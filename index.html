@@ -166,17 +166,46 @@
   </div>
 
 </div>
+<!-- 🎵 Music Collection Collapsible Section -->
+<div style="max-width: 700px; margin: 0 auto 60px;">
+  <button onclick="toggleMusic()" style="width: 100%; padding: 16px; font-size: 1.2em; background-color: #333; color: #f0c040; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 0 10px rgba(255,255,255,0.1);">
+    🎵 Music Collection
+  </button>
+  <div id="musicBox" style="display: none; margin-top: 20px; background-color: #1a1a1a; padding: 20px; border-radius: 12px;">
+    
+    <!-- Everyday You Song -->
+    <h3 style="color: #f0c040; text-align:center;">Everyday You Song</h3>
+    <p style="color: #aaa; font-size: 0.9em; text-align:center;">
+      Play this... I hope it makes you smile. This is what I think of you in the most subtle way. 🌙🎶
+    </p>
+    <div style="text-align: center; margin-bottom: 30px;">
+      <audio controls>
+        <source src="kanak.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
-<!-- 🎵 Audio Players -->
-<h3 style="color: #f0c040; text-align:center; margin-top: 40px;">Everyday you song</h3>
-<div style="text-align: center; margin-top: 40px;">
-  <p style="color: #aaa; font-size: 0.9em; margin-bottom: 10px;">
-    Play this... I hope it makes you smile. This is what I think of you in the most sublte way. 🌙🎶
-  </p>
-  <audio controls>
-    <source src="kanak.m4a" type="audio/mp4">
-  </audio>
+    <!-- Day 4 Song -->
+    <h3 style="color: #f0c040; text-align:center;">Day 4 — From Me to You 🌙</h3>
+    <p style="color: #aaa; font-size: 0.9em; text-align:center;">
+      This song carries what I always say aloud but now I’m making it a highlight. 🎧
+    </p>
+    <div style="text-align: center;">
+      <audio controls>
+        <source src="yours.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+  </div>
 </div>
+
+<script>
+  function toggleMusic() {
+    const box = document.getElementById('musicBox');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
 
 <h3 style="color: #f0c040; text-align:center; margin-top: 40px;">Day 1 — From me to you Song 🌙</h3>
 <div style="text-align: center; margin-top: 10px;">
