@@ -411,23 +411,20 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
 <script>
   const bgm = document.getElementById("bgm");
   const musicBtn = document.getElementById("musicToggle");
+  let isPlaying = false;
 
-  // Start music on first user interaction (for mobile autoplay policy)
-  document.body.addEventListener('click', () => {
-    if (bgm.paused) {
-      bgm.play().catch(() => {});
-    }
-  }, { once: true });
+  musicBtn.textContent = "▶️ Play BGM"; // Initial state
 
-  function toggleMusic() {
-    if (bgm.paused) {
-      bgm.play();
-      musicBtn.innerText = "🔊 Pause BGM";
-    } else {
+  musicBtn.addEventListener("click", () => {
+    if (isPlaying) {
       bgm.pause();
-      musicBtn.innerText = "▶️ Play BGM";
+      musicBtn.textContent = "▶️ Play BGM";
+    } else {
+      bgm.play().catch(() => {}); // Prevent error if user gesture isn't valid
+      musicBtn.textContent = "⏸️ Pause BGM";
     }
-  }
+    isPlaying = !isPlaying;
+  });
 </script>
 </body>
 <div id="stars"></div>
