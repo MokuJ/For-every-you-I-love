@@ -321,35 +321,38 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     }
   }
 </script>
-<script>
-  // Toggle the visibility of the contact box with password
-  function toggleContact() {
-    const box = document.getElementById('contactBox');
-
-    if (box.style.display === 'block') {
-      box.style.display = 'none';
-      return;
-    }
-
-    const password = prompt("Enter password to view contact:");
-    if (password === "ILY2607") {
+<!-- 💌 Contact Kanak All-in-One -->
+<div id="contactContainer" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+  <button onclick="(function(){
+    const pwd = prompt('Enter password to view:');
+    if (pwd === 'ILY2607') {
+      const box = document.getElementById('contactBox');
       box.style.display = 'block';
+      setTimeout(() => {
+        document.addEventListener('click', function handler(e) {
+          if (!box.contains(e.target) && e.target.innerText !== '💌 Contact Kanak') {
+            box.style.display = 'none';
+            document.removeEventListener('click', handler);
+          }
+        });
+      }, 100);
     } else {
-      alert("Access denied. Wrong password.");
+      alert('Incorrect password.');
     }
-  }
+  })()" 
+  style="padding: 10px 14px; background-color: #444; color: #f0c040; border: none; border-radius: 8px; font-size: 1em; cursor: pointer;">
+    💌 Contact Kanak
+  </button>
+</div>
 
-  // Close contact box if clicked outside
-  document.addEventListener('click', function(event) {
-    const button = event.target.closest('button');
-    const box = document.getElementById('contactBox');
-    const isInsideBox = event.target.closest('#contactBox');
-    const isContactBtn = button && button.innerText.includes("Contact Kanak");
-
-    if (!isInsideBox && !isContactBtn) {
-      box.style.display = 'none';
-    }
-  });
-</script>
+<div id="contactBox" style="display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background-color: #1a1a1a; padding: 20px; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.05); text-align: center; z-index: 9990;">
+  <p style="color: #eee; font-size: 1.1em; margin-bottom: 10px;">Her socials (click icons):</p>
+  <div style="font-size: 1.8em;">
+    <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" style="margin: 0 8px;">📷</a>
+    <a href="https://www.instagram.com/kanakkk.core?igsh=NmdiNTdna2ptMG5m" target="_blank" style="margin: 0 8px;">📸</a>
+    <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" style="margin: 0 8px;">👻</a>
+    <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" style="margin: 0 8px;">🎵</a>
+  </div>
+</div>
 </body>
 </html>
