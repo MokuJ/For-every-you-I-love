@@ -426,6 +426,38 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     isPlaying = !isPlaying;
   });
 </script>
+<!-- 📄 PDF Download Button -->
+<button onclick="downloadPDF()" style="
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: #f0c040;
+  color: black;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 1000;
+">📄 Download PDF</button>
+<!-- PDF LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- PDF FUNCTION -->
+<script>
+  function downloadPDF() {
+    const element = document.body;
+    const opt = {
+      margin:       0.5,
+      filename:     'For_Every_You_I_Love_Kanak.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  }
+</script>
 </body>
 <div id="stars"></div>
 <script>
