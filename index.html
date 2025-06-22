@@ -283,14 +283,6 @@ I am not good for you, I know that. I will never and I can never force you, or a
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
-<audio id="bg-music" autoplay loop>
-  <source src="bgm.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-<button onclick="document.getElementById('bg-music').play()" 
-style="position: fixed; bottom: 80px; right: 20px; background-color: #f0c040; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(255,255,255,0.2); z-index: 1000;">
-🎵 Play Music
 </button>
 <button onclick="blastLaughter()" 
 style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: bold; box-shadow: 0 0 6px rgba(255,0,0,0.4); z-index: 1000;">
@@ -365,6 +357,51 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       document.getElementById('protectedContact').style.display = 'none';
     } else {
       alert("Wrong password 😬");
+    }
+  }
+</script>
+<!-- 🎵 Background Music & Toggle Button -->
+<audio id="bgm" loop>
+  <source src="bgm.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<button id="musicToggle" onclick="toggleMusic()" style="
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222;
+  color: #f0c040;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95em;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  z-index: 9999;
+">
+  🔊 Pause BGM
+</button>
+
+<script>
+  const bgm = document.getElementById("bgm");
+  const musicBtn = document.getElementById("musicToggle");
+
+  // Try to play music after user interacts (for mobile autoplay policies)
+  document.body.addEventListener('click', () => {
+    if (bgm.paused) {
+      bgm.play().catch(() => {}); // Catch to suppress autoplay errors
+    }
+  }, { once: true });
+
+  function toggleMusic() {
+    if (bgm.paused) {
+      bgm.play();
+      musicBtn.innerText = "🔊 Pause BGM";
+    } else {
+      bgm.pause();
+      musicBtn.innerText = "▶️ Play BGM";
     }
   }
 </script>
