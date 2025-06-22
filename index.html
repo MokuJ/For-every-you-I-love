@@ -360,7 +360,7 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     }
   }
 </script>
-<!-- 🎵 Background Music & Toggle Button -->
+<!-- 🎵 Background Music & Toggle Button (Bottom Right) -->
 <audio id="bgm" loop>
   <source src="bgm.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
@@ -369,8 +369,7 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
 <button id="musicToggle" onclick="toggleMusic()" style="
   position: fixed;
   bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 20px;
   background-color: #222;
   color: #f0c040;
   border: none;
@@ -388,10 +387,10 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
   const bgm = document.getElementById("bgm");
   const musicBtn = document.getElementById("musicToggle");
 
-  // Try to play music after user interacts (for mobile autoplay policies)
+  // Start music on first user interaction (for mobile autoplay policy)
   document.body.addEventListener('click', () => {
     if (bgm.paused) {
-      bgm.play().catch(() => {}); // Catch to suppress autoplay errors
+      bgm.play().catch(() => {});
     }
   }, { once: true });
 
