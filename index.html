@@ -153,13 +153,7 @@
   function showImage() {
   const password = prompt("Enter password:");
   if (password === "ILY2607") {
-    const img = document.createElement('img');
-    img.src = "Kannupyari.jpg";
-    img.alt = "Her Picture";
-    img.style.maxWidth = "90%";
-    img.style.borderRadius = "12px";
-    img.style.boxShadow = "0 0 15px rgba(255,255,255,0.1)";
-    document.getElementById("image-container").appendChild(img);
+    document.getElementById("image-container").style.display = "block";
   } else {
     alert("Wrong password. Access denied.");
   }
