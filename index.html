@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+  #backToTop {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    z-index: 999;
+    background-color: #f0c040;
+    color: #000;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-weight: bold;
+    display: none;
+    transition: opacity 0.3s ease;
+  }
+  #backToTop:hover {
+    background-color: #ffe58a;
+  }
+</style>
   <meta charset="UTF-8">
   <title>For Every You I Love, Kanak</title>
   <style>
@@ -189,6 +210,22 @@ I am not good for you, I know that. I will never and I can never force you, or a
   window.onload = () => {
     document.body.style.opacity = '1';
   };
+</script>
+<button onclick="scrollToTop()" id="backToTop">↑ Top</button>
+<script>
+  const btn = document.getElementById("backToTop");
+
+  window.onscroll = () => {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  };
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 </script>
 </body>
 </html>
