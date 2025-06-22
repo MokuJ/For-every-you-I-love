@@ -321,38 +321,52 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     }
   }
 </script>
-<!-- 💌 Contact Kanak All-in-One -->
-<div id="contactContainer" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
-  <button onclick="(function(){
-    const pwd = prompt('Enter password to view:');
-    if (pwd === 'ILY2607') {
-      const box = document.getElementById('contactBox');
-      box.style.display = 'block';
-      setTimeout(() => {
-        document.addEventListener('click', function handler(e) {
-          if (!box.contains(e.target) && e.target.innerText !== '💌 Contact Kanak') {
-            box.style.display = 'none';
-            document.removeEventListener('click', handler);
-          }
-        });
-      }, 100);
-    } else {
-      alert('Incorrect password.');
-    }
-  })()" 
-  style="padding: 10px 14px; background-color: #444; color: #f0c040; border: none; border-radius: 8px; font-size: 1em; cursor: pointer;">
-    💌 Contact Kanak
+<!-- 🔒 Contact Kanak (Collapsible + Password Protected) -->
+<div style="text-align: center; margin: 60px auto;">
+  <button onclick="toggleContact()" style="padding: 12px 24px; font-size: 1.1em; background-color: #333; color: #f0c040; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 0 10px rgba(255,255,255,0.1);">
+    📱 Contact Kanak
   </button>
-</div>
-
-<div id="contactBox" style="display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background-color: #1a1a1a; padding: 20px; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.05); text-align: center; z-index: 9990;">
-  <p style="color: #eee; font-size: 1.1em; margin-bottom: 10px;">Her socials (click icons):</p>
-  <div style="font-size: 1.8em;">
-    <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" style="margin: 0 8px;">📷</a>
-    <a href="https://www.instagram.com/kanakkk.core?igsh=NmdiNTdna2ptMG5m" target="_blank" style="margin: 0 8px;">📸</a>
-    <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" style="margin: 0 8px;">👻</a>
-    <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" style="margin: 0 8px;">🎵</a>
+  <div id="contactBox" style="display: none; margin-top: 20px;">
+    <div id="protectedContact" style="margin-top: 10px;">
+      <p style="color: #aaa;">Enter password to view:</p>
+      <input type="password" id="contactPass" placeholder="Password" style="padding: 8px; border-radius: 6px; border: 1px solid #555; background: #111; color: #fff;">
+      <button onclick="verifyContact()" style="padding: 8px 16px; margin-left: 10px; background-color: #f0c040; color: #000; border: none; border-radius: 6px; cursor: pointer;">Unlock</button>
+    </div>
+    <div id="kanakLinks" style="display: none; margin-top: 20px;">
+      <p style="color: #ccc; font-size: 0.95em; margin-bottom: 10px;">Her little digital world 🌍</p>
+      <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
+        <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" title="Main Insta">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Main" />
+        </a>
+        <a href="https://www.instagram.com/kanakkk.core?igsh=NmdiNTdna2ptMG5m" target="_blank" title="Private Insta">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Pvt" />
+        </a>
+        <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" title="Snapchat">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Snapchat" />
+        </a>
+        <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" title="Spotify Playlist">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify" />
+        </a>
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+  function toggleContact() {
+    const box = document.getElementById('contactBox');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function verifyContact() {
+    const pass = document.getElementById('contactPass').value;
+    if (pass === 'ILY2607') {
+      document.getElementById('kanakLinks').style.display = 'block';
+      document.getElementById('protectedContact').style.display = 'none';
+    } else {
+      alert("Wrong password 😬");
+    }
+  }
+</script>
 </body>
 </html>
