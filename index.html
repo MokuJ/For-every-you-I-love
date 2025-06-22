@@ -283,5 +283,14 @@ I am not good for you, I know that. I will never and I can never force you, or a
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
+<audio id="bg-music" autoplay loop>
+  <source src="bgm.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<button onclick="document.getElementById('bg-music').play()" 
+style="position: fixed; bottom: 80px; right: 20px; background-color: #f0c040; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(255,255,255,0.2); z-index: 1000;">
+🎵 Play Music
+</button>
 </body>
 </html>
