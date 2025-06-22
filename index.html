@@ -21,7 +21,26 @@
   </p>
 </div>
   <h1 style="text-align: center; font-size: 2.5em;">For every you I love, Kanak.</h1>
+<!-- Password-Protected Image -->
+<div id="protected-image" style="text-align: center; margin-top: 40px;">
+  <button onclick="showImage()" style="padding: 10px 20px; font-size: 1em; background-color: #222; color: #fff; border: 1px solid #555; border-radius: 8px; cursor: pointer;">
+    Enter Password to View Image
+  </button>
+  <div id="image-container" style="margin-top: 20px; display: none;">
+    <img src="Kannupyari.jpg" alt="Her Picture" style="max-width: 90%; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.1);" />
+  </div>
+</div>
 
+<script>
+  function showImage() {
+    const password = prompt("Enter password:");
+    if (password === "ILY2607") {
+      document.getElementById("image-container").style.display = "block";
+    } else {
+      alert("Wrong password. Access denied.");
+    }
+  }
+</script>
   <!-- Outer Layout Box -->
   <div style="max-width: 700px; margin: 40px auto;">
 
