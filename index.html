@@ -145,5 +145,39 @@ I am not good for you, I know that. I will never and I can never force you, or a
     Your browser does not support the audio element.
   </audio>
 </div>
+<style>
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    color: #f87171;
+    opacity: 0.7;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateX(0) translateY(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(-30px) translateY(-800px);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }
+  setInterval(createHeart, 800);
+</script>
 </body>
 </html>
