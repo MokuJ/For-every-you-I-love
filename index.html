@@ -321,42 +321,35 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     }
   }
 </script>
-<!-- Contact Kanak Collapsible Button --><div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;">
-  <button onclick="toggleContactBox()" style="background-color: #333; color: #f0c040; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 1em; box-shadow: 0 0 10px rgba(255,255,255,0.1);">
-    💌 Contact Kanak
-  </button>
-</div><div id="contactBox" style="display: none; position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%); background-color: #1a1a1a; padding: 20px; border-radius: 12px; box-shadow: 0 0 12px rgba(255,255,255,0.05); text-align: center; z-index: 1000;">
-  <p style="color: #fff; font-size: 1em; margin-bottom: 10px;">Enter password to unlock Kanak's links</p>
-  <input type="password" id="kanakPassword" placeholder="Enter password" style="padding: 6px 10px; border-radius: 6px; border: none; margin-bottom: 10px;">
-  <br>
-  <button onclick="showLinks()" style="background-color: #444; color: #f0c040; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.9em;">Unlock</button>  <div id="kanakLinks" style="display:none; margin-top: 15px;">
-    <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" title="Main Insta">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" style="width:30px; margin: 8px;">
-    </a>
-    <a href="https://www.instagram.com/kanakkk.core?igsh=NmdiNTdna2ptMG5m" target="_blank" title="Private Insta">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" style="width:30px; margin: 8px; opacity:0.7;">
-    </a>
-    <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" title="Snapchat">
-      <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/Snapchat_logo.svg" style="width:30px; margin: 8px;">
-    </a>
-    <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" title="Spotify Playlist">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" style="width:30px; margin: 8px;">
-    </a>
-  </div>
-</div><script>
-  function toggleContactBox() {
+<script>
+  // Toggle the visibility of the contact box with password
+  function toggleContact() {
     const box = document.getElementById('contactBox');
-    box.style.display = box.style.display === 'none' ? 'block' : 'none';
-  }
 
-  function showLinks() {
-    const pass = document.getElementById('kanakPassword').value;
-    if (pass === "ILY2607") {
-      document.getElementById('kanakLinks').style.display = 'block';
+    if (box.style.display === 'block') {
+      box.style.display = 'none';
+      return;
+    }
+
+    const password = prompt("Enter password to view contact:");
+    if (password === "ILY2607") {
+      box.style.display = 'block';
     } else {
-      alert("Wrong password. Access denied.");
+      alert("Access denied. Wrong password.");
     }
   }
+
+  // Close contact box if clicked outside
+  document.addEventListener('click', function(event) {
+    const button = event.target.closest('button');
+    const box = document.getElementById('contactBox');
+    const isInsideBox = event.target.closest('#contactBox');
+    const isContactBtn = button && button.innerText.includes("Contact Kanak");
+
+    if (!isInsideBox && !isContactBtn) {
+      box.style.display = 'none';
+    }
+  });
 </script>
 </body>
 </html>
