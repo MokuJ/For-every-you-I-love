@@ -141,11 +141,12 @@
 
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
-<div style="margin: 10px 0;">
+<!-- Centered collapsible button -->
+<div style="display: flex; justify-content: center; margin: 20px 0;">
   <button class="safe-collapsible" style="
     font-size: 1em;
     padding: 10px 16px;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     border: none;
     background-color: #333;
@@ -153,22 +154,49 @@
   ">
     Craving a glimpse? 👀
   </button>
-  <div class="safe-content" style="display: none; padding: 10px; background: #222; color: white; border-radius: 8px; margin-top: 5px;">
-    This is your hidden content. 🔒
+</div>
+
+<!-- Hidden content with password-protected image -->
+<div class="safe-content" style="display: none; text-align: center;">
+  <button onclick="checkPassword(this)" style="
+    padding: 10px 14px;
+    border-radius: 8px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+  ">Enter Password to View Image</button>
+
+  <div class="image-container" style="display: none; margin-top: 10px;">
+    <img src="Kannupyari.jpg" alt="Her Picture" style="max-width: 90%; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.1);" />
   </div>
 </div>
 
+<!-- JS -->
 <script>
-  // Safe: Doesn't break if run multiple times
+  // Toggle collapsible
   document.querySelectorAll('.safe-collapsible').forEach(btn => {
     if (!btn.classList.contains('listener-attached')) {
       btn.classList.add('listener-attached');
       btn.addEventListener('click', function () {
-        const content = this.nextElementSibling;
+        const content = this.closest('div').nextElementSibling;
         content.style.display = content.style.display === 'block' ? 'none' : 'block';
       });
     }
   });
+
+  // Password check
+  function checkPassword(button) {
+    const password = prompt("Enter password:");
+    if (password === "ILY2607") {
+      const container = button.nextElementSibling;
+      container.style.display = "block";
+      button.style.display = "none";
+    } else {
+      alert("Incorrect password!");
+    }
+  }
 </script>
 <div class="content">
   <div id="protected-image" style="text-align: center; margin-top: 40px;">
