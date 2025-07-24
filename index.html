@@ -141,24 +141,22 @@
 
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
-<!-- Centered collapsible button -->
-<div style="display: flex; justify-content: center; margin: 20px 0;">
-  <button class="safe-collapsible" style="
-    font-size: 1em;
-    padding: 10px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: none;
-    background-color: #333;
+<!-- COLLAPSIBLE BUTTON -->
+<div style="text-align: center; margin: 20px 0;">
+  <button id="revealToggle" style="
+    font-size: 0.9em;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background-color: #444;
     color: white;
-  ">
-    Craving a glimpse? 👀
-  </button>
+    border: none;
+    cursor: pointer;
+  ">Craving a glimpse? 👀</button>
 </div>
 
-<!-- Hidden content with password-protected image -->
-<div class="safe-content" style="display: none; text-align: center;">
-  <button onclick="checkPassword(this)" style="
+<!-- PASSWORD SECTION (Initially Hidden) -->
+<div id="passwordSection" style="display: none; text-align: center;">
+  <button id="passwordButton" onclick="checkPassword(this)" style="
     padding: 10px 14px;
     border-radius: 8px;
     background-color: #555;
@@ -168,30 +166,26 @@
     margin-bottom: 10px;
   ">Enter Password to View Image</button>
 
-  <div class="image-container" style="display: none; margin-top: 10px;">
-    <img src="Kannupyari.jpg" alt="Her Picture" style="max-width: 90%; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.1);" />
+  <div id="imageContainer" style="display: none; margin-top: 10px;">
+    <img src="Kannupyari.jpg" alt="Her Picture" style="
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    " />
   </div>
 </div>
 
-<!-- JS -->
+<!-- JAVASCRIPT -->
 <script>
-  // Toggle collapsible
-  document.querySelectorAll('.safe-collapsible').forEach(btn => {
-    if (!btn.classList.contains('listener-attached')) {
-      btn.classList.add('listener-attached');
-      btn.addEventListener('click', function () {
-        const content = this.closest('div').nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
-      });
-    }
+  document.getElementById("revealToggle").addEventListener("click", () => {
+    const section = document.getElementById("passwordSection");
+    section.style.display = section.style.display === "block" ? "none" : "block";
   });
 
-  // Password check
   function checkPassword(button) {
     const password = prompt("Enter password:");
     if (password === "ILY2607") {
-      const container = button.nextElementSibling;
-      container.style.display = "block";
+      document.getElementById("imageContainer").style.display = "block";
       button.style.display = "none";
     } else {
       alert("Incorrect password!");
