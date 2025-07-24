@@ -142,7 +142,7 @@
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
 <!-- COLLAPSIBLE BUTTON -->
-<div style="text-align: center; margin: 20px 0;">
+<div style="text-align: center; margin-top: 20px;">
   <button id="revealToggle" style="
     font-size: 0.9em;
     padding: 8px 14px;
@@ -154,41 +154,46 @@
   ">Craving a glimpse? 👀</button>
 </div>
 
-<!-- PASSWORD SECTION (Initially Hidden) -->
-<div id="passwordSection" style="display: none; text-align: center;">
-  <button id="passwordButton" onclick="checkPassword(this)" style="
-    padding: 10px 14px;
-    border-radius: 8px;
-    background-color: #555;
+<!-- PASSWORD & IMAGE SECTION -->
+<div id="secretSection" style="display: none; text-align: center; margin-top: 15px;">
+  <input type="password" id="passwordInput" placeholder="Enter password..." style="
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  ">
+  <button onclick="revealImage()" style="
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: #666;
     color: white;
     border: none;
     cursor: pointer;
-    margin-bottom: 10px;
-  ">Enter Password to View Image</button>
+  ">Unlock</button>
 
-  <div id="imageContainer" style="display: none; margin-top: 10px;">
+  <div id="imageContainer" style="display: none; margin-top: 15px;">
     <img src="Kannupyari.jpg" alt="Her Picture" style="
       max-width: 90%;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
-    " />
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    ">
   </div>
 </div>
 
-<!-- JAVASCRIPT -->
 <script>
+  // Toggle password section on button click
   document.getElementById("revealToggle").addEventListener("click", () => {
-    const section = document.getElementById("passwordSection");
+    const section = document.getElementById("secretSection");
     section.style.display = section.style.display === "block" ? "none" : "block";
   });
 
-  function checkPassword(button) {
-    const password = prompt("Enter password:");
+  // Password validation
+  function revealImage() {
+    const password = document.getElementById("passwordInput").value;
     if (password === "ILY2607") {
       document.getElementById("imageContainer").style.display = "block";
-      button.style.display = "none";
     } else {
-      alert("Incorrect password!");
+      alert("Wrong password!");
     }
   }
 </script>
