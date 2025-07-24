@@ -253,6 +253,7 @@
 </div>
 
 </div>
+
 <!-- 🎵 Music Collection Collapsible Section -->
 <div style="max-width: 700px; margin: 0 auto 60px;">
   <button onclick="toggleMusic()" style="width: 100%; padding: 16px; font-size: 1.2em; background-color: #333; color: #f0c040; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 0 10px rgba(255,255,255,0.1);">
@@ -261,35 +262,35 @@
   <div id="musicBox" style="display: none; margin-top: 20px; background-color: #1a1a1a; padding: 20px; border-radius: 12px;">
     
     <div class="section">
-  <h2>My Music</h2>
+      <h2>My Music</h2>
 
-  <div class="song">
-    <h3>No. 1 Party Anthem – Arctic Monkeys</h3>
-    <p>
-      I still hear this when I sit alone, thinking about you.  
-      I wasn’t the loud one at the party—I was just hoping you’d walk in.  
-      I kept pretending to enjoy things, but you were the only person I ever looked for in any crowd.
-    </p>
-    <audio controls>
-      <source src="assets/music/No1PartyAnthem.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
+      <div class="song">
+        <h3>No. 1 Party Anthem – Arctic Monkeys</h3>
+        <p>
+          I still hear this when I sit alone, thinking about you.  
+          I wasn’t the loud one at the party—I was just hoping you’d walk in.  
+          I kept pretending to enjoy things, but you were the only person I ever looked for in any crowd.
+        </p>
+        <audio controls>
+          <source src="assets/music/No1PartyAnthem.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
 
-  <div class="song">
-    <h3>Love is a Laserquest – Arctic Monkeys</h3>
-    <p>
-      Do you ever think about me like I still think about you?  
-      I never stopped wishing things were different.  
-      I told you my truth, not to ask for more—but because I didn’t want to lie to you.  
-      This song hits like every question I’ll never get to ask you again.
-    </p>
-    <audio controls>
-      <source src="assets/music/LoveIsALaserquest.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
-</div>
+      <div class="song">
+        <h3>Love is a Laserquest – Arctic Monkeys</h3>
+        <p>
+          Do you ever think about me like I still think about you?  
+          I never stopped wishing things were different.  
+          I told you my truth, not to ask for more—but because I didn’t want to lie to you.  
+          This song hits like every question I’ll never get to ask you again.
+        </p>
+        <audio controls>
+          <source src="assets/music/LoveIsALaserquest.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div> <!-- This was the missing closing tag -->
 
     <!-- Everyday You Song -->
     <h3 style="color: #f0c040; text-align:center;">Everyday for You </h3>
@@ -317,7 +318,6 @@
 
   </div>
 </div>
-
 <script>
   function toggleMusic() {
     const box = document.getElementById('musicBox');
