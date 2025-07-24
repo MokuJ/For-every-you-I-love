@@ -141,7 +141,16 @@
 
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
-<button class="collapsible" style="font-size: 1em; padding: 10px 14px; border-radius: 10px;">
+<button class="collapsible" style="
+  font-size: 0.9em;
+  padding: 6px 12px;
+  border-radius: 8px;
+  width: auto;
+  max-width: fit-content;
+  display: inline-block;
+  white-space: nowrap;
+  margin: 10px 0;
+">
   Craving a glimpse? 👀
 </button>
 <div class="content">
@@ -157,8 +166,7 @@
     const password = prompt("Enter password:");
     if (password === "ILY2607") {
       document.getElementById("image-container").style.display = "block";
-      // Optionally hide the button after success
-      event.target.style.display = "none";
+      document.querySelector("button[onclick='checkPassword()']").style.display = "none"; // hides the button properly
     } else {
       alert("Incorrect password!");
     }
