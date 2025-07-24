@@ -141,20 +141,35 @@
 
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
-<div style="text-align: center;">
-  <button class="collapsible" style="
-    font-size: 0.9em;
-    padding: 6px 12px;
+<div style="margin: 10px 0;">
+  <button class="safe-collapsible" style="
+    font-size: 1em;
+    padding: 10px 16px;
     border-radius: 8px;
-    width: auto;
-    max-width: fit-content;
-    display: inline-block;
-    white-space: nowrap;
-    margin: 10px 0;
+    cursor: pointer;
+    border: none;
+    background-color: #333;
+    color: white;
   ">
     Craving a glimpse? 👀
   </button>
+  <div class="safe-content" style="display: none; padding: 10px; background: #222; color: white; border-radius: 8px; margin-top: 5px;">
+    This is your hidden content. 🔒
+  </div>
 </div>
+
+<script>
+  // Safe: Doesn't break if run multiple times
+  document.querySelectorAll('.safe-collapsible').forEach(btn => {
+    if (!btn.classList.contains('listener-attached')) {
+      btn.classList.add('listener-attached');
+      btn.addEventListener('click', function () {
+        const content = this.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    }
+  });
+</script>
 <div class="content">
   <div id="protected-image" style="text-align: center; margin-top: 40px;">
     <button onclick="showImage()" style="padding: 10px 20px; font-size: 1em; background-color: #222; color: #fff; border: 1px solid #555; border-radius: 8px; cursor: pointer; margin-bottom: 20px;">
