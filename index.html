@@ -141,7 +141,9 @@
 
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
-<button class="collapsible">Craving a glimpse? 👀</button>
+<button class="collapsible" style="font-size: 1em; padding: 10px 14px; border-radius: 10px;">
+  Craving a glimpse? 👀
+</button>
 <div class="content">
   <div id="protected-image" style="text-align: center; margin-top: 40px;">
     <button onclick="showImage()" style="padding: 10px 20px; font-size: 1em; background-color: #222; color: #fff; border: 1px solid #555; border-radius: 8px; cursor: pointer; margin-bottom: 20px;">
@@ -150,6 +152,18 @@
     <div id="image-container" style="margin-top: 20px; display: none;">
       <img src="Kannupyari.jpg" alt="Her Picture" style="max-width: 90%; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.1);" />
     </div>
+    <script>
+  function checkPassword() {
+    const password = prompt("Enter password:");
+    if (password === "ILY2607") {
+      document.getElementById("image-container").style.display = "block";
+      // Optionally hide the button after success
+      event.target.style.display = "none";
+    } else {
+      alert("Incorrect password!");
+    }
+  }
+</script>
   </div>
 </div>
 
