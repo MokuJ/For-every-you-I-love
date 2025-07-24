@@ -142,7 +142,7 @@
 <!-- Password-Protected Image -->
 <!-- Craving a glimpse collapsible -->
 <!-- COLLAPSIBLE BUTTON -->
-<div style="text-align: center; margin-top: 20px;">
+<div style="text-align: center; margin: 20px 0;">
   <button id="revealToggle" style="
     font-size: 0.9em;
     padding: 8px 14px;
@@ -155,21 +155,23 @@
 </div>
 
 <!-- PASSWORD & IMAGE SECTION -->
-<div id="secretSection" style="display: none; text-align: center; margin-top: 15px;">
-  <input type="password" id="passwordInput" placeholder="Enter password..." style="
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-  ">
-  <button onclick="revealImage()" style="
-    padding: 8px 12px;
-    border-radius: 6px;
-    background-color: #666;
-    color: white;
-    border: none;
-    cursor: pointer;
-  ">Unlock</button>
+<div id="secretSection" style="display: none; text-align: center; margin-bottom: 40px;">
+  <div id="passwordBlock">
+    <input type="password" id="passwordInput" placeholder="Enter password..." style="
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    ">
+    <button onclick="revealImage()" style="
+      padding: 8px 12px;
+      border-radius: 6px;
+      background-color: #666;
+      color: white;
+      border: none;
+      cursor: pointer;
+    ">Unlock</button>
+  </div>
 
   <div id="imageContainer" style="display: none; margin-top: 15px;">
     <img src="Kannupyari.jpg" alt="Her Picture" style="
@@ -192,6 +194,7 @@
     const password = document.getElementById("passwordInput").value;
     if (password === "ILY2607") {
       document.getElementById("imageContainer").style.display = "block";
+      document.getElementById("passwordBlock").style.display = "none"; // Hides input + button
     } else {
       alert("Wrong password!");
     }
