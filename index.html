@@ -253,7 +253,6 @@
 </div>
 
 </div>
-
 <!-- 🎵 Music Collection Collapsible Section -->
 <div style="max-width: 700px; margin: 0 auto 60px;">
   <button onclick="toggleMusic()" style="width: 100%; padding: 16px; font-size: 1.2em; background-color: #333; color: #f0c040; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 0 10px rgba(255,255,255,0.1);">
@@ -261,37 +260,39 @@
   </button>
   <div id="musicBox" style="display: none; margin-top: 20px; background-color: #1a1a1a; padding: 20px; border-radius: 12px;">
     
-    <div class="section">
-      <h2>My Music</h2>
+    <!-- LOVE IS A LASERQUEST -->
+<button class="collapsible">Love Is a Laserquest</button>
+<div class="content">
+  <h3>Love Is a Laserquest</h3>
+  <p>
+    If love is just a laserquest,<br>
+    then I’ve been stuck in it ever since.<br>
+    You probably moved on, healed, maybe forgot,<br>
+    but I’m still somewhere back there,<br>
+    wondering if any part of you still checks in sometimes.
+  </p>
+  <audio controls>
+    <source src="love_is_a_laserquest.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
 
-      <div class="song">
-        <h3>No. 1 Party Anthem – Arctic Monkeys</h3>
-        <p>
-          I still hear this when I sit alone, thinking about you.  
-          I wasn’t the loud one at the party—I was just hoping you’d walk in.  
-          I kept pretending to enjoy things, but you were the only person I ever looked for in any crowd.
-        </p>
-        <audio controls>
-          <source src="assets/music/No1PartyAnthem.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-
-      <div class="song">
-        <h3>Love is a Laserquest – Arctic Monkeys</h3>
-        <p>
-          Do you ever think about me like I still think about you?  
-          I never stopped wishing things were different.  
-          I told you my truth, not to ask for more—but because I didn’t want to lie to you.  
-          This song hits like every question I’ll never get to ask you again.
-        </p>
-        <audio controls>
-          <source src="assets/music/LoveIsALaserquest.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div> <!-- This was the missing closing tag -->
-
+<!-- NO. 1 PARTY ANTHEM -->
+<button class="collapsible">No. 1 Party Anthem</button>
+<div class="content">
+  <h3>No. 1 Party Anthem</h3>
+  <p>
+    I'm at another place, music loud, faces blur,<br>
+    pretending I don’t miss you,<br>
+    but every beat sounds like your name.<br>
+    It’s not a party anthem tonight—it’s a longing song in disguise.
+  </p>
+  <audio controls>
+    <source src="no1_party_anthem.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+    
     <!-- Everyday You Song -->
     <h3 style="color: #f0c040; text-align:center;">Everyday for You </h3>
     <p style="color: #aaa; font-size: 0.9em; text-align:center;">
@@ -318,6 +319,7 @@
 
   </div>
 </div>
+
 <script>
   function toggleMusic() {
     const box = document.getElementById('musicBox');
