@@ -473,202 +473,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Line of Our Time Together</title>
+  <title>Moksh Timeline</title>
   <style>
     body {
+      font-family: 'Georgia', serif;
+      background-color: #111;
+      color: #eee;
       margin: 0;
-      padding: 0;
-      background: #000;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
+      padding: 20px;
     }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    .collapsible-button {
-      background: #1f1f1f;
-      color: #ffc107;
-      border: none;
-      padding: 14px;
-      width: 100%;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: left;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
-
     .timeline {
       position: relative;
-      padding: 40px 0;
-      list-style: none;
+      max-width: 800px;
+      margin: auto;
     }
-
-    .timeline::before {
+    .timeline::after {
       content: '';
       position: absolute;
+      width: 6px;
+      background-color: #eee;
       top: 0;
       bottom: 0;
       left: 50%;
-      width: 4px;
-      background: red;
-      transform: translateX(-50%);
+      margin-left: -3px;
     }
-
-    .entry {
+    .container {
+      padding: 10px 40px;
       position: relative;
+      background-color: inherit;
       width: 50%;
-      padding: 12px 20px;
-      box-sizing: border-box;
     }
-
-    .entry:nth-child(odd) {
+    .left {
       left: 0;
-      text-align: right;
     }
-
-    .entry:nth-child(even) {
+    .right {
       left: 50%;
-      text-align: left;
     }
-
-    .entry::before {
-      content: "❤️";
+    .container::after {
+      content: '';
       position: absolute;
-      top: 18px;
-      left: 100%;
-      font-size: 1.2rem;
-      transform: translateX(-50%);
-      z-index: 2;
+      width: 25px;
+      height: 25px;
+      right: -13px;
+      background-color: #fff;
+      border: 4px solid #ff3c6d;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
     }
-
-    .entry:nth-child(even)::before {
-      left: 0%;
-      transform: translateX(-50%);
+    .right::after {
+      left: -13px;
     }
-
-    .entry-content {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.07);
-      color: #f0f0f0;
-      border-radius: 10px;
-      padding: 12px 16px;
-      max-width: 260px;
-      font-size: 0.95rem;
-      word-wrap: break-word;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    .content {
+      padding: 20px;
+      background-color: #222;
+      position: relative;
+      border-radius: 6px;
     }
-
-    .date {
-      font-size: 0.8rem;
-      color: #bbb;
-      margin-top: 6px;
+    .collapsible {
+      background-color: #ff3c6d;
+      color: white;
+      cursor: pointer;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      text-align: center;
+      outline: none;
+      font-size: 18px;
+      margin-top: 30px;
+      border-radius: 8px;
     }
-
-    .final-note {
+    .collapsible:hover {
+      background-color: #e23661;
+    }
+    .hidden-text {
+      padding: 20px;
+      display: none;
+      background-color: #1e1e1e;
+      margin-top: 10px;
+      border-radius: 6px;
       text-align: center;
       font-style: italic;
-      margin-top: 40px;
-      color: #aaa;
+      color: #ccc;
     }
-
-    .collapsible-content {
-      display: none;
-      margin-top: 10px;
-    }
-
-    .collapsible-button.active + .collapsible-content {
-      display: block;
+    @media screen and (max-width: 600px) {
+      .timeline::after {
+        left: 31px;
+      }
+      .container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      .container::after {
+        left: 18px;
+      }
+      .right {
+        left: 0%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button class="collapsible-button" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');">
-      The line of our time together
-    </button>
-    <div class="collapsible-content show">
-      <ul class="timeline">
-        <li class="entry">
-          <div class="entry-content">First time I talked to her. Approached and asked her ID.</div>
-          <div class="date">29 May 2022</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">We began talking on Instagram.</div>
-          <div class="date">1 June 2022</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">She wished me happy birthday for the first time.</div>
-          <div class="date">11 June 2022</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">I wished her happy birthday for the first time.</div>
-          <div class="date">26 July 2022</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">We had to stop talking because of certain people.</div>
-          <div class="date">18 Sept 2022</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">We reunited. She said she loves me. Asked me to be her best friend.</div>
-          <div class="date">4 Oct 2022</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">Major ups and downs. Disappearing and reappearing again and again.</div>
-          <div class="date">2022–2023</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">After a major break, I said fuck it and tried again. Got her back.</div>
-          <div class="date">24 April 2024</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">It went so well. I’ll relive that time without asking.</div>
-          <div class="date">2024–2025</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">She supposedly wished me happy birthday for the last time.</div>
-          <div class="date">11 June 2025</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">I confessed my feelings to her.</div>
-          <div class="date">22 June 2025</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">She said it's better to end this. Officially ended it.</div>
-          <div class="date">27 June 2025</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">Supposedly wished her happy birthday for the last time.</div>
-          <div class="date">26 July 2025</div>
-        </li>
-        <li class="entry">
-          <div class="entry-content">Still hoping. Still counting. Waiting on her return.</div>
-          <div class="date">2025–____</div>
-        </li>
-      </ul>
-      <div class="final-note">Avoided many and many key moments to not cry.</div>
-    </div>
-  </div>
 
-  <script>
-    const buttons = document.querySelectorAll('.collapsible-button');
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        button.classList.toggle('active');
-        const content = button.nextElementSibling;
-        if (content.classList.contains('show')) {
-          content.classList.remove('show');
-        } else {
-          content.classList.add('show');
-        }
-      });
-    });
-  </script>
+<div class="timeline">
+  <div class="container left"><div class="content">29 May 2022 – First time I talked to her. Asked her ID.</div></div>
+  <div class="container right"><div class="content">1 June 2022 – We began talking on Instagram.</div></div>
+  <div class="container left"><div class="content">11 June 2022 – She wished me my birthday for the first time.</div></div>
+  <div class="container right"><div class="content">26 July 2022 – I wished her birthday for the first time.</div></div>
+  <div class="container left"><div class="content">18 Sep 2022 – We had to stop talking due to certain people.</div></div>
+  <div class="container right"><div class="content">4 Oct 2022 – We reunited. She said she loves me and asked me to be her best friend.</div></div>
+  <div class="container left"><div class="content">2022–2023 – Major ups and downs. Disappearing and appearing.</div></div>
+  <div class="container right"><div class="content">24 Apr 2024 – After a long break, I reached out again. We became friends once more.</div></div>
+  <div class="container left"><div class="content">2024–2025 – It went beautifully. I love that time. I’ll relive it forever.</div></div>
+  <div class="container right"><div class="content">11 June 2025 – She supposedly wished me my birthday for the last time.</div></div>
+  <div class="container left"><div class="content">22 June 2025 – I confessed my feelings to her.</div></div>
+  <div class="container right"><div class="content">27 June 2025 – She said it’s better we end this. First official end.</div></div>
+  <div class="container left"><div class="content">26 July 2025 – I wished her birthday for the last time… probably.</div></div>
+  <div class="container right"><div class="content">2025–____ – Still hoping. Still counting. Still waiting.</div></div>
+</div>
+
+<button class="collapsible">Show Hidden Message</button>
+<div class="hidden-text" id="hiddenText">
+  Avoided many and many key moments to not cry.
+</div>
+
+<script>
+  const coll = document.querySelector(".collapsible");
+  const hidden = document.getElementById("hiddenText");
+
+  coll.addEventListener("click", () => {
+    hidden.style.display = hidden.style.display === "block" ? "none" : "block";
+  });
+</script>
+
 </body>
 </html>
 
