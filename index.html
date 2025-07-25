@@ -468,200 +468,210 @@
   </p>
 </div>
 
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Timeline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Timeline</title>
   <style>
     body {
-      background-color: #0f0f0f;
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 20px;
-    }
-    .timeline {
-      position: relative;
-      max-width: 900px;
-      margin: auto;
-    }
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 6px;
-      background-color: #ff3860;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -3px;
-    }
-    .container {
-      padding: 10px 40px;
-      position: relative;
-      background-color: inherit;
-      width: 50%;
-    }
-    .container.left {
-      left: 0;
-    }
-    .container.right {
-      left: 50%;
-    }
-    .date {
-      padding: 10px;
-      background: #1f1f1f;
-      color: #ffd369;
-      font-weight: bold;
-      border-radius: 8px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
       text-align: center;
-      width: fit-content;
     }
-    .text-box {
-      padding: 20px;
-      background: #1e1e1e;
-      position: relative;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
-    }
-    .left .text-box::before {
-      content: " ";
-      height: 0;
-      position: absolute;
-      top: 22px;
-      right: -15px;
-      border: 7px solid transparent;
-      border-left: 7px solid #1e1e1e;
-    }
-    .right .text-box::before {
-      content: " ";
-      height: 0;
-      position: absolute;
-      top: 22px;
-      left: -15px;
-      border: 7px solid transparent;
-      border-right: 7px solid #1e1e1e;
-    }
-    .container.left .date {
-      margin-left: auto;
-    }
-    .button-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #ff3860;
-      border: none;
-      border-radius: 5px;
+
+    .collapsible-btn {
+      background-color: #343a40;
       color: white;
-      font-weight: bold;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
+      margin-bottom: 30px;
     }
-    button:hover {
-      background-color: #ff6384;
-    }
-    #hiddenMessage {
+
+    .timeline-container {
       display: none;
-      text-align: center;
-      margin-top: 20px;
-      color: #aaaaaa;
-      font-style: italic;
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
     }
-    @media screen and (max-width: 768px) {
-      .container {
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #6c757d;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 1.5rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .timeline-item.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 1rem;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 1.2rem;
+      width: 20px;
+      height: 20px;
+      background: #28a745;
+      border-radius: 50%;
+      border: 3px solid white;
+      z-index: 3;
+    }
+
+    .timeline-item.left .timeline-dot {
+      right: -10px;
+    }
+
+    .timeline-item.right .timeline-dot {
+      left: -10px;
+    }
+
+    .bottom-message {
+      margin-top: 4rem;
+      font-style: italic;
+      color: #6c757d;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-item {
         width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
+        text-align: center !important;
+        left: 0 !important;
+        margin-bottom: 2rem;
       }
-      .container.right {
-        left: 0%;
+
+      .timeline-item.left .timeline-dot,
+      .timeline-item.right .timeline-dot {
+        left: 50%;
+        transform: translateX(-50%);
       }
-      .timeline::after {
-        left: 30px;
-      }
-      .left .text-box::before,
-      .right .text-box::before {
-        left: 15px;
-        border: 7px solid transparent;
-        border-left: 7px solid #1e1e1e;
+
+      .timeline-line {
+        left: 50%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="timeline">
-    <div class="container left">
-      <div class="date">29 May, 2022</div>
-      <div class="text-box">First time I approached her and asked for her ID.</div>
+
+  <button class="collapsible-btn" onclick="toggleTimeline()">Line of our time together</button>
+
+  <div class="timeline-container" id="timeline">
+    <div class="timeline-line"></div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🟢 29 May, 2022 — First time I talked to her. Approached her and asked her ID.</div>
     </div>
-    <div class="container right">
-      <div class="date">1 June, 2022</div>
-      <div class="text-box">We began talking on Instagram.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">💬 1 June, 2022 — We began talking on Instagram.</div>
     </div>
-    <div class="container left">
-      <div class="date">11 June, 2022</div>
-      <div class="text-box">She wished me a happy birthday for the first time.</div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🎂 11 June, 2022 — She wished me my birthday for the first time.</div>
     </div>
-    <div class="container right">
-      <div class="date">26 July, 2022</div>
-      <div class="text-box">I wished her happy birthday for the first time.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🎉 26 July, 2022 — I wished her, her birthday for the first time.</div>
     </div>
-    <div class="container left">
-      <div class="date">18 September, 2022</div>
-      <div class="text-box">We had to stop talking due to certain people.</div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🚫 September 18, 2022 — We had to stop talking because of certain people.</div>
     </div>
-    <div class="container right">
-      <div class="date">4 October, 2022</div>
-      <div class="text-box">We reunited. She said "I love you" for the first time and asked me to be her best friend.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">❤️ October 4, 2022 — We reunited. She said she loves me for the first time and asked me out to be her bestfriend.</div>
     </div>
-    <div class="container left">
-      <div class="date">2022–2023</div>
-      <div class="text-box">We had major ups and downs—disappearing, reappearing.</div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">⚡ 2022-2023 — We had major ups and downs. Disappearing and appearing.</div>
     </div>
-    <div class="container right">
-      <div class="date">24 April, 2024</div>
-      <div class="text-box">After a long break I didn’t want, I tried again. Missed her. We became friends again.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🫂 April 24, 2024 — After a major break in 2023 that I didn't want, I tried to reconcile. I missed her. We became friends again.</div>
     </div>
-    <div class="container left">
-      <div class="date">2024–2025</div>
-      <div class="text-box">This period went so well. I’ll relive it without asking.</div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🌟 2024-2025 — It went so well. I love that time and will relive that without asking.</div>
     </div>
-    <div class="container right">
-      <div class="date">11 June, 2025</div>
-      <div class="text-box">She supposedly wished me a happy birthday for the last time.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">🎈 11 June, 2025 — She supposedly wished me my birthday the last time.</div>
     </div>
-    <div class="container left">
-      <div class="date">22 June, 2025</div>
-      <div class="text-box">I confessed my feelings to her.</div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">💌 22 June, 2025 — I confessed my feelings to her.</div>
     </div>
-    <div class="container right">
-      <div class="date">27 June, 2025</div>
-      <div class="text-box">She said it’s better to end things. We ended it officially for the first time.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">💔 27 June, 2025 — She said it's better to end this. We ended it officially for the first time.</div>
     </div>
-    <div class="container left">
-      <div class="date">26 July, 2025</div>
-      <div class="text-box">I supposedly wished her happy birthday for the last time—despite the end.</div>
+
+    <div class="timeline-item left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">📅 26 July, 2025 — I have supposedly wished her happy birthday for the last time even though we've ended.</div>
     </div>
-    <div class="container right">
-      <div class="date">2025–____</div>
-      <div class="text-box">Still hoping and counting on her to come back.</div>
+
+    <div class="timeline-item right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">⏳ 2025–____ — Still hoping and counting on her coming back.</div>
     </div>
   </div>
-  <div class="button-container">
-    <button onclick="toggleMessage()">Show Hidden Message</button>
-  </div>
-  <div id="hiddenMessage">Avoided many and many key moments to not cry.</div>  <script>
-    function toggleMessage() {
-      const msg = document.getElementById("hiddenMessage");
-      if (msg.style.display === "none") {
-        msg.style.display = "block";
-      } else {
-        msg.style.display = "none";
-      }
+
+  <div class="bottom-message">“Avoided many and many key moments to not cry.”</div>
+
+  <script>
+    function toggleTimeline() {
+      const container = document.getElementById("timeline");
+      container.style.display = container.style.display === "block" ? "none" : "block";
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
 
 <style>
