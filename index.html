@@ -471,206 +471,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Our Timeline</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fa;
+      background-color: #121212;
+      color: #f1f1f1;
       margin: 0;
       padding: 2rem;
+    }
+
+    details {
+      margin: 2rem auto;
+      max-width: 600px;
+      background-color: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    summary {
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      list-style: none;
       text-align: center;
     }
 
-    .collapsible-btn {
-      background-color: #343a40;
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-bottom: 30px;
-    }
-
-    .timeline-container {
-      display: none;
+    .timeline {
       position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 0;
+      margin-top: 2rem;
     }
 
-    .timeline-line {
+    .timeline::before {
+      content: '';
       position: absolute;
-      left: 50%;
       top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 4px;
       height: 100%;
-      background: #6c757d;
-      transform: translateX(-50%);
-      z-index: 1;
+      background-color: #555;
     }
 
-    .timeline-item {
+    .entry {
       position: relative;
       width: 50%;
-      padding: 1.5rem 2rem;
+      padding: 1rem 2rem;
       box-sizing: border-box;
     }
 
-    .timeline-item.left {
+    .entry.left {
       left: 0;
       text-align: right;
     }
 
-    .timeline-item.right {
+    .entry.right {
       left: 50%;
       text-align: left;
     }
 
-    .timeline-content {
-      background: white;
-      padding: 1rem;
-      border-radius: 12px;
-      position: relative;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      z-index: 2;
-    }
-
-    .timeline-dot {
+    .entry::before {
+      content: '🔘';
       position: absolute;
-      top: 1.2rem;
-      width: 20px;
-      height: 20px;
-      background: #28a745;
+      top: 1rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      background-color: #222;
+      color: #fff;
       border-radius: 50%;
-      border: 3px solid white;
-      z-index: 3;
+      text-align: center;
+      line-height: 1.2rem;
+      font-size: 1.2rem;
     }
 
-    .timeline-item.left .timeline-dot {
-      right: -10px;
+    .entry.left::before {
+      right: -0.8rem;
     }
 
-    .timeline-item.right .timeline-dot {
-      left: -10px;
+    .entry.right::before {
+      left: -0.8rem;
     }
 
-    .bottom-message {
-      margin-top: 4rem;
+    .message {
+      margin-top: 2rem;
       font-style: italic;
-      color: #6c757d;
-    }
-
-    @media (max-width: 768px) {
-      .timeline-item {
-        width: 100%;
-        text-align: center !important;
-        left: 0 !important;
-        margin-bottom: 2rem;
-      }
-
-      .timeline-item.left .timeline-dot,
-      .timeline-item.right .timeline-dot {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .timeline-line {
-        left: 50%;
-      }
+      text-align: center;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-
-  <button class="collapsible-btn" onclick="toggleTimeline()">Line of our time together</button>
-
-  <div class="timeline-container" id="timeline">
-    <div class="timeline-line"></div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🟢 29 May, 2022 — First time I talked to her. Approached her and asked her ID.</div>
+  <details>
+    <summary>📜 Line of our time together</summary>
+    <div class="timeline">
+      <div class="entry left"><strong>29 May, 2022</strong><br>First time I talked to her. Approached her and asked her ID.</div>
+      <div class="entry right"><strong>1 June, 2022</strong><br>We began talking on Instagram.</div>
+      <div class="entry left"><strong>11 June, 2022</strong><br>She wished me my birthday for the first time.</div>
+      <div class="entry right"><strong>26 July, 2022</strong><br>I wished her happy birthday for the first time.</div>
+      <div class="entry left"><strong>18 September, 2022</strong><br>We had to stop talking because of certain people.</div>
+      <div class="entry right"><strong>4 October, 2022</strong><br>We reunited. She said she loves me for the first time and asked me out to be her bestfriend.</div>
+      <div class="entry left"><strong>2022–2023</strong><br>Major ups and downs. Disappearing and appearing.</div>
+      <div class="entry right"><strong>24 April, 2024</strong><br>After a major break in 2023, I thought fuck it and tried to reconcile. I missed her. I talked, persuaded, and we became friends again.</div>
+      <div class="entry left"><strong>2024–2025</strong><br>It went so well. I love that time and will relive that without asking.</div>
+      <div class="entry right"><strong>11 June, 2025</strong><br>She supposedly wished me my birthday the last time.</div>
+      <div class="entry left"><strong>22 June, 2025</strong><br>I confessed my feelings to her.</div>
+      <div class="entry right"><strong>27 June, 2025</strong><br>She said it's better to end this. We ended it. Officially.</div>
+      <div class="entry left"><strong>26 July, 2025</strong><br>I have supposedly wished her happy birthday for the last time even though we've ended.</div>
+      <div class="entry right"><strong>2025–____</strong><br>Still hoping and counting on her coming back.</div>
     </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">💬 1 June, 2022 — We began talking on Instagram.</div>
-    </div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🎂 11 June, 2022 — She wished me my birthday for the first time.</div>
-    </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🎉 26 July, 2022 — I wished her, her birthday for the first time.</div>
-    </div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🚫 September 18, 2022 — We had to stop talking because of certain people.</div>
-    </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">❤️ October 4, 2022 — We reunited. She said she loves me for the first time and asked me out to be her bestfriend.</div>
-    </div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">⚡ 2022-2023 — We had major ups and downs. Disappearing and appearing.</div>
-    </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🫂 April 24, 2024 — After a major break in 2023 that I didn't want, I tried to reconcile. I missed her. We became friends again.</div>
-    </div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🌟 2024-2025 — It went so well. I love that time and will relive that without asking.</div>
-    </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">🎈 11 June, 2025 — She supposedly wished me my birthday the last time.</div>
-    </div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">💌 22 June, 2025 — I confessed my feelings to her.</div>
-    </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">💔 27 June, 2025 — She said it's better to end this. We ended it officially for the first time.</div>
-    </div>
-
-    <div class="timeline-item left">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">📅 26 July, 2025 — I have supposedly wished her happy birthday for the last time even though we've ended.</div>
-    </div>
-
-    <div class="timeline-item right">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">⏳ 2025–____ — Still hoping and counting on her coming back.</div>
-    </div>
-  </div>
-
-  <div class="bottom-message">“Avoided many and many key moments to not cry.”</div>
-
-  <script>
-    function toggleTimeline() {
-      const container = document.getElementById("timeline");
-      container.style.display = container.style.display === "block" ? "none" : "block";
-    }
-  </script>
-
+    <div class="message">Avoided many and many key moments to not cry.</div>
+  </details>
 </body>
 </html>
 
