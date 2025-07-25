@@ -475,128 +475,200 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Line of Our Time Together</title>
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
     .container {
       max-width: 900px;
       margin: auto;
-      padding: 20px;
+      padding: 30px 20px;
     }
-    summary {
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 10px 0;
+
+    .collapsible-button {
+      background: #1f1f1f;
+      color: #ffc107;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      font-size: 1.2rem;
       font-weight: bold;
-      color: #444;
+      text-align: left;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
     }
+
     .timeline {
       position: relative;
-      margin: 40px 0;
-      padding: 0;
+      padding: 40px 0;
       list-style: none;
     }
+
     .timeline::before {
       content: '';
       position: absolute;
-      left: 50%;
       top: 0;
       bottom: 0;
+      left: 50%;
       width: 4px;
-      background: #444;
+      background: red;
       transform: translateX(-50%);
     }
+
     .entry {
       position: relative;
       width: 50%;
-      padding: 15px 25px;
+      padding: 12px 20px;
       box-sizing: border-box;
     }
+
     .entry:nth-child(odd) {
       left: 0;
       text-align: right;
     }
+
     .entry:nth-child(even) {
       left: 50%;
       text-align: left;
     }
+
     .entry::before {
-      content: attr(data-date);
+      content: "❤️";
       position: absolute;
-      top: 15px;
-      font-size: 0.85rem;
-      color: #999;
+      top: 18px;
+      left: 100%;
+      font-size: 1.2rem;
+      transform: translateX(-50%);
+      z-index: 2;
     }
-    .entry:nth-child(odd)::before {
-      right: -110px;
-    }
+
     .entry:nth-child(even)::before {
-      left: -110px;
+      left: 0%;
+      transform: translateX(-50%);
     }
+
     .entry-content {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 12px 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       display: inline-block;
-      max-width: 90%;
+      background: rgba(255, 255, 255, 0.07);
+      color: #f0f0f0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      max-width: 260px;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
     }
+
+    .date {
+      font-size: 0.8rem;
+      color: #bbb;
+      margin-top: 6px;
+    }
+
     .final-note {
-      margin-top: 40px;
       text-align: center;
       font-style: italic;
-      color: #777;
+      margin-top: 40px;
+      color: #aaa;
+    }
+
+    .collapsible-content {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .collapsible-button.active + .collapsible-content {
+      display: block;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <details open>
-      <summary>The line of our time together</summary>
+    <button class="collapsible-button" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');">
+      The line of our time together
+    </button>
+    <div class="collapsible-content show">
       <ul class="timeline">
-        <li class="entry" data-date="29 May 2022">
+        <li class="entry">
           <div class="entry-content">First time I talked to her. Approached and asked her ID.</div>
+          <div class="date">29 May 2022</div>
         </li>
-        <li class="entry" data-date="1 June 2022">
+        <li class="entry">
           <div class="entry-content">We began talking on Instagram.</div>
+          <div class="date">1 June 2022</div>
         </li>
-        <li class="entry" data-date="11 June 2022">
+        <li class="entry">
           <div class="entry-content">She wished me happy birthday for the first time.</div>
+          <div class="date">11 June 2022</div>
         </li>
-        <li class="entry" data-date="26 July 2022">
+        <li class="entry">
           <div class="entry-content">I wished her happy birthday for the first time.</div>
+          <div class="date">26 July 2022</div>
         </li>
-        <li class="entry" data-date="18 Sep 2022">
+        <li class="entry">
           <div class="entry-content">We had to stop talking because of certain people.</div>
+          <div class="date">18 Sept 2022</div>
         </li>
-        <li class="entry" data-date="4 Oct 2022">
-          <div class="entry-content">We reunited. She said she loves me and asked me out to be her best friend.</div>
+        <li class="entry">
+          <div class="entry-content">We reunited. She said she loves me. Asked me to be her best friend.</div>
+          <div class="date">4 Oct 2022</div>
         </li>
-        <li class="entry" data-date="2022–2023">
-          <div class="entry-content">Major ups and downs. Disappearing, reappearing, again and again.</div>
+        <li class="entry">
+          <div class="entry-content">Major ups and downs. Disappearing and reappearing again and again.</div>
+          <div class="date">2022–2023</div>
         </li>
-        <li class="entry" data-date="24 April 2024">
-          <div class="entry-content">After a major break, I said “fuck it”, tried again, talked, persuaded. Got her back.</div>
+        <li class="entry">
+          <div class="entry-content">After a major break, I said fuck it and tried again. Got her back.</div>
+          <div class="date">24 April 2024</div>
         </li>
-        <li class="entry" data-date="2024–2025">
-          <div class="entry-content">It went so well. I’ll relive that time without asking anyone.</div>
+        <li class="entry">
+          <div class="entry-content">It went so well. I’ll relive that time without asking.</div>
+          <div class="date">2024–2025</div>
         </li>
-        <li class="entry" data-date="11 June 2025">
+        <li class="entry">
           <div class="entry-content">She supposedly wished me happy birthday for the last time.</div>
+          <div class="date">11 June 2025</div>
         </li>
-        <li class="entry" data-date="22 June 2025">
+        <li class="entry">
           <div class="entry-content">I confessed my feelings to her.</div>
+          <div class="date">22 June 2025</div>
         </li>
-        <li class="entry" data-date="27 June 2025">
-          <div class="entry-content">She said it's better to end this. Officially ended it—for the first time.</div>
+        <li class="entry">
+          <div class="entry-content">She said it's better to end this. Officially ended it.</div>
+          <div class="date">27 June 2025</div>
         </li>
-        <li class="entry" data-date="26 July 2025">
-          <div class="entry-content">I supposedly wished her happy birthday for the last time—even after ending.</div>
+        <li class="entry">
+          <div class="entry-content">Supposedly wished her happy birthday for the last time.</div>
+          <div class="date">26 July 2025</div>
         </li>
-        <li class="entry" data-date="2025–____">
-          <div class="entry-content">Still hoping. Still counting. Still waiting on her return.</div>
+        <li class="entry">
+          <div class="entry-content">Still hoping. Still counting. Waiting on her return.</div>
+          <div class="date">2025–____</div>
         </li>
       </ul>
       <div class="final-note">Avoided many and many key moments to not cry.</div>
-    </details>
+    </div>
   </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.collapsible-button');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        button.classList.toggle('active');
+        const content = button.nextElementSibling;
+        if (content.classList.contains('show')) {
+          content.classList.remove('show');
+        } else {
+          content.classList.add('show');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
 
