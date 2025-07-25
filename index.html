@@ -468,25 +468,137 @@
   </p>
 </div>
 
-<details class="timeline-wrapper">
-  <summary class="timeline-button">The line of our time together</summary>
-  <div class="timeline">
-    <div class="timeline-event left"><div><strong>29 May 2022</strong><br>First time I talked to her.</div></div>
-    <div class="timeline-event right"><div><strong>1 June 2022</strong><br>We began talking.</div></div>
-    <div class="timeline-event left"><div><strong>11 June 2022</strong><br>She wished me first time.</div></div>
-    <div class="timeline-event right"><div><strong>26 July 2022</strong><br>I wished her first time.</div></div>
-    <div class="timeline-event left"><div><strong>18 Sep 2022</strong><br>We stopped talking.</div></div>
-    <div class="timeline-event right"><div><strong>4 Oct 2022</strong><br>Reunited, love & BFF.</div></div>
-    <div class="timeline-event left"><div><strong>2022–2023</strong><br>Ups and downs.</div></div>
-    <div class="timeline-event right"><div><strong>24 Apr 2024</strong><br>I tried to reconcile.</div></div>
-    <div class="timeline-event left"><div><strong>2024–2025</strong><br>Time went so well.</div></div>
-    <div class="timeline-event right"><div><strong>11 June 2025</strong><br>She wished me last time.</div></div>
-    <div class="timeline-event left"><div><strong>22 June 2025</strong><br>I confessed.</div></div>
-    <div class="timeline-event right"><div><strong>27 June 2025</strong><br>We ended it officially.</div></div>
-    <div class="timeline-event left"><div><strong>26 July 2025</strong><br>I wished her last the time.</div></div>
-    <div class="timeline-event right"><div><strong>2025–∞</strong><br>Still hoping. Still waiting.</div></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Line of Our Time Together</title>
+  <style>
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    summary {
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 10px 0;
+      font-weight: bold;
+      color: #444;
+    }
+    .timeline {
+      position: relative;
+      margin: 40px 0;
+      padding: 0;
+      list-style: none;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #444;
+      transform: translateX(-50%);
+    }
+    .entry {
+      position: relative;
+      width: 50%;
+      padding: 15px 25px;
+      box-sizing: border-box;
+    }
+    .entry:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .entry:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+    .entry::before {
+      content: attr(data-date);
+      position: absolute;
+      top: 15px;
+      font-size: 0.85rem;
+      color: #999;
+    }
+    .entry:nth-child(odd)::before {
+      right: -110px;
+    }
+    .entry:nth-child(even)::before {
+      left: -110px;
+    }
+    .entry-content {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: inline-block;
+      max-width: 90%;
+    }
+    .final-note {
+      margin-top: 40px;
+      text-align: center;
+      font-style: italic;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <details open>
+      <summary>The line of our time together</summary>
+      <ul class="timeline">
+        <li class="entry" data-date="29 May 2022">
+          <div class="entry-content">First time I talked to her. Approached and asked her ID.</div>
+        </li>
+        <li class="entry" data-date="1 June 2022">
+          <div class="entry-content">We began talking on Instagram.</div>
+        </li>
+        <li class="entry" data-date="11 June 2022">
+          <div class="entry-content">She wished me happy birthday for the first time.</div>
+        </li>
+        <li class="entry" data-date="26 July 2022">
+          <div class="entry-content">I wished her happy birthday for the first time.</div>
+        </li>
+        <li class="entry" data-date="18 Sep 2022">
+          <div class="entry-content">We had to stop talking because of certain people.</div>
+        </li>
+        <li class="entry" data-date="4 Oct 2022">
+          <div class="entry-content">We reunited. She said she loves me and asked me out to be her best friend.</div>
+        </li>
+        <li class="entry" data-date="2022–2023">
+          <div class="entry-content">Major ups and downs. Disappearing, reappearing, again and again.</div>
+        </li>
+        <li class="entry" data-date="24 April 2024">
+          <div class="entry-content">After a major break, I said “fuck it”, tried again, talked, persuaded. Got her back.</div>
+        </li>
+        <li class="entry" data-date="2024–2025">
+          <div class="entry-content">It went so well. I’ll relive that time without asking anyone.</div>
+        </li>
+        <li class="entry" data-date="11 June 2025">
+          <div class="entry-content">She supposedly wished me happy birthday for the last time.</div>
+        </li>
+        <li class="entry" data-date="22 June 2025">
+          <div class="entry-content">I confessed my feelings to her.</div>
+        </li>
+        <li class="entry" data-date="27 June 2025">
+          <div class="entry-content">She said it's better to end this. Officially ended it—for the first time.</div>
+        </li>
+        <li class="entry" data-date="26 July 2025">
+          <div class="entry-content">I supposedly wished her happy birthday for the last time—even after ending.</div>
+        </li>
+        <li class="entry" data-date="2025–____">
+          <div class="entry-content">Still hoping. Still counting. Still waiting on her return.</div>
+        </li>
+      </ul>
+      <div class="final-note">Avoided many and many key moments to not cry.</div>
+    </details>
   </div>
-</details>
+</body>
+</html>
 
 <style>
 .timeline-wrapper {
