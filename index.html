@@ -468,30 +468,28 @@
   </p>
 </div>
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Moksh Timeline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline</title>
   <style>
     body {
-      font-family: 'Georgia', serif;
-      background-color: #111;
-      color: #eee;
-      margin: 0;
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 20px;
     }
     .timeline {
       position: relative;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     .timeline::after {
       content: '';
       position: absolute;
       width: 6px;
-      background-color: #eee;
+      background-color: #ff3860;
       top: 0;
       bottom: 0;
       left: 50%;
@@ -503,111 +501,167 @@
       background-color: inherit;
       width: 50%;
     }
-    .left {
+    .container.left {
       left: 0;
     }
-    .right {
+    .container.right {
       left: 50%;
     }
-    .container::after {
-      content: '';
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      right: -13px;
-      background-color: #fff;
-      border: 4px solid #ff3c6d;
-      top: 15px;
-      border-radius: 50%;
-      z-index: 1;
+    .date {
+      padding: 10px;
+      background: #1f1f1f;
+      color: #ffd369;
+      font-weight: bold;
+      border-radius: 8px;
+      text-align: center;
+      width: fit-content;
     }
-    .right::after {
-      left: -13px;
-    }
-    .content {
+    .text-box {
       padding: 20px;
-      background-color: #222;
+      background: #1e1e1e;
       position: relative;
       border-radius: 6px;
+      box-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
     }
-    .collapsible {
-      background-color: #ff3c6d;
-      color: white;
-      cursor: pointer;
-      padding: 12px;
-      width: 100%;
-      border: none;
-      text-align: center;
-      outline: none;
-      font-size: 18px;
+    .left .text-box::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      right: -15px;
+      border: 7px solid transparent;
+      border-left: 7px solid #1e1e1e;
+    }
+    .right .text-box::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      left: -15px;
+      border: 7px solid transparent;
+      border-right: 7px solid #1e1e1e;
+    }
+    .container.left .date {
+      margin-left: auto;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
       margin-top: 30px;
-      border-radius: 8px;
     }
-    .collapsible:hover {
-      background-color: #e23661;
+    button {
+      padding: 10px 20px;
+      background-color: #ff3860;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    .hidden-text {
-      padding: 20px;
+    button:hover {
+      background-color: #ff6384;
+    }
+    #hiddenMessage {
       display: none;
-      background-color: #1e1e1e;
-      margin-top: 10px;
-      border-radius: 6px;
       text-align: center;
+      margin-top: 20px;
+      color: #aaaaaa;
       font-style: italic;
-      color: #ccc;
     }
-    @media screen and (max-width: 600px) {
-      .timeline::after {
-        left: 31px;
-      }
+    @media screen and (max-width: 768px) {
       .container {
         width: 100%;
         padding-left: 70px;
         padding-right: 25px;
       }
-      .container::after {
-        left: 18px;
-      }
-      .right {
+      .container.right {
         left: 0%;
+      }
+      .timeline::after {
+        left: 30px;
+      }
+      .left .text-box::before,
+      .right .text-box::before {
+        left: 15px;
+        border: 7px solid transparent;
+        border-left: 7px solid #1e1e1e;
       }
     }
   </style>
 </head>
 <body>
-
-<div class="timeline">
-  <div class="container left"><div class="content">29 May 2022 – First time I talked to her. Asked her ID.</div></div>
-  <div class="container right"><div class="content">1 June 2022 – We began talking on Instagram.</div></div>
-  <div class="container left"><div class="content">11 June 2022 – She wished me my birthday for the first time.</div></div>
-  <div class="container right"><div class="content">26 July 2022 – I wished her birthday for the first time.</div></div>
-  <div class="container left"><div class="content">18 Sep 2022 – We had to stop talking due to certain people.</div></div>
-  <div class="container right"><div class="content">4 Oct 2022 – We reunited. She said she loves me and asked me to be her best friend.</div></div>
-  <div class="container left"><div class="content">2022–2023 – Major ups and downs. Disappearing and appearing.</div></div>
-  <div class="container right"><div class="content">24 Apr 2024 – After a long break, I reached out again. We became friends once more.</div></div>
-  <div class="container left"><div class="content">2024–2025 – It went beautifully. I love that time. I’ll relive it forever.</div></div>
-  <div class="container right"><div class="content">11 June 2025 – She supposedly wished me my birthday for the last time.</div></div>
-  <div class="container left"><div class="content">22 June 2025 – I confessed my feelings to her.</div></div>
-  <div class="container right"><div class="content">27 June 2025 – She said it’s better we end this. First official end.</div></div>
-  <div class="container left"><div class="content">26 July 2025 – I wished her birthday for the last time… probably.</div></div>
-  <div class="container right"><div class="content">2025–____ – Still hoping. Still counting. Still waiting.</div></div>
-</div>
-
-<button class="collapsible">Show Hidden Message</button>
-<div class="hidden-text" id="hiddenText">
-  Avoided many and many key moments to not cry.
-</div>
-
-<script>
-  const coll = document.querySelector(".collapsible");
-  const hidden = document.getElementById("hiddenText");
-
-  coll.addEventListener("click", () => {
-    hidden.style.display = hidden.style.display === "block" ? "none" : "block";
-  });
-</script>
-
-</body>
+  <div class="timeline">
+    <div class="container left">
+      <div class="date">29 May, 2022</div>
+      <div class="text-box">First time I approached her and asked for her ID.</div>
+    </div>
+    <div class="container right">
+      <div class="date">1 June, 2022</div>
+      <div class="text-box">We began talking on Instagram.</div>
+    </div>
+    <div class="container left">
+      <div class="date">11 June, 2022</div>
+      <div class="text-box">She wished me a happy birthday for the first time.</div>
+    </div>
+    <div class="container right">
+      <div class="date">26 July, 2022</div>
+      <div class="text-box">I wished her happy birthday for the first time.</div>
+    </div>
+    <div class="container left">
+      <div class="date">18 September, 2022</div>
+      <div class="text-box">We had to stop talking due to certain people.</div>
+    </div>
+    <div class="container right">
+      <div class="date">4 October, 2022</div>
+      <div class="text-box">We reunited. She said "I love you" for the first time and asked me to be her best friend.</div>
+    </div>
+    <div class="container left">
+      <div class="date">2022–2023</div>
+      <div class="text-box">We had major ups and downs—disappearing, reappearing.</div>
+    </div>
+    <div class="container right">
+      <div class="date">24 April, 2024</div>
+      <div class="text-box">After a long break I didn’t want, I tried again. Missed her. We became friends again.</div>
+    </div>
+    <div class="container left">
+      <div class="date">2024–2025</div>
+      <div class="text-box">This period went so well. I’ll relive it without asking.</div>
+    </div>
+    <div class="container right">
+      <div class="date">11 June, 2025</div>
+      <div class="text-box">She supposedly wished me a happy birthday for the last time.</div>
+    </div>
+    <div class="container left">
+      <div class="date">22 June, 2025</div>
+      <div class="text-box">I confessed my feelings to her.</div>
+    </div>
+    <div class="container right">
+      <div class="date">27 June, 2025</div>
+      <div class="text-box">She said it’s better to end things. We ended it officially for the first time.</div>
+    </div>
+    <div class="container left">
+      <div class="date">26 July, 2025</div>
+      <div class="text-box">I supposedly wished her happy birthday for the last time—despite the end.</div>
+    </div>
+    <div class="container right">
+      <div class="date">2025–____</div>
+      <div class="text-box">Still hoping and counting on her to come back.</div>
+    </div>
+  </div>
+  <div class="button-container">
+    <button onclick="toggleMessage()">Show Hidden Message</button>
+  </div>
+  <div id="hiddenMessage">Avoided many and many key moments to not cry.</div>  <script>
+    function toggleMessage() {
+      const msg = document.getElementById("hiddenMessage");
+      if (msg.style.display === "none") {
+        msg.style.display = "block";
+      } else {
+        msg.style.display = "none";
+      }
+    }
+  </script></body>
 </html>
 
 <style>
