@@ -1107,6 +1107,169 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
 </body>
 <div id="stars"></div>
 <script>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love Ticker</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+    }
+    .ticker {
+      width: 100%;
+      overflow: hidden;
+      background-color: #111;
+      white-space: nowrap;
+      box-sizing: border-box;
+      border-top: 2px solid gold;
+      border-bottom: 2px solid gold;
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      z-index: 9999;
+    }
+
+    .ticker span {
+      display: inline-block;
+      padding: 0 20px;
+      animation: scroll 60s linear infinite;
+      font-size: 18px;
+    }
+
+    .dot {
+      color: white;
+      padding: 0 10px;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ticker">
+    <span>
+      <span style="color:#e6194B">Je t’aime</span><span class="dot">•</span>
+      <span style="color:#3cb44b">Te amo</span><span class="dot">•</span>
+      <span style="color:#ffe119">Ich liebe dich</span><span class="dot">•</span>
+      <span style="color:#4363d8">Ti amo</span><span class="dot">•</span>
+      <span style="color:#f58231">愛してる</span><span class="dot">•</span>
+      <span style="color:#911eb4">사랑해</span><span class="dot">•</span>
+      <span style="color:#46f0f0">Я тебя люблю</span><span class="dot">•</span>
+      <span style="color:#f032e6">मैं तुमसे प्यार करता हूँ</span><span class="dot">•</span>
+      <span style="color:#bcf60c">Eu te amo</span><span class="dot">•</span>
+      <span style="color:#fabebe">Σ’ αγαπώ</span><span class="dot">•</span>
+      <span style="color:#008080">Kocham cię</span><span class="dot">•</span>
+      <span style="color:#e6beff">Te iubesc</span><span class="dot">•</span>
+      <span style="color:#9a6324">Mahal kita</span><span class="dot">•</span>
+      <span style="color:#fffac8">Seni seviyorum</span><span class="dot">•</span>
+      <span style="color:#800000">أنا أحبك</span><span class="dot">•</span>
+      <span style="color:#aaffc3">ฉันรักคุณ</span><span class="dot">•</span>
+      <span style="color:#808000">Anh yêu em</span><span class="dot">•</span>
+      <span style="color:#ffd8b1">Mwen renmen ou</span><span class="dot">•</span>
+      <span style="color:#000075">Nakupenda</span><span class="dot">•</span>
+      <span style="color:#808080">Minä rakastan sinua</span><span class="dot">•</span>
+      <span style="color:#ffffff">我爱你</span><span class="dot">•</span>
+      <span style="color:#a9a9a9">Volim te</span><span class="dot">•</span>
+      <span style="color:#dc143c">Mi amas vin</span><span class="dot">•</span>
+      <span style="color:#6495ed">Szeretlek</span><span class="dot">•</span>
+      <span style="color:#7fff00">Aš tave myliu</span><span class="dot">•</span>
+      <span style="color:#d2691e">Miluji tě</span><span class="dot">•</span>
+      <span style="color:#ff7f50">Я люблю цябе</span><span class="dot">•</span>
+      <span style="color:#6495ed">Aloha wau iā ‘oe</span><span class="dot">•</span>
+      <span style="color:#fff5ee">Nkwagala</span><span class="dot">•</span>
+      <span style="color:#ff1493">Ndimakukonda</span><span class="dot">•</span>
+      <span style="color:#1e90ff">Inħobbok</span><span class="dot">•</span>
+      <span style="color:#b22222">Volim vas</span><span class="dot">•</span>
+      <span style="color:#228b22">Ndinokuda</span><span class="dot">•</span>
+      <span style="color:#ff69b4">Ngiyakuthanda</span><span class="dot">•</span>
+      <span style="color:#cd5c5c">Te dua</span><span class="dot">•</span>
+      <span style="color:#4b0082">Maite zaitut</span><span class="dot">•</span>
+      <span style="color:#f0e68c">Ég elska þig</span><span class="dot">•</span>
+      <span style="color:#add8e6">Nani ninna preetisuttene</span><span class="dot">•</span>
+      <span style="color:#90ee90">Aku cinta padamu</span><span class="dot">•</span>
+      <span style="color:#20b2aa">Njan Ninne Premikunnu</span><span class="dot">•</span>
+      <span style="color:#778899">මම ඔයාට ආදරෙයි</span><span class="dot">•</span>
+      <span style="color:#ffb6c1">நான் உன்னை காதலிக்கிறேன்</span><span class="dot">•</span>
+      <span style="color:#7cfc00">నేను నిన్ను ప్రేమిస్తున్నాను</span><span class="dot">•</span>
+      <span style="color:#fff0f5">ငါနင့်ကိုချစ်တယ်</span><span class="dot">•</span>
+      <span style="color:#8b0000">ฉันรักคุณ</span><span class="dot">•</span>
+      <span style="color:#00ced1">ຂ້ອຍຮັກເຈົ້າ</span><span class="dot">•</span>
+      <span style="color:#9400d3">دوستت دارم</span><span class="dot">•</span>
+      <span style="color:#ff8c00">אני אוהב אותך</span><span class="dot">•</span>
+      <span style="color:#9932cc">Εγώ σ'αγαπώ</span><span class="dot">•</span>
+      <span style="color:#ff4500">ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</span><span class="dot">•</span>
+      <span style="color:#da70d6">ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</span><span class="dot">•</span>
+      <span style="color:#8a2be2">আমি তোমায় ভালোবাসি</span><span class="dot">•</span>
+      <span style="color:#7b68ee">আমি আপনাকে ভালবাসি</span><span class="dot">•</span>
+      <span style="color:#483d8b">ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</span><span class="dot">•</span>
+      <span style="color:#0000cd">میں تم سے محبت کرتا ہوں</span><span class="dot">•</span>
+      <span style="color:#00bfff">მე შენ მიყვარხარ</span><span class="dot">•</span>
+      <span style="color:#5f9ea0">Я тебя кахаю</span><span class="dot">•</span>
+      <span style="color:#66cdaa">Aku tresna sampeyan</span><span class="dot">•</span>
+      <span style="color:#7fffd4">Es tevi mīlu</span><span class="dot">•</span>
+      <span style="color:#afeeee">Kuv hlub koj</span><span class="dot">•</span>
+      <span style="color:#add8e6">Mīlu tevi</span><span class="dot">•</span>
+      <span style="color:#b0e0e6">Ես քեզ սիրում եմ</span><span class="dot">•</span>
+      <span style="color:#b0c4de">Mi volas te amo</span><span class="dot">•</span>
+      <span style="color:#c0c0c0">Mahal kita</span><span class="dot">•</span>
+      <span style="color:#d3d3d3">Inhobbok</span><span class="dot">•</span>
+      <span style="color:#e0ffff">Volim te</span><span class="dot">•</span>
+      <span style="color:#f0f8ff">S'agapo</span><span class="dot">•</span>
+      <span style="color:#f0e68c">Я тебе кохаю</span><span class="dot">•</span>
+      <span style="color:#faebd7">Sana seviyorum</span><span class="dot">•</span>
+      <span style="color:#deb887">Ndimakukonda</span><span class="dot">•</span>
+      <span style="color:#cd853f">Maite zaitut</span><span class="dot">•</span>
+      <span style="color:#bc8f8f">Я цябе кахаю</span><span class="dot">•</span>
+      <span style="color:#a0522d">Ti voglio bene</span><span class="dot">•</span>
+      <span style="color:#8b4513">Eu te amo</span><span class="dot">•</span>
+      <span style="color:#d2b48c">Aš tave myliu</span><span class="dot">•</span>
+      <span style="color:#f5deb3">Miluji tě</span><span class="dot">•</span>
+      <span style="color:#ffe4c4">Mi amas vin</span><span class="dot">•</span>
+      <span style="color:#ffdead">Szeretlek</span><span class="dot">•</span>
+      <span style="color:#fff8dc">Te dua</span><span class="dot">•</span>
+      <span style="color:#fafad2">Volim te</span><span class="dot">•</span>
+      <span style="color:#ffffe0">Rwy'n dy garu di</span><span class="dot">•</span>
+      <span style="color:#f0fff0">Mina rakastan sind</span><span class="dot">•</span>
+      <span style="color:#f8f8ff">Ti tengu caru</span><span class="dot">•</span>
+      <span style="color:#fffaf0">Ndagukunda</span><span class="dot">•</span>
+      <span style="color:#fdf5e6">Ke a go rata</span><span class="dot">•</span>
+      <span style="color:#ffefd5">Ndinokuda</span><span class="dot">•</span>
+      <span style="color:#ffe4b5">Ngiyakuthanda</span><span class="dot">•</span>
+      <span style="color:#ffdab9">Mi amas vin</span><span class="dot">•</span>
+      <span style="color:#fce6c9">Szeretlek</span><span class="dot">•</span>
+      <span style="color:#f5f5dc">Te dua</span><span class="dot">•</span>
+      <span style="color:#e0b0ff">Volim te</span><span class="dot">•</span>
+      <span style="color:#d8bfd8">Rwy'n dy garu di</span><span class="dot">•</span>
+      <span style="color:#dda0dd">Mina rakastan sind</span><span class="dot">•</span>
+      <span style="color:#ee82ee">Ti tengu caru</span><span class="dot">•</span>
+      <span style="color:#da70d6">Ke a go rata</span><span class="dot">•</span>
+      <span style="color:#ff00ff">Ndagukunda</span><span class="dot">•</span>
+      <span style="color:#ffc0cb">Aš tave myliu</span><span class="dot">•</span>
+      <span style="color:#ffb6c1">Miluji tě</span><span class="dot">•</span>
+      <span style="color:#ff69b4">Я тебя кахаю</span><span class="dot">•</span>
+      <span style="color:#ff1493">Aloha wau iā ‘oe</span><span class="dot">•</span>
+      <span style="color:#db7093">Nkwagala</span><span class="dot">•</span>
+      <span style="color:#c71585">Ndimakukonda</span><span class="dot">•</span>
+      <span style="color:#b22222">Inħobbok</span><span class="dot">•</span>
+      <span style="color:#8b0000">Volim vas</span><span class="dot">•</span>
+      <span style="color:#a52a2a">Ndinokuda</span><span class="dot">•</span>
+      <span style="color:#adff2f">Ngiyakuthanda</span><span class="dot">•</span>
+      <span style="color:#7fff00">Te dua</span><span class="dot">•</span>
+      <span style="color:#7cfc00">Maite zaitut</span><span class="dot">•</span>
+      <span style="color:#00ff00">Ég elska þig</span><span class="dot">•</span>
+      <span style="color:#32cd32">Nani ninna preetisuttene</span><span class="dot">•</span>
+    </span>
+  </div>
+</body>
+</html>
+
   const stars = document.getElementById("stars");
   for (let i = 0; i < 100; i++) {
     const star = document.createElement("div");
