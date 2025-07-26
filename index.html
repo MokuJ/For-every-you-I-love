@@ -1117,40 +1117,43 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       padding: 0;
       background-color: #000;
       /* Adjusted padding-top for a more robust separation. */
-      padding-top: 70px; /* Increased from 50px */
+      padding-top: 58px; /* Adjusted to account for thinner ticker: 8px padding + 2px border + 18px font-size + 8px padding + 2px border = 38px height + buffer */
       /* Added a broader font-family stack for better script rendering */
       font-family: 'Arial Unicode MS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Segoe UI', Arial, sans-serif;
     }
     .ticker {
       width: 100%;
       overflow: hidden;
-      background-color: #111;
+      /* Neutral strip color */
+      background-color: #4A4A4A; /* Changed from #111 */
       white-space: nowrap;
       box-sizing: border-box;
       border-top: 2px solid gold;
       border-bottom: 2px solid gold;
-      padding: 10px 0; /* This padding adds to the ticker's height */
+      /* Thinned the strip */
+      padding: 8px 0; /* Reduced from 10px */
       position: fixed;
       top: 0;
       left: 0;
       z-index: 9999;
-      height: 46px; /* Explicitly set height based on padding + font size + borders */
+      height: 42px; /* Explicitly set height based on new padding + font size + borders */
     }
 
     .ticker-content {
       display: inline-block;
-      animation: scroll 90s linear infinite; /* Slower animation speed */
+      /* Adjusted animation speed */
+      animation: scroll 45s linear infinite; /* Changed from 90s */
     }
 
     .ticker-content span {
       display: inline-block;
-      padding: 0 10px; /* Reduced horizontal padding for less gap */
+      padding: 0 10px;
       font-size: 18px;
     }
 
     .dot {
       color: white;
-      padding: 0 10px; /* Dot padding also reduced for consistency */
+      padding: 0 10px;
     }
 
     @keyframes scroll {
@@ -1161,7 +1164,7 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     .main-content {
       color: white;
       text-align: center;
-      padding: 50px 20px; /* Standard padding for the main content */
+      padding: 50px 20px;
       font-size: 24px;
     }
   </style>
@@ -1285,7 +1288,7 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
   <div class="main-content">
     <h1>Welcome to the Love Ticker!</h1>
     <p>This is where your main page content would go. The "I love you" ticker is now at the top and scrolls smoothly, without overlapping this message.</p>
-    <p>If you still see overlap, try increasing the `padding-top` value in the `body` CSS rule until the content is perfectly below the ticker.</p>
+    <p>If you still notice any slight overlap, a very minor adjustment to the `padding-top` value in the `body` CSS rule (e.g., `59px` or `60px`) should resolve it. Similarly, adjust the `animation` duration if the speed isn't quite right for you.</p>
   </div>
 </body>
 </html>
