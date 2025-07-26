@@ -1109,190 +1109,209 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Love Ticker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multilingual Love</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 20px;
+      background-color: black;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .collapsible {
       background-color: #000;
-      /* Adjusted padding-top for a more robust separation. */
-      padding-top: 58px; /* Adjusted to account for thinner ticker: 8px padding + 2px border + 18px font-size + 8px padding + 2px border = 38px height + buffer */
-      /* Added a broader font-family stack for better script rendering */
-      font-family: 'Arial Unicode MS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Segoe UI', Arial, sans-serif;
-    }
-    .ticker {
+      color: gold;
+      cursor: pointer;
+      padding: 10px 20px;
       width: 100%;
-      overflow: hidden;
-      /* Neutral strip color */
-      background-color: #4A4A4A; /* Changed from #111 */
-      white-space: nowrap;
-      box-sizing: border-box;
-      border-top: 2px solid gold;
-      border-bottom: 2px solid gold;
-      /* Thinned the strip */
-      padding: 8px 0; /* Reduced from 10px */
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-      height: 42px; /* Explicitly set height based on new padding + font size + borders */
+      border: 1px solid gold;
+      text-align: center;
+      outline: none;
+      font-size: 20px;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
 
-    .ticker-content {
-      display: inline-block;
-      /* Adjusted animation speed */
-      animation: scroll 45s linear infinite; /* Changed from 90s */
+    .active, .collapsible:hover {
+      background-color: #111;
     }
 
-    .ticker-content span {
-      display: inline-block;
-      padding: 0 10px;
+    .content {
+      display: none;
+      padding: 0;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .keypad button {
+      padding: 10px;
+      font-size: 18px;
+      background-color: #222;
+      color: white;
+      border: 1px solid #555;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .message-box {
+      background-color: #000;
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 4px solid;
+      border-radius: 5px;
       font-size: 18px;
     }
 
-    .dot {
-      color: white;
-      padding: 0 10px;
+    .headline-strip {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      background-color: #111;
+      padding: 8px 0;
+      border-top: 1px solid #333;
     }
 
-    @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    .headline-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 200s linear infinite;
     }
 
-    .main-content {
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-      font-size: 24px;
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="ticker">
-    <div class="ticker-content">
-      <span style="color:#e6194B">Je t’aime</span><span class="dot">•</span>
-      <span style="color:#3cb44b">Te amo</span><span class="dot">•</span>
-      <span style="color:#ffe119">Ich liebe dich</span><span class="dot">•</span>
-      <span style="color:#4363d8">Ti amo</span><span class="dot">•</span>
-      <span style="color:#f58231">愛してる</span><span class="dot">•</span>
-      <span style="color:#911eb4">사랑해</span><span class="dot">•</span>
-      <span style="color:#46f0f0">Я тебя люблю</span><span class="dot">•</span>
-      <span style="color:#f032e6">मैं तुमसे प्यार करता हूँ</span><span class="dot">•</span>
-      <span style="color:#bcf60c">Eu te amo</span><span class="dot">•</span>
-      <span style="color:#fabebe">Σ’ αγαπώ</span><span class="dot">•</span>
-      <span style="color:#008080">Kocham cię</span><span class="dot">•</span>
-      <span style="color:#e6beff">Te iubesc</span><span class="dot">•</span>
-      <span style="color:#9a6324">Mahal kita</span><span class="dot">•</span>
-      <span style="color:#fffac8">Seni seviyorum</span><span class="dot">•</span>
-      <span style="color:#800000">أنا أحبك</span><span class="dot">•</span>
-      <span style="color:#aaffc3">ฉันรักคุณ</span><span class="dot">•</span>
-      <span style="color:#808000">Anh yêu em</span><span class="dot">•</span>
-      <span style="color:#ffd8b1">Mwen renmen ou</span><span class="dot">•</span>
-      <span style="color:#000075">Nakupenda</span><span class="dot">•</span>
-      <span style="color:#808080">Minä rakastan sinua</span><span class="dot">•</span>
-      <span style="color:#ffffff">我爱你</span><span class="dot">•</span>
-      <span style="color:#a9a9a9">Volim te</span><span class="dot">•</span>
-      <span style="color:#dc143c">Mi amas vin</span><span class="dot">•</span>
-      <span style="color:#6495ed">Szeretlek</span><span class="dot">•</span>
-      <span style="color:#7fff00">Aš tave myliu</span><span class="dot">•</span>
-      <span style="color:#d2691e">Miluji tě</span><span class="dot">•</span>
-      <span style="color:#ff7f50">Я люблю цябе</span><span class="dot">•</span>
-      <span style="color:#6495ed">Aloha wau iā ‘oe</span><span class="dot">•</span>
-      <span style="color:#fff5ee">Nkwagala</span><span class="dot">•</span>
-      <span style="color:#ff1493">Ndimakukonda</span><span class="dot">•</span>
-      <span style="color:#1e90ff">Inħobbok</span><span class="dot">•</span>
-      <span style="color:#b22222">Volim vas</span><span class="dot">•</span>
-      <span style="color:#228b22">Ndinokuda</span><span class="dot">•</span>
-      <span style="color:#ff69b4">Ngiyakuthanda</span><span class="dot">•</span>
-      <span style="color:#cd5c5c">Te dua</span><span class="dot">•</span>
-      <span style="color:#4b0082">Maite zaitut</span><span class="dot">•</span>
-      <span style="color:#f0e68c">Ég elska þig</span><span class="dot">•</span>
-      <span style="color:#add8e6">Nani ninna preetisuttene</span><span class="dot">•</span>
-      <span style="color:#90ee90">Aku cinta padamu</span><span class="dot">•</span>
-      <span style="color:#20b2aa">Njan Ninne Premikunnu</span><span class="dot">•</span>
-      <span style="color:#778899">මම ඔයාට ආදරෙයි</span><span class="dot">•</span>
-      <span style="color:#ffb6c1">நான் உன்னை காதலிக்கிறேன்</span><span class="dot">•</span>
-      <span style="color:#7cfc00">నేను నిన్ను ప్రేమిస్తున్నాను</span><span class="dot">•</span>
-      <span style="color:#fff0f5">ငါနင့်ကိုချစ်တယ်</span><span class="dot">•</span>
-      <span style="color:#8b0000">ฉันรักคุณ</span><span class="dot">•</span>
-      <span style="color:#00ced1">ຂ້ອຍຮັກເຈົ້າ</span><span class="dot">•</span>
-      <span style="color:#9400d3">دوستت دارم</span><span class="dot">•</span>
-      <span style="color:#ff8c00">אני אוהב אותך</span><span class="dot">•</span>
-      <span style="color:#9932cc">Εγώ σ'αγαπώ</span><span class="dot">•</span>
-      <span style="color:#ff4500">ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</span><span class="dot">•</span>
-      <span style="color:#da70d6">ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</span><span class="dot">•</span>
-      <span style="color:#8a2be2">আমি তোমায় ভালোবাসি</span><span class="dot">•</span>
-      <span style="color:#7b68ee">আমি আপনাকে ভালবাসি</span><span class="dot">•</span>
-      <span style="color:#483d8b">ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</span><span class="dot">•</span>
-      <span style="color:#0000cd">میں تم سے محبت کرتا ہوں</span><span class="dot">•</span>
-      <span style="color:#00bfff">მე შენ მიყვარხარ</span><span class="dot">•</span>
-      <span style="color:#5f9ea0">Я тебя кахаю</span><span class="dot">•</span>
-      <span style="color:#66cdaa">Aku tresna sampeyan</span><span class="dot">•</span>
-      <span style="color:#7fffd4">Es tevi mīlu</span><span class="dot">•</span>
-      <span style="color:#afeeee">Kuv hlub koj</span><span class="dot">•</span>
-      <span style="color:#add8e6">Mīlu tevi</span><span class="dot">•</span>
-      <span style="color:#b0e0e6">Ես քեզ սիրում եմ</span><span class="dot">•</span>
-      <span style="color:#b0c4de">Mi volas te amo</span><span class="dot">•</span>
-      <span style="color:#c0c0c0">Mahal kita</span><span class="dot">•</span>
-      <span style="color:#d3d3d3">Inhobbok</span><span class="dot">•</span>
-      <span style="color:#e0ffff">Volim te</span><span class="dot">•</span>
-      <span style="color:#f0f8ff">S'agapo</span><span class="dot">•</span>
-      <span style="color:#f0e68c">Я тебе кохаю</span><span class="dot">•</span>
-      <span style="color:#faebd7">Sana seviyorum</span><span class="dot">•</span>
-      <span style="color:#deb887">Ndimakukonda</span><span class="dot">•</span>
-      <span style="color:#cd853f">Maite zaitut</span><span class="dot">•</span>
-      <span style="color:#bc8f8f">Я цябе кахаю</span><span class="dot">•</span>
-      <span style="color:#a0522d">Ti voglio bene</span><span class="dot">•</span>
-      <span style="color:#8b4513">Eu te amo</span><span class="dot">•</span>
-      <span style="color:#d2b48c">Aš tave myliu</span><span class="dot">•</span>
-      <span style="color:#f5deb3">Miluji tě</span><span class="dot">•</span>
-      <span style="color:#ffe4c4">Mi amas vin</span><span class="dot">•</span>
-      <span style="color:#ffdead">Szeretlek</span><span class="dot">•</span>
-      <span style="color:#fff8dc">Te dua</span><span class="dot">•</span>
-      <span style="color:#fafad2">Volim te</span><span class="dot">•</span>
-      <span style="color:#ffffe0">Rwy'n dy garu di</span><span class="dot">•</span>
-      <span style="color:#f0fff0">Mina rakastan sind</span><span class="dot">•</span>
-      <span style="color:#f8f8ff">Ti tengu caru</span><span class="dot">•</span>
-      <span style="color:#fffaf0">Ndagukunda</span><span class="dot">•</span>
-      <span style="color:#fdf5e6">Ke a go rata</span><span class="dot">•</span>
-      <span style="color:#ffefd5">Ndinokuda</span><span class="dot">•</span>
-      <span style="color:#ffe4b5">Ngiyakuthanda</span><span class="dot">•</span>
-      <span style="color:#ffdab9">Mi amas vin</span><span class="dot">•</span>
-      <span style="color:#fce6c9">Szeretlek</span><span class="dot">•</span>
-      <span style="color:#f5f5dc">Te dua</span><span class="dot">•</span>
-      <span style="color:#e0b0ff">Volim te</span><span class="dot">•</span>
-      <span style="color:#d8bfd8">Rwy'n dy garu di</span><span class="dot">•</span>
-      <span style="color:#dda0dd">Mina rakastan sind</span><span class="dot">•</span>
-      <span style="color:#ee82ee">Ti tengu caru</span><span class="dot">•</span>
-      <span style="color:#da70d6">Ke a go rata</span><span class="dot">•</span>
-      <span style="color:#ff00ff">Ndagukunda</span><span class="dot">•</span>
-      <span style="color:#ffc0cb">Aš tave myliu</span><span class="dot">•</span>
-      <span style="color:#ffb6c1">Miluji tě</span><span class="dot">•</span>
-      <span style="color:#ff69b4">Я тебя кахаю</span><span class="dot">•</span>
-      <span style="color:#ff1493">Aloha wau iā ‘oe</span><span class="dot">•</span>
-      <span style="color:#db7093">Nkwagala</span><span class="dot">•</span>
-      <span style="color:#c71585">Ndimakukonda</span><span class="dot">•</span>
-      <span style="color:#b22222">Inħobbok</span><span class="dot">•</span>
-      <span style="color:#8b0000">Volim vas</span><span class="dot">•</span>
-      <span style="color:#a52a2a">Ndinokuda</span><span class="dot">•</span>
-      <span style="color:#adff2f">Ngiyakuthanda</span><span class="dot">•</span>
-      <span style="color:#7fff00">Te dua</span><span class="dot">•</span>
-      <span style="color:#7cfc00">Maite zaitut</span><span class="dot">•</span>
-      <span style="color:#00ff00">Ég elska þig</span><span class="dot">•</span>
-      <span style="color:#32cd32">Nani ninna preetisuttene</span><span class="dot">•</span>
-    </div>
-  </div>
 
-  <div class="main-content">
-    <h1>Welcome to the Love Ticker!</h1>
-    <p>This is where your main page content would go. The "I love you" ticker is now at the top and scrolls smoothly, without overlapping this message.</p>
-    <p>If you still notice any slight overlap, a very minor adjustment to the `padding-top` value in the `body` CSS rule (e.g., `59px` or `60px`) should resolve it. Similarly, adjust the `animation` duration if the speed isn't quite right for you.</p>
+<button type="button" class="collapsible">Dial My Feelings</button>
+<div class="content">
+  <div class="keypad" id="keypad">
+    <button onclick="addDigit('1')">1</button>
+    <button onclick="addDigit('2')">2</button>
+    <button onclick="addDigit('3')">3</button>
+    <button onclick="addDigit('4')">4</button>
+    <button onclick="addDigit('5')">5</button>
+    <button onclick="addDigit('6')">6</button>
+    <button onclick="addDigit('7')">7</button>
+    <button onclick="addDigit('8')">8</button>
+    <button onclick="addDigit('9')">9</button>
+    <button onclick="goBack()">←</button>
+    <button onclick="addDigit('0')">0</button>
+    <button onclick="clearMessage()">C</button>
   </div>
+  <div id="messages"></div>
+</div>
+
+<div class="headline-strip">
+  <div class="headline-text" id="headlineText"></div>
+</div>
+
+<script>
+  const collapsible = document.querySelector(".collapsible");
+  const content = document.querySelector(".content");
+  const keypad = document.getElementById("keypad");
+  const messagesDiv = document.getElementById("messages");
+
+  collapsible.addEventListener("click", () => {
+    collapsible.classList.toggle("active");
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+
+  const feelings = {
+    '1': ['愛してる ❤️', 'Je t’aime 💖', 'Ich liebe dich 💘'],
+    '2': ['मैं तुमसे प्यार करता हूँ 💓', 'আমি তোমায় ভালোবাসি 💕', 'నేను నిన్ను ప్రేమిస్తున్నాను 💗'],
+    '3': ['আমি তোমাকে ভালবাসি 💝', 'Ich liebe dich 💛', 'Mo nifẹ rẹ 🧡'],
+    '4': ['Ti amo 💙', 'Eu te amo 💚', 'Я тебя люблю 💜'],
+    '5': ['사랑해 🩷', 'Te quiero 🩵', 'Σ\' αγαπώ 💞'],
+    '6': ['Kocham cię 💟', 'Jag älskar dig 🖤', 'Mahal kita 💌'],
+    '7': ['मैं तुझसे प्यार करता हूँ 💘', 'Ik hou van jou 💓', 'ฉันรักคุณ 💗'],
+    '8': ['Ana behibek 💝', 'Tôi yêu bạn 💜', 'Ngiyakuthanda 💛'],
+    '9': ['Ik hou van je 💖', 'Ich liebe dich 💙', 'Je t’adore 💚'],
+    '0': ['愛してる 💘', 'Я тебя люблю 🧡', 'I love you ❤️']
+  };
+
+  function addDigit(digit) {
+    const phrases = feelings[digit];
+    const container = document.createElement("div");
+    container.className = "message-box";
+    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+    container.textContent = randomPhrase;
+
+    const color = "#" + Math.floor(Math.random()*16777215).toString(16);
+    container.style.color = color;
+    container.style.borderColor = color;
+
+    messagesDiv.appendChild(container);
+    keypad.style.display = "none";
+  }
+
+  function goBack() {
+    if (messagesDiv.lastChild) {
+      messagesDiv.removeChild(messagesDiv.lastChild);
+    }
+    keypad.style.display = "grid";
+  }
+
+  function clearMessage() {
+    messagesDiv.innerHTML = '';
+    keypad.style.display = "grid";
+  }
+
+  // Headline strip logic
+  const headlineText = document.getElementById("headlineText");
+
+  const iLoveYouLanguages = [
+    "I love you", "Je t’aime", "Te quiero", "Ich liebe dich", "Ti amo", "Eu te amo",
+    "Я тебя люблю", "S’agapo", "Mahal kita", "Aishiteru", "Seni seviyorum", "Main tumse pyaar karta hoon",
+    "Ngo oi nei", "Kimi o ai shiteru", "Wo ai ni", "Ana behibek", "Jeg elsker dig", "Jag älskar dig",
+    "Ek is lief vir jou", "Amo-te", "Kocham cię", "Te iubesc", "Tôi yêu bạn", "Ik hou van jou",
+    "Taim i’ ngra leat", "Mi amas vin", "Ngiyakuthanda", "Hum tumse pyaar karte hain", "Nakupenda", "Volim te",
+    "Jeg elsker deg", "Szeretlek", "Eg elska teg", "Lubim ťa", "Ma armastan sind", "Miluji tě",
+    "Is breá liom tú", "Aloha wau ia ‘oe", "Ich lieb Di", "Obicham te", "Tha gaol agam ort", "Amor te",
+    "Ani ohev otach", "T’estimo", "Minä rakastan sinua", "Ngiya kuthanda", "Chit khit tae", "Sarangeul haeyo",
+    "Tôi yêu em", "Ek het jou lief", "T’estim", "Em yêu anh", "Me balobaka yo", "Bangun sana",
+    "Tú mo ghrá", "Ngiyakuthanda", "Kocham cię", "Me do wo", "Mi a dorote", "Ljubim te",
+    "Tave myliu", "Es tevi miilu", "Ndagukunda", "Nakupenda", "Ayor anosh’ni", "Nenu ninnu premisthunnanu",
+    "Mujhe tumse pyaar hai", "Njan ninne snehikkunnu", "Main tuhanu pyaar karda haan", "Ich han dich lieb",
+    "Toi yeu em", "Mo ni fe", "Maite zaitut", "Ti voglio bene", "Sh’qif", "Seni sevirem",
+    "Nenu ninnu ishtapadutunnanu", "Timi lai maya garchu", "Yeu em nhieu", "M’enamoro de ti", "Wǒ ài nǐ",
+    "Tôi yêu bạn", "Na love you", "Uthando lwami", "Ana uhibbuka", "Mi amas vin", "Volim te",
+    "Salanghae", "Lubim ta", "Njan ninne snehikkunnu", "Tula prem karto", "Tō tō aroha au", "Bhalobashi tomay",
+    "Eg elsker deg", "Iay layvee ooyay", "Mo ni fe re", "Inhluvuko", "T’aime fort", "Ich hab dich lieb",
+    "Ami tomake bhalobashi", "Bahala ka sa buhay mo" // 100 total
+  ];
+
+  let colorfulLove = '';
+  for (let i = 0; i < iLoveYouLanguages.length; i++) {
+    const color = "#" + Math.floor(Math.random()*16777215).toString(16);
+    colorfulLove += `<span style="color:${color}; margin-right: 10px;">${iLoveYouLanguages[i]} ●</span>`;
+  }
+  headlineText.innerHTML = colorfulLove.repeat(10); // repeat to ensure infinite loop
+</script>
+
 </body>
 </html>
-
 </body>
 <div id="stars"></div>
 <script>
