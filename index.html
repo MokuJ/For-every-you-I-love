@@ -729,7 +729,140 @@ summary {
 }
 </style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moksh Mahal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: #eee;
+      padding: 20px;
+      text-align: center;
+    }
 
+    details {
+      margin: 2rem auto;
+      background: #222;
+      border: 1px solid gold;
+      border-radius: 10px;
+      max-width: 400px;
+      padding: 1rem;
+    }
+
+    summary {
+      font-size: 1.2rem;
+      color: gold;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .keypad-container {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    .keypad-button {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid gold;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .keypad-button:hover {
+      background-color: gold;
+      color: #111;
+    }
+
+    .message-box {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      color: #fff;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border: 1px solid gold;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: gold;
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background-color: #ffc800;
+    }
+  </style>
+</head>
+<body>
+
+  <details>
+    <summary>Languages of Love</summary>
+    <div id="keypadSection">
+      <div class="keypad-container" id="keypad">
+        <button class="keypad-button" onclick="showMessage(1)">1</button>
+        <button class="keypad-button" onclick="showMessage(2)">2</button>
+        <button class="keypad-button" onclick="showMessage(3)">3</button>
+        <button class="keypad-button" onclick="showMessage(4)">4</button>
+        <button class="keypad-button" onclick="showMessage(5)">5</button>
+        <button class="keypad-button" onclick="showMessage(6)">6</button>
+        <button class="keypad-button" onclick="showMessage(7)">7</button>
+        <button class="keypad-button" onclick="showMessage(8)">8</button>
+        <button class="keypad-button" onclick="showMessage(9)">9</button>
+        <button class="keypad-button" style="grid-column: 2" onclick="showMessage(0)">0</button>
+      </div>
+      <div class="message-box" id="messageBox"></div>
+      <button class="back-button" id="backBtn" onclick="goBack()" style="display:none;">Back</button>
+    </div>
+  </details>
+
+  <script>
+    const messages = {
+      1: "English: I love you",
+      2: "中文: 我爱你",
+      3: "हिन्दी: मैं तुमसे प्यार करता हूँ",
+      4: "Español: Te amo",
+      5: "Français: Je t’aime",
+      6: "العربية: أحبك",
+      7: "বাংলা: আমি তোমাকে ভালোবাসি",
+      8: "Русский: Я тебя люблю",
+      9: "Português: Eu te amo",
+      0: "اردو: میں تم سے محبت کرتا ہوں"
+    };
+
+    function showMessage(num) {
+      document.getElementById('keypad').style.display = 'none';
+      const message = messages[num];
+      document.getElementById('messageBox').textContent = message;
+      document.getElementById('messageBox').style.display = 'block';
+      document.getElementById('backBtn').style.display = 'inline-block';
+    }
+
+    function goBack() {
+      document.getElementById('keypad').style.display = 'grid';
+      document.getElementById('messageBox').style.display = 'none';
+      document.getElementById('backBtn').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
 
 </div>
 <!-- 🎵 Music Collection Collapsible Section -->
