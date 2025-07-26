@@ -1117,6 +1117,9 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       padding: 0;
       background-color: #000;
       font-family: Arial, sans-serif;
+      /* Crucially, add padding-top to body to create space for the fixed ticker.
+         Adjust 50px if your ticker's height changes. */
+      padding-top: 50px; /* Assuming ticker height is approx. 50px (padding + border + font-size) */
     }
     .ticker {
       width: 100%;
@@ -1127,33 +1130,48 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       border-top: 2px solid gold;
       border-bottom: 2px solid gold;
       padding: 10px 0;
-      position: fixed;
+      position: fixed; /* Keeps the ticker at the top of the viewport */
       top: 0;
-      z-index: 9999;
+      left: 0; /* Ensures it starts from the very left */
+      z-index: 9999; /* Ensures it's above other content */
     }
 
-    .ticker span {
-      display: inline-block;
-      padding: 0 20px;
-      animation: scroll 60s linear infinite;
+    /* This div holds all the scrolling content */
+    .ticker-content {
+      display: inline-block; /* Allows width to expand and animation to work */
+      /* Slower animation speed (90s instead of 60s) */
+      animation: scroll 90s linear infinite;
+    }
+
+    /* Individual messages inside the ticker */
+    .ticker-content span {
+      display: inline-block; /* Keeps each message as a block for padding */
+      padding: 0 10px; /* Reduced horizontal padding for less gap */
       font-size: 18px;
     }
 
     .dot {
       color: white;
-      padding: 0 10px;
+      padding: 0 10px; /* Dot padding also reduced for consistency */
     }
 
     @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      0% { transform: translateX(100%); } /* Starts off-screen to the right */
+      100% { transform: translateX(-100%); } /* Ends off-screen to the left */
+    }
+
+    /* Styles for the main content to clearly show the ticker is separate */
+    .main-content {
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      font-size: 24px;
     }
   </style>
 </head>
 <body>
   <div class="ticker">
-    <span>
-      <span style="color:#e6194B">Je t’aime</span><span class="dot">•</span>
+    <div class="ticker-content"> <span style="color:#e6194B">Je t’aime</span><span class="dot">•</span>
       <span style="color:#3cb44b">Te amo</span><span class="dot">•</span>
       <span style="color:#ffe119">Ich liebe dich</span><span class="dot">•</span>
       <span style="color:#4363d8">Ti amo</span><span class="dot">•</span>
@@ -1263,7 +1281,13 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       <span style="color:#7cfc00">Maite zaitut</span><span class="dot">•</span>
       <span style="color:#00ff00">Ég elska þig</span><span class="dot">•</span>
       <span style="color:#32cd32">Nani ninna preetisuttene</span><span class="dot">•</span>
-    </span>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h1>Welcome to the Love Ticker!</h1>
+    <p>This is where your main page content would go. The "I love you" ticker is now at the top and scrolls smoothly, without overlapping this message.</p>
+    <p>You can adjust the `padding-top` on the `body` in the CSS if the ticker's height changes, or if you add more content to the ticker that makes it taller.</p>
   </div>
 </body>
 </html>
