@@ -731,7 +731,7 @@ summary {
 
 <div style="max-width: 400px; margin: auto; border: 1px solid #444; border-radius: 12px; background: #000; padding: 10px; font-family: sans-serif; text-align: center;">
   <details>
-    <summary style="cursor: pointer; font-weight: bold; font-size: 18px; text-align: center; color: white;">Speak My Love</summary>
+    <summary style="cursor: pointer; font-weight: bold; font-size: 18px; text-align: center; color: white;">Dial My Feelings</summary>
     <div id="keypad" style="margin-top: 20px;">
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
         <button class="key-btn" onclick="showMessage(1)">1</button>
@@ -984,7 +984,8 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       emoji.textContent = "🖕";
       emoji.style.position = "fixed";
       emoji.style.left = Math.random() * window.innerWidth + "px";
-      emoji.style.top = Math.random() * window.innerHeight + "px";
+      emoji.style.top = (Math.random() * (window.innerHeight - 200)) + "px";
+
       emoji.style.fontSize = "1.5em";
       emoji.style.opacity = "1";
       emoji.style.transition = "all 2s ease";
