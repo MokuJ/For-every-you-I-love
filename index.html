@@ -729,59 +729,101 @@ summary {
 }
 </style>
 
-<div class="p-4 bg-black rounded-xl shadow-md">
-  <details class="group">
-    <summary class="text-center text-white font-semibold text-lg cursor-pointer border border-yellow-400 rounded-md px-4 py-1 hover:bg-yellow-900 transition-all duration-300">
-      Dial My Feelings
-    </summary>
-    <div id="keypad" class="grid grid-cols-3 gap-2 mt-4 w-1/2 mx-auto">
-      <button onclick="showMessage(1)" class="bg-yellow-800 text-white py-2 rounded">1</button>
-      <button onclick="showMessage(2)" class="bg-yellow-800 text-white py-2 rounded">2</button>
-      <button onclick="showMessage(3)" class="bg-yellow-800 text-white py-2 rounded">3</button>
-      <button onclick="showMessage(4)" class="bg-yellow-800 text-white py-2 rounded">4</button>
-      <button onclick="showMessage(5)" class="bg-yellow-800 text-white py-2 rounded">5</button>
-      <button onclick="showMessage(6)" class="bg-yellow-800 text-white py-2 rounded">6</button>
-      <button onclick="showMessage(7)" class="bg-yellow-800 text-white py-2 rounded">7</button>
-      <button onclick="showMessage(8)" class="bg-yellow-800 text-white py-2 rounded">8</button>
-      <button onclick="showMessage(9)" class="bg-yellow-800 text-white py-2 rounded">9</button>
-      <div></div>
-      <button onclick="showMessage(0)" class="bg-yellow-800 text-white py-2 rounded col-span-1">0</button>
-      <div></div>
+<div style="max-width: 400px; margin: auto; border: 1px solid #444; border-radius: 12px; background: #000; padding: 10px; font-family: sans-serif; text-align: center;">
+  <details>
+    <summary style="cursor: pointer; font-weight: bold; font-size: 18px; text-align: center; color: white;">Speak My Love</summary>
+    <div id="keypad" style="margin-top: 20px;">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <button class="key-btn" onclick="showMessage(1)">1</button>
+        <button class="key-btn" onclick="showMessage(2)">2</button>
+        <button class="key-btn" onclick="showMessage(3)">3</button>
+        <button class="key-btn" onclick="showMessage(4)">4</button>
+        <button class="key-btn" onclick="showMessage(5)">5</button>
+        <button class="key-btn" onclick="showMessage(6)">6</button>
+        <button class="key-btn" onclick="showMessage(7)">7</button>
+        <button class="key-btn" onclick="showMessage(8)">8</button>
+        <button class="key-btn" onclick="showMessage(9)">9</button>
+        <div></div>
+        <button class="key-btn" onclick="showMessage(0)">0</button>
+        <div></div>
+      </div>
     </div>
-    <div id="message" class="hidden mt-6 text-center text-lg font-semibold bg-black p-4 rounded-lg"></div>
-    <button onclick="goBack()" id="backBtn" class="hidden mt-4 mx-auto block bg-yellow-900 text-white px-4 py-1 rounded">← Back</button>
+    <div id="messageBox" style="display: none; margin-top: 20px;">
+      <p id="messageText" style="font-size: 20px; background: black; padding: 15px; border-radius: 10px;"></p>
+      <button class="back-btn" onclick="goBack()">← Back</button>
+    </div>
   </details>
 </div>
 
+<style>
+  .key-btn {
+    background-color: #111;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 18px;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .key-btn:hover {
+    background-color: #222;
+    border-color: #ff4c4c;
+    box-shadow: 0 0 12px #ff4c4c99;
+    color: #ff4c4c;
+  }
+
+  .back-btn {
+    background-color: #222;
+    border: 1px solid #888;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background-color: #333;
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 10px #ffd70080;
+  }
+</style>
+
 <script>
   const messages = {
-    0: { text: "Я тебя люблю ❤️", color: "text-red-500" },
-    1: { text: "I love you 💙", color: "text-blue-400" },
-    2: { text: "Te amo 💚", color: "text-green-400" },
-    3: { text: "मैं तुमसे प्यार करता हूँ 💛", color: "text-yellow-400" },
-    4: { text: "أنا أحبك 🧡", color: "text-orange-400" },
-    5: { text: "Je t’aime 💜", color: "text-purple-400" },
-    6: { text: "Ich liebe dich 💖", color: "text-pink-500" },
-    7: { text: "Wǒ ài nǐ 💓", color: "text-rose-400" },
-    8: { text: "愛してる 🤎", color: "text-amber-500" },
-    9: { text: "Saranghae 💞", color: "text-fuchsia-400" },
+    1: { text: "I love you ❤️", color: "#FF4C4C" },
+    2: { text: "Je t'aime 💙", color: "#1E90FF" },
+    3: { text: "Te amo 💛", color: "#FFD700" },
+    4: { text: "Ich liebe dich 💚", color: "#32CD32" },
+    5: { text: "Ti amo 💜", color: "#9370DB" },
+    6: { text: "愛してる 💖", color: "#FF69B4" },
+    7: { text: "मैं तुमसे प्यार करता हूँ 🧡", color: "#FFA500" },
+    8: { text: "Я тебя люблю 💙", color: "#00BFFF" },
+    9: { text: "أنا أحبك ❤️‍🔥", color: "#DC143C" },
+    0: { text: "我爱你 🤍", color: "#F0FFFF" },
   };
 
   function showMessage(num) {
-    const messageEl = document.getElementById("message");
-    const keypad = document.getElementById("keypad");
-    const backBtn = document.getElementById("backBtn");
-    const { text, color } = messages[num];
-    messageEl.innerHTML = `<p class="${color}">${text}</p>`;
-    messageEl.classList.remove("hidden");
-    keypad.classList.add("hidden");
-    backBtn.classList.remove("hidden");
+    const messageData = messages[num];
+    const msgBox = document.getElementById('messageBox');
+    const keypad = document.getElementById('keypad');
+    const msgText = document.getElementById('messageText');
+
+    msgText.innerText = messageData.text;
+    msgText.style.color = messageData.color;
+
+    keypad.style.display = 'none';
+    msgBox.style.display = 'block';
   }
 
   function goBack() {
-    document.getElementById("message").classList.add("hidden");
-    document.getElementById("keypad").classList.remove("hidden");
-    document.getElementById("backBtn").classList.add("hidden");
+    document.getElementById('keypad').style.display = 'block';
+    document.getElementById('messageBox').style.display = 'none';
   }
 </script>
 
