@@ -731,29 +731,68 @@ summary {
 
 <div style="max-width: 400px; margin: auto; border: 1px solid #444; border-radius: 12px; background: #000; padding: 10px; font-family: sans-serif; text-align: center;">
   <details>
-    <summary style="cursor: pointer; font-weight: bold; font-size: 18px; text-align: center;">Speak My Love</summary>
+    <summary style="cursor: pointer; font-weight: bold; font-size: 18px; text-align: center; color: white;">Speak My Love</summary>
     <div id="keypad" style="margin-top: 20px;">
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-        <button onclick="showMessage(1)">1</button>
-        <button onclick="showMessage(2)">2</button>
-        <button onclick="showMessage(3)">3</button>
-        <button onclick="showMessage(4)">4</button>
-        <button onclick="showMessage(5)">5</button>
-        <button onclick="showMessage(6)">6</button>
-        <button onclick="showMessage(7)">7</button>
-        <button onclick="showMessage(8)">8</button>
-        <button onclick="showMessage(9)">9</button>
+        <button class="key-btn" onclick="showMessage(1)">1</button>
+        <button class="key-btn" onclick="showMessage(2)">2</button>
+        <button class="key-btn" onclick="showMessage(3)">3</button>
+        <button class="key-btn" onclick="showMessage(4)">4</button>
+        <button class="key-btn" onclick="showMessage(5)">5</button>
+        <button class="key-btn" onclick="showMessage(6)">6</button>
+        <button class="key-btn" onclick="showMessage(7)">7</button>
+        <button class="key-btn" onclick="showMessage(8)">8</button>
+        <button class="key-btn" onclick="showMessage(9)">9</button>
         <div></div>
-        <button onclick="showMessage(0)">0</button>
+        <button class="key-btn" onclick="showMessage(0)">0</button>
         <div></div>
       </div>
     </div>
     <div id="messageBox" style="display: none; margin-top: 20px;">
       <p id="messageText" style="font-size: 20px; background: black; padding: 15px; border-radius: 10px;"></p>
-      <button onclick="goBack()" style="margin-top: 10px;">← Back</button>
+      <button class="back-btn" onclick="goBack()">← Back</button>
     </div>
   </details>
 </div>
+
+<style>
+  .key-btn {
+    background-color: #111;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 18px;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .key-btn:hover {
+    background-color: #222;
+    border-color: #ff4c4c;
+    box-shadow: 0 0 12px #ff4c4c99;
+    color: #ff4c4c;
+  }
+
+  .back-btn {
+    background-color: #222;
+    border: 1px solid #888;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background-color: #333;
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 10px #ffd70080;
+  }
+</style>
 
 <script>
   const messages = {
