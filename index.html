@@ -1087,17 +1087,18 @@ style="position: fixed; bottom: 85px; left: 20px; background-color: #ff4444; col
     .love-strip-content {
       display: inline-block;
       white-space: nowrap;
-      animation: scrollLove 25s linear infinite; /* Adjusted speed for smoother loop */
+      /* The animation 'scrollLove' will be applied directly to the content */
+      animation: scrollLove 50s linear infinite; /* Increased duration for smoother loop with more content */
       font-family: sans-serif;
       font-size: 1rem;
     }
 
     @keyframes scrollLove {
       from {
-        transform: translateX(100%);
+        transform: translateX(0%); /* Start from 0% (content is visible) */
       }
       to {
-        transform: translateX(-100%);
+        transform: translateX(-50%); /* Scroll exactly half the content width for perfect loop */
       }
     }
 
@@ -1287,7 +1288,7 @@ style="position: fixed; bottom: 85px; left: 20px; background-color: #ff4444; col
       <span class="love-item" style="color: cornflowerblue;">Mo ti fẹ́ rẹ •</span>
       <span class="love-item" style="color: snow;">Tình yêu của tôi •</span>
       <span class="love-item" style="color: seashell;">Mi amore •</span>
-    </div>
+      </div>
   </div>
 
 </body>
