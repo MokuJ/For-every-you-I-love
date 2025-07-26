@@ -729,82 +729,77 @@ summary {
 }
 </style>
 
-import { useState } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love in 10 Languages</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white flex items-center justify-center min-h-screen px-4 py-10">
 
-export default function LoveKeypad() {
-  const [selectedMessage, setSelectedMessage] = useState(null);
+  <div class="max-w-md w-full space-y-6 bg-gray-900 p-6 rounded-2xl shadow-xl border border-yellow-500">
+    
+    <!-- Title Collapsible -->
+    <details class="group">
+      <summary class="text-center cursor-pointer text-xl font-bold text-yellow-400 py-2">
+        Expressions of Love Around the World
+      </summary>
+      
+      <!-- Keypad -->
+      <div class="mt-6 grid grid-cols-3 gap-4 text-center text-lg">
+        <!-- Each number is a button -->
+        <button onclick="showMessage(1)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">1</button>
+        <button onclick="showMessage(2)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">2</button>
+        <button onclick="showMessage(3)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">3</button>
+        <button onclick="showMessage(4)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">4</button>
+        <button onclick="showMessage(5)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">5</button>
+        <button onclick="showMessage(6)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">6</button>
+        <button onclick="showMessage(7)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">7</button>
+        <button onclick="showMessage(8)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">8</button>
+        <button onclick="showMessage(9)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded">9</button>
+        <div></div>
+        <button onclick="showMessage(0)" class="bg-yellow-600 hover:bg-yellow-700 py-2 rounded col-span-1">0</button>
+        <div></div>
+      </div>
 
-  const messages = {
-    1: { lang: 'Mandarin (Chinese)', text: '我爱你' },
-    2: { lang: 'Spanish', text: 'Te amo' },
-    3: { lang: 'English', text: 'I love you' },
-    4: { lang: 'Hindi', text: 'मैं तुमसे प्यार करता हूँ' },
-    5: { lang: 'Arabic', text: 'أحبك' },
-    6: { lang: 'Bengali', text: 'আমি তোমায় ভালোবাসি' },
-    7: { lang: 'Portuguese', text: 'Eu te amo' },
-    8: { lang: 'Russian', text: 'Я тебя люблю' },
-    9: { lang: 'Urdu', text: 'میں تم سے محبت کرتا ہوں' },
-    0: { lang: 'Japanese', text: '愛してる' },
-  };
+      <!-- Message display box -->
+      <div id="messageBox" class="mt-8 hidden text-center space-y-4">
+        <p id="loveMessage" class="text-xl font-semibold text-pink-400 italic"></p>
+        <button onclick="goBack()" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-sm text-yellow-300">
+          ← Go back
+        </button>
+      </div>
 
-  const handleClick = (num) => {
-    setSelectedMessage(messages[num]);
-  };
+    </details>
+  </div>
 
-  const goBack = () => {
-    setSelectedMessage(null);
-  };
+  <script>
+    const messages = {
+      1: "English: I love you",
+      2: "中文: 我爱你",
+      3: "हिन्दी: मैं तुमसे प्यार करता हूँ",
+      4: "Español: Te amo",
+      5: "Français: Je t'aime",
+      6: "العربية: أحبك",
+      7: "বাংলা: আমি তোমায় ভালোবাসি",
+      8: "Русский: Я тебя люблю",
+      9: "Português: Eu te amo",
+      0: "日本語: 愛してる"
+    };
 
-  return (
-    <div className="p-6 flex flex-col items-center justify-center bg-white rounded-lg shadow-md max-w-md mx-auto">
-      <details className="w-full">
-        <summary className="text-lg font-semibold text-center cursor-pointer py-2 bg-purple-100 rounded-lg shadow-inner">
-          Ten Words. Ten Worlds.
-        </summary>
+    function showMessage(num) {
+      document.getElementById('loveMessage').textContent = messages[num];
+      document.getElementById('messageBox').classList.remove('hidden');
+    }
 
-        <div className="mt-4 w-full flex flex-col items-center justify-center">
-          {!selectedMessage ? (
-            <>
-              <div className="grid grid-cols-3 gap-2 text-center text-white text-lg">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, ''].map((num, index) =>
-                  num === '' ? (
-                    <div key={index}></div>
-                  ) : (
-                    <button
-                      key={num}
-                      onClick={() => handleClick(num)}
-                      className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-md shadow-md transition-all"
-                    >
-                      {num}
-                    </button>
-                  )
-                )}
-              </div>
-              <p className="text-sm text-gray-500 mt-4 italic text-center">
-                Press a number to reveal a truth spoken in another tongue.
-              </p>
-            </>
-          ) : (
-            <div className="flex flex-col items-center justify-center text-center space-y-4 p-6 border rounded-md shadow-inner bg-purple-50 w-full mt-4">
-              <h3 className="text-xl font-bold text-purple-800">
-                {selectedMessage.lang}
-              </h3>
-              <p className="text-2xl font-semibold text-purple-900">
-                “{selectedMessage.text}”
-              </p>
-              <button
-                onClick={goBack}
-                className="mt-4 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 shadow-sm transition-all"
-              >
-                Back
-              </button>
-            </div>
-          )}
-        </div>
-      </details>
-    </div>
-  );
-}
+    function goBack() {
+      document.getElementById('messageBox').classList.add('hidden');
+    }
+  </script>
+
+</body>
+</html>
 
 </div>
 <!-- 🎵 Music Collection Collapsible Section -->
