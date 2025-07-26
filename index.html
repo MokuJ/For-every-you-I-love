@@ -1116,10 +1116,10 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       margin: 0;
       padding: 0;
       background-color: #000;
-      font-family: Arial, sans-serif;
-      /* Crucially, add padding-top to body to create space for the fixed ticker.
-         Adjust 50px if your ticker's height changes. */
-      padding-top: 50px; /* Assuming ticker height is approx. 50px (padding + border + font-size) */
+      /* Adjusted padding-top for a more robust separation. */
+      padding-top: 70px; /* Increased from 50px */
+      /* Added a broader font-family stack for better script rendering */
+      font-family: 'Arial Unicode MS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Segoe UI', Arial, sans-serif;
     }
     .ticker {
       width: 100%;
@@ -1129,23 +1129,21 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
       box-sizing: border-box;
       border-top: 2px solid gold;
       border-bottom: 2px solid gold;
-      padding: 10px 0;
-      position: fixed; /* Keeps the ticker at the top of the viewport */
+      padding: 10px 0; /* This padding adds to the ticker's height */
+      position: fixed;
       top: 0;
-      left: 0; /* Ensures it starts from the very left */
-      z-index: 9999; /* Ensures it's above other content */
+      left: 0;
+      z-index: 9999;
+      height: 46px; /* Explicitly set height based on padding + font size + borders */
     }
 
-    /* This div holds all the scrolling content */
     .ticker-content {
-      display: inline-block; /* Allows width to expand and animation to work */
-      /* Slower animation speed (90s instead of 60s) */
-      animation: scroll 90s linear infinite;
+      display: inline-block;
+      animation: scroll 90s linear infinite; /* Slower animation speed */
     }
 
-    /* Individual messages inside the ticker */
     .ticker-content span {
-      display: inline-block; /* Keeps each message as a block for padding */
+      display: inline-block;
       padding: 0 10px; /* Reduced horizontal padding for less gap */
       font-size: 18px;
     }
@@ -1156,22 +1154,22 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
     }
 
     @keyframes scroll {
-      0% { transform: translateX(100%); } /* Starts off-screen to the right */
-      100% { transform: translateX(-100%); } /* Ends off-screen to the left */
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
-    /* Styles for the main content to clearly show the ticker is separate */
     .main-content {
       color: white;
       text-align: center;
-      padding: 50px 20px;
+      padding: 50px 20px; /* Standard padding for the main content */
       font-size: 24px;
     }
   </style>
 </head>
 <body>
   <div class="ticker">
-    <div class="ticker-content"> <span style="color:#e6194B">Je t’aime</span><span class="dot">•</span>
+    <div class="ticker-content">
+      <span style="color:#e6194B">Je t’aime</span><span class="dot">•</span>
       <span style="color:#3cb44b">Te amo</span><span class="dot">•</span>
       <span style="color:#ffe119">Ich liebe dich</span><span class="dot">•</span>
       <span style="color:#4363d8">Ti amo</span><span class="dot">•</span>
@@ -1287,7 +1285,7 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
   <div class="main-content">
     <h1>Welcome to the Love Ticker!</h1>
     <p>This is where your main page content would go. The "I love you" ticker is now at the top and scrolls smoothly, without overlapping this message.</p>
-    <p>You can adjust the `padding-top` on the `body` in the CSS if the ticker's height changes, or if you add more content to the ticker that makes it taller.</p>
+    <p>If you still see overlap, try increasing the `padding-top` value in the `body` CSS rule until the content is perfectly below the ticker.</p>
   </div>
 </body>
 </html>
