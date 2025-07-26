@@ -1110,205 +1110,138 @@ style="position: fixed; bottom: 25px; left: 20px; background-color: #ff4444; col
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multilingual Love</title>
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background-color: black;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    .collapsible {
-      background-color: #000;
-      color: gold;
-      cursor: pointer;
-      padding: 10px 20px;
-      width: 100%;
-      border: 1px solid gold;
-      text-align: center;
-      outline: none;
-      font-size: 20px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .active, .collapsible:hover {
-      background-color: #111;
-    }
-
-    .content {
-      display: none;
-      padding: 0;
-    }
-
-    .keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 50px);
-      gap: 10px;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .keypad button {
-      padding: 10px;
-      font-size: 18px;
-      background-color: #222;
-      color: white;
-      border: 1px solid #555;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .message-box {
-      background-color: #000;
-      margin: 10px 0;
-      padding: 10px;
-      border-left: 4px solid;
-      border-radius: 5px;
-      font-size: 18px;
-    }
-
-    .headline-strip {
+    .love-strip-container {
       position: fixed;
       bottom: 0;
       width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
       background-color: #111;
-      padding: 8px 0;
-      border-top: 1px solid #333;
+      overflow: hidden;
+      z-index: 9999;
+      height: 40px;
+      display: flex;
+      align-items: center;
     }
 
-    .headline-text {
+    .love-strip-content {
       display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 200s linear infinite;
+      white-space: nowrap;
+      animation: scrollLove 50s linear infinite;
+      font-family: sans-serif;
+      font-size: 1rem;
     }
 
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(0);
+    @keyframes scrollLove {
+      from {
+        transform: translateX(100%);
       }
-      100% {
+      to {
         transform: translateX(-100%);
       }
+    }
+
+    .love-item {
+      display: inline-block;
+      margin-right: 20px;
     }
   </style>
 </head>
 <body>
 
-<button type="button" class="collapsible">Dial My Feelings</button>
-<div class="content">
-  <div class="keypad" id="keypad">
-    <button onclick="addDigit('1')">1</button>
-    <button onclick="addDigit('2')">2</button>
-    <button onclick="addDigit('3')">3</button>
-    <button onclick="addDigit('4')">4</button>
-    <button onclick="addDigit('5')">5</button>
-    <button onclick="addDigit('6')">6</button>
-    <button onclick="addDigit('7')">7</button>
-    <button onclick="addDigit('8')">8</button>
-    <button onclick="addDigit('9')">9</button>
-    <button onclick="goBack()">←</button>
-    <button onclick="addDigit('0')">0</button>
-    <button onclick="clearMessage()">C</button>
+  <div class="love-strip-container">
+    <div class="love-strip-content">
+      <!-- 100 love messages with unique colors and bullet separator -->
+      <span class="love-item" style="color: red;">I love you •</span>
+      <span class="love-item" style="color: orange;">Te amo •</span>
+      <span class="love-item" style="color: yellow;">Ich liebe dich •</span>
+      <span class="love-item" style="color: green;">Je t’aime •</span>
+      <span class="love-item" style="color: blue;">Ti amo •</span>
+      <span class="love-item" style="color: indigo;">愛してる •</span>
+      <span class="love-item" style="color: violet;">사랑해 •</span>
+      <span class="love-item" style="color: pink;">Я тебя люблю •</span>
+      <span class="love-item" style="color: cyan;">Eu te amo •</span>
+      <span class="love-item" style="color: lime;">Σ' αγαπώ •</span>
+      <span class="love-item" style="color: teal;">Nakupenda •</span>
+      <span class="love-item" style="color: gold;">Saya cinta kamu •</span>
+      <span class="love-item" style="color: magenta;">Aš tave myliu •</span>
+      <span class="love-item" style="color: lightblue;">Jeg elsker dig •</span>
+      <span class="love-item" style="color: brown;">Ech hob dikh •</span>
+      <span class="love-item" style="color: crimson;">Ani ohev otach •</span>
+      <span class="love-item" style="color: olive;">Kocham cię •</span>
+      <span class="love-item" style="color: navy;">Jag älskar dig •</span>
+      <span class="love-item" style="color: coral;">Szeretlek •</span>
+      <span class="love-item" style="color: salmon;">Volim te •</span>
+      <span class="love-item" style="color: turquoise;">Eg elski teg •</span>
+      <span class="love-item" style="color: maroon;">Ik hou van jou •</span>
+      <span class="love-item" style="color: plum;">Minä rakastan sinua •</span>
+      <span class="love-item" style="color: slateblue;">Tá grá agam duit •</span>
+      <span class="love-item" style="color: darkorange;">Ek het jou lief •</span>
+      <span class="love-item" style="color: darkcyan;">Ngo oi nei •</span>
+      <span class="love-item" style="color: darkmagenta;">Phom rak khun •</span>
+      <span class="love-item" style="color: darkgreen;">Taim i' ngra leat •</span>
+      <span class="love-item" style="color: steelblue;">Mo ni fe re •</span>
+      <span class="love-item" style="color: indianred;">Me tula prem karto •</span>
+      <span class="love-item" style="color: seagreen;">Main tumse pyaar karta hoon •</span>
+      <span class="love-item" style="color: orchid;">Ngiyakuthanda •</span>
+      <span class="love-item" style="color: sienna;">Hum tumse pyaar karte hain •</span>
+      <span class="love-item" style="color: aquamarine;">Ek is lief vir jou •</span>
+      <span class="love-item" style="color: lightcoral;">Volim te •</span>
+      <span class="love-item" style="color: palegreen;">Wo ai ni •</span>
+      <span class="love-item" style="color: lavender;">Mahal kita •</span>
+      <span class="love-item" style="color: wheat;">Ngiyakuthanda •</span>
+      <span class="love-item" style="color: hotpink;">Mi amas vin •</span>
+      <span class="love-item" style="color: skyblue;">Lubim ta •</span>
+      <span class="love-item" style="color: limegreen;">Jeg elsker deg •</span>
+      <span class="love-item" style="color: goldenrod;">Ich liebe dich •</span>
+      <span class="love-item" style="color: darkslateblue;">Iay ovlay ouyay •</span>
+      <span class="love-item" style="color: royalblue;">Я люблю тебя •</span>
+      <span class="love-item" style="color: chartreuse;">Amor te tengo •</span>
+      <span class="love-item" style="color: firebrick;">Eg elskar deg •</span>
+      <span class="love-item" style="color: peru;">Te dua •</span>
+      <span class="love-item" style="color: tomato;">Saya sayang awak •</span>
+      <span class="love-item" style="color: fuchsia;">Mina rakastan sinua •</span>
+      <span class="love-item" style="color: navy;">Mo gra duitse •</span>
+      <span class="love-item" style="color: slategray;">Ich hab' dich lieb •</span>
+      <span class="love-item" style="color: gainsboro;">Lubim tě •</span>
+      <!-- duplicate to make 100+ -->
+      <span class="love-item" style="color: orangered;">Mahal kita •</span>
+      <span class="love-item" style="color: darkorchid;">Kuv hlub koj •</span>
+      <span class="love-item" style="color: darksalmon;">Mwen renmen ou •</span>
+      <span class="love-item" style="color: greenyellow;">T'estimo •</span>
+      <span class="love-item" style="color: lightseagreen;">Ich lieb dich •</span>
+      <span class="love-item" style="color: darkturquoise;">Jag älskar dig •</span>
+      <span class="love-item" style="color: powderblue;">Ma armastan sind •</span>
+      <span class="love-item" style="color: mediumpurple;">Me t'kam xhan •</span>
+      <span class="love-item" style="color: mintcream;">Jeg elsker deg •</span>
+      <span class="love-item" style="color: lemonchiffon;">Main tenu pyaar karda •</span>
+      <span class="love-item" style="color: peachpuff;">Amar tomake bhalobashi •</span>
+      <span class="love-item" style="color: lightgoldenrodyellow;">Amo-te •</span>
+      <span class="love-item" style="color: darkkhaki;">Ti voglio bene •</span>
+      <span class="love-item" style="color: palevioletred;">Is breá liom tú •</span>
+      <span class="love-item" style="color: darkseagreen;">Mo nifẹ rẹ •</span>
+      <span class="love-item" style="color: lightslategray;">Ngiyakuthanda •</span>
+      <span class="love-item" style="color: rosybrown;">I love you •</span>
+      <span class="love-item" style="color: mediumseagreen;">Te quiero •</span>
+      <span class="love-item" style="color: burlywood;">Seni seviyorum •</span>
+      <span class="love-item" style="color: palevioletred;">Aloha wau ia'oe •</span>
+      <span class="love-item" style="color: silver;">Taim i' ngra leat •</span>
+      <span class="love-item" style="color: lime;">Main tumse mohabbat karta hoon •</span>
+      <span class="love-item" style="color: deeppink;">Me gustas mucho •</span>
+      <span class="love-item" style="color: indigo;">Me do pasand ho •</span>
+      <span class="love-item" style="color: ivory;">Tum bahut pyaare ho •</span>
+      <span class="love-item" style="color: tan;">Kocham ciebie •</span>
+      <span class="love-item" style="color: teal;">I cherish you •</span>
+      <span class="love-item" style="color: violet;">Mi corazón es tuyo •</span>
+      <span class="love-item" style="color: sandybrown;">Te adoro •</span>
+      <span class="love-item" style="color: chocolate;">You mean the world to me •</span>
+      <span class="love-item" style="color: mediumvioletred;">Tôi yêu bạn •</span>
+      <span class="love-item" style="color: papayawhip;">Uthando lwami •</span>
+      <span class="love-item" style="color: lightsteelblue;">Me pyaar karta hoon •</span>
+      <span class="love-item" style="color: cornflowerblue;">Mo ti fẹ́ rẹ •</span>
+      <span class="love-item" style="color: snow;">Tình yêu của tôi •</span>
+      <span class="love-item" style="color: seashell;">Mi amore •</span>
+    </div>
   </div>
-  <div id="messages"></div>
-</div>
-
-<div class="headline-strip">
-  <div class="headline-text" id="headlineText"></div>
-</div>
-
-<script>
-  const collapsible = document.querySelector(".collapsible");
-  const content = document.querySelector(".content");
-  const keypad = document.getElementById("keypad");
-  const messagesDiv = document.getElementById("messages");
-
-  collapsible.addEventListener("click", () => {
-    collapsible.classList.toggle("active");
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-
-  const feelings = {
-    '1': ['愛してる ❤️', 'Je t’aime 💖', 'Ich liebe dich 💘'],
-    '2': ['मैं तुमसे प्यार करता हूँ 💓', 'আমি তোমায় ভালোবাসি 💕', 'నేను నిన్ను ప్రేమిస్తున్నాను 💗'],
-    '3': ['আমি তোমাকে ভালবাসি 💝', 'Ich liebe dich 💛', 'Mo nifẹ rẹ 🧡'],
-    '4': ['Ti amo 💙', 'Eu te amo 💚', 'Я тебя люблю 💜'],
-    '5': ['사랑해 🩷', 'Te quiero 🩵', 'Σ\' αγαπώ 💞'],
-    '6': ['Kocham cię 💟', 'Jag älskar dig 🖤', 'Mahal kita 💌'],
-    '7': ['मैं तुझसे प्यार करता हूँ 💘', 'Ik hou van jou 💓', 'ฉันรักคุณ 💗'],
-    '8': ['Ana behibek 💝', 'Tôi yêu bạn 💜', 'Ngiyakuthanda 💛'],
-    '9': ['Ik hou van je 💖', 'Ich liebe dich 💙', 'Je t’adore 💚'],
-    '0': ['愛してる 💘', 'Я тебя люблю 🧡', 'I love you ❤️']
-  };
-
-  function addDigit(digit) {
-    const phrases = feelings[digit];
-    const container = document.createElement("div");
-    container.className = "message-box";
-    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-    container.textContent = randomPhrase;
-
-    const color = "#" + Math.floor(Math.random()*16777215).toString(16);
-    container.style.color = color;
-    container.style.borderColor = color;
-
-    messagesDiv.appendChild(container);
-    keypad.style.display = "none";
-  }
-
-  function goBack() {
-    if (messagesDiv.lastChild) {
-      messagesDiv.removeChild(messagesDiv.lastChild);
-    }
-    keypad.style.display = "grid";
-  }
-
-  function clearMessage() {
-    messagesDiv.innerHTML = '';
-    keypad.style.display = "grid";
-  }
-
-  // Headline strip logic
-  const headlineText = document.getElementById("headlineText");
-
-  const iLoveYouLanguages = [
-    "I love you", "Je t’aime", "Te quiero", "Ich liebe dich", "Ti amo", "Eu te amo",
-    "Я тебя люблю", "S’agapo", "Mahal kita", "Aishiteru", "Seni seviyorum", "Main tumse pyaar karta hoon",
-    "Ngo oi nei", "Kimi o ai shiteru", "Wo ai ni", "Ana behibek", "Jeg elsker dig", "Jag älskar dig",
-    "Ek is lief vir jou", "Amo-te", "Kocham cię", "Te iubesc", "Tôi yêu bạn", "Ik hou van jou",
-    "Taim i’ ngra leat", "Mi amas vin", "Ngiyakuthanda", "Hum tumse pyaar karte hain", "Nakupenda", "Volim te",
-    "Jeg elsker deg", "Szeretlek", "Eg elska teg", "Lubim ťa", "Ma armastan sind", "Miluji tě",
-    "Is breá liom tú", "Aloha wau ia ‘oe", "Ich lieb Di", "Obicham te", "Tha gaol agam ort", "Amor te",
-    "Ani ohev otach", "T’estimo", "Minä rakastan sinua", "Ngiya kuthanda", "Chit khit tae", "Sarangeul haeyo",
-    "Tôi yêu em", "Ek het jou lief", "T’estim", "Em yêu anh", "Me balobaka yo", "Bangun sana",
-    "Tú mo ghrá", "Ngiyakuthanda", "Kocham cię", "Me do wo", "Mi a dorote", "Ljubim te",
-    "Tave myliu", "Es tevi miilu", "Ndagukunda", "Nakupenda", "Ayor anosh’ni", "Nenu ninnu premisthunnanu",
-    "Mujhe tumse pyaar hai", "Njan ninne snehikkunnu", "Main tuhanu pyaar karda haan", "Ich han dich lieb",
-    "Toi yeu em", "Mo ni fe", "Maite zaitut", "Ti voglio bene", "Sh’qif", "Seni sevirem",
-    "Nenu ninnu ishtapadutunnanu", "Timi lai maya garchu", "Yeu em nhieu", "M’enamoro de ti", "Wǒ ài nǐ",
-    "Tôi yêu bạn", "Na love you", "Uthando lwami", "Ana uhibbuka", "Mi amas vin", "Volim te",
-    "Salanghae", "Lubim ta", "Njan ninne snehikkunnu", "Tula prem karto", "Tō tō aroha au", "Bhalobashi tomay",
-    "Eg elsker deg", "Iay layvee ooyay", "Mo ni fe re", "Inhluvuko", "T’aime fort", "Ich hab dich lieb",
-    "Ami tomake bhalobashi", "Bahala ka sa buhay mo" // 100 total
-  ];
-
-  let colorfulLove = '';
-  for (let i = 0; i < iLoveYouLanguages.length; i++) {
-    const color = "#" + Math.floor(Math.random()*16777215).toString(16);
-    colorfulLove += `<span style="color:${color}; margin-right: 10px;">${iLoveYouLanguages[i]} ●</span>`;
-  }
-  headlineText.innerHTML = colorfulLove.repeat(10); // repeat to ensure infinite loop
-</script>
 
 </body>
 </html>
