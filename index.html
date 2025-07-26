@@ -729,138 +729,82 @@ summary {
 }
 </style>
 
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unlock My Heart</title>
-  <style>
-    .collapsible {
-      background-color: #444;
-      color: white;
-      cursor: pointer;
-      padding: 1rem;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 1.25rem;
-    }.active, .collapsible:hover {
-  background-color: #666;
-}
+import { useState } from 'react';
 
-.content {
-  padding: 0 1rem;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
-}
+export default function LoveKeypad() {
+  const [selectedMessage, setSelectedMessage] = useState(null);
 
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 80px);
-  gap: 10px;
-  justify-content: center;
-  padding: 2rem 0;
-}
+  const messages = {
+    1: { lang: 'Mandarin (Chinese)', text: '我爱你' },
+    2: { lang: 'Spanish', text: 'Te amo' },
+    3: { lang: 'English', text: 'I love you' },
+    4: { lang: 'Hindi', text: 'मैं तुमसे प्यार करता हूँ' },
+    5: { lang: 'Arabic', text: 'أحبك' },
+    6: { lang: 'Bengali', text: 'আমি তোমায় ভালোবাসি' },
+    7: { lang: 'Portuguese', text: 'Eu te amo' },
+    8: { lang: 'Russian', text: 'Я тебя люблю' },
+    9: { lang: 'Urdu', text: 'میں تم سے محبت کرتا ہوں' },
+    0: { lang: 'Japanese', text: '愛してる' },
+  };
 
-.keypad button {
-  padding: 20px;
-  font-size: 1.5rem;
-  background-color: #222;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  const handleClick = (num) => {
+    setSelectedMessage(messages[num]);
+  };
 
-.keypad button:hover {
-  background-color: #333;
-}
+  const goBack = () => {
+    setSelectedMessage(null);
+  };
 
-.message {
-  text-align: center;
-  font-size: 2rem;
-  padding: 2rem;
-}
+  return (
+    <div className="p-6 flex flex-col items-center justify-center bg-white rounded-lg shadow-md max-w-md mx-auto">
+      <details className="w-full">
+        <summary className="text-lg font-semibold text-center cursor-pointer py-2 bg-purple-100 rounded-lg shadow-inner">
+          Ten Words. Ten Worlds.
+        </summary>
 
-.back-btn {
-  display: block;
-  margin: 0 auto 2rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #555;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.back-btn:hover {
-  background-color: #777;
-}
-
-  </style>
-</head>
-<body>
-  <button type="button" class="collapsible">Unlock My Heart ❤️🔢</button>
-  <div class="content">
-    <div id="keypadContainer">
-      <div class="keypad">
-        <button onclick="showMessage(1)">1</button>
-        <button onclick="showMessage(2)">2</button>
-        <button onclick="showMessage(3)">3</button>
-        <button onclick="showMessage(4)">4</button>
-        <button onclick="showMessage(5)">5</button>
-        <button onclick="showMessage(6)">6</button>
-        <button onclick="showMessage(7)">7</button>
-        <button onclick="showMessage(8)">8</button>
-        <button onclick="showMessage(9)">9</button>
-        <div></div>
-        <button onclick="showMessage(0)">0</button>
-      </div>
+        <div className="mt-4 w-full flex flex-col items-center justify-center">
+          {!selectedMessage ? (
+            <>
+              <div className="grid grid-cols-3 gap-2 text-center text-white text-lg">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, ''].map((num, index) =>
+                  num === '' ? (
+                    <div key={index}></div>
+                  ) : (
+                    <button
+                      key={num}
+                      onClick={() => handleClick(num)}
+                      className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-md shadow-md transition-all"
+                    >
+                      {num}
+                    </button>
+                  )
+                )}
+              </div>
+              <p className="text-sm text-gray-500 mt-4 italic text-center">
+                Press a number to reveal a truth spoken in another tongue.
+              </p>
+            </>
+          ) : (
+            <div className="flex flex-col items-center justify-center text-center space-y-4 p-6 border rounded-md shadow-inner bg-purple-50 w-full mt-4">
+              <h3 className="text-xl font-bold text-purple-800">
+                {selectedMessage.lang}
+              </h3>
+              <p className="text-2xl font-semibold text-purple-900">
+                “{selectedMessage.text}”
+              </p>
+              <button
+                onClick={goBack}
+                className="mt-4 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 shadow-sm transition-all"
+              >
+                Back
+              </button>
+            </div>
+          )}
+        </div>
+      </details>
     </div>
-    <div id="messageContainer" style="display: none;">
-      <div class="message" id="loveMessage"></div>
-      <button class="back-btn" onclick="goBack()">Back</button>
-    </div>
-  </div>  <script>
-    const messages = {
-      1: "I love you",         // English
-      2: "Wǒ ài nǐ",           // Mandarin
-      3: "Main tumse pyaar karta hoon",  // Hindi
-      4: "Te amo",             // Spanish
-      5: "Je t’aime",          // French
-      6: "Uhibbuka",           // Arabic
-      7: "Ami tomay bhalobashi", // Bengali
-      8: "Ya tebya lyublyu",   // Russian
-      9: "Eu te amo",          // Portuguese
-      0: "Main tumse mohabbat karta hoon" // Urdu
-    };
-
-    function showMessage(num) {
-      document.getElementById('keypadContainer').style.display = 'none';
-      document.getElementById('messageContainer').style.display = 'block';
-      document.getElementById('loveMessage').innerText = messages[num];
-    }
-
-    function goBack() {
-      document.getElementById('messageContainer').style.display = 'none';
-      document.getElementById('keypadContainer').style.display = 'block';
-    }
-
-    const coll = document.getElementsByClassName("collapsible")[0];
-    const content = document.getElementsByClassName("content")[0];
-    coll.addEventListener("click", function () {
-      this.classList.toggle("active");
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
-  </script></body>
-</html>
+  );
+}
 
 </div>
 <!-- 🎵 Music Collection Collapsible Section -->
