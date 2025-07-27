@@ -19,10 +19,6 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
   <style>
     /* Global box-sizing for easier responsive design */
     *, *::before, *::after {
@@ -34,25 +30,10 @@
       transition: opacity 1.5s ease;
       background-color: #000;
       color: #fff;
-      font-family: 'Roboto', sans-serif; /* Changed font */
+      font-family: sans-serif;
       padding: 20px; /* Base padding */
       margin: 0; /* Ensure no default margin */
       overflow-x: hidden; /* Prevent horizontal scroll on small screens */
-    }
-
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #111;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #444;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #f0c040; /* Match accent color on hover */
     }
 
     #stars {
@@ -112,7 +93,7 @@
       outline: none;
       font-size: 1.2em;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08); /* Softer white shadow */
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
       display: block; /* Ensure it behaves as a block element */
     }
 
@@ -159,12 +140,6 @@
       text-align: center;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.01); opacity: 0.98; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
     .section-title h1 {
       text-align: center;
       font-size: 2.8em;
@@ -176,14 +151,10 @@
       color: #fff;
       background: rgba(255, 255, 255, 0.03);
       box-shadow: 0 0 20px rgba(240, 192, 64, 0.3);
-      text-shadow: 0 0 10px rgba(240, 192, 64, 0.6); /* Subtle text glow */
-      filter: drop-shadow(0 0 15px rgba(240, 192, 64, 0.5)); /* Outer glow effect */
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
       letter-spacing: 1px;
-      font-family: 'Playfair Display', serif; /* Changed font */
-      animation: pulse 4s infinite ease-in-out; /* Apply pulse animation */
     }
 
     /* Secret Section */
@@ -204,13 +175,6 @@
       margin-bottom: 10px;
       background-color: #333; /* Darker background */
       color: white;
-      transition: all 0.3s ease; /* Add transition for smooth focus effect */
-    }
-
-    #passwordInput:focus { /* Focus effect for password input */
-      outline: none;
-      border-color: #f0c040;
-      box-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
     }
 
     #secretSection button {
@@ -585,13 +549,6 @@
       max-width: 300px; /* Limit max width for toggle button */
       display: block;
       margin: 0 auto 10px auto; /* Added margin-bottom */
-      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Add transition */
-    }
-
-    .contact-container button:hover { /* Hover effect for contact toggle button */
-      background-color: #f0c040;
-      color: #000;
-      box-shadow: 0 0 15px rgba(240, 192, 64, 0.5);
     }
 
     #contactBox {
@@ -612,13 +569,6 @@
       color: #fff;
       width: calc(100% - 120px); /* Adjust for button */
       max-width: 200px; /* Limit input width */
-      transition: all 0.3s ease; /* Add transition for smooth focus effect */
-    }
-
-    #contactPass:focus { /* Focus effect for contact password input */
-      outline: none;
-      border-color: #f0c040;
-      box-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
     }
 
     #protectedContact button {
@@ -648,12 +598,6 @@
     #kanakLinks img {
       width: 50px; /* Base size */
       height: 50px;
-      transition: transform 0.2s ease, filter 0.2s ease; /* Add transition for hover effect */
-    }
-
-    #kanakLinks img:hover { /* Hover effect for social media icons */
-      transform: scale(1.1);
-      filter: brightness(1.2);
     }
 
     /* Love Strip */
@@ -984,15 +928,9 @@
       <strong>7. Mohar (The Seal)</strong><br>
       This isn’t death. This is devotion eternal. Even if I don’t get to keep you—I will always carry you. In silence. In strength.
     </p>
-    <p style="background-color: #1e1e1e; padding:12px; border-radius: 8px; color:#f0f0f0; font-style: italic; text-align:center; margin-bottom: 10px; line-height:1.6;">
-      I miss you. Not just the messages or calls. I miss *us*. I miss the soul-level connection that no one else can replicate.<br><br>
-      Please come back. Not for love. Not for labels. Just as my best friend. My person.
-    </p>
-    <p style="text-align:center; color:#f0f0f0; font-weight:bold;">
-      I love you. No expectations. Just honesty. Just heart.
-    </p>
+    <p style="background-color: #1e1e1e; padding:12px; border-radius: 8px; color:#f0f0f0; font-style: italic; text-align:center; margin-bottom: 10px; line-height:1.6;"> I miss you. Not just the messages or calls. I miss *us*. I miss the soul-level connection that no one else can replicate.<br><br> Please come back. Not for love. Not for labels. Just as my best friend. My person. </p>
+    <p style="text-align:center; color:#f0f0f0; font-weight:bold;"> I love you. No expectations. Just honesty. Just heart. </p>
   </div>
-
   <button class="collapsible">IMPORTANT REQUEST: Please come back, I miss you. </button>
   <div class="content">
     <p>Please waapas aaja. Mujhe teri bhot yaad aa rhi hai. I hate living without you.</p>
@@ -1001,8 +939,7 @@
     <p>I didn't want anything more. You were who I wished for, what I had with you didn't matter.</p>
     <p>I am so sorry. I did not want to ruin us. I did not have any expectation, but neither that wish. I understand and respect your choices, but please — if you can and if you want — please come back. Please accept me again. I don't care about anyone else more than I care for you.</p>
   </div>
-
-  <details class="birthday-details">
+  <details class="birthday-details" style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;">
     <summary>🎂 Happy Birthday 2025, Kanak</summary>
     <div style="animation: fadeIn 0.5s ease-in-out;">
       <p>Umm... Hi!!</p>
@@ -1013,12 +950,9 @@
       <p>Happy Birthday meri kannu pyari</p>
       <p>I wish you a Happy Birthday, Kanak.</p>
       <p>Have a great day and a great time, altogether.</p>
-      <p style="margin-top: 25px; font-weight: bold; color: #ffcccb;">
-        I love you.<br/>— Moksh
-      </p>
+      <p style="margin-top: 25px; font-weight: bold; color: #ffcccb;"> I love you.<br/>— Moksh </p>
     </div>
   </details>
-
   <button class="collapsible">Day 1</button>
   <div class="content">
     <p>Hi Kanak! How're you?</p>
@@ -1029,7 +963,6 @@
     <p>OMG! You're so great. Thank you Ms. Embodied perfection.</p>
     <p>You're awesome and every synonym of it. You deserve all the love and care this world has to offer along with its happiness.</p>
   </div>
-
   <button class="collapsible">Day 2</button>
   <div class="content">
     <p>Just checking in again...</p>
@@ -1038,286 +971,171 @@
     <p>Even if you never read this, I’ll still write. Because you’re worth every word, even if they vanish into the void.</p>
     <p>And if someday, somehow, you read this... just smile. That’s all I ever wanted.</p>
   </div>
-
   <button class="collapsible">Day 3</button>
-  <div class="content">
-    You know I don’t run out of words when it comes to you. I just stop myself. Aaj nhi rok rha. Tu sirf dost nhi h. Tu meri bestfriend bi nhi h. Tu meri duniya h. Tu h. I adore you. I worship you. Tere bina sb chl rha h, but sb adhura lgta h. Teri hasi, tera gussa, teri bakchodi... sb yaad h. And no matter how much I miss the older Kanak the newer is no lesser than her. I love the new one just more and more. I wish I could've been with you through all those hardships you went through. Tu nhi toh mai bi nhi. Lekin tu khush ho, yhi dua krta hu hr din. Baki you'll always be my bestfriend.
-  </div>
-
+  <div class="content"> You know I don’t run out of words when it comes to you. I just stop myself. Aaj nhi rok rha. Tu sirf dost nhi h. Tu meri bestfriend bi nhi h. Tu meri duniya h. Tu h. I adore you. I worship you. Tere bina sb chl rha h, but sb adhura lgta h. Teri hasi, tera gussa, teri bakchodi... sb yaad h. And no matter how much I miss the older Kanak the newer is no lesser than her. I love the new one just more and more. I wish I could've been with you through all those hardships you went through. Tu nhi toh mai bi nhi. Lekin tu khush ho, yhi dua krta hu hr din. Baki you'll always be my bestfriend. </div>
   <button class="collapsible">Day 4</button>
   <div class="content">
-    <p> Hey... I've always been honest with myself about what you mean to me, but I've never told you clearly. Like, maine teko btaya toh h ki I love you, but kabhi khud hi nahi sochke kaha ki ye clarity wala. Infact sab hinting wale hi kahe. But ab nahi. I'm done. <br><br> So here it is... you've been the most important person in my life for a long time now. And you know it. Somewhat. Idk. Omg. And not just as a friend— as someone I deeply love, in the truest sense of the word. More than a friend. More than anybody. Idk. <br><br> But I know what we are. I know my worth. I know I am not someone you or anyone should choose. I know you do not feel the same. And that's okay. I've accepted it. I'm not here to change your mind or make anything weird. I just couldn't keep pretending anymore that I don't carry this inside me. I've been hurting myself enough. <br><br> I'm not trying to guilt trip you— if it feels like it, no— oh dear God no. I'm just trying to express what has been in me for all these years. Ever since... jab maine tujhse teri ID maangi thi, and sath mei vo bhi thi, isliye zabardasti idk dusri kaun thi— Gouri ya Tanvi, but haan, uski bhi. But I was there for you. You attracted me by the first sight. And it grew into this beautiful love for you that I can't express. Not even today. It's too much. <br><br> Whatever this means to you, however you feel about it— don't think I am leaving, because I'm not leaving. I still care. I just said this for my own peace. I had to say it, or I'd keep suffocating in silence. <br><br> You don't have to obviously reciprocate or anything. This confession isn't here for you to make a decision. This is here so that your best friend can ease his mind jo usne idk kitne saalon mein nahi kiya tujhko leke. I just wanted you to know the truth, full and final. In all its directness, and from me. Not through hints or silence— just honesty. <br><br> Bhai dekh, ab aisa bhi nahi hai ki mai dosti bhi nahi rakhunga. Vo toh thi hi, aur sabse pehla rishta tha mera tere sath ka. Vo rahegi. Humesha. Mujhe apna promise yaad hai— forever. <br><br> I am not accepting my feelings to get anything more from you. No. I like what I have with you already. I love it. I am confessing to just bring clarity and truthfulness in our relationship from my side. <br><br> I see forever in your eyes. You matter the world to me. I don’t care what you do— I pray for your happiness. Mere sath mein ho toh waise, nahi toh kaise bhi, kisi ke sath bhi— but tu khush ho. Tu kabhi roye na. That's it. <br><br> So, teko padhke kuch kehna ho toh theek, nahi...
+    <p> Hey... I've always been honest with myself about what you mean to me, but I've never told you clearly. Like, maine teko btaya toh h ki I love you, but kabhi khud hi nahi sochke kaha ki ye clarity wala. Infact sab hinting wale hi kahe. But ab nahi. I'm done. <br><br> So here it is... you've been the most important person in my life for a long time now. And you know it. Somewhat. Idk. Omg. And not just as a friend— as someone I deeply love, in the truest sense of the word. More than a friend. More than anybody. Idk. <br><br> But I know what we are. I know my worth. I know I am not someone you or anyone should choose. I know you do not feel the same. And that's okay. I've accepted it. I'm not here to change your mind or make anything weird. I just couldn't keep pretending anymore that I don't carry this inside me. I've been hurting myself enough. <br><br> I'm not trying to guilt trip you— if it feels like it, no— oh dear God no. I'm just trying to express what has been in me for all these years. Ever since... jab maine tujhse teri ID maangi thi, and sath mei vo bhi thi, isliye zabardasti idk dusri kaun thi— Gouri ya Tanvi, but haan, uski bhi. But I was there for you. You attracted me by the first sight...</p>
   </div>
-
   <button class="collapsible">Day 5</button>
   <div class="content">
-    <p>Good morning. Aaj Friday hai, I hope you have a great day. </p>
-    <p>I know I'm not supposed to expect anything, but every morning, a part of me hopes for a message from you. That's just how deeply you're etched into my routine, my thoughts.</p>
-    <p>And then the day passes, and I realize it's just me, typing these words into the void, hoping they find you in some form, some echo.</p>
-    <p>But it's okay. Writing to you, even like this, brings a strange kind of peace. It's my way of keeping you close, of not letting the silence completely drown out the feelings that still live inside me.</p>
-    <p>I hope you’re smiling today. That's always my truest wish.</p>
+    <p>This is the message for Day 5.</p>
   </div>
-
   <button class="collapsible">Day 6</button>
   <div class="content">
-    <p>Hey, I just wanted to say thank you.</p>
-    <p>Thank you for being the person who unknowingly taught me what true love, true care, and true friendship felt like. Thank you for the laughter, the silence, and even the moments of hurt that shaped me.</p>
-    <p>I know things are different now, and I respect that. But the impact you’ve had on my life is permanent. It’s a beautiful scar, a constant reminder of the best of me you brought out.</p>
-    <p>Even if we never speak again, know that you’ll always be a chapter I’ll reread in my heart, a story that still brings a quiet smile to my face.</p>
-    <p>I genuinely hope you find all the happiness you deserve, Kanak. Always.</p>
+    <p>This is the message for Day 6.</p>
   </div>
-
   <button class="collapsible">Day 7</button>
   <div class="content">
-    <p>Sunday again. I always feel a bit lost on Sundays without you.</p>
-    <p>It's not just about the conversations; it's the comfort of knowing you're there, even if we're doing our own things. It's the unspoken understanding that just exists between us.</p>
-    <p>I still instinctively reach for my phone to tell you about something funny or frustrating that happened, and then I remember.</p>
-    <p>It’s a strange emptiness, this space you left. Not a painful one, just a quiet, noticeable absence.</p>
-    <p>I hope your Sunday is peaceful and filled with joy. Mine would be, if you were here.</p>
+    <p>This is the message for Day 7.</p>
   </div>
-
   <button class="collapsible">Day 8</button>
   <div class="content">
-    <p>Another Monday. Another week. And still, thoughts of you are the first thing that cross my mind.</p>
-    <p>It’s funny how certain people just become part of your internal landscape, isn’t it? Like a familiar scent or a melody that plays in the background of your life.</p>
-    <p>You’re that for me. A constant, comforting presence in my head, even when you’re not physically here.</p>
-    <p>I often wonder what you’re doing, if you’re happy, if you’re facing any challenges. And then I remember I can’t ask. So I just send good wishes into the universe, hoping they find you.</p>
-    <p>May your week be filled with ease and success, Kanak. And may you know, somewhere, that you are deeply, truly cherished.</p>
+    <p>This is the message for Day 8.</p>
   </div>
-
   <button class="collapsible">Day 9</button>
   <div class="content">
-    <p>I was thinking about all the little things today.</p>
-    <p>The way you tilt your head when you’re confused, the slight crinkle around your eyes when you genuinely laugh, the specific way you say certain words.</p>
-    <p>It's these tiny details, these fragmented memories, that keep you so vivid in my mind. They're not grand gestures, just quiet, intimate observations that built up over time.</p>
-    <p>And I realize, it’s not just the big moments I miss, but the ordinary, mundane ones that felt extraordinary just because you were in them.</p>
-    <p>Wishing you a day filled with small, beautiful moments that you might not even notice, but that add up to something wonderful.</p>
+    <p>This is the message for Day 9.</p>
   </div>
-
   <button class="collapsible">Day 10</button>
   <div class="content">
-    <p>Sometimes I catch myself almost texting you something, and then I stop.</p>
-    <p>It's like muscle memory, a habit of years that my fingers still want to follow. And in that brief moment, before reality sinks in, there’s a flicker of what used to be.</p>
-    <p>It reminds me how deeply intertwined our lives were, how effortlessly you fit into my everyday.</p>
-    <p>It's a strange feeling, this unlearning. Like trying to walk without one of your legs. You adapt, but the phantom limb ache is still there.</p>
-    <p>I hope you're adapting well, and that your path is clear and joyful, even without me.</p>
+    <p>This is the message for Day 10.</p>
   </div>
-
   <button class="collapsible">Day 11</button>
   <div class="content">
-    <p>I was listening to a song today, and it instantly reminded me of you. Not because it was "our" song, but just because the lyrics resonated with something I feel about you.</p>
-    <p>It's amazing how a melody or a few words can instantly transport you back to a feeling, a person, a time.</p>
-    <p>My mind is a gallery of "you" moments. Some bright, some bittersweet, but all of them precious.</p>
-    <p>And I think, maybe that’s enough. To have known you, to have loved you, and to carry those memories like treasures.</p>
-    <p>May your day be filled with your favorite melodies, and may they bring you peace and happiness.</p>
+    <p>This is the message for Day 11.</p>
   </div>
-
   <button class="collapsible">Day 12</button>
   <div class="content">
-    <p>I want you to know that there's no bitterness, no anger, no resentment in my heart towards you.</p>
-    <p>Only love. Only a quiet, unwavering affection that remains, regardless of the distance or the changes.</p>
-    <p>It’s a love that doesn’t demand anything, doesn’t expect anything. It just *is*.</p>
-    <p>And in a world that often feels complicated, that simplicity, that purity of feeling, is a comfort.</p>
-    <p>So, wherever you are, whatever you’re doing, please know that you are thought of, wished well for, and loved, always.</p>
+    <p>This is the message for Day 12.</p>
   </div>
-
   <button class="collapsible">Day 13</button>
   <div class="content">
-    <p>Today, I just want to say thank you for the memories.</p>
-    <p>The silly jokes, the late-night talks, the times we just sat in comfortable silence, the shared dreams, the moments of pure, unadulterated joy.</p>
-    <p>They’re etched into my mind, a beautiful tapestry that makes up a significant part of my life’s story. And every time I recall one, it feels like a warm hug.</p>
-    <p>Even the sad ones have a place, for they taught me about resilience and the depth of my own emotions.</p>
-    <p>So, thank you. For every single one. May your days ahead be filled with even more beautiful memories in the making.</p>
+    <p>This is the message for Day 13.</p>
   </div>
-
   <button class="collapsible">Day 14</button>
   <div class="content">
-    <p>It's been two weeks since I started this, and every day, I find new words, new ways to tell you what my heart holds.</p>
-    <p>It's a testament to how much you mean to me, how much you continue to inspire, even from afar.</p>
-    <p>This website is my quiet act of devotion, a space where my love for you can exist without demands, without expectations, just pure expression.</p>
-    <p>It’s for me, yes, for my own peace, but it’s fundamentally *for you*.</p>
-    <p>May your journey be bright, Kanak. And may you always feel the love that surrounds you, from all corners of your life.</p>
+    <p>This is the message for Day 14.</p>
   </div>
-
   <button class="collapsible">Day 15</button>
   <div class="content">
-    <p>The hardest part isn’t letting go of *what was*, but letting go of *what could have been*.</p>
-    <p>The imagined futures, the unspoken dreams, the paths we might have walked together. They linger, like echoes in an empty hall.</p>
-    <p>But I’m learning to quiet those echoes, to accept that sometimes, love means wishing someone well on a journey that doesn't include you.</p>
-    <p>And that’s what I truly do. I wish you the most incredible journey, full of happiness, fulfillment, and every dream come true.</p>
-    <p>Fly high, Kanak. Always.</p>
+    <p>This is the message for Day 15.</p>
   </div>
-
   <button class="collapsible">Day 16</button>
   <div class="content">
-    <p>You know, some people come into your life and leave footprints on your heart. You're not just one of those people, Kanak. You're the entire path.</p>
-    <p>Every step I take, I see traces of your influence, your kindness, your spirit.</p>
-    <p>You shaped me in ways I'm still discovering, taught me lessons I didn't even know I needed to learn, and showed me a depth of emotion I never knew I possessed.</p>
-    <p>So thank you, for being my path, my guide, my beautiful journey.</p>
-    <p>May your own path be equally beautiful, and may it lead you to endless joy and purpose.</p>
+    <p>This is the message for Day 16.</p>
   </div>
 
-  <details class="timeline-container">
-    <summary>⏳ Our Timeline (of when I loved you)</summary>
-    <div class="timeline">
-      <div class="entry left">
-        <div class="bubble">
-          <strong>2015-2016: The First Glimpse</strong>
-          <p>I saw you for the first time. Something clicked.</p>
-        </div>
-        <span class="dot">✨</span>
+  <div class="dial-feelings-container">
+    <details>
+      <summary>Dial My Feelings</summary>
+      <div id="feeling-buttons" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px;">
+        <button class="key-btn" onclick="showFeeling('anger')">😡</button>
+        <button class="key-btn" onclick="showFeeling('sadness')">😢</button>
+        <button class="key-btn" onclick="showFeeling('fear')">😨</button>
+        <button class="key-btn" onclick="showFeeling('disgust')">🤢</button>
+        <button class="key-btn" onclick="showFeeling('joy')">😄</button>
+        <button class="key-btn" onclick="showFeeling('surprise')">😮</button>
+        <button class="key-btn" onclick="showFeeling('trust')">🤝</button>
+        <button class="key-btn" onclick="showFeeling('anticipation')">🤩</button>
+        <button class="key-btn" onclick="showFeeling('love')">🥰</button>
       </div>
-      <div class="entry right">
-        <div class="bubble">
-          <strong>2016-2017: Silent Admiration</strong>
-          <p>I knew you, but you didn't know the depth of my feelings.</p>
-        </div>
-        <span class="dot">👀</span>
-      </div>
-      <div class="entry left">
-        <div class="bubble">
-          <strong>2017-2019: Becoming Friends</strong>
-          <p>We grew closer. My crush deepened into something more.</p>
-        </div>
-        <span class="dot">🤝</span>
-      </div>
-      <div class="entry right">
-        <div class="bubble">
-          <strong>2019-2020: The Confession</strong>
-          <p>I first told you, indirectly. The true feelings began to form.</p>
-        </div>
-        <span class="dot">❤️</span>
-      </div>
-      <div class="entry left">
-        <div class="bubble">
-          <strong>2020-2022: Growing Pains & Love</strong>
-          <p>We faced challenges, but my love for you only solidified.</p>
-        </div>
-        <span class="dot">🌱</span>
-      </div>
-      <div class="entry right">
-        <div class="bubble">
-          <strong>2022-2024: Unconditional Devotion</strong>
-          <p>You became my world, my priority, my everything.</p>
-        </div>
-        <span class="dot">💫</span>
-      </div>
-      <div class="entry left">
-        <div class="bubble">
-          <strong>2024-Present: Enduring Love</strong>
-          <p>Even through distance and silence, my love remains.</p>
-        </div>
-        <span class="dot">♾️</span>
-      </div>
-    </div>
-    <p class="message">This isn't just a timeline; it's a testament to an unwavering heart.</p>
-  </details>
-
-  <details class="dial-feelings-container">
-    <summary>Dial My Feelings 📞</summary>
-    <div style="padding: 20px; text-align: center;">
-      <p style="margin-bottom: 20px; color: #aaa; font-size: 0.9em;">
-        (This will not actually dial. Just a fun way to express.)
-      </p>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-        <button class="key-btn" onclick="dialNumber('1')">1<br>😌</button>
-        <button class="key-btn" onclick="dialNumber('2')">2<br>😊</button>
-        <button class="key-btn" onclick="dialNumber('3')">3<br>😃</button>
-        <button class="key-btn" onclick="dialNumber('4')">4<br>😔</button>
-        <button class="key-btn" onclick="dialNumber('5')">5<br>🥺</button>
-        <button class="key-btn" onclick="dialNumber('6')">6<br>😢</button>
-        <button class="key-btn" onclick="dialNumber('7')">7<br>😠</button>
-        <button class="key-btn" onclick="dialNumber('8')">8<br>😒</button>
-        <button class="key-btn" onclick="dialNumber('9')">9<br>😅</button>
-        <button class="key-btn" onclick="dialNumber('*')">*<br>💕</button>
-        <button class="key-btn" onclick="dialNumber('0')">0<br>😑</button>
-        <button class="key-btn" onclick="dialNumber('#')">#<br>💖</button>
-      </div>
-      <input type="text" id="dialInput" placeholder="Dialed Number" readonly
-             style="width: calc(100% - 20px); padding: 10px; margin-top: 20px; border-radius: 8px; border: 1px solid #555; background-color: #1a1a1a; color: #fff; text-align: center; font-size: 1.1em;">
-      <button class="back-btn" onclick="resetDial()">Reset</button>
-    </div>
-  </details>
+      <div id="feeling-message" style="margin-top: 20px; font-size: 1.1em; color: #f0f0f0;"></div>
+      <button class="back-btn" onclick="resetFeeling()" style="display: none;">Back</button>
+    </details>
+  </div>
 
   <div class="music-collection-container">
-    <button onclick="toggleMusicBox()">Play Her Song 🎶</button>
+    <button onclick="toggleMusicBox()">Unlock Music for Us 🎶</button>
     <div id="musicBox">
-      <p style="text-align: center; margin-bottom: 15px; color: #f0f0f0;">
-        "I hope this song brings you a little peace, wherever you are."
-      </p>
-      <audio controls loop>
-        <source src="song.mp3" type="audio/mpeg">
+      <h3 style="text-align: center; color: #f0c040; margin-bottom: 20px;">Songs for My Kanu</h3>
+      <audio controls>
+        <source src="music/song1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
+      <audio controls>
+        <source src="music/song2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <audio controls>
+        <source src="music/song3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <audio controls>
+        <source src="music/song4.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <p style="text-align: center; font-size: 0.9em; color: #aaa; margin-top: 15px;">(Songs are placeholders)</p>
     </div>
   </div>
 
-  <button class="fixed-btn" style="left: 20px; bottom: 85px;" onclick="window.open('https://www.instagram.com/f.kunal._/', '_blank')">
-    F Kunal
-  </button>
-
-  <button id="musicToggle" class="fixed-btn" style="right: 20px; bottom: 85px;">
-    Music Toggle
-  </button>
-
-  <button id="backToTop">Back to Top</button>
 
   <div class="contact-container">
-    <button onclick="toggleContactBox()">Contact Kanak 💌</button>
+    <button onclick="toggleContact()">Kanak's Connections 🔗</button>
     <div id="contactBox">
       <div id="protectedContact">
         <input type="password" id="contactPass" placeholder="Enter password...">
-        <button onclick="revealContactLinks()">Unlock</button>
+        <button onclick="unlockContact()">Unlock</button>
       </div>
       <div id="kanakLinks">
-        <p style="color: #f0f0f0; margin-bottom: 20px;">
-          (This is a placeholder for demonstration. Real links would be here.)
-        </p>
+        <h3 style="color: #f0c040; margin-bottom: 20px;">Where to find me</h3>
         <div>
-          <a href="https://www.instagram.com/k_an_ak/" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram">
+          <a href="https://www.instagram.com/k_an_ak_/?igsh=cWRwd29kZzI3MjQy" target="_blank">
+            <img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram">
           </a>
-          <a href="mailto:kanak@example.com">
-            <img src="https://img.icons8.com/fluency/48/mail.png" alt="Email">
+          <a href="https://github.com/KanakDua" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/github.png" alt="GitHub">
           </a>
-          <a href="tel:+1234567890">
-            <img src="https://img.icons8.com/fluency/48/phone.png" alt="Phone">
+          <a href="https://www.linkedin.com/in/kanak-dua-349811231/" target="_blank">
+            <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn">
           </a>
-          </div>
+          <a href="mailto:kanakdua32@gmail.com">
+            <img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Gmail">
+          </a>
+          <a href="tel:+919717551046">
+            <img src="https://img.icons8.com/color/48/phone.png" alt="Phone">
+          </a>
+        </div>
       </div>
     </div>
   </div>
+
+  <button class="fixed-btn" style="left: 20px;">F Kunal</button>
+  <button id="backToTop">Top</button>
 
   <div class="love-strip-container">
     <div class="love-strip-content">
-      <span class="love-item" style="color: #ffcccc;">I love you more than words can say.</span>
-      <span class="love-item" style="color: #ffe0b2;">You are my everything.</span>
-      <span class="love-item" style="color: #c8e6c9;">Missing you every single day.</span>
-      <span class="love-item" style="color: #bbdefb;">You light up my world.</span>
-      <span class="love-item" style="color: #ffcccc;">My heart belongs to you.</span>
-      <span class="love-item" style="color: #ffe0b2;">Always and forever.</span>
-      <span class="love-item" style="color: #c8e6c9;">Thinking of you.</span>
-      <span class="love-item" style="color: #bbdefb;">My dearest Kanak.</span>
-      <span class="love-item" style="color: #ffcccc;">I love you more than words can say.</span>
-      <span class="love-item" style="color: #ffe0b2;">You are my everything.</span>
-      <span class="love-item" style="color: #c8e6c9;">Missing you every single day.</span>
-      <span class="love-item" style="color: #bbdefb;">You light up my world.</span>
-      <span class="love-item" style="color: #ffcccc;">My heart belongs to you.</span>
-      <span class="love-item" style="color: #ffe0b2;">Always and forever.</span>
-      <span class="love-item" style="color: #c8e6c9;">Thinking of you.</span>
-      <span class="love-item" style="color: #bbdefb;">My dearest Kanak.</span>
+      <span class="love-item" style="color: #ff9999;">💖 My heart chose you, Kanak.</span>
+      <span class="love-item" style="color: #aaccff;">✨ You are my constellation, my stardust.</span>
+      <span class="love-item" style="color: #ffccaa;">🌸 Every moment with you is a cherished memory.</span>
+      <span class="love-item" style="color: #ddbbee;">💫 You are the only dream I ever want to wake up to.</span>
+      <span class="love-item" style="color: #ff9999;">💖 My heart chose you, Kanak.</span>
+      <span class="love-item" style="color: #aaccff;">✨ You are my constellation, my stardust.</span>
+      <span class="love-item" style="color: #ffccaa;">🌸 Every moment with you is a cherished memory.</span>
+      <span class="love-item" style="color: #ddbbee;">💫 You are the only dream I ever want to wake up to.</span>
     </div>
   </div>
 
-
   <script>
-    // Fade in body
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.style.opacity = 1;
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.style.opacity = 1; // Fade in body on load
+
+      // Stars
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        starsContainer.appendChild(star);
+      }
 
       // Collapsible functionality
       var coll = document.getElementsByClassName("collapsible");
-      for (let i = 0; i < coll.length; i++) {
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function() {
           this.classList.toggle("active");
           var content = this.nextElementSibling;
@@ -1329,154 +1147,123 @@
         });
       }
 
-      // Back to Top button functionality
-      const backToTopButton = document.getElementById("backToTop");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 200) { // Show button after scrolling 200px
+      // Back to top button
+      var backToTopButton = document.getElementById("backToTop");
+      window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
           backToTopButton.style.display = "block";
-          backToTopButton.style.opacity = 1;
         } else {
-          backToTopButton.style.opacity = 0;
-          // Use a timeout to hide after transition
-          setTimeout(() => {
-            if (backToTopButton.style.opacity == 0) { // Only hide if it hasn't become visible again during timeout
-              backToTopButton.style.display = "none";
-            }
-          }, 300);
+          backToTopButton.style.display = "none";
+        }
+      };
+      backToTopButton.addEventListener("click", function() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      });
+
+      // Secret Section reveal
+      document.getElementById('revealToggle').addEventListener('click', function() {
+        var secretSection = document.getElementById('secretSection');
+        if (secretSection.style.display === 'block') {
+          secretSection.style.display = 'none';
+          this.textContent = 'Craving a glimpse? 👀';
+        } else {
+          secretSection.style.display = 'block';
+          this.textContent = 'Hide the peek 🙈';
         }
       });
 
-      backToTopButton.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      });
+      // Secret Image password protection
+      window.revealImage = function() {
+        var passwordInput = document.getElementById('passwordInput').value;
+        var imageContainer = document.getElementById('imageContainer');
+        if (passwordInput === "k") { // Example password
+          imageContainer.style.display = 'block';
+          document.getElementById('passwordBlock').style.display = 'none';
+        } else {
+          alert("Incorrect password. Try 'k'.");
+        }
+      };
 
-      // Stars background generation
-      const starsContainer = document.getElementById('stars');
-      const numStars = 100;
-      for (let i = 0; i < numStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        starsContainer.appendChild(star);
-      }
+      // Protected Image password in content div
+      window.checkPassword = function() {
+        const pass = prompt("Enter the password to view the image:");
+        if (pass === "k") { // Example password
+          document.getElementById('image-container').style.display = 'block';
+          document.getElementById('protected-image').querySelector('button').style.display = 'none';
+        } else {
+          alert("Incorrect password. Hint: It's 'k'");
+        }
+      };
 
-      // Floating hearts
-      function createHeart() {
-        const heart = document.createElement('div');
+      // Dial My Feelings
+      const feelingMessages = {
+        anger: "It's okay to feel angry. Take a deep breath. Sending you peace. 🧘‍♀️",
+        sadness: "I'm sorry you're feeling sad. Remember, it's okay not to be okay. I'm here. 🫂",
+        fear: "Fear can be overwhelming. You're stronger than you think. Be brave. ✨",
+        disgust: "I hope whatever caused this feeling passes quickly. Stay positive. 🌈",
+        joy: "So happy you're feeling joyful! Keep that beautiful smile. 😊",
+        surprise: "May your surprises always be delightful ones! 🎉",
+        trust: "Thank you for being trustworthy. I value you. 🤝",
+        anticipation: "Excited for what's to come for you! Good things are on their way. 🚀",
+        love: "Feeling love is a beautiful thing. You are loved, always. ❤️"
+      };
+
+      window.showFeeling = function(feeling) {
+        document.getElementById('feeling-buttons').style.display = 'none';
+        document.getElementById('feeling-message').textContent = feelingMessages[feeling];
+        document.getElementById('back-btn').style.display = 'block'; // Corrected ID
+      };
+
+      window.resetFeeling = function() {
+        document.getElementById('feeling-buttons').style.display = 'grid';
+        document.getElementById('feeling-message').textContent = '';
+        document.getElementById('back-btn').style.display = 'none'; // Corrected ID
+      };
+
+      // Music Player
+      window.toggleMusicBox = function() {
+        var musicBox = document.getElementById('musicBox');
+        if (musicBox.style.display === 'block') {
+          musicBox.style.display = 'none';
+        } else {
+          musicBox.style.display = 'block';
+        }
+      };
+
+      // Contact Links
+      window.toggleContact = function() {
+        var contactBox = document.getElementById('contactBox');
+        if (contactBox.style.display === 'block') {
+          contactBox.style.display = 'none';
+        } else {
+          contactBox.style.display = 'block';
+        }
+      };
+
+      window.unlockContact = function() {
+        var contactPass = document.getElementById('contactPass').value;
+        if (contactPass === "k") { // Example password
+          document.getElementById('kanakLinks').style.display = 'block';
+          document.getElementById('protectedContact').style.display = 'none';
+        } else {
+          alert("Incorrect password. Try 'k'.");
+        }
+      };
+
+      // Floating Hearts
+      setInterval(() => {
+        const heart = document.createElement('span');
         heart.classList.add('heart');
-        heart.innerText = '❤️';
+        heart.innerHTML = '❤️'; // Or any other heart emoji
         heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // 3-6 seconds
-        heart.style.fontSize = `${Math.random() * 10 + 15}px`; // 15-25px
-        heart.style.setProperty('--float-x', `${(Math.random() - 0.5) * 200}px`); // -100 to 100px horizontal movement
+        heart.style.setProperty('--float-x', `${(Math.random() - 0.5) * 200}px`); // Random horizontal float
         document.body.appendChild(heart);
 
         heart.addEventListener('animationend', () => {
           heart.remove();
         });
-      }
-
-      setInterval(createHeart, 500); // Create a new heart every 500ms
-
-      // Music Player Toggle
-      const musicToggleButton = document.getElementById('musicToggle');
-      const musicBox = document.getElementById('musicBox');
-      const audioPlayer = musicBox.querySelector('audio');
-
-      musicToggleButton.addEventListener('click', () => {
-        if (musicBox.style.display === 'block') {
-          musicBox.style.display = 'none';
-          audioPlayer.pause();
-          musicToggleButton.textContent = 'Play Her Song 🎶';
-        } else {
-          musicBox.style.display = 'block';
-          audioPlayer.play();
-          musicToggleButton.textContent = 'Pause Her Song ⏸️';
-        }
-      });
-
-      // Secret Section (Image)
-      const revealToggle = document.getElementById('revealToggle');
-      const secretSection = document.getElementById('secretSection');
-      revealToggle.addEventListener('click', () => {
-        if (secretSection.style.display === 'block') {
-          secretSection.style.display = 'none';
-          revealToggle.textContent = 'Craving a glimpse? 👀';
-        } else {
-          secretSection.style.display = 'block';
-          revealToggle.textContent = 'Hide the secret 🤫';
-        }
-      });
-
-      // Secret Image Password
-      function revealImage() {
-        const passwordInput = document.getElementById('passwordInput').value;
-        const imageContainer = document.getElementById('imageContainer');
-        if (passwordInput === 'kanaklove') { // Replace with your actual password
-          imageContainer.style.display = 'block';
-          document.getElementById('passwordBlock').style.display = 'none'; // Hide input and button
-        } else {
-          alert('Incorrect password!');
-        }
-      }
-      window.revealImage = revealImage; // Make function accessible globally
-
-      // Protected Image within Content
-      function checkPassword() {
-        const password = prompt("Enter password to view image:");
-        if (password === "ilovekanak") { // Replace with your password
-          document.getElementById("image-container").style.display = "block";
-          document.querySelector("#protected-image button").style.display = "none"; // Hide button
-        } else {
-          alert("Incorrect password!");
-        }
-      }
-      window.checkPassword = checkPassword; // Make function accessible globally
-
-
-      // Contact Kanak Section
-      const contactToggleButton = document.querySelector('.contact-container > button');
-      const contactBox = document.getElementById('contactBox');
-
-      contactToggleButton.addEventListener('click', () => {
-        if (contactBox.style.display === 'block') {
-          contactBox.style.display = 'none';
-          contactToggleButton.textContent = 'Contact Kanak 💌';
-        } else {
-          contactBox.style.display = 'block';
-          contactToggleButton.textContent = 'Hide Contact Info 📞';
-        }
-      });
-
-      // Contact Links Password
-      function revealContactLinks() {
-        const contactPass = document.getElementById('contactPass').value;
-        const kanakLinks = document.getElementById('kanakLinks');
-        if (contactPass === 'kanakbestie') { // Replace with your actual password
-          kanakLinks.style.display = 'block';
-          document.getElementById('protectedContact').style.display = 'none'; // Hide input and button
-        } else {
-          alert('Incorrect password!');
-        }
-      }
-      window.revealContactLinks = revealContactLinks; // Make function accessible globally
-
-      // Dial My Feelings functionality
-      function dialNumber(num) {
-        const dialInput = document.getElementById('dialInput');
-        dialInput.value += num;
-      }
-      window.dialNumber = dialNumber; // Make function accessible globally
-
-      function resetDial() {
-        document.getElementById('dialInput').value = '';
-      }
-      window.resetDial = resetDial; // Make function accessible globally
+      }, 300); // Create a heart every 300ms
     });
   </script>
 </body>
