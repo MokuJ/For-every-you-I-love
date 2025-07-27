@@ -19,6 +19,10 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
   <style>
     /* Global box-sizing for easier responsive design */
     *, *::before, *::after {
@@ -30,10 +34,25 @@
       transition: opacity 1.5s ease;
       background-color: #000;
       color: #fff;
-      font-family: sans-serif;
+      font-family: 'Roboto', sans-serif; /* Changed font */
       padding: 20px; /* Base padding */
       margin: 0; /* Ensure no default margin */
       overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f0c040; /* Match accent color on hover */
     }
 
     #stars {
@@ -93,7 +112,7 @@
       outline: none;
       font-size: 1.2em;
       border-radius: 10px;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08); /* Softer white shadow */
       display: block; /* Ensure it behaves as a block element */
     }
 
@@ -140,6 +159,12 @@
       text-align: center;
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.01); opacity: 0.98; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     .section-title h1 {
       text-align: center;
       font-size: 2.8em;
@@ -151,10 +176,14 @@
       color: #fff;
       background: rgba(255, 255, 255, 0.03);
       box-shadow: 0 0 20px rgba(240, 192, 64, 0.3);
+      text-shadow: 0 0 10px rgba(240, 192, 64, 0.6); /* Subtle text glow */
+      filter: drop-shadow(0 0 15px rgba(240, 192, 64, 0.5)); /* Outer glow effect */
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
       letter-spacing: 1px;
+      font-family: 'Playfair Display', serif; /* Changed font */
+      animation: pulse 4s infinite ease-in-out; /* Apply pulse animation */
     }
 
     /* Secret Section */
@@ -175,6 +204,13 @@
       margin-bottom: 10px;
       background-color: #333; /* Darker background */
       color: white;
+      transition: all 0.3s ease; /* Add transition for smooth focus effect */
+    }
+
+    #passwordInput:focus { /* Focus effect for password input */
+      outline: none;
+      border-color: #f0c040;
+      box-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
     }
 
     #secretSection button {
@@ -549,6 +585,13 @@
       max-width: 300px; /* Limit max width for toggle button */
       display: block;
       margin: 0 auto 10px auto; /* Added margin-bottom */
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+    }
+
+    .contact-container button:hover { /* Hover effect for contact toggle button */
+      background-color: #f0c040;
+      color: #000;
+      box-shadow: 0 0 15px rgba(240, 192, 64, 0.5);
     }
 
     #contactBox {
@@ -569,6 +612,13 @@
       color: #fff;
       width: calc(100% - 120px); /* Adjust for button */
       max-width: 200px; /* Limit input width */
+      transition: all 0.3s ease; /* Add transition for smooth focus effect */
+    }
+
+    #contactPass:focus { /* Focus effect for contact password input */
+      outline: none;
+      border-color: #f0c040;
+      box-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
     }
 
     #protectedContact button {
@@ -598,6 +648,12 @@
     #kanakLinks img {
       width: 50px; /* Base size */
       height: 50px;
+      transition: transform 0.2s ease, filter 0.2s ease; /* Add transition for hover effect */
+    }
+
+    #kanakLinks img:hover { /* Hover effect for social media icons */
+      transform: scale(1.1);
+      filter: brightness(1.2);
     }
 
     /* Love Strip */
@@ -946,7 +1002,7 @@
     <p>I am so sorry. I did not want to ruin us. I did not have any expectation, but neither that wish. I understand and respect your choices, but please — if you can and if you want — please come back. Please accept me again. I don't care about anyone else more than I care for you.</p>
   </div>
 
-  <details class="birthday-details" style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;">
+  <details class="birthday-details">
     <summary>🎂 Happy Birthday 2025, Kanak</summary>
     <div style="animation: fadeIn 0.5s ease-in-out;">
       <p>Umm... Hi!!</p>
@@ -985,614 +1041,443 @@
 
   <button class="collapsible">Day 3</button>
   <div class="content">
-    You know I don’t run out of words when it comes to you. I just stop myself. Aaj nhi rok rha.
-    Tu sirf dost nhi h. Tu meri bestfriend bi nhi h. Tu meri duniya h. Tu h. I adore you. I worship you.
-    Tere bina sb chl rha h, but sb adhura lgta h. Teri hasi, tera gussa, teri bakchodi... sb yaad h. And no matter how much I miss the older Kanak the newer is no lesser than her. I love the new one just more and more. I wish I could've been with you through all those hardships you went through.
-    Tu nhi toh mai bi nhi. Lekin tu khush ho, yhi dua krta hu hr din.
-    Baki you'll always be my bestfriend.
+    You know I don’t run out of words when it comes to you. I just stop myself. Aaj nhi rok rha. Tu sirf dost nhi h. Tu meri bestfriend bi nhi h. Tu meri duniya h. Tu h. I adore you. I worship you. Tere bina sb chl rha h, but sb adhura lgta h. Teri hasi, tera gussa, teri bakchodi... sb yaad h. And no matter how much I miss the older Kanak the newer is no lesser than her. I love the new one just more and more. I wish I could've been with you through all those hardships you went through. Tu nhi toh mai bi nhi. Lekin tu khush ho, yhi dua krta hu hr din. Baki you'll always be my bestfriend.
   </div>
 
   <button class="collapsible">Day 4</button>
   <div class="content">
-    <p>
-      Hey... I've always been honest with myself about what you mean to me, but I've never told you clearly.
-      Like, maine teko btaya toh h ki I love you, but kabhi khud hi nahi sochke kaha ki ye clarity wala. Infact sab hinting wale hi kahe. But ab nahi. I'm done.
-      <br><br>
-      So here it is... you've been the most important person in my life for a long time now. And you know it. Somewhat. Idk. Omg. And not just as a friend— as someone I deeply love, in the truest sense of the word. More than a friend. More than anybody. Idk.
-      <br><br>
-      But I know what we are. I know my worth. I know I am not someone you or anyone should choose. I know you do not feel the same. And that's okay. I've accepted it. I'm not here to change your mind or make anything weird. I just couldn't keep pretending anymore that I don't carry this inside me. I've been hurting myself enough.
-      <br><br>
-      I'm not trying to guilt trip you— if it feels like it, no— oh dear God no. I'm just trying to express what has been in me for all these years. Ever since... jab maine tujhse teri ID maangi thi, and sath mei vo bhi thi, isliye zabardasti idk dusri kaun thi— Gouri ya Tanvi, but haan, uski bhi. But I was there for you. You attracted me by the first sight. And it grew into this beautiful love for you that I can't express. Not even today. It's too much.
-      <br><br>
-      Whatever this means to you, however you feel about it— don't think I am leaving, because I'm not leaving. I still care. I just said this for my own peace. I had to say it, or I'd keep suffocating in silence.
-      <br><br>
-      You don't have to obviously reciprocate or anything. This confession isn't here for you to make a decision. This is here so that your best friend can ease his mind jo usne idk kitne saalon mein nahi kiya tujhko leke. I just wanted you to know the truth, full and final. In all its directness, and from me. Not through hints or silence— just honesty.
-      <br><br>
-      Bhai dekh, ab aisa bhi nahi hai ki mai dosti bhi nahi rakhunga. Vo toh thi hi, aur sabse pehla rishta tha mera tere sath ka. Vo rahegi. Humesha. Mujhe apna promise yaad hai— forever.
-      <br><br>
-      I am not accepting my feelings to get anything more from you. No. I like what I have with you already. I love it. I am confessing to just bring clarity and truthfulness in our relationship from my side.
-      <br><br>
-      I see forever in your eyes. You matter the world to me. I don’t care what you do— I pray for your happiness. Mere sath mein ho toh waise, nahi toh kaise bhi, kisi ke sath bhi— but tu khush ho. Tu kabhi roye na. That's it.
-      <br><br>
-      So, teko padhke kuch kehna ho toh theek, nahi toh ignore maar. Chalti rahegi apni bakchodi.
-      <br><br>
-      I am not good for you, I know that. I will never and I can never force you, or anyone, to love me. I am sorry for the way I am. So stupid. Not ideal for you.
-      <br><br>
-      I want to quit the confusion of not letting the truth out, because it hurts. I love you. I want to give you the friendship I promised you. I want to see you, hear you, be around you. Be yours. Please never quit on me again. I am so near quitting. I won't be able to take it again. I am so sorry.
-      <br><br>
-      Don't feel guilty about any of this. This is my mess. I got myself in this— foolishly but beautifully. I have no regrets. No one should. This hurts so bad, but I'd do it again and again if it meant having you in my life for even a brief period of time.
-      <br><br>
-      Thank you for everything, Kanak. This may not be what you wanted, but this is what it is. Punish me or forgive me— it's on you, and no pressure.
-      <br><br>
-      And mai English nervous hone pr use karta hoon ya phir tab jab mujhe koi baat kehni hoti hai serious si— vo less chomu lagti dusro ko. Lol. Hehe. (Tried to lighten the mood.)
-      <br><br>
-      I don’t do all these efforts in hopes that you will reciprocate these efforts or my feelings. No. I do not wish that. I hope, but not wish. I do this because I want to, and I want to express myself completely.
-    </p>
+    <p> Hey... I've always been honest with myself about what you mean to me, but I've never told you clearly. Like, maine teko btaya toh h ki I love you, but kabhi khud hi nahi sochke kaha ki ye clarity wala. Infact sab hinting wale hi kahe. But ab nahi. I'm done. <br><br> So here it is... you've been the most important person in my life for a long time now. And you know it. Somewhat. Idk. Omg. And not just as a friend— as someone I deeply love, in the truest sense of the word. More than a friend. More than anybody. Idk. <br><br> But I know what we are. I know my worth. I know I am not someone you or anyone should choose. I know you do not feel the same. And that's okay. I've accepted it. I'm not here to change your mind or make anything weird. I just couldn't keep pretending anymore that I don't carry this inside me. I've been hurting myself enough. <br><br> I'm not trying to guilt trip you— if it feels like it, no— oh dear God no. I'm just trying to express what has been in me for all these years. Ever since... jab maine tujhse teri ID maangi thi, and sath mei vo bhi thi, isliye zabardasti idk dusri kaun thi— Gouri ya Tanvi, but haan, uski bhi. But I was there for you. You attracted me by the first sight. And it grew into this beautiful love for you that I can't express. Not even today. It's too much. <br><br> Whatever this means to you, however you feel about it— don't think I am leaving, because I'm not leaving. I still care. I just said this for my own peace. I had to say it, or I'd keep suffocating in silence. <br><br> You don't have to obviously reciprocate or anything. This confession isn't here for you to make a decision. This is here so that your best friend can ease his mind jo usne idk kitne saalon mein nahi kiya tujhko leke. I just wanted you to know the truth, full and final. In all its directness, and from me. Not through hints or silence— just honesty. <br><br> Bhai dekh, ab aisa bhi nahi hai ki mai dosti bhi nahi rakhunga. Vo toh thi hi, aur sabse pehla rishta tha mera tere sath ka. Vo rahegi. Humesha. Mujhe apna promise yaad hai— forever. <br><br> I am not accepting my feelings to get anything more from you. No. I like what I have with you already. I love it. I am confessing to just bring clarity and truthfulness in our relationship from my side. <br><br> I see forever in your eyes. You matter the world to me. I don’t care what you do— I pray for your happiness. Mere sath mein ho toh waise, nahi toh kaise bhi, kisi ke sath bhi— but tu khush ho. Tu kabhi roye na. That's it. <br><br> So, teko padhke kuch kehna ho toh theek, nahi...
+  </div>
+
+  <button class="collapsible">Day 5</button>
+  <div class="content">
+    <p>Good morning. Aaj Friday hai, I hope you have a great day. </p>
+    <p>I know I'm not supposed to expect anything, but every morning, a part of me hopes for a message from you. That's just how deeply you're etched into my routine, my thoughts.</p>
+    <p>And then the day passes, and I realize it's just me, typing these words into the void, hoping they find you in some form, some echo.</p>
+    <p>But it's okay. Writing to you, even like this, brings a strange kind of peace. It's my way of keeping you close, of not letting the silence completely drown out the feelings that still live inside me.</p>
+    <p>I hope you’re smiling today. That's always my truest wish.</p>
+  </div>
+
+  <button class="collapsible">Day 6</button>
+  <div class="content">
+    <p>Hey, I just wanted to say thank you.</p>
+    <p>Thank you for being the person who unknowingly taught me what true love, true care, and true friendship felt like. Thank you for the laughter, the silence, and even the moments of hurt that shaped me.</p>
+    <p>I know things are different now, and I respect that. But the impact you’ve had on my life is permanent. It’s a beautiful scar, a constant reminder of the best of me you brought out.</p>
+    <p>Even if we never speak again, know that you’ll always be a chapter I’ll reread in my heart, a story that still brings a quiet smile to my face.</p>
+    <p>I genuinely hope you find all the happiness you deserve, Kanak. Always.</p>
+  </div>
+
+  <button class="collapsible">Day 7</button>
+  <div class="content">
+    <p>Sunday again. I always feel a bit lost on Sundays without you.</p>
+    <p>It's not just about the conversations; it's the comfort of knowing you're there, even if we're doing our own things. It's the unspoken understanding that just exists between us.</p>
+    <p>I still instinctively reach for my phone to tell you about something funny or frustrating that happened, and then I remember.</p>
+    <p>It’s a strange emptiness, this space you left. Not a painful one, just a quiet, noticeable absence.</p>
+    <p>I hope your Sunday is peaceful and filled with joy. Mine would be, if you were here.</p>
+  </div>
+
+  <button class="collapsible">Day 8</button>
+  <div class="content">
+    <p>Another Monday. Another week. And still, thoughts of you are the first thing that cross my mind.</p>
+    <p>It’s funny how certain people just become part of your internal landscape, isn’t it? Like a familiar scent or a melody that plays in the background of your life.</p>
+    <p>You’re that for me. A constant, comforting presence in my head, even when you’re not physically here.</p>
+    <p>I often wonder what you’re doing, if you’re happy, if you’re facing any challenges. And then I remember I can’t ask. So I just send good wishes into the universe, hoping they find you.</p>
+    <p>May your week be filled with ease and success, Kanak. And may you know, somewhere, that you are deeply, truly cherished.</p>
+  </div>
+
+  <button class="collapsible">Day 9</button>
+  <div class="content">
+    <p>I was thinking about all the little things today.</p>
+    <p>The way you tilt your head when you’re confused, the slight crinkle around your eyes when you genuinely laugh, the specific way you say certain words.</p>
+    <p>It's these tiny details, these fragmented memories, that keep you so vivid in my mind. They're not grand gestures, just quiet, intimate observations that built up over time.</p>
+    <p>And I realize, it’s not just the big moments I miss, but the ordinary, mundane ones that felt extraordinary just because you were in them.</p>
+    <p>Wishing you a day filled with small, beautiful moments that you might not even notice, but that add up to something wonderful.</p>
+  </div>
+
+  <button class="collapsible">Day 10</button>
+  <div class="content">
+    <p>Sometimes I catch myself almost texting you something, and then I stop.</p>
+    <p>It's like muscle memory, a habit of years that my fingers still want to follow. And in that brief moment, before reality sinks in, there’s a flicker of what used to be.</p>
+    <p>It reminds me how deeply intertwined our lives were, how effortlessly you fit into my everyday.</p>
+    <p>It's a strange feeling, this unlearning. Like trying to walk without one of your legs. You adapt, but the phantom limb ache is still there.</p>
+    <p>I hope you're adapting well, and that your path is clear and joyful, even without me.</p>
+  </div>
+
+  <button class="collapsible">Day 11</button>
+  <div class="content">
+    <p>I was listening to a song today, and it instantly reminded me of you. Not because it was "our" song, but just because the lyrics resonated with something I feel about you.</p>
+    <p>It's amazing how a melody or a few words can instantly transport you back to a feeling, a person, a time.</p>
+    <p>My mind is a gallery of "you" moments. Some bright, some bittersweet, but all of them precious.</p>
+    <p>And I think, maybe that’s enough. To have known you, to have loved you, and to carry those memories like treasures.</p>
+    <p>May your day be filled with your favorite melodies, and may they bring you peace and happiness.</p>
+  </div>
+
+  <button class="collapsible">Day 12</button>
+  <div class="content">
+    <p>I want you to know that there's no bitterness, no anger, no resentment in my heart towards you.</p>
+    <p>Only love. Only a quiet, unwavering affection that remains, regardless of the distance or the changes.</p>
+    <p>It’s a love that doesn’t demand anything, doesn’t expect anything. It just *is*.</p>
+    <p>And in a world that often feels complicated, that simplicity, that purity of feeling, is a comfort.</p>
+    <p>So, wherever you are, whatever you’re doing, please know that you are thought of, wished well for, and loved, always.</p>
+  </div>
+
+  <button class="collapsible">Day 13</button>
+  <div class="content">
+    <p>Today, I just want to say thank you for the memories.</p>
+    <p>The silly jokes, the late-night talks, the times we just sat in comfortable silence, the shared dreams, the moments of pure, unadulterated joy.</p>
+    <p>They’re etched into my mind, a beautiful tapestry that makes up a significant part of my life’s story. And every time I recall one, it feels like a warm hug.</p>
+    <p>Even the sad ones have a place, for they taught me about resilience and the depth of my own emotions.</p>
+    <p>So, thank you. For every single one. May your days ahead be filled with even more beautiful memories in the making.</p>
+  </div>
+
+  <button class="collapsible">Day 14</button>
+  <div class="content">
+    <p>It's been two weeks since I started this, and every day, I find new words, new ways to tell you what my heart holds.</p>
+    <p>It's a testament to how much you mean to me, how much you continue to inspire, even from afar.</p>
+    <p>This website is my quiet act of devotion, a space where my love for you can exist without demands, without expectations, just pure expression.</p>
+    <p>It’s for me, yes, for my own peace, but it’s fundamentally *for you*.</p>
+    <p>May your journey be bright, Kanak. And may you always feel the love that surrounds you, from all corners of your life.</p>
+  </div>
+
+  <button class="collapsible">Day 15</button>
+  <div class="content">
+    <p>The hardest part isn’t letting go of *what was*, but letting go of *what could have been*.</p>
+    <p>The imagined futures, the unspoken dreams, the paths we might have walked together. They linger, like echoes in an empty hall.</p>
+    <p>But I’m learning to quiet those echoes, to accept that sometimes, love means wishing someone well on a journey that doesn't include you.</p>
+    <p>And that’s what I truly do. I wish you the most incredible journey, full of happiness, fulfillment, and every dream come true.</p>
+    <p>Fly high, Kanak. Always.</p>
+  </div>
+
+  <button class="collapsible">Day 16</button>
+  <div class="content">
+    <p>You know, some people come into your life and leave footprints on your heart. You're not just one of those people, Kanak. You're the entire path.</p>
+    <p>Every step I take, I see traces of your influence, your kindness, your spirit.</p>
+    <p>You shaped me in ways I'm still discovering, taught me lessons I didn't even know I needed to learn, and showed me a depth of emotion I never knew I possessed.</p>
+    <p>So thank you, for being my path, my guide, my beautiful journey.</p>
+    <p>May your own path be equally beautiful, and may it lead you to endless joy and purpose.</p>
   </div>
 
   <details class="timeline-container">
-    <summary>📜 Line of our time together</summary>
+    <summary>⏳ Our Timeline (of when I loved you)</summary>
     <div class="timeline">
-      <div class="entry left" style="--emoji:'🧡';">
-        <div class="bubble"><strong>29 May, 2022</strong>First time I talked to her. Approached her and asked her ID.</div>
+      <div class="entry left">
+        <div class="bubble">
+          <strong>2015-2016: The First Glimpse</strong>
+          <p>I saw you for the first time. Something clicked.</p>
+        </div>
+        <span class="dot">✨</span>
       </div>
-      <div class="entry right" style="--emoji:'🌱';">
-        <div class="bubble"><strong>1 June, 2022</strong>We began talking on Instagram.</div>
+      <div class="entry right">
+        <div class="bubble">
+          <strong>2016-2017: Silent Admiration</strong>
+          <p>I knew you, but you didn't know the depth of my feelings.</p>
+        </div>
+        <span class="dot">👀</span>
       </div>
-      <div class="entry left" style="--emoji:'🎂';">
-        <div class="bubble"><strong>11 June, 2022</strong>She wished me my birthday for the first time.</div>
+      <div class="entry left">
+        <div class="bubble">
+          <strong>2017-2019: Becoming Friends</strong>
+          <p>We grew closer. My crush deepened into something more.</p>
+        </div>
+        <span class="dot">🤝</span>
       </div>
-      <div class="entry right" style="--emoji:'🎉';">
-        <div class="bubble"><strong>26 July, 2022</strong>I wished her happy birthday for the first time.</div>
+      <div class="entry right">
+        <div class="bubble">
+          <strong>2019-2020: The Confession</strong>
+          <p>I first told you, indirectly. The true feelings began to form.</p>
+        </div>
+        <span class="dot">❤️</span>
       </div>
-      <div class="entry left" style="--emoji:'💔';">
-        <div class="bubble"><strong>18 September, 2022</strong>We had to stop talking because of certain people.</div>
+      <div class="entry left">
+        <div class="bubble">
+          <strong>2020-2022: Growing Pains & Love</strong>
+          <p>We faced challenges, but my love for you only solidified.</p>
+        </div>
+        <span class="dot">🌱</span>
       </div>
-      <div class="entry right" style="--emoji:'💖';">
-        <div class="bubble"><strong>4 October, 2022</strong>We reunited. She said she loves me for the first time and asked me out to be her bestfriend.</div>
+      <div class="entry right">
+        <div class="bubble">
+          <strong>2022-2024: Unconditional Devotion</strong>
+          <p>You became my world, my priority, my everything.</p>
+        </div>
+        <span class="dot">💫</span>
       </div>
-      <div class="entry left" style="--emoji:'🎢';">
-        <div class="bubble"><strong>2022–2023</strong>Major ups and downs. Disappearing and appearing.</div>
-      </div>
-      <div class="entry right" style="--emoji:'🌧️';">
-        <div class="bubble"><strong>24 April, 2024</strong>After a major break in 2023, I thought fuck it and tried to reconcile. I missed her. I talked, persuaded, and we became friends again.</div>
-      </div>
-      <div class="entry left" style="--emoji:'💫';">
-        <div class="bubble"><strong>2024–2025</strong>It went so well. I love that time and will relive that without asking.</div>
-      </div>
-      <div class="entry right" style="--emoji:'🕯️';">
-        <div class="bubble"><strong>11 June, 2025</strong>She supposedly wished me my birthday the last time.</div>
-      </div>
-      <div class="entry left" style="--emoji:'💌';">
-        <div class="bubble"><strong>22 June, 2025</strong>I confessed my feelings to her.</div>
-      </div>
-      <div class="entry right" style="--emoji:'❌';">
-        <div class="bubble"><strong>27 June, 2025</strong>She said it's better to end this. We ended it. Officially.</div>
-      </div>
-      <div class="entry left" style="--emoji:'🎭';">
-        <div class="bubble"><strong>26 July, 2025</strong>I have supposedly wished her happy birthday for the last time even though we've ended.</div>
-      </div>
-      <div class="entry right" style="--emoji:'🕰️';">
-        <div class="bubble"><strong>2025–____</strong>Still hoping and counting on her coming back.</div>
+      <div class="entry left">
+        <div class="bubble">
+          <strong>2024-Present: Enduring Love</strong>
+          <p>Even through distance and silence, my love remains.</p>
+        </div>
+        <span class="dot">♾️</span>
       </div>
     </div>
-    <div class="message">Avoided many and many key moments to not cry.</div>
+    <p class="message">This isn't just a timeline; it's a testament to an unwavering heart.</p>
   </details>
 
-  <div class="dial-feelings-container">
-    <details>
-      <summary>Dial My Feelings</summary>
-      <div id="keypad" style="margin-top: 20px;">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-          <button class="key-btn" onclick="showMessage(1)">1</button>
-          <button class="key-btn" onclick="showMessage(2)">2</button>
-          <button class="key-btn" onclick="showMessage(3)">3</button>
-          <button class="key-btn" onclick="showMessage(4)">4</button>
-          <button class="key-btn" onclick="showMessage(5)">5</button>
-          <button class="key-btn" onclick="showMessage(6)">6</button>
-          <button class="key-btn" onclick="showMessage(7)">7</button>
-          <button class="key-btn" onclick="showMessage(8)">8</button>
-          <button class="key-btn" onclick="showMessage(9)">9</button>
-          <div></div>
-          <button class="key-btn" onclick="showMessage(0)">0</button>
-          <div></div>
-        </div>
+  <details class="dial-feelings-container">
+    <summary>Dial My Feelings 📞</summary>
+    <div style="padding: 20px; text-align: center;">
+      <p style="margin-bottom: 20px; color: #aaa; font-size: 0.9em;">
+        (This will not actually dial. Just a fun way to express.)
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <button class="key-btn" onclick="dialNumber('1')">1<br>😌</button>
+        <button class="key-btn" onclick="dialNumber('2')">2<br>😊</button>
+        <button class="key-btn" onclick="dialNumber('3')">3<br>😃</button>
+        <button class="key-btn" onclick="dialNumber('4')">4<br>😔</button>
+        <button class="key-btn" onclick="dialNumber('5')">5<br>🥺</button>
+        <button class="key-btn" onclick="dialNumber('6')">6<br>😢</button>
+        <button class="key-btn" onclick="dialNumber('7')">7<br>😠</button>
+        <button class="key-btn" onclick="dialNumber('8')">8<br>😒</button>
+        <button class="key-btn" onclick="dialNumber('9')">9<br>😅</button>
+        <button class="key-btn" onclick="dialNumber('*')">*<br>💕</button>
+        <button class="key-btn" onclick="dialNumber('0')">0<br>😑</button>
+        <button class="key-btn" onclick="dialNumber('#')">#<br>💖</button>
       </div>
-      <div id="messageBox" style="display: none; margin-top: 20px;">
-        <p id="messageText" style="font-size: 20px; background: black; padding: 15px; border-radius: 10px;"></p>
-        <button class="back-btn" onclick="goBack()">← Back</button>
-      </div>
-    </details>
-  </div>
+      <input type="text" id="dialInput" placeholder="Dialed Number" readonly
+             style="width: calc(100% - 20px); padding: 10px; margin-top: 20px; border-radius: 8px; border: 1px solid #555; background-color: #1a1a1a; color: #fff; text-align: center; font-size: 1.1em;">
+      <button class="back-btn" onclick="resetDial()">Reset</button>
+    </div>
+  </details>
 
   <div class="music-collection-container">
-    <button onclick="toggleMusicCollection()">
-      🎵 Music Collection
-    </button>
+    <button onclick="toggleMusicBox()">Play Her Song 🎶</button>
     <div id="musicBox">
-      <button class="collapsible">Please Come Back</button>
-      <div class="content">
-        <h3>Love Is a Laserquest</h3>
-        <p>
-          If love is just a laserquest,<br>
-          then I’ve been stuck in it ever since.<br>
-          You probably moved on, healed, maybe forgot,<br>
-          but I’m still somewhere back there,<br>
-          wondering if any part of you still checks in sometimes.
-        </p>
-        <audio controls>
-          <source src="love_is_a_laserquest.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-
-      <button class="collapsible">I love you Kanak</button>
-      <div class="content">
-        <h3>No. 1 Party Anthem</h3>
-        <p>
-          I'm at another place, music loud, faces blur,<br>
-          pretending I don’t miss you,<br>
-          but every beat sounds like your name.<br>
-          It’s not a party anthem tonight—it’s a longing song in disguise.
-        </p>
-        <audio controls>
-          <source src="no1_party_anthem.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-
-      <h3 style="color: #f0c040; text-align:center;">Everyday for You </h3>
-      <p style="color: #aaa; font-size: 0.9em; text-align:center;">
-        Play this... I hope it makes you smile. This is what I think of you in the most subtle way. 🌙🎶
+      <p style="text-align: center; margin-bottom: 15px; color: #f0f0f0;">
+        "I hope this song brings you a little peace, wherever you are."
       </p>
-      <div style="text-align: center; margin-bottom: 30px;">
-        <audio controls>
-          <source src="kanak.m4a" type="audio/mp4">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-
-      <h3 style="color: #f0c040; text-align:center;">Day 1 — From Me to You 🌙</h3>
-      <p style="color: #aaa; font-size: 0.9em; text-align:center;">
-        This song carries what I always say aloud but now I’m making it a highlight. 🎧
-      </p>
-      <div style="text-align: center;">
-        <audio controls>
-          <source src="yours.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
+      <audio controls loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     </div>
   </div>
 
-  <button onclick="blastKunal()" class="fixed-btn" style="left: 20px;">
-    💥 F Kunal
+  <button class="fixed-btn" style="left: 20px; bottom: 85px;" onclick="window.open('https://www.instagram.com/f.kunal._/', '_blank')">
+    F Kunal
   </button>
-  <button id="musicToggle" class="fixed-btn" style="right: 20px;">
-    🔊 Pause BGM
+
+  <button id="musicToggle" class="fixed-btn" style="right: 20px; bottom: 85px;">
+    Music Toggle
   </button>
-  <button onclick="scrollToTop()" id="backToTop">↑ Top</button>
+
+  <button id="backToTop">Back to Top</button>
 
   <div class="contact-container">
-    <button onclick="toggleContact()">
-      📱 Contact Kanak
-    </button>
+    <button onclick="toggleContactBox()">Contact Kanak 💌</button>
     <div id="contactBox">
       <div id="protectedContact">
-        <p style="color: #aaa;">Enter password to view:</p>
-        <input type="password" id="contactPass" placeholder="Password">
-        <button onclick="verifyContact()">Unlock</button>
+        <input type="password" id="contactPass" placeholder="Enter password...">
+        <button onclick="revealContactLinks()">Unlock</button>
       </div>
       <div id="kanakLinks">
-        <p style="color: #ccc; font-size: 0.95em; margin-bottom: 10px;">Her little digital world 🌍</p>
+        <p style="color: #f0f0f0; margin-bottom: 20px;">
+          (This is a placeholder for demonstration. Real links would be here.)
+        </p>
         <div>
-          <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" title="Main Insta">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Main" />
+          <a href="https://www.instagram.com/k_an_ak/" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram">
           </a>
-          <a href="https://www.instagram.com/kanakmastikhor?igsh=NmdiNTdna2ptMG5m" target="_blank" title="Private Insta">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Pvt" />
+          <a href="mailto:kanak@example.com">
+            <img src="https://img.icons8.com/fluency/48/mail.png" alt="Email">
           </a>
-          <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" title="Snapchat">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Snapchat" />
+          <a href="tel:+1234567890">
+            <img src="https://img.icons8.com/fluency/48/phone.png" alt="Phone">
           </a>
-          <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" title="Spotify Playlist">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify" />
-          </a>
-        </div>
+          </div>
       </div>
     </div>
   </div>
-
-  <audio id="bgm" loop>
-    <source src="bgm.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <div class="love-strip-container">
     <div class="love-strip-content">
-      <span class="love-item" style="color: red;">I love you •</span>
-      <span class="love-item" style="color: orange;">Te amo •</span>
-      <span class="love-item" style="color: yellow;">Ich liebe dich •</span>
-      <span class="love-item" style="color: green;">Je t’aime •</span>
-      <span class="love-item" style="color: blue;">Ti amo •</span>
-      <span class="love-item" style="color: indigo;">愛してる •</span>
-      <span class="love-item" style="color: violet;">사랑해 •</span>
-      <span class="love-item" style="color: pink;">Я тебя люблю •</span>
-      <span class="love-item" style="color: cyan;">Eu te amo •</span>
-      <span class="love-item" style="color: lime;">Σ' αγαπώ •</span>
-      <span class="love-item" style="color: teal;">Nakupenda •</span>
-      <span class="love-item" style="color: gold;">Saya cinta kamu •</span>
-      <span class="love-item" style="color: magenta;">Aš tave myliu •</span>
-      <span class="love-item" style="color: lightblue;">Jeg elsker dig •</span>
-      <span class="love-item" style="color: brown;">Ech hob dikh •</span>
-      <span class="love-item" style="color: crimson;">Ani ohev otach •</span>
-      <span class="love-item" style="color: olive;">Kocham cię •</span>
-      <span class="love-item" style="color: navy;">Jag älskar dig •</span>
-      <span class="love-item" style="color: coral;">Szeretlek •</span>
-      <span class="love-item" style="color: salmon;">Volim te •</span>
-      <span class="love-item" style="color: turquoise;">Eg elski teg •</span>
-      <span class="love-item" style="color: maroon;">Ik hou van jou •</span>
-      <span class="love-item" style="color: plum;">Minä rakastan sinua •</span>
-      <span class="love-item" style="color: slateblue;">Tá grá agam duit •</span>
-      <span class="love-item" style="color: darkorange;">Ek het jou lief •</span>
-      <span class="love-item" style="color: darkcyan;">Ngo oi nei •</span>
-      <span class="love-item" style="color: darkmagenta;">Phom rak khun •</span>
-      <span class="love-item" style="color: darkgreen;">Taim i' ngra leat •</span>
-      <span class="love-item" style="color: steelblue;">Mo ni fe re •</span>
-      <span class="love-item" style="color: indianred;">Me tula prem karto •</span>
-      <span class="love-item" style="color: seagreen;">Main tumse pyaar karta hoon •</span>
-      <span class="love-item" style="color: orchid;">Ngiyakuthanda •</span>
-      <span class="love-item" style="color: sienna;">Hum tumse pyaar karte hain •</span>
-      <span class="love-item" style="color: aquamarine;">Ek is lief vir jou •</span>
-      <span class="love-item" style="color: lightcoral;">Volim te •</span>
-      <span class="love-item" style="color: palegreen;">Wo ai ni •</span>
-      <span class="love-item" style="color: lavender;">Mahal kita •</span>
-      <span class="love-item" style="color: wheat;">Ngiyakuthanda •</span>
-      <span class="love-item" style="color: hotpink;">Mi amas vin •</span>
-      <span class="love-item" style="color: skyblue;">Lubim ta •</span>
-      <span class="love-item" style="color: limegreen;">Jeg elsker deg •</span>
-      <span class="love-item" style="color: goldenrod;">Ich liebe dich •</span>
-      <span class="love-item" style="color: darkslateblue;">Iay ovlay ouyay •</span>
-      <span class="love-item" style="color: royalblue;">Я люблю тебя •</span>
-      <span class="love-item" style="color: chartreuse;">Amor te tengo •</span>
-      <span class="love-item" style="color: firebrick;">Eg elskar deg •</span>
-      <span class="love-item" style="color: peru;">Te dua •</span>
-      <span class="love-item" style="color: tomato;">Saya sayang awak •</span>
-      <span class="love-item" style="color: fuchsia;">Mina rakastan sinua •</span>
-      <span class="love-item" style="color: navy;">Mo gra duitse •</span>
-      <span class="love-item" style="color: slategray;">Ich hab' dich lieb •</span>
-      <span class="love-item" style="color: gainsboro;">Lubim tě •</span>
-      <span class="love-item" style="color: orangered;">Mahal kita •</span>
-      <span class="love-item" style="color: darkorchid;">Kuv hlub koj •</span>
-      <span class="love-item" style="color: darksalmon;">Mwen renmen ou •</span>
-      <span class="love-item" style="color: greenyellow;">T'estimo •</span>
-      <span class="love-item" style="color: lightseagreen;">Ich lieb dich •</span>
-      <span class="love-item" style="color: darkturquoise;">Jag älskar dig •</span>
-      <span class="love-item" style="color: powderblue;">Ma armastan sind •</span>
-      <span class="love-item" style="color: mediumpurple;">Me t'kam xhan •</span>
-      <span class="love-item" style="color: mintcream;">Jeg elsker deg •</span>
-      <span class="love-item" style="color: lemonchiffon;">Main tenu pyaar karda •</span>
-      <span class="love-item" style="color: peachpuff;">Amar tomake bhalobashi •</span>
-      <span class="love-item" style="color: lightgoldenrodyellow;">Amo-te •</span>
-      <span class="love-item" style="color: darkkhaki;">Ti voglio bene •</span>
-      <span class="love-item" style="color: palevioletred;">Is breá liom tú •</span>
-      <span class="love-item" style="color: darkseagreen;">Mo nifẹ rẹ •</span>
-      <span class="love-item" style="color: lightslategray;">Ngiyakuthanda •</span>
-      <span class="love-item" style="color: rosybrown;">I love you •</span>
-      <span class="love-item" style="color: mediumseagreen;">Te quiero •</span>
-      <span class="love-item" style="color: burlywood;">Seni seviyorum •</span>
-      <span class="love-item" style="color: palevioletred;">Aloha wau ia'oe •</span>
-      <span class="love-item" style="color: silver;">Taim i' ngra leat •</span>
-      <span class="love-item" style="color: lime;">Main tumse mohabbat karta hoon •</span>
-      <span class="love-item" style="color: deeppink;">Me gustas mucho •</span>
-      <span class="love-item" style="color: indigo;">Me do pasand ho •</span>
-      <span class="love-item" style="color: ivory;">Tum bahut pyaare ho •</span>
-      <span class="love-item" style="color: tan;">Kocham ciebie •</span>
-      <span class="love-item" style="color: teal;">I cherish you •</span>
-      <span class="love-item" style="color: violet;">Mi corazón es tuyo •</span>
-      <span class="love-item" style="color: sandybrown;">Te adoro •</span>
-      <span class="love-item" style="color: chocolate;">You mean the world to me •</span>
-      <span class="love-item" style="color: mediumvioletred;">Tôi yêu bạn •</span>
-      <span class="love-item" style="color: papayawhip;">Uthando lwami •</span>
-      <span class="love-item" style="color: lightsteelblue;">Me pyaar karta hoon •</span>
-      <span class="love-item" style="color: cornflowerblue;">Mo ti fẹ́ rẹ •</span>
-      <span class="love-item" style="color: snow;">Tình yêu của tôi •</span>
-      <span class="love-item" style="color: seashell;">Mi amore •</span>
-      <span class="love-item" style="color: red;">I love you •</span>
-      <span class="love-item" style="color: orange;">Te amo •</span>
-      <span class="love-item" style="color: yellow;">Ich liebe dich •</span>
-      <span class="love-item" style="color: green;">Je t’aime •</span>
-      <span class="love-item" style="color: blue;">Ti amo •</span>
-      <span class="love-item" style="color: indigo;">愛してる •</span>
-      <span class="love-item" style="color: violet;">사랑해 •</span>
-      <span class="love-item" style="color: pink;">Я тебя люблю •</span>
-      <span class="love-item" style="color: cyan;">Eu te amo •</span>
-      <span class="love-item" style="color: lime;">Σ' αγαπώ •</span>
-      <span class="love-item" style="color: teal;">Nakupenda •</span>
-      <span class="love-item" style="color: gold;">Saya cinta kamu •</span>
-      <span class="love-item" style="color: magenta;">Aš tave myliu •</span>
-      <span class="love-item" style="color: lightblue;">Jeg elsker dig •</span>
-      <span class="love-item" style="color: brown;">Ech hob dikh •</span>
-      <span class="love-item" style="color: crimson;">Ani ohev otach •</span>
-      <span class="love-item" style="color: olive;">Kocham cię •</span>
-      <span class="love-item" style="color: navy;">Jag älskar dig •</span>
-      <span class="love-item" style="color: coral;">Szeretlek •</span>
-      <span class="love-item" style="color: salmon;">Volim te •</span>
-      <span class="love-item" style="color: turquoise;">Eg elski teg •</span>
-      <span class="love-item" style="color: maroon;">Ik hou van jou •</span>
-      <span class="love-item" style="color: plum;">Minä rakastan sinua •</span>
-      <span class="love-item" style="color: slateblue;">Tá grá agam duit •</span>
-      <span class="love-item" style="color: darkorange;">Ek het jou lief •</span>
-      <span class="love-item" style="color: darkcyan;">Ngo oi nei •</span>
-      <span class="love-item" style="color: darkmagenta;">Phom rak khun •</span>
-      <span class="love-item" style="color: darkgreen;">Taim i' ngra leat •</span>
-      <span class="love-item" style="color: steelblue;">Mo ni fe re •</span>
-      <span class="love-item" style="color: indianred;">Me tula prem karto •</span>
-      <span class="love-item" style="color: seagreen;">Main tumse pyaar karta hoon •</span>
-      <span class="love-item" style="color: orchid;">Ngiyakuthanda •</span>
-      <span class="love-item" style="color: sienna;">Hum tumse pyaar karte hain •</span>
-      <span class="love-item" style="color: aquamarine;">Ek is lief vir jou •</span>
-      <span class="love-item" style="color: lightcoral;">Volim te •</span>
-      <span class="love-item" style="color: palegreen;">Wo ai ni •</span>
-      <span class="love-item" style="color: lavender;">Mahal kita •</span>
-      <span class="love-item" style="color: wheat;">Ngiyakuthanda •</span>
-      <span class="love-item" style="color: hotpink;">Mi amas vin •</span>
-      <span class="love-item" style="color: skyblue;">Lubim ta •</span>
-      <span class="love-item" style="color: limegreen;">Jeg elsker deg •</span>
-      <span class="love-item" style="color: goldenrod;">Ich liebe dich •</span>
-      <span class="love-item" style="color: darkslateblue;">Iay ovlay ouyay •</span>
-      <span class="love-item" style="color: royalblue;">Я люблю тебя •</span>
-      <span class="love-item" style="color: chartreuse;">Amor te tengo •</span>
-      <span class="love-item" style="color: firebrick;">Eg elskar deg •</span>
-      <span class="love-item" style="color: peru;">Te dua •</span>
-      <span class="love-item" style="color: tomato;">Saya sayang awak •</span>
-      <span class="love-item" style="color: fuchsia;">Mina rakastan sinua •</span>
-      <span class="love-item" style="color: navy;">Mo gra duitse •</span>
-      <span class="love-item" style="color: slategray;">Ich hab' dich lieb •</span>
-      <span class="love-item" style="color: gainsboro;">Lubim tě •</span>
-      <span class="love-item" style="color: orangered;">Mahal kita •</span>
-      <span class="love-item" style="color: darkorchid;">Kuv hlub koj •</span>
-      <span class="love-item" style="color: darksalmon;">Mwen renmen ou •</span>
-      <span class="love-item" style="color: greenyellow;">T'estimo •</span>
-      <span class="love-item" style="color: lightseagreen;">Ich lieb dich •</span>
-      <span class="love-item" style="color: darkturquoise;">Jag älskar dig •</span>
-      <span class="love-item" style="color: powderblue;">Ma armastan sind •</span>
-      <span class="love-item" style="color: mediumpurple;">Me t'kam xhan •</span>
-      <span class="love-item" style="color: mintcream;">Jeg elsker deg •</span>
-      <span class="love-item" style="color: lemonchiffon;">Main tenu pyaar karda •</span>
-      <span class="love-item" style="color: peachpuff;">Amar tomake bhalobashi •</span>
-      <span class="love-item" style="color: lightgoldenrodyellow;">Amo-te •</span>
-      <span class="love-item" style="color: darkkhaki;">Ti voglio bene •</span>
-      <span class="love-item" style="color: palevioletred;">Is breá liom tú •</span>
-      <span class="love-item" style="color: darkseagreen;">Mo nifẹ rẹ •</span>
-      <span class="love-item" style="color: lightslategray;">Ngiyakuthanda •</span>
-      <span class="love-item" style="color: rosybrown;">I love you •</span>
-      <span class="love-item" style="color: mediumseagreen;">Te quiero •</span>
-      <span class="love-item" style="color: burlywood;">Seni seviyorum •</span>
-      <span class="love-item" style="color: palevioletred;">Aloha wau ia'oe •</span>
-      <span class="love-item" style="color: silver;">Taim i' ngra leat •</span>
-      <span class="love-item" style="color: lime;">Main tumse mohabbat karta hoon •</span>
-      <span class="love-item" style="color: deeppink;">Me gustas mucho •</span>
-      <span class="love-item" style="color: indigo;">Me do pasand ho •</span>
-      <span class="love-item" style="color: ivory;">Tum bahut pyaare ho •</span>
-      <span class="love-item" style="color: tan;">Kocham ciebie •</span>
-      <span class="love-item" style="color: teal;">I cherish you •</span>
-      <span class="love-item" style="color: violet;">Mi corazón es tuyo •</span>
-      <span class="love-item" style="color: sandybrown;">Te adoro •</span>
-      <span class="love-item" style="color: chocolate;">You mean the world to me •</span>
-      <span class="love-item" style="color: mediumvioletred;">Tôi yêu bạn •</span>
-      <span class="love-item" style="color: papayawhip;">Uthando lwami •</span>
-      <span class="love-item" style="color: lightsteelblue;">Me pyaar karta hoon •</span>
-      <span class="love-item" style="color: cornflowerblue;">Mo ti fẹ́ rẹ •</span>
-      <span class="love-item" style="color: snow;">Tình yêu của tôi •</span>
-      <span class="love-item" style="color: seashell;">Mi amore •</span>
+      <span class="love-item" style="color: #ffcccc;">I love you more than words can say.</span>
+      <span class="love-item" style="color: #ffe0b2;">You are my everything.</span>
+      <span class="love-item" style="color: #c8e6c9;">Missing you every single day.</span>
+      <span class="love-item" style="color: #bbdefb;">You light up my world.</span>
+      <span class="love-item" style="color: #ffcccc;">My heart belongs to you.</span>
+      <span class="love-item" style="color: #ffe0b2;">Always and forever.</span>
+      <span class="love-item" style="color: #c8e6c9;">Thinking of you.</span>
+      <span class="love-item" style="color: #bbdefb;">My dearest Kanak.</span>
+      <span class="love-item" style="color: #ffcccc;">I love you more than words can say.</span>
+      <span class="love-item" style="color: #ffe0b2;">You are my everything.</span>
+      <span class="love-item" style="color: #c8e6c9;">Missing you every single day.</span>
+      <span class="love-item" style="color: #bbdefb;">You light up my world.</span>
+      <span class="love-item" style="color: #ffcccc;">My heart belongs to you.</span>
+      <span class="love-item" style="color: #ffe0b2;">Always and forever.</span>
+      <span class="love-item" style="color: #c8e6c9;">Thinking of you.</span>
+      <span class="love-item" style="color: #bbdefb;">My dearest Kanak.</span>
     </div>
   </div>
 
-  <script>
-    // Initial fade-in of the body
-    window.onload = () => {
-      document.body.style.opacity = '1';
 
-      // Initialize collapsible content for existing buttons
-      const collapsibles = document.querySelectorAll(".collapsible");
-      collapsibles.forEach(button => {
-        button.addEventListener("click", function () {
+  <script>
+    // Fade in body
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = 1;
+
+      // Collapsible functionality
+      var coll = document.getElementsByClassName("collapsible");
+      for (let i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
           this.classList.toggle("active");
-          const content = this.nextElementSibling;
+          var content = this.nextElementSibling;
           if (content.style.display === "block") {
             content.style.display = "none";
           } else {
             content.style.display = "block";
           }
         });
-      });
+      }
 
-      // Timeline emoji dot creation
-      document.querySelectorAll('.entry').forEach(entry => {
-        const emoji = entry.style.getPropertyValue('--emoji');
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        dot.textContent = emoji || '🔘'; // Fallback to a default dot
-        entry.appendChild(dot);
-      });
-
-      // Ensure all details elements start closed
-      // This part is for general <details> tags. The birthday-details has its own opening behavior.
-      document.querySelectorAll('details:not(.birthday-details):not(.timeline-container):not(.dial-feelings-container details)').forEach(d => {
-        d.removeAttribute('open');
-      });
-
-
-      // Background music autoplay attempt
-      const bgm = document.getElementById("bgm");
-      const musicBtn = document.getElementById("musicToggle");
-      let isPlaying = false;
-
-      // Attempt to play music only if user interacts
-      musicBtn.textContent = "▶️ Play BGM"; // Initial state
-
-      musicBtn.addEventListener("click", () => {
-        if (isPlaying) {
-          bgm.pause();
-          musicBtn.textContent = "▶️ Play BGM";
+      // Back to Top button functionality
+      const backToTopButton = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) { // Show button after scrolling 200px
+          backToTopButton.style.display = "block";
+          backToTopButton.style.opacity = 1;
         } else {
-          bgm.play().catch((error) => {
-            console.log("Autoplay prevented:", error);
-            // Inform user if autoplay failed
-            musicBtn.textContent = "▶️ Play BGM (Click again to try)";
-          });
-          musicBtn.textContent = "⏸️ Pause BGM";
+          backToTopButton.style.opacity = 0;
+          // Use a timeout to hide after transition
+          setTimeout(() => {
+            if (backToTopButton.style.opacity == 0) { // Only hide if it hasn't become visible again during timeout
+              backToTopButton.style.display = "none";
+            }
+          }, 300);
         }
-        isPlaying = !isPlaying;
       });
-    };
 
-    // Scroll to Top button functionality
-    const backToTopBtn = document.getElementById("backToTop");
-    window.onscroll = () => {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    };
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
 
-    // Secret Section (Image Password) functionality
-    document.getElementById("revealToggle").addEventListener("click", () => {
-      const section = document.getElementById("secretSection");
-      section.style.display = section.style.display === "block" ? "none" : "block";
-    });
-
-    function revealImage() {
-      const password = document.getElementById("passwordInput").value;
-      if (password === "ILY2607") {
-        document.getElementById("imageContainer").style.display = "block";
-        document.getElementById("passwordBlock").style.display = "none";
-      } else {
-        alert("Wrong password!");
-      }
-    }
-
-    // Protected Image (within content) functionality
-    function checkPassword() {
-      const password = prompt("Enter password:");
-      if (password === "ILY2607") {
-        document.getElementById("image-container").style.display = "block";
-        document.querySelector("#protected-image button").style.display = "none"; // hides the button
-      } else {
-        alert("Incorrect password!");
-      }
-    }
-
-    // Dial My Feelings functionality
-    const messages = {
-      1: { text: "I love you ❤️", color: "#FF4C4C" },
-      2: { text: "Je t'aime 💙", color: "#1E90FF" },
-      3: { text: "Te amo 💛", color: "#FFD700" },
-      4: { text: "Ich liebe dich 💚", color: "#32CD32" },
-      5: { text: "Ti amo 💜", color: "#9370DB" },
-      6: { text: "愛してる 💖", color: "#FF69B4" },
-      7: { text: "मैं तुमसे प्यार करता हूँ 🧡", color: "#FFA500" },
-      8: { text: "Я тебя люблю 💙", color: "#00BFFF" },
-      9: { text: "أنا أحبك ❤️‍🔥", color: "#DC143C" },
-      0: { text: "我爱你 🤍", color: "#F0FFFF" },
-    };
-
-    function showMessage(num) {
-      const messageData = messages[num];
-      const msgBox = document.getElementById('messageBox');
-      const keypad = document.getElementById('keypad');
-      const msgText = document.getElementById('messageText');
-
-      msgText.innerText = messageData.text;
-      msgText.style.color = messageData.color;
-
-      keypad.style.display = 'none';
-      msgBox.style.display = 'block';
-    }
-
-    function goBack() {
-      document.getElementById('keypad').style.display = 'block';
-      document.getElementById('messageBox').style.display = 'none';
-    }
-
-    // Music Collection Toggle
-    function toggleMusicCollection() {
-      const box = document.getElementById('musicBox');
-      box.style.display = box.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Floating Hearts functionality
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerText = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 4 + Math.random() * 3 + 's';
-      heart.style.setProperty('--float-x', `${(Math.random() - 0.5) * 60}px`); // Random horizontal movement
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 7000);
-    }
-    setInterval(createHeart, 800);
-
-    // Blast Kunal functionality
-    function blastKunal() {
-      for (let i = 0; i < 15; i++) {
-        const emoji = document.createElement("div");
-        emoji.textContent = "🖕";
-        emoji.style.position = "fixed";
-        emoji.style.left = Math.random() * window.innerWidth + "px";
-        emoji.style.top = (Math.random() * (window.innerHeight - 200)) + "px";
-
-        emoji.style.fontSize = "1.5em";
-        emoji.style.opacity = "1";
-        emoji.style.transition = "all 2s ease";
-        document.body.appendChild(emoji);
-
-        setTimeout(() => {
-          emoji.style.top = (parseInt(emoji.style.top) - 100) + "px";
-          emoji.style.opacity = "0";
-        }, 100);
-
-        setTimeout(() => {
-          emoji.remove();
-        }, 2000);
-      }
-    }
-
-    // Contact Kanak functionality
-    function toggleContact() {
-      const box = document.getElementById('contactBox');
-      box.style.display = box.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function verifyContact() {
-      const pass = document.getElementById('contactPass').value;
-      if (pass === 'ILY2607') {
-        document.getElementById('kanakLinks').style.display = 'block';
-        document.getElementById('protectedContact').style.display = 'none';
-      } else {
-        alert("Wrong password 😬");
-      }
-    }
-
-    // Star animation (if any stars are outside viewport, this will make them visible)
-    const starsContainer = document.getElementById("stars");
-    if (starsContainer) {
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.top = Math.random() * 100 + "vh";
-        star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      // Stars background generation
+      const starsContainer = document.getElementById('stars');
+      const numStars = 100;
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
         starsContainer.appendChild(star);
       }
-    }
-  </script>
 
+      // Floating hearts
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerText = '❤️';
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // 3-6 seconds
+        heart.style.fontSize = `${Math.random() * 10 + 15}px`; // 15-25px
+        heart.style.setProperty('--float-x', `${(Math.random() - 0.5) * 200}px`); // -100 to 100px horizontal movement
+        document.body.appendChild(heart);
+
+        heart.addEventListener('animationend', () => {
+          heart.remove();
+        });
+      }
+
+      setInterval(createHeart, 500); // Create a new heart every 500ms
+
+      // Music Player Toggle
+      const musicToggleButton = document.getElementById('musicToggle');
+      const musicBox = document.getElementById('musicBox');
+      const audioPlayer = musicBox.querySelector('audio');
+
+      musicToggleButton.addEventListener('click', () => {
+        if (musicBox.style.display === 'block') {
+          musicBox.style.display = 'none';
+          audioPlayer.pause();
+          musicToggleButton.textContent = 'Play Her Song 🎶';
+        } else {
+          musicBox.style.display = 'block';
+          audioPlayer.play();
+          musicToggleButton.textContent = 'Pause Her Song ⏸️';
+        }
+      });
+
+      // Secret Section (Image)
+      const revealToggle = document.getElementById('revealToggle');
+      const secretSection = document.getElementById('secretSection');
+      revealToggle.addEventListener('click', () => {
+        if (secretSection.style.display === 'block') {
+          secretSection.style.display = 'none';
+          revealToggle.textContent = 'Craving a glimpse? 👀';
+        } else {
+          secretSection.style.display = 'block';
+          revealToggle.textContent = 'Hide the secret 🤫';
+        }
+      });
+
+      // Secret Image Password
+      function revealImage() {
+        const passwordInput = document.getElementById('passwordInput').value;
+        const imageContainer = document.getElementById('imageContainer');
+        if (passwordInput === 'kanaklove') { // Replace with your actual password
+          imageContainer.style.display = 'block';
+          document.getElementById('passwordBlock').style.display = 'none'; // Hide input and button
+        } else {
+          alert('Incorrect password!');
+        }
+      }
+      window.revealImage = revealImage; // Make function accessible globally
+
+      // Protected Image within Content
+      function checkPassword() {
+        const password = prompt("Enter password to view image:");
+        if (password === "ilovekanak") { // Replace with your password
+          document.getElementById("image-container").style.display = "block";
+          document.querySelector("#protected-image button").style.display = "none"; // Hide button
+        } else {
+          alert("Incorrect password!");
+        }
+      }
+      window.checkPassword = checkPassword; // Make function accessible globally
+
+
+      // Contact Kanak Section
+      const contactToggleButton = document.querySelector('.contact-container > button');
+      const contactBox = document.getElementById('contactBox');
+
+      contactToggleButton.addEventListener('click', () => {
+        if (contactBox.style.display === 'block') {
+          contactBox.style.display = 'none';
+          contactToggleButton.textContent = 'Contact Kanak 💌';
+        } else {
+          contactBox.style.display = 'block';
+          contactToggleButton.textContent = 'Hide Contact Info 📞';
+        }
+      });
+
+      // Contact Links Password
+      function revealContactLinks() {
+        const contactPass = document.getElementById('contactPass').value;
+        const kanakLinks = document.getElementById('kanakLinks');
+        if (contactPass === 'kanakbestie') { // Replace with your actual password
+          kanakLinks.style.display = 'block';
+          document.getElementById('protectedContact').style.display = 'none'; // Hide input and button
+        } else {
+          alert('Incorrect password!');
+        }
+      }
+      window.revealContactLinks = revealContactLinks; // Make function accessible globally
+
+      // Dial My Feelings functionality
+      function dialNumber(num) {
+        const dialInput = document.getElementById('dialInput');
+        dialInput.value += num;
+      }
+      window.dialNumber = dialNumber; // Make function accessible globally
+
+      function resetDial() {
+        document.getElementById('dialInput').value = '';
+      }
+      window.resetDial = resetDial; // Make function accessible globally
+    });
+  </script>
 </body>
 </html>
