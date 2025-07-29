@@ -1804,5 +1804,59 @@
     });
   });
 </script>
+<style>
+  /* Shooting Star Styles */
+  .shooting-star {
+    position: fixed;
+    top: -10px;
+    left: -100px;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(45deg, #fff, rgba(255,255,255,0));
+    opacity: 0;
+    transform: rotate(45deg);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @keyframes shoot {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) rotate(45deg);
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(800px, 800px) rotate(45deg);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  function createShootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+    document.body.appendChild(star);
+
+    // Random start position
+    const startLeft = Math.random() * window.innerWidth * 0.8;
+    star.style.left = `${startLeft}px`;
+
+    // Random delay
+    const duration = 1.5 + Math.random(); // 1.5s to 2.5s
+    star.style.animation = `shoot ${duration}s ease-out`;
+
+    setTimeout(() => {
+      star.remove();
+    }, duration * 1000);
+  }
+
+  // Create one every 10–20 seconds (subtle & rare)
+  setInterval(() => {
+    if (Math.random() < 0.5) createShootingStar();
+  }, 15000);
+</script>
 </body>
 </html>
