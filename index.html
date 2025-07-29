@@ -1765,6 +1765,44 @@
       }
     }
   </script>
+<!-- ❤️ Cursor, Confetti, Fade-in Paragraphs -->
+<style>
+  /* Custom Heart Cursor */
+  body {
+    cursor: url('https://cur.cursors-4u.net/others/oth-1/oth71.cur'), auto;
+  }
 
+  /* Paragraph Fade-in Animation */
+  .content p {
+    animation: fadeInUp 1s ease-in;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<!-- 🎉 Confetti on Click -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script>
+  document.querySelectorAll(".collapsible").forEach(button => {
+    button.addEventListener("click", function () {
+      if (this.textContent.includes("Marry me")) {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>
