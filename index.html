@@ -1257,7 +1257,7 @@
   line-height: 1.8;
   text-shadow: 1px 1px 2px #000;
 ">
-  <p style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;">Will you marry me, Kanak?</p>
+  <p style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
 </div>
 
 <style>
@@ -1861,6 +1861,50 @@
   setInterval(() => {
     if (Math.random() < 0.5) createShootingStar();
   }, 15000);
+</script>
+<style>
+  /* 💗 Heartbeat animation */
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  button.collapsible.marriage-proposal {
+    animation: heartbeat 2.5s infinite;
+  }
+</style>
+
+<script>
+  // 💗 Add heartbeat class to "Marry me?" button
+  const marryButton = [...document.querySelectorAll(".collapsible")]
+    .find(btn => btn.textContent.trim().includes("Marry me"));
+  if (marryButton) {
+    marryButton.classList.add("marriage-proposal");
+  }
+
+  // 💌 Typewriter effect for the proposal message
+  function typeText(el, text, speed = 60) {
+    let i = 0;
+    el.innerHTML = '';
+    const interval = setInterval(() => {
+      el.innerHTML += text.charAt(i);
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+  }
+
+  if (marryButton) {
+    marryButton.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      const isOpening = content.style.display !== "block";
+      if (isOpening) {
+        const p = content.querySelector('p');
+        if (p) {
+          typeText(p, "Will you marry me, Kanak?");
+        }
+      }
+    });
+  }
 </script>
 </body>
 </html>
