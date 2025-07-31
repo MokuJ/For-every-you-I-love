@@ -1437,6 +1437,69 @@
   }, 6000);
 </script>
 
+<div class="card" style="text-align: center;">
+  <button class="collapsible" style="
+    display: block;
+    margin: 10px auto;
+    width: fit-content;
+    padding: 10px 20px;
+    font-weight: bold;
+  ">What You Do to Me</button>
+
+  <div class="content" style="padding: 10px;">
+    <video id="myVideo" width="100%" style="border-radius: 12px; max-height: 400px;" src="pinched.mp4"></video>
+    
+    <div style="margin-top: 10px;">
+      <button id="playPauseBtn" onclick="togglePlay()">▶️ Play</button>
+      <button id="muteUnmuteBtn" onclick="toggleMute()">🔊 Unmute</button>
+      <input type="range" id="seekBar" value="0" style="width: 80%; margin-top: 10px;" />
+    </div>
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById("myVideo");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const muteUnmuteBtn = document.getElementById("muteUnmuteBtn");
+  const seekBar = document.getElementById("seekBar");
+
+  function togglePlay() {
+    if (video.paused) {
+      video.play();
+      playPauseBtn.innerHTML = "⏸ Pause";
+    } else {
+      video.pause();
+      playPauseBtn.innerHTML = "▶️ Play";
+    }
+  }
+
+  function toggleMute() {
+    video.muted = !video.muted;
+    muteUnmuteBtn.innerHTML = video.muted ? "🔇 Mute" : "🔊 Unmute";
+  }
+
+  video.addEventListener('timeupdate', () => {
+    const value = (100 / video.duration) * video.currentTime;
+    seekBar.value = value;
+  });
+
+  seekBar.addEventListener('input', () => {
+    video.currentTime = video.duration * (seekBar.value / 100);
+  });
+
+  // Pause on collapsible close
+  const allCollapsibles = document.querySelectorAll(".collapsible");
+  allCollapsibles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      if (content.style.maxHeight) {
+        video.pause();
+        playPauseBtn.innerHTML = "▶️ Play";
+      }
+    });
+  });
+</script>
+
   <button onclick="blastKunal()" class="fixed-btn" style="left: 20px;">
     Fuck Kunal 🖕
   </button>
