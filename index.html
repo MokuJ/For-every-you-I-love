@@ -1338,7 +1338,15 @@
   </div>
 
 <div class="card" style="text-align: center;">
-  <button class="collapsible" style="margin: 0 auto; display: inline-block; font-weight: bold;">Miss You Meme</button>
+  <button class="collapsible" style="
+    margin: 0 auto;
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+  ">Miss You Meme</button>
+
   <div class="content" style="position: relative;">
     <img id="memeImage" src="1.jpg" alt="Meme 1" style="
       max-width: 100%;
@@ -1346,9 +1354,10 @@
       margin: 10px auto;
       display: block;
       opacity: 1;
+      transform: translateX(0);
       transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
     ">
-    
+
     <!-- Arrows -->
     <button onclick="prevMeme()" style="
       position: absolute;
@@ -1388,34 +1397,40 @@
 
   let currentMeme = 0;
   const memeImg = document.getElementById("memeImage");
-  let direction = "next";
 
-  function updateMeme(index, dir = "next") {
+  function swipeMeme(toNext = true) {
+    const outDirection = toNext ? "-100%" : "100%";
+    const inDirection = toNext ? "100%" : "-100%";
+
+    memeImg.style.transition = "transform 0.5s ease-in-out, opacity 0.5s ease";
+    memeImg.style.transform = `translateX(${outDirection})`;
     memeImg.style.opacity = 0;
-    memeImg.style.transform = dir === "next" ? "translateX(30px)" : "translateX(-30px)";
+
     setTimeout(() => {
-      memeImg.src = memeImages[index];
-      memeImg.alt = "Meme " + (index + 1);
-      memeImg.style.transform = "translateX(0)";
-      memeImg.style.opacity = 1;
+      currentMeme = (currentMeme + (toNext ? 1 : -1) + memeImages.length) % memeImages.length;
+      memeImg.src = memeImages[currentMeme];
+      memeImg.alt = "Meme " + (currentMeme + 1);
+      memeImg.style.transform = `translateX(${inDirection})`;
+
+      setTimeout(() => {
+        memeImg.style.transition = "transform 0.5s ease-in-out, opacity 0.5s ease";
+        memeImg.style.transform = "translateX(0)";
+        memeImg.style.opacity = 1;
+      }, 50);
     }, 300);
   }
 
   function nextMeme() {
-    direction = "next";
-    currentMeme = (currentMeme + 1) % memeImages.length;
-    updateMeme(currentMeme, "next");
+    swipeMeme(true);
   }
 
   function prevMeme() {
-    direction = "prev";
-    currentMeme = (currentMeme - 1 + memeImages.length) % memeImages.length;
-    updateMeme(currentMeme, "prev");
+    swipeMeme(false);
   }
 
   setInterval(() => {
     nextMeme();
-  }, 6000); // auto-swipe every 6s
+  }, 6000); // 6s loop
 </script>
 
   <button onclick="blastKunal()" class="fixed-btn" style="left: 20px;">
