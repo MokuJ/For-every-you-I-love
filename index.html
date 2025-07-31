@@ -1462,6 +1462,7 @@
   const playPauseBtn = document.getElementById("playPauseBtn");
   const muteUnmuteBtn = document.getElementById("muteUnmuteBtn");
   const seekBar = document.getElementById("seekBar");
+  muteUnmuteBtn.innerHTML = "🔇 Mute";
 
   function togglePlay() {
     if (video.paused) {
@@ -1475,7 +1476,7 @@
 
   function toggleMute() {
     video.muted = !video.muted;
-    muteUnmuteBtn.innerHTML = video.muted ? "🔇 Mute" : "🔊 Unmute";
+    muteUnmuteBtn.innerHTML = video.muted ? "🔊 Unmute" : "🔇 Mute";
   }
 
   video.addEventListener('timeupdate', () => {
