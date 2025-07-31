@@ -1337,15 +1337,46 @@
     </div>
   </div>
 
-
-<div class="card">
-  <button class="collapsible">Miss You Meme</button>
-  <div class="content" style="text-align: center; position: relative;">
-    <img id="memeImage" src="1.jpg" alt="Meme 1" style="max-width: 100%; border-radius: 12px; margin: 10px auto; display: block; transition: opacity 0.5s ease-in-out;">
+<div class="card" style="text-align: center;">
+  <button class="collapsible" style="margin: 0 auto; display: inline-block; font-weight: bold;">Miss You Meme</button>
+  <div class="content" style="position: relative;">
+    <img id="memeImage" src="1.jpg" alt="Meme 1" style="
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 10px auto;
+      display: block;
+      opacity: 1;
+      transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    ">
     
     <!-- Arrows -->
-    <button onclick="prevMeme()" style="position: absolute; top: 45%; left: 10px; background: rgba(0,0,0,0.4); color: white; border: none; border-radius: 50%; font-size: 20px; padding: 10px 14px; cursor: pointer;">⟨</button>
-    <button onclick="nextMeme()" style="position: absolute; top: 45%; right: 10px; background: rgba(0,0,0,0.4); color: white; border: none; border-radius: 50%; font-size: 20px; padding: 10px 14px; cursor: pointer;">⟩</button>
+    <button onclick="prevMeme()" style="
+      position: absolute;
+      top: 45%;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 28px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    " onmousedown="this.style.transform='scale(1.2)'" onmouseup="this.style.transform='scale(1)'">⟨</button>
+
+    <button onclick="nextMeme()" style="
+      position: absolute;
+      top: 45%;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 28px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    " onmousedown="this.style.transform='scale(1.2)'" onmouseup="this.style.transform='scale(1)'">⟩</button>
   </div>
 </div>
 
@@ -1354,32 +1385,37 @@
     "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
     "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"
   ];
-  
+
   let currentMeme = 0;
   const memeImg = document.getElementById("memeImage");
+  let direction = "next";
 
-  function updateMeme(index) {
+  function updateMeme(index, dir = "next") {
     memeImg.style.opacity = 0;
+    memeImg.style.transform = dir === "next" ? "translateX(30px)" : "translateX(-30px)";
     setTimeout(() => {
       memeImg.src = memeImages[index];
       memeImg.alt = "Meme " + (index + 1);
+      memeImg.style.transform = "translateX(0)";
       memeImg.style.opacity = 1;
-    }, 200);
+    }, 300);
   }
 
   function nextMeme() {
+    direction = "next";
     currentMeme = (currentMeme + 1) % memeImages.length;
-    updateMeme(currentMeme);
+    updateMeme(currentMeme, "next");
   }
 
   function prevMeme() {
+    direction = "prev";
     currentMeme = (currentMeme - 1 + memeImages.length) % memeImages.length;
-    updateMeme(currentMeme);
+    updateMeme(currentMeme, "prev");
   }
 
   setInterval(() => {
     nextMeme();
-  }, 5000); // auto-swipe every 5 seconds
+  }, 6000); // auto-swipe every 6s
 </script>
 
   <button onclick="blastKunal()" class="fixed-btn" style="left: 20px;">
