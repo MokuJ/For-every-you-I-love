@@ -502,7 +502,7 @@
       }
     }
 
-    /* Fixed Buttons (F Kunal, Music Toggle, Back to Top) */
+    /* Fixed Buttons (Fuck Kunal, Music Toggle, Back to Top) */
     .fixed-btn {
       position: fixed;
       bottom: 85px; /* Base bottom position */
@@ -711,7 +711,7 @@
         bottom: 15px; /* Adjust bottom position for all fixed buttons */
       }
 
-      .fixed-btn[style*="left: 20px"] { /* F Kunal button */
+      .fixed-btn[style*="left: 20px"] { /* Fuck Kunal button */
         left: 15px;
         bottom: 60px; /* Move up to prevent overlap with contact button */
       }
@@ -1337,8 +1337,53 @@
     </div>
   </div>
 
+
+<div class="card">
+  <button class="collapsible">Miss You Meme</button>
+  <div class="content" style="text-align: center; position: relative;">
+    <img id="memeImage" src="1.jpg" alt="Meme 1" style="max-width: 100%; border-radius: 12px; margin: 10px auto; display: block; transition: opacity 0.5s ease-in-out;">
+    
+    <!-- Arrows -->
+    <button onclick="prevMeme()" style="position: absolute; top: 45%; left: 10px; background: rgba(0,0,0,0.4); color: white; border: none; border-radius: 50%; font-size: 20px; padding: 10px 14px; cursor: pointer;">⟨</button>
+    <button onclick="nextMeme()" style="position: absolute; top: 45%; right: 10px; background: rgba(0,0,0,0.4); color: white; border: none; border-radius: 50%; font-size: 20px; padding: 10px 14px; cursor: pointer;">⟩</button>
+  </div>
+</div>
+
+<script>
+  const memeImages = [
+    "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
+    "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"
+  ];
+  
+  let currentMeme = 0;
+  const memeImg = document.getElementById("memeImage");
+
+  function updateMeme(index) {
+    memeImg.style.opacity = 0;
+    setTimeout(() => {
+      memeImg.src = memeImages[index];
+      memeImg.alt = "Meme " + (index + 1);
+      memeImg.style.opacity = 1;
+    }, 200);
+  }
+
+  function nextMeme() {
+    currentMeme = (currentMeme + 1) % memeImages.length;
+    updateMeme(currentMeme);
+  }
+
+  function prevMeme() {
+    currentMeme = (currentMeme - 1 + memeImages.length) % memeImages.length;
+    updateMeme(currentMeme);
+  }
+
+  setInterval(() => {
+    nextMeme();
+  }, 5000); // auto-swipe every 5 seconds
+</script>
+
   <button onclick="blastKunal()" class="fixed-btn" style="left: 20px;">
-    💥 F Kunal
+    Fuck Kunal 🖕
   </button>
   <button id="musicToggle" class="fixed-btn" style="right: 20px;">
     🔊 Pause BGM
