@@ -1429,23 +1429,39 @@
     affectionVideo.currentTime = affectionVideo.duration * (affectionSeekBar.value / 100);
   });
 
-  // --- SHARED COLLAPSIBLE CONTROL ---
-  const allCollapsibles = document.querySelectorAll(".collapsible");
-  allCollapsibles.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const content = this.nextElementSibling;
-      if (content.style.maxHeight) {
-        if (!video.paused) {
-          video.pause();
-          playPauseBtn.innerHTML = "▶️ Play";
-        }
-        if (!affectionVideo.paused) {
-          affectionVideo.pause();
-          affectionPlayPauseBtn.innerHTML = "▶️ Play";
-        }
-      }
-    });
+// --- SHARED COLLAPSIBLE CONTROL (FIXED WITH transitionend) ---
+const allCollapsibles = document.querySelectorAll(".collapsible");
+
+allCollapsibles.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+
+    // Toggle collapsible
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+
+    // Pause logic now handled by transitionend
   });
+
+  // When collapsible closes, pause all videos inside
+  btn.nextElementSibling.addEventListener("transitionend", function () {
+    const content = this;
+
+    if (!content.style.maxHeight || content.style.maxHeight === "0px") {
+      if (!video.paused) {
+        video.pause();
+        playPauseBtn.innerHTML = "▶️ Play";
+      }
+      if (!affectionVideo.paused) {
+        affectionVideo.pause();
+        affectionPlayPauseBtn.innerHTML = "▶️ Play";
+      }
+    }
+  });
+});
 </script>
 
   <details class="timeline-container">
