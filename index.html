@@ -839,15 +839,20 @@
   justify-content: center;
   align-items: center;
   margin: 10px auto;
-  padding: 14px 20px; /* this makes it taller */
+  padding: 10px 20px;
   font-weight: bold;
   font-size: 1.1em;
   border-radius: 12px;
-  max-width: 50%;
+  max-width: 90%;
   text-align: center;
-  background-color: #111; /* match dark theme */
-  color: #fff;
-  border: 1px solid #444;
+}
+.fresh-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out;
+}
+.fresh-content.open {
+  max-height: 1000px;
 }
 </style>
   </style>
