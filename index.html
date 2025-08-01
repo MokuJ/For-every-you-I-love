@@ -2178,5 +2178,31 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
     });
   }
 </script>
+<script>
+  // Toggles the "Music Collection" box
+  function toggleMusicBox() {
+    var musicBox = document.getElementById("musicBox");
+    if (musicBox.style.display === "block") {
+      musicBox.style.display = "none";
+    } else {
+      musicBox.style.display = "block";
+    }
+  }
+
+  // Toggles the collapsible content for all .collapsible buttons
+  var coll = document.getElementsByClassName("collapsible");
+  for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
