@@ -1955,6 +1955,21 @@
 }
     });
   });
+  document.querySelectorAll(".collapsible").forEach(button => {
+  const content = button.nextElementSibling;
+
+  if (button.textContent.includes("Music Collection") || button.textContent.includes("Contact Kanak")) {
+    button.addEventListener("click", function () {
+      if (!content.classList.contains("open")) {
+        setTimeout(() => {
+          // force browser to register clickables
+          const links = content.querySelectorAll("a, button, input, textarea, iframe, audio");
+          links.forEach(el => el.tabIndex = 0);
+        }, 400); // timing depends on your CSS transition
+      }
+    });
+  }
+});
 </script>
 <style>
   /* Shooting Star Styles */
