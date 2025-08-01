@@ -1956,19 +1956,25 @@
     });
   });
   document.querySelectorAll(".collapsible").forEach(button => {
-  const content = button.nextElementSibling;
+  button.addEventListener("click", function () {
+    const content = this.nextElementSibling;
 
-  if (button.textContent.includes("Music Collection") || button.textContent.includes("Contact Kanak")) {
-    button.addEventListener("click", function () {
-      if (!content.classList.contains("open")) {
-        setTimeout(() => {
-          // force browser to register clickables
-          const links = content.querySelectorAll("a, button, input, textarea, iframe, audio");
-          links.forEach(el => el.tabIndex = 0);
-        }, 400); // timing depends on your CSS transition
-      }
-    });
-  }
+    // Toggle 'open' class manually
+    content.classList.toggle("open");
+
+    // Fix for buttons with emojis
+    if (
+      this.textContent.trim().includes("🎵 Music Collection") ||
+      this.textContent.trim().includes("📱Contact Kanak")
+    ) {
+      if (!content.classList.contains("open")) return;
+
+      setTimeout(() => {
+        const focusables = content.querySelectorAll("a, button, input, iframe, audio");
+        focusables.forEach(el => el.tabIndex = 0);
+      }, 300); // match CSS transition delay
+    }
+  });
 });
 </script>
 <style>
