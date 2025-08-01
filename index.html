@@ -1246,121 +1246,25 @@
 </div>
 
 <div class="card" style="text-align: center;">
-  <button class="collapsible" style="
-  display: block;
-  margin: 10px auto;
-  width: fit-content;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  border-radius: 8px;
-">Miss You Meme</button>
-
-  <div class="content" style="position: relative;">
-    <img id="memeImage" src="1.jpg" alt="Meme 1" style="
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 10px auto;
-      display: block;
-      opacity: 1;
-      transform: translateX(0);
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease-in-out;
-    ">
-
-    <!-- Arrows -->
-    <button onclick="prevMeme()" style="
-      position: absolute;
-      top: 45%;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 30px;
-      padding: 14px 18px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    " onmousedown="this.style.transform='scale(1.2)'" onmouseup="this.style.transform='scale(1)'">⟨</button>
-
-    <button onclick="nextMeme()" style="
-      position: absolute;
-      top: 45%;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 30px;
-      padding: 14px 18px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    " onmousedown="this.style.transform='scale(1.2)'" onmouseup="this.style.transform='scale(1)'">⟩</button>
+  <button class="collapsible" style="display: block; margin: 10px auto; width: fit-content; padding: 10px 20px; font-weight: bold;">What You Do to Me</button>
+  <div class="content" style="padding: 10px;">
+    <video id="myVideo" src="pinched.mp4" width="100%" style="border-radius: 12px; max-height: 400px;"></video>
+    <div style="margin-top: 10px;">
+      <button id="playPauseBtn" onclick="togglePlay()">▶️ Play</button>
+      <button id="muteUnmuteBtn" onclick="toggleMute()">🔇 Mute</button>
+      <input id="seekBar" type="range" value="0" style="width: 80%; margin-top: 10px;">
+    </div>
   </div>
 </div>
 
-<script>
-  const memeImages = [
-    "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
-    "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"
-  ];
-
-  let currentMeme = 0;
-  const memeImg = document.getElementById("memeImage");
-
-  function swipeMeme(toNext = true) {
-    const outDir = toNext ? "-120%" : "120%";
-    const inDir = toNext ? "120%" : "-120%";
-
-    memeImg.style.transition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease";
-    memeImg.style.transform = `translateX(${outDir})`;
-    memeImg.style.opacity = 0;
-
-    setTimeout(() => {
-      currentMeme = (currentMeme + (toNext ? 1 : -1) + memeImages.length) % memeImages.length;
-      memeImg.src = memeImages[currentMeme];
-      memeImg.alt = "Meme " + (currentMeme + 1);
-      memeImg.style.transition = "none";
-      memeImg.style.transform = `translateX(${inDir})`;
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          memeImg.style.transition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease";
-          memeImg.style.transform = "translateX(0)";
-          memeImg.style.opacity = 1;
-        });
-      });
-    }, 300);
-  }
-
-  function nextMeme() {
-    swipeMeme(true);
-  }
-
-  function prevMeme() {
-    swipeMeme(false);
-  }
-
-  setInterval(() => {
-    nextMeme();
-  }, 6000);
-</script>
-
 <div class="card" style="text-align: center;">
-  <button class="collapsible" style="
-    display: block;
-    margin: 10px auto;
-    width: fit-content;
-    padding: 10px 20px;
-    font-weight: bold;
-  ">What You Do to Me</button>
-
+  <button class="collapsible" style="display: block; margin: 10px auto; width: fit-content; padding: 10px 20px; font-weight: bold;">My Affections Are To You</button>
   <div class="content" style="padding: 10px;">
-    <video id="myVideo" width="100%" style="border-radius: 12px; max-height: 400px;" src="pinched.mp4"></video>
-    
+    <video id="affectionVideo" src="love.mp4" width="100%" style="border-radius: 12px; max-height: 400px;"></video>
     <div style="margin-top: 10px;">
-      <button id="playPauseBtn" onclick="togglePlay()">▶️ Play</button>
-      <button id="muteUnmuteBtn" onclick="toggleMute()">🔊 Unmute</button>
-      <input type="range" id="seekBar" value="0" style="width: 80%; margin-top: 10px;" />
+      <button id="affectionPlayPauseBtn" onclick="toggleAffectionPlay()">▶️ Play</button>
+      <button id="affectionMuteUnmuteBtn" onclick="toggleAffectionMute()">🔇 Mute</button>
+      <input id="affectionSeekBar" type="range" value="0" style="width: 80%; margin-top: 10px;">
     </div>
   </div>
 </div>
@@ -1379,7 +1283,6 @@
   muteUnmuteBtn.innerHTML = "🔇 Mute";
   affectionMuteUnmuteBtn.innerHTML = "🔇 Mute";
 
-  // --- PINCHED PLAYER ---
   function togglePlay() {
     if (video.paused) {
       video.play();
@@ -1404,7 +1307,6 @@
     video.currentTime = video.duration * (seekBar.value / 100);
   });
 
-  // --- LOVE PLAYER ---
   function toggleAffectionPlay() {
     if (affectionVideo.paused) {
       affectionVideo.play();
@@ -1429,39 +1331,79 @@
     affectionVideo.currentTime = affectionVideo.duration * (affectionSeekBar.value / 100);
   });
 
-// --- SHARED COLLAPSIBLE CONTROL (FIXED WITH transitionend) ---
-const allCollapsibles = document.querySelectorAll(".collapsible");
+  const allCollapsibles = document.querySelectorAll(".collapsible");
 
-allCollapsibles.forEach((btn) => {
-  btn.addEventListener("click", function () {
-    const content = this.nextElementSibling;
+  allCollapsibles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const content = this.nextElementSibling;
 
-    // Toggle collapsible
-    if (content.style.maxHeight) {
-      content.style.maxHeight = null;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+
+    btn.nextElementSibling.addEventListener("transitionend", function () {
+      const content = this;
+      if (!content.style.maxHeight || content.style.maxHeight === "0px") {
+        if (!video.paused) {
+          video.pause();
+          playPauseBtn.innerHTML = "▶️ Play";
+        }
+        if (!affectionVideo.paused) {
+          affectionVideo.pause();
+          affectionPlayPauseBtn.innerHTML = "▶️ Play";
+        }
+      }
+    });
+  });
+</script>
+
+<script>
+  const affectionVideo = document.getElementById("affectionVideo");
+  const affectionPlayPauseBtn = document.getElementById("affectionPlayPauseBtn");
+  const affectionMuteUnmuteBtn = document.getElementById("affectionMuteUnmuteBtn");
+  const affectionSeekBar = document.getElementById("affectionSeekBar");
+
+  // Show Mute first
+  affectionMuteUnmuteBtn.innerHTML = "🔇 Mute";
+
+  function toggleAffectionPlay() {
+    if (affectionVideo.paused) {
+      affectionVideo.play();
+      affectionPlayPauseBtn.innerHTML = "⏸ Pause";
     } else {
-      content.style.maxHeight = content.scrollHeight + "px";
+      affectionVideo.pause();
+      affectionPlayPauseBtn.innerHTML = "▶️ Play";
     }
+  }
 
-    // Pause logic now handled by transitionend
+  function toggleAffectionMute() {
+    affectionVideo.muted = !affectionVideo.muted;
+    affectionMuteUnmuteBtn.innerHTML = affectionVideo.muted ? "🔊 Unmute" : "🔇 Mute";
+  }
+
+  affectionVideo.addEventListener('timeupdate', () => {
+    const value = (100 / affectionVideo.duration) * affectionVideo.currentTime;
+    affectionSeekBar.value = value;
   });
 
-  // When collapsible closes, pause all videos inside
-  btn.nextElementSibling.addEventListener("transitionend", function () {
-    const content = this;
+  affectionSeekBar.addEventListener('input', () => {
+    affectionVideo.currentTime = affectionVideo.duration * (affectionSeekBar.value / 100);
+  });
 
-    if (!content.style.maxHeight || content.style.maxHeight === "0px") {
-      if (!video.paused) {
-        video.pause();
-        playPauseBtn.innerHTML = "▶️ Play";
-      }
-      if (!affectionVideo.paused) {
+  // Auto-pause when collapsible closes
+  const allCollapsibles = document.querySelectorAll(".collapsible");
+  allCollapsibles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      if (content.style.maxHeight && affectionVideo && !affectionVideo.paused) {
         affectionVideo.pause();
         affectionPlayPauseBtn.innerHTML = "▶️ Play";
       }
-    }
+    });
   });
-});
 </script>
 
   <details class="timeline-container">
