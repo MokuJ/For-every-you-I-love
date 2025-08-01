@@ -1225,6 +1225,44 @@
   <p>Don't return if you don't want to. I understand. But, if you ever see this just give me a subtle hint that you saw and chose not to come back. Might not be much to you but may help me in moving on.</p>
 </div>
 
+<!-- New Collapsible: My Affections Are To You -->
+<div class="card" style="text-align: center;">
+  <button class="collapsible">My Affections Are To You</button>
+  <div class="content">
+    <video id="video1" src="love.mp4"></video>
+    <div class="controls">
+      <button onclick="togglePlay('video1', this)">▶️ Play</button>
+      <button onclick="toggleMute('video1', this)">🔇 Mute</button>
+      <input type="range" id="seek1" value="0" style="width: 80%;">
+    </div>
+  </div>
+</div>
+
+<!-- New Collapsible: Miss You Meme -->
+<div class="card" style="text-align: center;">
+  <button class="collapsible">Miss You Meme</button>
+  <div class="content">
+    <div class="slider-wrapper">
+      <img id="memeImage" src="1.jpg" alt="Meme 1">
+      <button class="arrow-btn left" onclick="prevMeme()">⟨</button>
+      <button class="arrow-btn right" onclick="nextMeme()">⟩</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Collapsible: What You Do To Me -->
+<div class="card" style="text-align: center;">
+  <button class="collapsible">What You Do To Me</button>
+  <div class="content">
+    <video id="video2" src="pinched.mp4"></video>
+    <div class="controls">
+      <button onclick="togglePlay('video2', this)">▶️ Play</button>
+      <button onclick="toggleMute('video2', this)">🔇 Mute</button>
+      <input type="range" id="seek2" value="0" style="width: 80%;">
+    </div>
+  </div>
+</div>
+
   <details class="timeline-container">
     <summary>📜 Line of our time together</summary>
     <div class="timeline">
@@ -1843,6 +1881,57 @@
       }
     }
   </script>
+  <script>
+  function togglePlay(id, btn) {
+    const vid = document.getElementById(id);
+    if (vid.paused) {
+      vid.play();
+      btn.innerHTML = "⏸ Pause";
+    } else {
+      vid.pause();
+      btn.innerHTML = "▶️ Play";
+    }
+  }
+
+  function toggleMute(id, btn) {
+    const vid = document.getElementById(id);
+    vid.muted = !vid.muted;
+    btn.innerHTML = vid.muted ? "🔊 Unmute" : "🔇 Mute";
+  }
+
+  document.getElementById("video1").addEventListener("timeupdate", () => {
+    const v = document.getElementById("video1");
+    document.getElementById("seek1").value = (100 / v.duration) * v.currentTime;
+  });
+  document.getElementById("seek1").addEventListener("input", (e) => {
+    const v = document.getElementById("video1");
+    v.currentTime = v.duration * (e.target.value / 100);
+  });
+
+  document.getElementById("video2").addEventListener("timeupdate", () => {
+    const v = document.getElementById("video2");
+    document.getElementById("seek2").value = (100 / v.duration) * v.currentTime;
+  });
+  document.getElementById("seek2").addEventListener("input", (e) => {
+    const v = document.getElementById("video2");
+    v.currentTime = v.duration * (e.target.value / 100);
+  });
+
+  const memeImages = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"];
+  let currentMeme = 0;
+  const memeImg = document.getElementById("memeImage");
+
+  function showMeme(index) {
+    currentMeme = (index + memeImages.length) % memeImages.length;
+    memeImg.src = memeImages[currentMeme];
+    memeImg.alt = "Meme " + (currentMeme + 1);
+  }
+
+  function nextMeme() { showMeme(currentMeme + 1); }
+  function prevMeme() { showMeme(currentMeme - 1); }
+
+  setInterval(() => { nextMeme(); }, 6000);
+</script>
 <!-- ❤️ Cursor, Confetti, Fade-in Paragraphs -->
 <style>
   /* Custom Heart Cursor */
