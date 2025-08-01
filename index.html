@@ -99,7 +99,6 @@
 /* When the button is active, show the content */
 .collapsible.active + .content {
   max-height: 2000px; /* A large value to ensure all content is visible */
-  padding: 30px;
   margin-bottom: 40px; /* Add a bottom margin only when open */
 }
 
@@ -121,13 +120,13 @@
       font-style: italic;
     }
 
-    .love-message-box {
-      background-color: #0a0a0a;
-      color: #ddd;
-      font-size: 1em;
-      line-height: 1.6;
-      text-align: center;
-    }
+   .love-message-box { background-color: #0a0a0a;
+     color: #ddd;
+     font-size: 1em;
+     line-height: 1.6;
+     text-align: center;
+     padding: 30px; /* New: Add padding here */
+   }
 
     .section-title h1 {
       text-align: center;
@@ -441,18 +440,20 @@
       margin: 0 auto 60px;
     }
 
-    .music-collection-container button {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.2em;
-      background-color: #333;
-      color: #f0c040;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
-      margin-bottom: 10px; /* Added spacing */
-    }
+/* This is the collapsible button inside the music collection */
+.music-collection-container .collapsible {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.2em;
+  background-color: #333;
+  color: #f0c040;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  margin-bottom: 10px; /* Correct spacing */
+}
+
 
     #musicBox {
       display: none;
