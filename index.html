@@ -1941,6 +1941,15 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 <script>
   document.querySelectorAll(".collapsible").forEach(button => {
+    const content = btn.nextElementSibling;
+  btn.addEventListener("click", function () {
+    setTimeout(() => {
+      // Force a repaint or slight nudge to wake up the DOM
+      content.style.display = "block";
+      content.offsetHeight; // trigger reflow
+      content.style.display = "";
+    }, 200); // wait a bit to let animation start
+  });
     button.addEventListener("click", function () {
       if (this.textContent.includes("Marry me")) {
   const content = this.nextElementSibling;
