@@ -832,39 +832,6 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .collapsible {
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
-  padding: 8px 16px;
-  font-weight: bold;
-  font-size: 1.1em;
-  border-radius: 12px;
-  max-width: 90%;
-  text-align: center;
-}
-
-video {
-  border-radius: 12px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  max-height: 80vh;
-}
-
-#memeImage {
-  max-width: 100%;
-  height: auto;
-  max-height: 80vh;
-  border-radius: 12px;
-  margin: 10px auto;
-  display: block;
-  transition: transform 0.7s ease, opacity 0.7s ease;
-  object-fit: contain;
-}
   </style>
 </head>
 <body>
@@ -1258,20 +1225,22 @@ video {
   <p>Don't return if you don't want to. I understand. But, if you ever see this just give me a subtle hint that you saw and chose not to come back. Might not be much to you but may help me in moving on.</p>
 </div>
 
-<!-- New Collapsible: My Affections Are To You -->
+<!-- COLLAPSIBLE 1: My Affections Are To You -->
 <div class="card" style="text-align: center;">
   <button class="collapsible">My Affections Are To You</button>
   <div class="content">
-    <video id="video1" src="love.mp4"></video>
-    <div class="controls">
-      <button onclick="togglePlay('video1', this)">▶️ Play</button>
-      <button onclick="toggleMute('video1', this)">🔇 Mute</button>
-      <input type="range" id="seek1" value="0" style="width: 80%;">
+    <div class="media-wrapper">
+      <video id="video1" src="love.mp4" playsinline></video>
+      <div class="controls">
+        <button onclick="togglePlay('video1', this)">▶️ Play</button>
+        <button onclick="toggleMute('video1', this)">🔇 Mute</button>
+        <input type="range" id="seek1" value="0">
+      </div>
     </div>
   </div>
 </div>
 
-<!-- New Collapsible: Miss You Meme -->
+<!-- COLLAPSIBLE 2: Miss You Meme -->
 <div class="card" style="text-align: center;">
   <button class="collapsible">Miss You Meme</button>
   <div class="content">
@@ -1283,18 +1252,159 @@ video {
   </div>
 </div>
 
-<!-- New Collapsible: What You Do To Me -->
+<!-- COLLAPSIBLE 3: What You Do To Me -->
 <div class="card" style="text-align: center;">
   <button class="collapsible">What You Do To Me</button>
   <div class="content">
-    <video id="video2" src="pinched.mp4"></video>
-    <div class="controls">
-      <button onclick="togglePlay('video2', this)">▶️ Play</button>
-      <button onclick="toggleMute('video2', this)">🔇 Mute</button>
-      <input type="range" id="seek2" value="0" style="width: 80%;">
+    <div class="media-wrapper">
+      <video id="video2" src="pinched.mp4" playsinline></video>
+      <div class="controls">
+        <button onclick="togglePlay('video2', this)">▶️ Play</button>
+        <button onclick="toggleMute('video2', this)">🔇 Mute</button>
+        <input type="range" id="seek2" value="0">
+      </div>
     </div>
   </div>
 </div>
+
+<style>
+.collapsible {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 1.1em;
+  border-radius: 12px;
+  max-width: 90%;
+  text-align: center;
+}
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out;
+}
+.content.open {
+  max-height: 1000px;
+}
+video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+  margin: 10px auto;
+}
+.media-wrapper {
+  text-align: center;
+}
+.controls {
+  margin-top: 10px;
+}
+.controls button {
+  margin: 5px;
+}
+.controls input[type="range"] {
+  width: 80%;
+}
+.slider-wrapper {
+  position: relative;
+  text-align: center;
+}
+#memeImage {
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+  border-radius: 12px;
+  margin: 10px auto;
+  display: block;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  object-fit: contain;
+}
+.arrow-btn {
+  position: absolute;
+  top: 45%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 30px;
+  padding: 14px 18px;
+  cursor: pointer;
+}
+.arrow-btn.left {
+  left: 10px;
+}
+.arrow-btn.right {
+  right: 10px;
+}
+</style>
+
+<script>
+const memeImages = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"];
+let currentMeme = 0;
+const memeImg = document.getElementById("memeImage");
+
+function showMeme(index) {
+  currentMeme = (index + memeImages.length) % memeImages.length;
+  memeImg.src = memeImages[currentMeme];
+  memeImg.alt = "Meme " + (currentMeme + 1);
+}
+function nextMeme() { showMeme(currentMeme + 1); }
+function prevMeme() { showMeme(currentMeme - 1); }
+setInterval(() => { nextMeme(); }, 6000);
+
+function togglePlay(id, btn) {
+  const vid = document.getElementById(id);
+  if (vid.paused) {
+    vid.play();
+    btn.innerHTML = "⏸ Pause";
+  } else {
+    vid.pause();
+    btn.innerHTML = "▶️ Play";
+  }
+}
+function toggleMute(id, btn) {
+  const vid = document.getElementById(id);
+  vid.muted = !vid.muted;
+  btn.innerHTML = vid.muted ? "🔊 Unmute" : "🔇 Mute";
+}
+function setupSeekBar(videoId, seekId) {
+  const video = document.getElementById(videoId);
+  const seekBar = document.getElementById(seekId);
+  video.addEventListener("timeupdate", () => {
+    if (video.duration) seekBar.value = (100 / video.duration) * video.currentTime;
+  });
+  seekBar.addEventListener("input", () => {
+    video.currentTime = video.duration * (seekBar.value / 100);
+  });
+}
+setupSeekBar("video1", "seek1");
+setupSeekBar("video2", "seek2");
+
+document.querySelectorAll(".collapsible").forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+    content.classList.toggle("open");
+  });
+  const content = btn.nextElementSibling;
+  content.addEventListener("transitionend", function () {
+    if (!content.classList.contains("open")) {
+      const vids = content.querySelectorAll("video");
+      vids.forEach(v => {
+        v.pause();
+        const btn = content.querySelector("button");
+        if (btn) btn.innerHTML = "▶️ Play";
+      });
+    }
+  });
+});
+</script>
 
   <details class="timeline-container">
     <summary>📜 Line of our time together</summary>
@@ -1914,57 +2024,6 @@ video {
       }
     }
   </script>
-  <script>
-  function togglePlay(id, btn) {
-    const vid = document.getElementById(id);
-    if (vid.paused) {
-      vid.play();
-      btn.innerHTML = "⏸ Pause";
-    } else {
-      vid.pause();
-      btn.innerHTML = "▶️ Play";
-    }
-  }
-
-  function toggleMute(id, btn) {
-    const vid = document.getElementById(id);
-    vid.muted = !vid.muted;
-    btn.innerHTML = vid.muted ? "🔊 Unmute" : "🔇 Mute";
-  }
-
-  document.getElementById("video1").addEventListener("timeupdate", () => {
-    const v = document.getElementById("video1");
-    document.getElementById("seek1").value = (100 / v.duration) * v.currentTime;
-  });
-  document.getElementById("seek1").addEventListener("input", (e) => {
-    const v = document.getElementById("video1");
-    v.currentTime = v.duration * (e.target.value / 100);
-  });
-
-  document.getElementById("video2").addEventListener("timeupdate", () => {
-    const v = document.getElementById("video2");
-    document.getElementById("seek2").value = (100 / v.duration) * v.currentTime;
-  });
-  document.getElementById("seek2").addEventListener("input", (e) => {
-    const v = document.getElementById("video2");
-    v.currentTime = v.duration * (e.target.value / 100);
-  });
-
-  const memeImages = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"];
-  let currentMeme = 0;
-  const memeImg = document.getElementById("memeImage");
-
-  function showMeme(index) {
-    currentMeme = (index + memeImages.length) % memeImages.length;
-    memeImg.src = memeImages[currentMeme];
-    memeImg.alt = "Meme " + (currentMeme + 1);
-  }
-
-  function nextMeme() { showMeme(currentMeme + 1); }
-  function prevMeme() { showMeme(currentMeme - 1); }
-
-  setInterval(() => { nextMeme(); }, 6000);
-</script>
 <!-- ❤️ Cursor, Confetti, Fade-in Paragraphs -->
 <style>
   /* Custom Heart Cursor */
