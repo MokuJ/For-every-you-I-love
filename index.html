@@ -832,6 +832,39 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .collapsible {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 1.1em;
+  border-radius: 12px;
+  max-width: 90%;
+  text-align: center;
+}
+
+video {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 80vh;
+}
+
+#memeImage {
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+  border-radius: 12px;
+  margin: 10px auto;
+  display: block;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  object-fit: contain;
+}
   </style>
 </head>
 <body>
