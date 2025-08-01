@@ -80,40 +80,47 @@
       background-color: #ffe58a;
     }
 
-    .collapsible {
-      background-color: #222;
-      color: #f0c040;
-      cursor: pointer;
-      padding: 16px;
-      width: 100%; /* Default to 100% width */
-      max-width: 700px; /* Max width for larger screens */
-      margin: 0 auto 10px auto; /* Center with auto margins, added margin-bottom for spacing */
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 1.2em;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
-      display: block; /* Ensure it behaves as a block element */
-    }
+/* Styling for the collapsible buttons */
+.collapsible {
+  background-color: #222;
+  color: #f0c040;
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 10px auto;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1.2em;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
+  display: block;
+  transition: background-color 0.3s ease;
+}
 
-    .collapsible:hover {
-      background-color: #333;
-    }
+/* Styling for the collapsible content */
+.content {
+  padding: 0 30px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  margin: 0 auto 40px auto;
+  max-width: 700px;
+  color: #eee;
+  line-height: 1.6;
+  font-size: 1.05em;
+}
 
-    .content {
-      display: none;
-      overflow: hidden;
-      background-color: #1a1a1a;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.05);
-      margin: 0 auto 40px auto; /* Center with auto margins, added more margin-bottom for content sections */
-      max-width: 700px; /* Max width for larger screens */
-      color: #eee;
-      line-height: 1.6;
-      font-size: 1.05em;
-    }
+/* When the button is active, show the content */
+.collapsible.active + .content {
+  max-height: 2000px; /* A large value to ensure all content is visible */
+  padding: 30px;
+}
+
 
     /* General containers for responsive sizing */
     .info-box, .love-message-box, .section-title {
