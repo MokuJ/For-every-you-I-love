@@ -1225,6 +1225,72 @@
   <p>Don't return if you don't want to. I understand. But, if you ever see this just give me a subtle hint that you saw and chose not to come back. Might not be much to you but may help me in moving on.</p>
 </div>
 
+<div class="card" style="text-align: center;">
+  <button class="collapsible" style="
+    display: block;
+    margin: 10px auto;
+    width: fit-content;
+    padding: 10px 20px;
+    font-weight: bold;
+  ">My Affections Are To You</button>
+
+  <div class="content" style="padding: 10px;">
+    <video id="affectionVideo" width="100%" style="border-radius: 12px; max-height: 400px;" src="love.mp4"></video>
+    
+    <div style="margin-top: 10px;">
+      <button id="affectionPlayPauseBtn" onclick="toggleAffectionPlay()">▶️ Play</button>
+      <button id="affectionMuteUnmuteBtn" onclick="toggleAffectionMute()">🔇 Mute</button>
+      <input type="range" id="affectionSeekBar" value="0" style="width: 80%; margin-top: 10px;" />
+    </div>
+  </div>
+</div>
+
+<script>
+  const affectionVideo = document.getElementById("affectionVideo");
+  const affectionPlayPauseBtn = document.getElementById("affectionPlayPauseBtn");
+  const affectionMuteUnmuteBtn = document.getElementById("affectionMuteUnmuteBtn");
+  const affectionSeekBar = document.getElementById("affectionSeekBar");
+
+  // Show Mute first
+  affectionMuteUnmuteBtn.innerHTML = "🔇 Mute";
+
+  function toggleAffectionPlay() {
+    if (affectionVideo.paused) {
+      affectionVideo.play();
+      affectionPlayPauseBtn.innerHTML = "⏸ Pause";
+    } else {
+      affectionVideo.pause();
+      affectionPlayPauseBtn.innerHTML = "▶️ Play";
+    }
+  }
+
+  function toggleAffectionMute() {
+    affectionVideo.muted = !affectionVideo.muted;
+    affectionMuteUnmuteBtn.innerHTML = affectionVideo.muted ? "🔊 Unmute" : "🔇 Mute";
+  }
+
+  affectionVideo.addEventListener('timeupdate', () => {
+    const value = (100 / affectionVideo.duration) * affectionVideo.currentTime;
+    affectionSeekBar.value = value;
+  });
+
+  affectionSeekBar.addEventListener('input', () => {
+    affectionVideo.currentTime = affectionVideo.duration * (affectionSeekBar.value / 100);
+  });
+
+  // Auto-pause when collapsible closes
+  const allCollapsibles = document.querySelectorAll(".collapsible");
+  allCollapsibles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      if (content.style.maxHeight && affectionVideo && !affectionVideo.paused) {
+        affectionVideo.pause();
+        affectionPlayPauseBtn.innerHTML = "▶️ Play";
+      }
+    });
+  });
+</script>
+
   <details class="timeline-container">
     <summary>📜 Line of our time together</summary>
     <div class="timeline">
