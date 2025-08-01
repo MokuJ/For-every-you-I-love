@@ -1370,8 +1370,16 @@
   const playPauseBtn = document.getElementById("playPauseBtn");
   const muteUnmuteBtn = document.getElementById("muteUnmuteBtn");
   const seekBar = document.getElementById("seekBar");
-  muteUnmuteBtn.innerHTML = "🔇 Mute";
 
+  const affectionVideo = document.getElementById("affectionVideo");
+  const affectionPlayPauseBtn = document.getElementById("affectionPlayPauseBtn");
+  const affectionMuteUnmuteBtn = document.getElementById("affectionMuteUnmuteBtn");
+  const affectionSeekBar = document.getElementById("affectionSeekBar");
+
+  muteUnmuteBtn.innerHTML = "🔇 Mute";
+  affectionMuteUnmuteBtn.innerHTML = "🔇 Mute";
+
+  // --- PINCHED PLAYER ---
   function togglePlay() {
     if (video.paused) {
       video.play();
@@ -1396,28 +1404,7 @@
     video.currentTime = video.duration * (seekBar.value / 100);
   });
 
-  // Pause on collapsible close
-  const allCollapsibles = document.querySelectorAll(".collapsible");
-  allCollapsibles.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const content = this.nextElementSibling;
-      if (content.style.maxHeight) {
-        video.pause();
-        playPauseBtn.innerHTML = "▶️ Play";
-      }
-    });
-  });
-</script>
-
-<script>
-  const affectionVideo = document.getElementById("affectionVideo");
-  const affectionPlayPauseBtn = document.getElementById("affectionPlayPauseBtn");
-  const affectionMuteUnmuteBtn = document.getElementById("affectionMuteUnmuteBtn");
-  const affectionSeekBar = document.getElementById("affectionSeekBar");
-
-  // Show Mute first
-  affectionMuteUnmuteBtn.innerHTML = "🔇 Mute";
-
+  // --- LOVE PLAYER ---
   function toggleAffectionPlay() {
     if (affectionVideo.paused) {
       affectionVideo.play();
@@ -1442,14 +1429,20 @@
     affectionVideo.currentTime = affectionVideo.duration * (affectionSeekBar.value / 100);
   });
 
-  // Auto-pause when collapsible closes
+  // --- SHARED COLLAPSIBLE CONTROL ---
   const allCollapsibles = document.querySelectorAll(".collapsible");
   allCollapsibles.forEach((btn) => {
     btn.addEventListener("click", function () {
       const content = this.nextElementSibling;
-      if (content.style.maxHeight && affectionVideo && !affectionVideo.paused) {
-        affectionVideo.pause();
-        affectionPlayPauseBtn.innerHTML = "▶️ Play";
+      if (content.style.maxHeight) {
+        if (!video.paused) {
+          video.pause();
+          playPauseBtn.innerHTML = "▶️ Play";
+        }
+        if (!affectionVideo.paused) {
+          affectionVideo.pause();
+          affectionPlayPauseBtn.innerHTML = "▶️ Play";
+        }
       }
     });
   });
