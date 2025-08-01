@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
   <style>
+  .collapsible {
+    cursor: pointer;
+    user-select: none;
+  }
+
   .content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 0.6s ease-in-out;
+  }
+
+  .content.open {
+    max-height: 1000px; /* Big enough to show all content */
   }
 </style>
   <meta charset="UTF-8">
@@ -1353,26 +1362,22 @@
     pinchedVideo.currentTime = pinchedVideo.duration * (pinchedSeekBar.value / 100);
   });
 
+  <script>
   document.querySelectorAll(".collapsible").forEach((btn) => {
     btn.addEventListener("click", function () {
       const content = this.nextElementSibling;
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
+      content.classList.toggle("open");
     });
-    btn.nextElementSibling.addEventListener("transitionend", function () {
-      const content = this;
-      if (!content.style.maxHeight || content.style.maxHeight === "0px") {
-        if (!affectionVideo.paused) {
-          affectionVideo.pause();
-          affectionPlayPauseBtn.innerHTML = "▶️ Play";
-        }
-        if (!pinchedVideo.paused) {
-          pinchedVideo.pause();
-          pinchedPlayPauseBtn.innerHTML = "▶️ Play";
-        }
+
+    const content = btn.nextElementSibling;
+    content.addEventListener("transitionend", function () {
+      if (!content.classList.contains("open")) {
+        const vids = content.querySelectorAll("video");
+        vids.forEach(v => {
+          v.pause();
+          const btn = content.querySelector('button[onclick^="toggle"]');
+          if (btn) btn.innerHTML = "▶️ Play";
+        });
       }
     });
   });
