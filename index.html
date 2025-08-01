@@ -1227,7 +1227,7 @@
 
 <!-- COLLAPSIBLE 1: My Affections Are To You -->
 <div class="card" style="text-align: center;">
-  <button class="collapsible">My Affections Are To You</button>
+  <button class="collapsible mini-collapsible">My Affections Are To You</button>
   <div class="content">
     <div class="media-wrapper">
       <video id="video1" src="love.mp4" playsinline></video>
@@ -1242,7 +1242,7 @@
 
 <!-- COLLAPSIBLE 2: Miss You Meme -->
 <div class="card" style="text-align: center;">
-  <button class="collapsible">Miss You Meme</button>
+  <button class="collapsible mini-collapsible">Miss You Meme</button>
   <div class="content">
     <div class="slider-wrapper">
       <img id="memeImage" src="1.jpg" alt="Meme 1">
@@ -1254,7 +1254,7 @@
 
 <!-- COLLAPSIBLE 3: What You Do To Me -->
 <div class="card" style="text-align: center;">
-  <button class="collapsible">What You Do To Me</button>
+  <button class="collapsible mini-collapsible">What You Do To Me</button>
   <div class="content">
     <div class="media-wrapper">
       <video id="video2" src="pinched.mp4" playsinline></video>
@@ -2136,6 +2136,14 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
               0 0 30px rgba(255, 192, 203, 0.3);
   transition: box-shadow 0.3s ease-in-out;
 }
+</style>
+<style>
+  .mini-collapsible {
+    font-size: 1em;
+    padding: 6px 14px;
+    max-width: 80%;
+    border-radius: 10px;
+  }
 </style>
 
 <script>
