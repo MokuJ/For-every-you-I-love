@@ -88,7 +88,7 @@
   padding: 16px;
   width: 100%;
   max-width: 700px;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 10px auto; /* 10px bottom margin for spacing between buttons */
   border: none;
   text-align: left;
   outline: none;
@@ -108,12 +108,20 @@
   background-color: #1a1a1a;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-  margin: 0 auto 40px auto;
+  margin: 0; /* Important: No margin when closed */
   max-width: 700px;
   color: #eee;
   line-height: 1.6;
   font-size: 1.05em;
 }
+
+/* When the button is active, show the content */
+.collapsible.active + .content {
+  max-height: 2000px;
+  padding: 30px;
+  margin-bottom: 40px; /* Add margin only when the content is open */
+}
+
 
 /* When the button is active, show the content */
 .collapsible.active + .content {
