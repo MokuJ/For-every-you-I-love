@@ -80,28 +80,40 @@
       background-color: #ffe58a;
     }
 
-/* Styling for the collapsible content */
-.content {
-  padding: 0; /* This is the fix. Set to 0 initially. */
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out, padding 0.4s ease-out, margin 0.4s ease-out; /* Add margin to the transition */
-  background-color: #1a1a1a;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-  margin: 0; /* Ensures no space when closed. */
-  max-width: 700px;
-  color: #eee;
-  line-height: 1.6;
-  font-size: 1.05em;
-}
+    .collapsible {
+      background-color: #222;
+      color: #f0c040;
+      cursor: pointer;
+      padding: 16px;
+      width: 100%; /* Default to 100% width */
+      max-width: 700px; /* Max width for larger screens */
+      margin: 0 auto 10px auto; /* Center with auto margins, added margin-bottom for spacing */
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1.2em;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
+      display: block; /* Ensure it behaves as a block element */
+    }
 
-/* When the button is active, show the content */
-.collapsible.active + .content {
-  max-height: 2000px; /* A large value to ensure all content is visible */
-  margin-bottom: 40px; /* Add a bottom margin only when open */
-}
+    .collapsible:hover {
+      background-color: #333;
+    }
 
+    .content {
+      display: none;
+      overflow: hidden;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+      margin: 0 auto 40px auto; /* Center with auto margins, added more margin-bottom for content sections */
+      max-width: 700px; /* Max width for larger screens */
+      color: #eee;
+      line-height: 1.6;
+      font-size: 1.05em;
+    }
 
     /* General containers for responsive sizing */
     .info-box, .love-message-box, .section-title {
@@ -120,13 +132,13 @@
       font-style: italic;
     }
 
-   .love-message-box { background-color: #0a0a0a;
-     color: #ddd;
-     font-size: 1em;
-     line-height: 1.6;
-     text-align: center;
-     padding: 30px; /* New: Add padding here */
-   }
+    .love-message-box {
+      background-color: #0a0a0a;
+      color: #ddd;
+      font-size: 1em;
+      line-height: 1.6;
+      text-align: center;
+    }
 
     .section-title h1 {
       text-align: center;
@@ -212,7 +224,7 @@
       padding: 16px;
       width: calc(100% - 40px); /* Adjust for padding on body */
       max-width: 800px; /* Limit max width */
-      margin: 0 auto; /* Added margin-bottom */
+      margin: 0 auto 10px auto; /* Added margin-bottom */
       display: block;
     }
 
@@ -440,20 +452,18 @@
       margin: 0 auto 60px;
     }
 
-/* This is the collapsible button inside the music collection */
-.music-collection-container .collapsible {
-  width: 100%;
-  padding: 16px;
-  font-size: 1.2em;
-  background-color: #333;
-  color: #f0c040;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
-  margin-bottom: 10px; /* Correct spacing */
-}
-
+    .music-collection-container button {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.2em;
+      background-color: #333;
+      color: #f0c040;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      margin-bottom: 10px; /* Added spacing */
+    }
 
     #musicBox {
       display: none;
@@ -492,7 +502,7 @@
       }
     }
 
-    /* Fixed Buttons (Fuck Kunal, Music Toggle, Back to Top) */
+    /* Fixed Buttons (F Kunal, Music Toggle, Back to Top) */
     .fixed-btn {
       position: fixed;
       bottom: 85px; /* Base bottom position */
@@ -701,7 +711,7 @@
         bottom: 15px; /* Adjust bottom position for all fixed buttons */
       }
 
-      .fixed-btn[style*="left: 20px"] { /* Fuck Kunal button */
+      .fixed-btn[style*="left: 20px"] { /* F Kunal button */
         left: 15px;
         bottom: 60px; /* Move up to prevent overlap with contact button */
       }
@@ -1137,265 +1147,6 @@
     <p>May your own path be equally beautiful, and may it lead you to endless joy and purpose.</p>
   </div>
 
-<button class="collapsible">Day 17</button>
-  <div class="content">
-    <p>Um, hi kanak!<p>
-    </p>Please become a part of my life again. I have to imagine you all the time. I am going insane. It feels like schizophrenia but I tend to want it more, just so I can imagine you around myself.<p>
-    </p> I do not know why is it that I desire you around me, there has been nothing out of the ordinary with you. Maybe that's the case. It has all been so natural and easy with you, all the time.</p>
-    <p>Maybe I share some past life connection with you. Haha! My delusions.</p>
-    <p>Please come back. I don't want to label you specifically, friend or bestfriend or girlfriend or wife...no. I want you. I don't want intimacy or anything. I am way past that stuff. I want you. You make me want to want you.</p>
-    <p>It is like a primal desire.</p>
-    <p>What I feel for you is impossible to explain, just like it it impossible to explain why we cry, when we are sad. It is like some primal instinct in me.</p>
-    <p>Forgive me and please enlighten me.</p>
-    <p>Da mihi salutem.</p>
-  </div>
-
-<button class="collapsible">Day 18</button>
-<div class="content">
-  <p>Some days I feel like I’ve accepted everything. Other days, I find myself typing your name into thin air again.</p>
-  <p>It’s not about moving on or staying behind. It’s about finding a way to live with the echo of something so beautiful, it couldn’t last.</p>
-  <p>I carry your name like a charm in my pocket — quiet, unseen, but always close.</p>
-</div>
-
-<button class="collapsible">Day 19</button>
-<div class="content">
-  <p>I saw something today that reminded me of you, and I smiled without meaning to. A quiet, helpless kind of smile.</p>
-  <p>Funny how the heart keeps old photos in invisible frames, showing them to us when we least expect it.</p>
-  <p>I hope you’re laughing today. The world feels more right when you do.</p>
-</div>
-
-<button class="collapsible">Day 20</button>
-<div class="content">
-  <p>There’s a little version of me in my head, still waiting for your message. Still checking notifications like they hold galaxies.</p>
-  <p>I tell him it’s okay. That love doesn’t always arrive wrapped in replies. Sometimes, it’s just there. Still. Silent. Constant.</p>
-  <p>Like gravity. Like a prayer whispered every morning.</p>
-</div>
-
-<button class="collapsible">Day 21</button>
-<div class="content">
-  <p>They say time heals. I think time teaches.</p>
-  <p>It teaches how to carry a heart that’s heavy with unsaid things. It teaches that missing someone isn’t weakness, it’s memory doing its job.</p>
-  <p>And I remember you so well, Kanak. Every little thing. Every quiet grace.</p>
-</div>
-
-<button class="collapsible">Day 22</button>
-<div class="content">
-  <p>I often wonder what your days look like now. Who makes you laugh? Who sees you in ways I once did?</p>
-  <p>And then I remind myself — love isn’t about possession. It’s about presence, even in absence.</p>
-  <p>So here I am. Present. Quiet. Loving you in silence, still.</p>
-</div>
-
-<button class="collapsible">Day 23</button>
-<div class="content">
-  <p>Do you remember anything I ever said? Any song I sent? Any silly paragraph I wrote?</p>
-  <p>I hope you do. Not because I want validation, but because it means I was real to you once.</p>
-  <p>Even if I’m a closed tab now — for a while, I was your homepage. And that’s enough for me.</p>
-</div>
-
-<button class="collapsible">Day 24</button>
-<div class="content">
-  <p>Some nights, I dream you’re back. Not dramatically — just there. Like you never left.</p>
-  <p>We’re laughing at something stupid. You’re nudging me, rolling your eyes, calling me out.</p>
-  <p>And I wake up with the sound of your voice still echoing in my chest. It’s both a gift and a wound.</p>
-</div>
-
-<button class="collapsible">Day 25</button>
-<div class="content">
-  <p>It’s been many many days. Who even counts these things anymore? I do. Because love counts days, even when they stop mattering to the world.</p>
-  <p>You’ve become a rhythm in my solitude. A presence in the pauses. A warmth that lingers in cold nights.</p>
-  <p>Thank you for existing. Even if it’s from far away.</p>
-</div>
-
-<button class="collapsible">Day 26</button>
-<div class="content">
-  <p>This might just be another invisible page in an unread diary. But I wrote it anyway.</p>
-  <p>Because love is writing when no one’s listening. Waiting when no one’s returning. Hoping, even when it hurts.</p>
-  <p>And I hope — wherever you are, you’re okay. That’s all I really want.</p>
-  <p>Part of me wants to leave this at this number, the date of your birth, for symbolism. Maybe. Maybe not. I'll think about it.</p>
-  <p>Don't return if you don't want to. I understand. But, if you ever see this just give me a subtle hint that you saw and chose not to come back. Might not be much to you but may help me in moving on.</p>
-</div>
-
-<!-- COLLAPSIBLE 1: My Affections Are To You -->
-<div class="card" style="text-align: center;">
-  <button class="collapsible mini-collapsible">My Affections Are To You</button>
-  <div class="content">
-    <div class="media-wrapper">
-      <video id="video1" src="love.mp4" playsinline></video>
-      <div class="controls">
-        <button onclick="togglePlay('video1', this)">▶️ Play</button>
-        <button onclick="toggleMute('video1', this)">🔇 Mute</button>
-        <input type="range" id="seek1" value="0">
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- COLLAPSIBLE 2: Miss You Meme -->
-<div class="card" style="text-align: center;">
-  <button class="collapsible mini-collapsible">Miss You Meme</button>
-  <div class="content">
-    <div class="slider-wrapper">
-      <img id="memeImage" src="1.jpg" alt="Meme 1">
-      <button class="arrow-btn left" onclick="prevMeme()">⟨</button>
-      <button class="arrow-btn right" onclick="nextMeme()">⟩</button>
-    </div>
-  </div>
-</div>
-
-<!-- COLLAPSIBLE 3: What You Do To Me -->
-<div class="card" style="text-align: center;">
-  <button class="collapsible mini-collapsible">What You Do To Me</button>
-  <div class="content">
-    <div class="media-wrapper">
-      <video id="video2" src="pinched.mp4" playsinline></video>
-      <div class="controls">
-        <button onclick="togglePlay('video2', this)">▶️ Play</button>
-        <button onclick="toggleMute('video2', this)">🔇 Mute</button>
-        <input type="range" id="seek2" value="0">
-      </div>
-    </div>
-  </div>
-</div>
-
-<style>
-.collapsible {
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 1.1em;
-  border-radius: 12px;
-  max-width: 90%;
-  text-align: center;
-}
-.content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.6s ease-in-out;
-}
-.content.open {
-  max-height: 1000px;
-}
-video {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 12px;
-  display: block;
-  margin: 10px auto;
-}
-.media-wrapper {
-  text-align: center;
-}
-.controls {
-  margin-top: 10px;
-}
-.controls button {
-  margin: 5px;
-}
-.controls input[type="range"] {
-  width: 80%;
-}
-.slider-wrapper {
-  position: relative;
-  text-align: center;
-}
-#memeImage {
-  max-width: 100%;
-  height: auto;
-  max-height: 80vh;
-  border-radius: 12px;
-  margin: 10px auto;
-  display: block;
-  transition: transform 0.7s ease, opacity 0.7s ease;
-  object-fit: contain;
-}
-.arrow-btn {
-  position: absolute;
-  top: 45%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 30px;
-  padding: 14px 18px;
-  cursor: pointer;
-}
-.arrow-btn.left {
-  left: 10px;
-}
-.arrow-btn.right {
-  right: 10px;
-}
-</style>
-
-<script>
-const memeImages = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"];
-let currentMeme = 0;
-const memeImg = document.getElementById("memeImage");
-
-function showMeme(index) {
-  currentMeme = (index + memeImages.length) % memeImages.length;
-  memeImg.src = memeImages[currentMeme];
-  memeImg.alt = "Meme " + (currentMeme + 1);
-}
-function nextMeme() { showMeme(currentMeme + 1); }
-function prevMeme() { showMeme(currentMeme - 1); }
-setInterval(() => { nextMeme(); }, 6000);
-
-function togglePlay(id, btn) {
-  const vid = document.getElementById(id);
-  if (vid.paused) {
-    vid.play();
-    btn.innerHTML = "⏸ Pause";
-  } else {
-    vid.pause();
-    btn.innerHTML = "▶️ Play";
-  }
-}
-function toggleMute(id, btn) {
-  const vid = document.getElementById(id);
-  vid.muted = !vid.muted;
-  btn.innerHTML = vid.muted ? "🔊 Unmute" : "🔇 Mute";
-}
-function setupSeekBar(videoId, seekId) {
-  const video = document.getElementById(videoId);
-  const seekBar = document.getElementById(seekId);
-  video.addEventListener("timeupdate", () => {
-    if (video.duration) seekBar.value = (100 / video.duration) * video.currentTime;
-  });
-  seekBar.addEventListener("input", () => {
-    video.currentTime = video.duration * (seekBar.value / 100);
-  });
-}
-setupSeekBar("video1", "seek1");
-setupSeekBar("video2", "seek2");
-
-document.querySelectorAll(".collapsible").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    const content = this.nextElementSibling;
-    content.classList.toggle("open");
-  });
-  const content = btn.nextElementSibling;
-  content.addEventListener("transitionend", function () {
-    if (!content.classList.contains("open")) {
-      const vids = content.querySelectorAll("video");
-      vids.forEach(v => {
-        v.pause();
-        const btn = content.querySelector("button");
-        if (btn) btn.innerHTML = "▶️ Play";
-      });
-    }
-  });
-});
-</script>
-
   <details class="timeline-container">
     <summary>📜 Line of our time together</summary>
     <div class="timeline">
@@ -1587,7 +1338,7 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
   </div>
 
   <button onclick="blastKunal()" class="fixed-btn" style="left: 20px;">
-    Fuck Kunal 🖕
+    💥 F Kunal
   </button>
   <button id="musicToggle" class="fixed-btn" style="right: 20px;">
     🔊 Pause BGM
@@ -2127,14 +1878,6 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
   transition: box-shadow 0.3s ease-in-out;
 }
 </style>
-<style>
-  .mini-collapsible {
-    font-size: 1em;
-    padding: 6px 14px;
-    max-width: 80%;
-    border-radius: 10px;
-  }
-</style>
 
 <script>
   // 💗 Add heartbeat class to "Marry me?" button
@@ -2167,30 +1910,6 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
       }
     });
   }
-</script>
-
-<script>
-  // Function to handle the music collection toggle button
-  function toggleMusicBox() {
-    var musicBox = document.getElementById("musicBox");
-    if (musicBox.style.display === "block") {
-      musicBox.style.display = "none";
-    } else {
-      musicBox.style.display = "block";
-    }
-  }
-
-  // Get the main music collection button and add a click event listener
-  document.getElementById("musicCollectionToggle").addEventListener("click", toggleMusicBox);
-
-  // General function for all .collapsible buttons
-  var coll = document.getElementsByClassName("collapsible");
-  for (let i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-    });
-  }
-
 </script>
 </body>
 </html>
