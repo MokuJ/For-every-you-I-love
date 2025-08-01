@@ -2185,6 +2185,7 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
     });
   }
 </script>
+
 <script>
   // Function to handle the music collection toggle button
   function toggleMusicBox() {
@@ -2195,21 +2196,13 @@ document.querySelectorAll(".collapsible").forEach((btn) => {
       musicBox.style.display = "block";
     }
   }
-
   // Get the main music collection button and add a click event listener
   document.getElementById("musicCollectionToggle").addEventListener("click", toggleMusicBox);
-
   // General function for all .collapsible buttons
   var coll = document.getElementsByClassName("collapsible");
   for (let i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
       this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
     });
   }
 </script>
