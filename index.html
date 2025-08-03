@@ -832,6 +832,25 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .collapsible:hover {
+  background-color: #333 !important;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+.letter-mode {
+  background: url('https://www.transparenttextures.com/patterns/paper-fibers.png') repeat;
+  color: #2e2e2e !important;
+  font-family: 'Cormorant Garamond', serif !important;
+}
+
+.letter-mode .collapsible,
+.letter-mode .content,
+.letter-mode .info-box,
+.letter-mode .love-message-box {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #2e2e2e !important;
+  box-shadow: none !important;
+}
     <style>
 .fresh-collapsible {
   cursor: pointer;
@@ -2168,5 +2187,19 @@ document.querySelectorAll(".fresh-collapsible").forEach((btn) => {
   });
 });
 </script>
+<div style="text-align:center; margin: 30px 0;">
+  <button onclick="document.body.classList.toggle('letter-mode')" style="
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #e0d8cc;
+    color: #2e2e2e;
+    font-weight: bold;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+  ">
+    ✉️ Toggle Letter Mode
+  </button>
+</div>
 </body>
 </html>
