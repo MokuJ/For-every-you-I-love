@@ -1408,6 +1408,101 @@
     </details>
   </div>
   
+  <!-- Collapsible World Love Map --><button class="collapsible">🌍 Around the World, I Love You</button>
+
+<div class="content">
+  <div id="worldMapContainer" style="max-width: 100%; margin: 30px auto; text-align: center;">
+    <iframe src="https://upload.wikimedia.org/wikipedia/commons/8/80/BlankMap-World.svg" 
+            id="worldMap" style="width: 90%; height: 500px; border: none; pointer-events: none; opacity: 0.5;">
+    </iframe>
+    <div id="tooltip" style="
+      display: none;
+      position: absolute;
+      background: #111;
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1em;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+      z-index: 9999;
+    "></div>
+  </div>
+</div><script>
+// I Love You translations per country
+const loveMessages = {
+  "India": "मैं तुमसे प्यार करता हूँ",
+  "Japan": "愛してる",
+  "France": "Je t’aime",
+  "Germany": "Ich liebe dich",
+  "Russia": "Я тебя люблю",
+  "China": "我爱你",
+  "Spain": "Te amo",
+  "Italy": "Ti amo",
+  "South Korea": "사랑해",
+  "Brazil": "Eu te amo",
+  "United States": "I love you",
+  "Mexico": "Te amo",
+  "United Kingdom": "I love you",
+  "Canada": "I love you",
+  "Australia": "I love you",
+  "Saudi Arabia": "أحبك",
+  "Thailand": "ฉันรักคุณ",
+  "Vietnam": "Anh yêu em",
+  "Turkey": "Seni seviyorum",
+  "Indonesia": "Aku cinta kamu",
+  "Iran": "دوستت دارم",
+  "Philippines": "Mahal kita",
+  "Egypt": "بحبك",
+  "Pakistan": "میں تم سے پیار کرتا ہوں",
+  "Bangladesh": "আমি তোমায় ভালোবাসি",
+  "Ukraine": "Я тебе кохаю",
+  "Argentina": "Te amo",
+  "South Africa": "Ek het jou lief",
+  "Poland": "Kocham cię",
+  "Netherlands": "Ik hou van jou",
+  "Sweden": "Jag älskar dig",
+  "Norway": "Jeg elsker deg",
+  "Denmark": "Jeg elsker dig",
+  "Greece": "Σ’ αγαπώ",
+  "Portugal": "Eu te amo",
+  "Czech Republic": "Miluji tě",
+  "Hungary": "Szeretlek",
+  "Romania": "Te iubesc",
+  "Israel": "אני אוהב אותך",
+  "Malaysia": "Saya cinta padamu",
+  "Singapore": "I love you",
+  "New Zealand": "Aroha ahau ki a koe",
+  "Nepal": "म तिमीलाई माया गर्छु",
+  "Sri Lanka": "මම ඔබට ආදරෙයි",
+  "Iraq": "أحبك",
+  "Afghanistan": "زه تا سره مینه لرم",
+  "Switzerland": "Ich liebe dich",
+  "Austria": "Ich liebe dich",
+  "Belgium": "Ik hou van jou",
+  "Finland": "Rakastan sinua"
+};
+
+// Fake interaction (simulate clicking countries)
+const mapContainer = document.getElementById("worldMapContainer");
+const tooltip = document.getElementById("tooltip");
+
+mapContainer.addEventListener("click", function (e) {
+  const countries = Object.keys(loveMessages);
+  const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+  const message = loveMessages[randomCountry];
+
+  tooltip.innerHTML = message;
+  tooltip.style.left = e.pageX + "px";
+  tooltip.style.top = e.pageY + "px";
+  tooltip.style.display = "block";
+
+  setTimeout(() => {
+    tooltip.style.display = "none";
+  }, 2000);
+});
+</script>
+  
   <button class="collapsible" style="
   background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
   color: #ffe5e5;
