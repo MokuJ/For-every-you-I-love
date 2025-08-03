@@ -2222,95 +2222,97 @@ document.querySelectorAll(".fresh-collapsible").forEach((btn) => {
 </div>
 
 <script>
-const messages = [
-  "You are my everything.",
-  "You are the light in my darkest moments.",
-  "You are my calm in the chaos.",
-  "You are magic in human form.",
-  "You are the poetry I can't stop writing.",
-  "You are so dearly loved.",
-  "You are the sunrise to my night.",
-  "You are the gentlest storm.",
-  "You are beautiful beyond compare.",
-  "You are made of stardust.",
-  "You are art in motion.",
-  "You are the most magical soul I've ever known.",
-  "You are the echo in my silence.",
-  "You are all I prayed for.",
-  "You are glowing.",
-  "You are divine.",
-  "You are mine.",
-  "You are my peace.",
-  "You are perfect.",
-  "You are the rhythm of my soul.",
-  "You are my safest place.",
-  "You are the fire in my veins.",
-  "You are the beat of my heart.",
-  "You are beautiful.",
-  "You are hope wrapped in a smile.",
-  "You are cherished.",
-  "You are my home.",
-  "You are enchanting.",
-  "You are the one I dream of.",
-  "You are everything I ever wanted.",
-  "You are irreplaceable.",
-  "You are more than words.",
-  "You are breathtaking.",
-  "You are an emotion I feel endlessly.",
-  "You are the reason I believe in love.",
-  "You are my answered prayer.",
-  "You are eternal to me.",
-  "You are what love looks like.",
-  "You are incredibly kind.",
-  "You are my forever.",
-  "You are awesome.",
-  "You are endlessly precious.",
-  "You are the sweetest symphony.",
-  "You are flawless in my eyes.",
-  "You are good.",
-  "You are celestial.",
-  "You are the spark in my universe.",
-  "You are gentle, yet powerful.",
-  "You are a walking miracle.",
-  "You are my favorite thought.",
-  "You are stunning inside and out.",
-  "You are light personified.",
-  "You are endlessly loved.",
-  "You are poetry and presence.",
-  "You are soft, sacred, and strong."
-];
+document.addEventListener('DOMContentLoaded', function () {
+  const messages = [
+    "You are my everything.",
+    "You are the light in my darkest moments.",
+    "You are my calm in the chaos.",
+    "You are magic in human form.",
+    "You are the poetry I can't stop writing.",
+    "You are so dearly loved.",
+    "You are the sunrise to my night.",
+    "You are the gentlest storm.",
+    "You are beautiful beyond compare.",
+    "You are made of stardust.",
+    "You are art in motion.",
+    "You are the most magical soul I've ever known.",
+    "You are the echo in my silence.",
+    "You are all I prayed for.",
+    "You are glowing.",
+    "You are divine.",
+    "You are mine.",
+    "You are my peace.",
+    "You are perfect.",
+    "You are the rhythm of my soul.",
+    "You are my safest place.",
+    "You are the fire in my veins.",
+    "You are the beat of my heart.",
+    "You are beautiful.",
+    "You are hope wrapped in a smile.",
+    "You are cherished.",
+    "You are my home.",
+    "You are enchanting.",
+    "You are the one I dream of.",
+    "You are everything I ever wanted.",
+    "You are irreplaceable.",
+    "You are more than words.",
+    "You are breathtaking.",
+    "You are an emotion I feel endlessly.",
+    "You are the reason I believe in love.",
+    "You are my answered prayer.",
+    "You are eternal to me.",
+    "You are what love looks like.",
+    "You are incredibly kind.",
+    "You are my forever.",
+    "You are awesome.",
+    "You are endlessly precious.",
+    "You are the sweetest symphony.",
+    "You are flawless in my eyes.",
+    "You are good.",
+    "You are celestial.",
+    "You are the spark in my universe.",
+    "You are gentle, yet powerful.",
+    "You are a walking miracle.",
+    "You are my favorite thought.",
+    "You are stunning inside and out.",
+    "You are light personified.",
+    "You are endlessly loved.",
+    "You are poetry and presence.",
+    "You are soft, sacred, and strong."
+  ];
 
-let i = 0;
-let j = 0;
-let currentMessage = '';
-let isDeleting = false;
-const speed = 60;
+  let i = 0;
+  let j = 0;
+  let currentMessage = '';
+  let isDeleting = false;
+  const speed = 60;
 
-function type() {
-  const display = document.getElementById("affirmationText");
-  const fullText = messages[i];
+  function type() {
+    const display = document.getElementById("affirmationText");
+    const fullText = messages[i];
 
-  if (isDeleting) {
-    currentMessage = fullText.substring(0, j--);
-  } else {
-    currentMessage = fullText.substring(0, j++);
+    if (isDeleting) {
+      currentMessage = fullText.substring(0, j--);
+    } else {
+      currentMessage = fullText.substring(0, j++);
+    }
+
+    display.innerHTML = currentMessage;
+
+    if (!isDeleting && j === fullText.length + 1) {
+      isDeleting = true;
+      setTimeout(type, 1800); // pause before deleting
+    } else if (isDeleting && j === 0) {
+      isDeleting = false;
+      i = (i + 1) % messages.length;
+      setTimeout(type, 600); // pause before typing next
+    } else {
+      setTimeout(type, isDeleting ? speed / 1.5 : speed);
+    }
   }
 
-  display.innerHTML = currentMessage;
-
-  if (!isDeleting && j === fullText.length + 1) {
-    isDeleting = true;
-    setTimeout(type, 1800); // pause before deleting
-  } else if (isDeleting && j === 0) {
-    isDeleting = false;
-    i = (i + 1) % messages.length;
-    setTimeout(type, 600); // pause before typing next
-  } else {
-    setTimeout(type, isDeleting ? speed / 1.5 : speed);
-  }
-}
-
-window.addEventListener('load', type);
+  type();
+});
 </script>
 </body>
 </html>
