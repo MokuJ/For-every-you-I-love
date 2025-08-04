@@ -1791,7 +1791,7 @@ for (let i = 0; i < collapsibles.length; i++) {
       🎵 Music Collection
     </button>
     <div id="musicBox">
-      <button class="collapsible">Please Come Back</button>
+      <button class="inner-collapsible">Please Come Back</button>
       <div class="content">
         <h3>Love Is a Laserquest</h3>
         <p>
@@ -1807,7 +1807,7 @@ for (let i = 0; i < collapsibles.length; i++) {
         </audio>
       </div>
 
-      <button class="collapsible">I love you Kanak</button>
+      <button class="inner-collapsible">I love you Kanak</button>
       <div class="content">
         <h3>No. 1 Party Anthem</h3>
         <p>
@@ -1823,7 +1823,7 @@ for (let i = 0; i < collapsibles.length; i++) {
       </div>
       
       <!-- Song 1 -->
-<button class="collapsible">I miss you. Very serious.</button>
+<button class="inner-collapsible">I miss you. Very serious.</button>
 <div class="content">
   <p>
     This song isn’t just music — it’s how it feels to look at your photo and ache quietly.<br>
@@ -1836,7 +1836,7 @@ for (let i = 0; i < collapsibles.length; i++) {
 </div>
 
 <!-- Song 2 -->
-<button class="collapsible">It's hard to live without you. You've been my habit.</button>
+<button class="inner-collapsible">It's hard to live without you. You've been my habit.</button>
 <div class="content">
   <p>
     Jeena… Jeena kaise...<br>
@@ -2951,6 +2951,15 @@ document.querySelectorAll(".collapsible").forEach(button => {
     } else {
       content.style.display = "block";
     }
+  });
+});
+</script>
+<script>
+document.querySelectorAll(".inner-collapsible").forEach(button => {
+  button.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+    if (!content) return;
+    content.style.display = content.style.display === "block" ? "none" : "block";
   });
 });
 </script>
