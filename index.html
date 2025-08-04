@@ -1408,82 +1408,256 @@
     </details>
   </div>
   
-  <!-- Collapsible World Love Map --><button class="collapsible">🌍 Around The World, I Still Love You</button>
+  <!-- Around the World, I Still Love You - Full JS + SVG Interactive Map -->
+<div id="loveMapContainer" style="position: relative; width: 100%; max-width: 900px; margin: auto;">
+  <svg id="worldMapSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1001" style="width: 100%; height: auto;"></svg>
+  <div id="loveMessageBox" style="
+    display: none;
+    position: absolute;
+    background: #111;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    font-size: 16px;
+    white-space: nowrap;
+    z-index: 9999;
+  "></div>
+</div>
 
-<div class="content">
-  <div id="worldMapContainer" style="height: 500px; width: 100%; margin: 20px auto;"></div>
-</div><!-- Load amCharts and map libraries --><script src="https://cdn.amcharts.com/lib/5/index.js"></script><script src="https://cdn.amcharts.com/lib/5/map.js"></script><script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script><script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
 const loveMessages = {
-  "India": "मैं तुमसे प्यार करता हूँ",
-  "Japan": "愛してる",
-  "France": "Je t’aime",
-  "Germany": "Ich liebe dich",
-  "Russia": "Я тебя люблю",
-  "China": "我爱你",
-  "Spain": "Te amo",
-  "Italy": "Ti amo",
-  "South Korea": "사랑해",
-  "Brazil": "Eu te amo",
-  "United States": "I love you",
-  "Mexico": "Te amo",
-  "United Kingdom": "I love you",
-  "Canada": "I love you",
-  "Australia": "I love you"
+  "AFG": "زه تا سره مینه لرم",
+  "ALB": "Të dua",
+  "DZA": "أحبك",
+  "AND": "T'estimo",
+  "AGO": "Eu te amo",
+  "ATG": "I love you",
+  "ARG": "Te amo",
+  "ARM": "Ես քեզ սիրում եմ",
+  "AUS": "I love you",
+  "AUT": "Ich liebe dich",
+  "AZE": "Mən səni sevirəm",
+  "BHS": "I love you",
+  "BHR": "أنا أحبك",
+  "BGD": "আমি তোমায় ভালোবাসি",
+  "BRB": "I love you",
+  "BLR": "Я цябе кахаю",
+  "BEL": "Ik hou van jou",
+  "BLZ": "I love you",
+  "BEN": "Je t’aime",
+  "BTN": "Nga che gi za na",
+  "BOL": "Te amo",
+  "BIH": "Volim te",
+  "BWA": "Ke a go rata",
+  "BRA": "Eu te amo",
+  "BRN": "Saya cinta padamu",
+  "BGR": "Обичам те",
+  "BFA": "Je t’aime",
+  "BDI": "Ndagukunda",
+  "CPV": "Ami bu kre",
+  "KHM": "ខ្ញុំស្រលាញ់អ្នក",
+  "CMR": "Je t’aime",
+  "CAN": "I love you",
+  "CAF": "Mbë mbi",
+  "TCD": "Je t’aime",
+  "CHL": "Te amo",
+  "CHN": "我爱你",
+  "COL": "Te amo",
+  "COM": "Nakupenda",
+  "COG": "Nalingi yo",
+  "CRI": "Te amo",
+  "HRV": "Volim te",
+  "CUB": "Te amo",
+  "CYP": "Σε αγαπώ",
+  "CZE": "Miluji tě",
+  "COD": "Nalingi yo",
+  "DNK": "Jeg elsker dig",
+  "DJI": "أنا أحبك",
+  "DMA": "I love you",
+  "DOM": "Te amo",
+  "TLS": "Hau hadomi o",
+  "ECU": "Te amo",
+  "EGY": "بحبك",
+  "SLV": "Te amo",
+  "GNQ": "Ndemekame yo",
+  "ERI": "Yefqrekaye",
+  "EST": "Ma armastan sind",
+  "SWZ": "Ngiyakutsandza",
+  "ETH": "Ewedishalehu",
+  "FJI": "Au domoni iko",
+  "FIN": "Rakastan sinua",
+  "FRA": "Je t’aime",
+  "GAB": "Je t’aime",
+  "GMB": "Nopp naa la",
+  "GEO": "მიყვარხარ",
+  "DEU": "Ich liebe dich",
+  "GHA": "Me dɔ wo",
+  "GRC": "Σ’ αγαπώ",
+  "GRD": "I love you",
+  "GTM": "Te amo",
+  "GIN": "Je t’aime",
+  "GNB": "N’na mistura bué",
+  "GUY": "I love you",
+  "HTI": "Mwen renmen ou",
+  "HND": "Te amo",
+  "HUN": "Szeretlek",
+  "ISL": "Ég elska þig",
+  "IND": "मैं तुमसे प्यार करता हूँ",
+  "IDN": "Aku cinta kamu",
+  "IRN": "دوستت دارم",
+  "IRQ": "أحبك",
+  "IRL": "Taim i’ ngra leat",
+  "ISR": "אני אוהב אותך",
+  "ITA": "Ti amo",
+  "CIV": "Mo fè ran",
+  "JAM": "Mi love yuh",
+  "JPN": "愛してる",
+  "JOR": "أنا أحبك",
+  "KAZ": "Мен сені жақсы көремін",
+  "KEN": "Nakupenda",
+  "KIR": "I tangiringiriko",
+  "KWT": "أنا أحبك",
+  "KGZ": "Мен сени жакшы көрөм",
+  "LAO": "ຂ້ອຍ​ຮັກ​ເຈົ້າ",
+  "LVA": "Es tevi milu",
+  "LBN": "أنا بحبك",
+  "LSO": "Kea u rata",
+  "LBR": "I love you",
+  "LBY": "أنا أحبك",
+  "LIE": "Ich liebe dich",
+  "LTU": "Aš tave myliu",
+  "LUX": "Ech hun dech gaer",
+  "MDG": "Tiako ianao",
+  "MWI": "Ndimakukonda",
+  "MYS": "Saya cinta padamu",
+  "MDV": "މަސްދޫ ހެދިއްޖެ",
+  "MLI": "M’bi fe",
+  "MLT": "Inhobbok",
+  "MHL": "Ij iokwe eok",
+  "MRT": "أحبك",
+  "MUS": "Mo content toi",
+  "MEX": "Te amo",
+  "FSM": "I love you",
+  "MDA": "Te iubesc",
+  "MCO": "Je t’aime",
+  "MNG": "Би чамд хайртай",
+  "MNE": "Volim te",
+  "MAR": "Kanbghik",
+  "MOZ": "Eu te amo",
+  "MMR": "မင်္ဂလာပါ ချစ်တယ်",
+  "NAM": "I love you",
+  "NRU": "I love you",
+  "NPL": "म तिमीलाई माया गर्छु",
+  "NLD": "Ik hou van jou",
+  "NZL": "Aroha ahau ki a koe",
+  "NIC": "Te amo",
+  "NER": "Ina son ku",
+  "NGA": "Mo nifẹ rẹ",
+  "PRK": "사랑해요",
+  "MKD": "Te sakam",
+  "NOR": "Jeg elsker deg",
+  "OMN": "أنا أحبك",
+  "PAK": "میں تم سے پیار کرتا ہوں",
+  "PLW": "Ngak ra milengem",
+  "PSE": "أنا بحبك",
+  "PAN": "Te amo",
+  "PNG": "Mi laikim yu",
+  "PRY": "Rohayhu",
+  "PER": "Te amo",
+  "PHL": "Mahal kita",
+  "POL": "Kocham cię",
+  "PRT": "Eu te amo",
+  "QAT": "أنا أحبك",
+  "ROU": "Te iubesc",
+  "RUS": "Я тебя люблю",
+  "RWA": "Ndagukunda",
+  "KNA": "I love you",
+  "LCA": "I love you",
+  "VCT": "I love you",
+  "WSM": "Ou te alofa ia te oe",
+  "SMR": "Ti amo",
+  "STP": "Eu te amo",
+  "SAU": "أحبك",
+  "SEN": "Nopp naa la",
+  "SRB": "Volim te",
+  "SYC": "Mon kontan ou",
+  "SLE": "A yef we",
+  "SGP": "I love you",
+  "SVK": "Ľúbim ťa",
+  "SVN": "Ljubim te",
+  "SLB": "Iumi lavem yu",
+  "SOM": "Waan ku jeclahay",
+  "ZAF": "Ek het jou lief",
+  "KOR": "사랑해요",
+  "SSD": "Amiti mi jom",
+  "ESP": "Te amo",
+  "LKA": "මම ඔබට ආදරෙයි",
+  "SDN": "أنا أحبك",
+  "SUR": "Mi lobi joe",
+  "SWE": "Jag älskar dig",
+  "CHE": "Ich liebe dich",
+  "SYR": "أنا أحبك",
+  "TWN": "我愛你",
+  "TJK": "Ман туро дӯст медорам",
+  "TZA": "Nakupenda",
+  "THA": "ฉันรักคุณ",
+  "TLS": "Hau hadomi o",
+  "TGO": "Me do kpé wo",
+  "TON": "ʻOfa atu",
+  "TTO": "I love you",
+  "TUN": "أنا أحبك",
+  "TUR": "Seni seviyorum",
+  "TKM": "Men seni söýýärin",
+  "TUV": "Alofa atu",
+  "UGA": "Nkwagala",
+  "UKR": "Я тебе кохаю",
+  "ARE": "أحبك",
+  "GBR": "I love you",
+  "USA": "I love you",
+  "URY": "Te amo",
+  "UZB": "Men seni sevaman",
+  "VUT": "Mi lavem yu",
+  "VEN": "Te amo",
+  "VNM": "Anh yêu em",
+  "YEM": "أنا أحبك",
+  "ZMB": "Ndimakukonda",
+  "ZWE": "Ndinokuda"
 };
 
-am5.ready(function() {
-  let root = am5.Root.new("worldMapContainer");
-  root.setThemes([am5themes_Animated.new(root)]);
+const svg = d3.select("#worldMapSVG");
+const popup = document.getElementById("loveMessageBox");
+const path = d3.geoPath().projection(d3.geoMercator().scale(320).translate([1000, 510]));
 
-  let chart = root.container.children.push(
-    am5map.MapChart.new(root, {
-      panX: "translateX",
-      panY: "translateY",
-      projection: am5map.geoMercator(),
-      wheelY: "zoom",
-      pinchZoom: true
-    })
-  );
+fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+  .then(res => res.json())
+  .then(worldData => {
+    const countries = topojson.feature(worldData, worldData.objects.countries).features;
 
-  let polygonSeries = chart.series.push(
-    am5map.MapPolygonSeries.new(root, {
-      geoJSON: am5geodata_worldLow,
-      valueField: "value",
-      calculateAggregates: true
-    })
-  );
+    svg.selectAll("path")
+      .data(countries)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("fill", "#89CFF0")
+      .attr("stroke", "#ffffff")
+      .attr("stroke-width", 0.5)
+      .style("cursor", "pointer")
+      .on("click", function(event, d) {
+        const code = d.id;
+        const name = d.properties.name || "";
+        const message = loveMessages[code] || "I love you";
 
-  polygonSeries.mapPolygons.template.setAll({
-    interactive: true,
-    fill: am5.color(0x8cbcd6),
-    stroke: am5.color(0xffffff),
-    tooltipText: ""
+        popup.innerText = `${name}: ${message}`;
+        popup.style.left = `${event.pageX}px`;
+        popup.style.top = `${event.pageY - 40}px`;
+        popup.style.display = "block";
+
+        setTimeout(() => popup.style.display = "none", 2500);
+      });
   });
-
-  polygonSeries.mapPolygons.template.events.on("click", function(ev) {
-    const name = ev.target.dataItem.dataContext.name;
-    const message = loveMessages[name] || "I love you";
-
-    const popup = document.createElement("div");
-    popup.innerText = `${name}: ${message}`;
-    popup.style.position = "fixed";
-    popup.style.left = "50%";
-    popup.style.top = "20px";
-    popup.style.transform = "translateX(-50%)";
-    popup.style.background = "#222";
-    popup.style.color = "#fff";
-    popup.style.padding = "10px 20px";
-    popup.style.borderRadius = "10px";
-    popup.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
-    popup.style.fontSize = "16px";
-    popup.style.zIndex = "9999";
-    document.body.appendChild(popup);
-
-    setTimeout(() => {
-      document.body.removeChild(popup);
-    }, 2500);
-  });
-});
 </script>
   
   <button class="collapsible" style="
