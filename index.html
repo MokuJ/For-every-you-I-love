@@ -1415,12 +1415,12 @@
     <!-- 🔻 PIN POINTER (inverted) -->
     <div style="position: relative; text-align: center;">
       <!-- ✅ Responsive Country Wheel Block -->
-<div style="position: relative; display: inline-block; margin-top: 20px;">
+<div style="position: relative; display: flex; justify-content: center; align-items: center; max-width: 90vw; margin: 20px auto;">
   <!-- 📍 Pointer -->
-  <div class="wheel-pointer" style="position: absolute; width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red;"></div>
+  <div class="wheel-pointer" style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red; z-index: 10;"></div>
 
   <!-- 🌀 Canvas -->
-  <canvas id="loveWheel" width="500" height="500" style="width: 100%; max-width: 500px; height: auto; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
+  <canvas id="loveWheel" style="width: 90vw; max-width: 500px; aspect-ratio: 1 / 1; height: auto; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
 </div>
 </div>
 
@@ -2845,6 +2845,30 @@ function resizeLoveWheel() {
   canvas.style.width = size + "px";
   canvas.style.height = size + "px";
 
+  pointer.style.top = `-${Math.floor(size * 0.04)}px`;
+  pointer.style.left = "50%";
+  pointer.style.transform = "translateX(-50%) rotate(180deg)";
+}
+
+window.addEventListener("load", resizeLoveWheel);
+window.addEventListener("resize", resizeLoveWheel);
+</script>
+<script>
+function resizeLoveWheel() {
+  const canvas = document.getElementById("loveWheel");
+  const pointer = document.querySelector(".wheel-pointer");
+
+  if (!canvas || !pointer) return;
+
+  // Get displayed width from computed style
+  const rect = canvas.getBoundingClientRect();
+  const size = Math.floor(rect.width);
+
+  // Set internal canvas resolution
+  canvas.width = size;
+  canvas.height = size;
+
+  // Realign pointer
   pointer.style.top = `-${Math.floor(size * 0.04)}px`;
   pointer.style.left = "50%";
   pointer.style.transform = "translateX(-50%) rotate(180deg)";
