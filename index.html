@@ -1731,44 +1731,48 @@ for (let i = 0; i < collapsibles.length; i++) {
 }
 </script>
   
-<!-- 💍 Marry Me Button -->
-<button id="marryButton" style="
-  background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
-  color: #ffe5e5;
-  font-size: 1.3em;
-  font-weight: 600;
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  text-align: center;
-  border: 2px solid #ff6b6b;
-  border-radius: 12px;
-  padding: 14px 24px;
-  max-width: 300px;
-  margin: 40px auto 10px auto;
-  display: block;
-  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: pulseGlow 3s infinite ease-in-out;
-  cursor: pointer;
-">💍 Marry me?</button>
+<!-- 💍 MARRY ME COLLAPSIBLE -->
+<div id="marryWrapper" style="text-align: center; margin: 50px auto;">
+  <button id="marryButton" style="
+    background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
+    color: #ffe5e5;
+    font-size: 1.3em;
+    font-weight: 600;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    text-align: center;
+    border: 2px solid #ff6b6b;
+    border-radius: 12px;
+    padding: 14px 24px;
+    max-width: 300px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulseGlow 3s infinite ease-in-out;
+    cursor: pointer;
+  ">
+    💍 Marry me?
+  </button>
 
-<!-- 💌 Message Box -->
-<div id="marryContent" style="
-  display: none;
-  background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
-  border: 2px solid #ff9999;
-  border-radius: 14px;
-  padding: 30px;
-  color: #fff0f0;
-  font-size: 1.4em;
-  font-family: 'Georgia', serif;
-  max-width: 700px;
-  margin: 0 auto 60px auto;
-  box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
-  text-align: center;
-  line-height: 1.8;
-  text-shadow: 1px 1px 2px #000;
-">
-  <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
+  <div id="marryContent" style="
+    display: none;
+    margin-top: 30px;
+    padding: 30px;
+    background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
+    border: 2px solid #ff9999;
+    border-radius: 14px;
+    color: #fff0f0;
+    font-size: 1.4em;
+    font-family: 'Georgia', serif;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
+    text-align: center;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px #000;
+  ">
+    <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
+  </div>
 </div>
 
 <style>
@@ -2978,37 +2982,20 @@ document.getElementById("marryButton").addEventListener("click", function () {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  function setupSingleClickToggle(buttonId, boxId) {
-    const btn = document.getElementById(buttonId);
-    const box = document.getElementById(boxId);
-    if (!btn || !box) return;
-
-    btn.addEventListener("click", () => {
-      box.style.display = box.style.display === "block" ? "none" : "block";
-    });
-  }
-
-  // 🎯 Specifically fix these buttons
-  setupSingleClickToggle("contactBtn", "contactBox");
-  setupSingleClickToggle("musicBtn", "musicBox");
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("marryButton");
   const content = document.getElementById("marryContent");
   const target = document.getElementById("marryTypewriter");
   const message = "Will you marry me, Kanak?";
+
   let i = 0;
   let typing = false;
 
   btn.addEventListener("click", () => {
     if (typing) return;
 
-    const isOpen = content.style.display === "block";
+    const isVisible = content.style.display === "block";
 
-    if (!isOpen) {
+    if (!isVisible) {
       content.style.display = "block";
       target.innerHTML = "";
       i = 0;
@@ -3026,6 +3013,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       type();
 
+      // Optional: Confetti if loaded
       if (typeof confetti === "function") {
         confetti({
           particleCount: 150,
