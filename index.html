@@ -3217,5 +3217,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
+<script>
+  const testAudio = document.createElement("audio");
+  testAudio.src = "glitch.mp3";
+  testAudio.addEventListener("canplaythrough", () => alert("✅ Browser can play glitch.mp3"));
+  testAudio.addEventListener("error", () => alert("❌ Can't play glitch.mp3. Check file."));
+</script>
+<audio controls>
+  <source src="glitch.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 </body>
 </html>
