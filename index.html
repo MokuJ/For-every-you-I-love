@@ -3085,5 +3085,53 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleVisibility("musicBtn", "musicBox");
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("marryButton");
+  const content = document.getElementById("marryContent");
+  const writer = document.getElementById("marryTypewriter");
+  const message = "Will you marry me, Kanak?";
+  let i = 0;
+  let typing = false;
+
+  if (!btn || !content || !writer) return;
+
+  btn.addEventListener("click", () => {
+    const visible = content.style.display === "block";
+
+    if (!visible) {
+      content.style.display = "block";
+      if (typing || writer.innerText) return;
+
+      typing = true;
+      writer.innerText = "";
+      i = 0;
+
+      const type = () => {
+        if (i < message.length) {
+          writer.innerText += message.charAt(i++);
+          setTimeout(type, 70);
+        } else {
+          typing = false;
+        }
+      };
+      type();
+
+      // Confetti, if library is loaded
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 180,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+        });
+      }
+    } else {
+      content.style.display = "none";
+    }
+  });
+});
+</script>
 </body>
 </html>
