@@ -1914,10 +1914,11 @@ drawWheel();
     </div>
   </div>
 
-<!-- ✅ FULLY WORKING COLLAPSIBLES + BUTTONS -->
+<!-- ✅ FULL BLOCK: THE VOID + ENDGAME -->
 <div style="max-width: 600px; margin: 40px auto;">
-  <!-- The Void That Replies -->
-  <button class="collapsible" style="background-color: #1a1a1a; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; display: block; margin: 0 auto;">
+
+  <!-- 🕳️ The Void That Replies -->
+  <button class="collapsible" style="background-color: #1a1a1a; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; margin: 0 auto; display: block;">
     🕳️ The Void That Replies
   </button>
   <div class="collapsible-content" style="display: none; padding: 20px; background-color: #111; color: white; border-radius: 8px; margin-top: 10px;">
@@ -1927,20 +1928,21 @@ drawWheel();
     <div id="voidReply" style="margin-top: 20px; padding: 15px; background: #1e1e1e; border-left: 5px solid crimson; border-radius: 8px; font-weight: bold; display: none; transition: opacity 0.4s ease;"></div>
   </div>
 
-  <!-- Endgame -->
-  <button class="collapsible" style="background-color: #8b0000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; display: block; margin: 20px auto 0;">
+  <!-- ☠️ Endgame -->
+  <button class="collapsible" style="background-color: #8b0000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; margin: 20px auto 0; display: block;">
     ☠️ Erase Everything
   </button>
   <div class="collapsible-content" style="display: none; padding: 20px; background-color: #1a1a1a; color: white; border-radius: 8px; margin-top: 10px; text-align: center;">
     <p>Nothing will remain. Not your confessions. Not your spins. Not even the void.</p>
     <button id="eraseButton" style="margin-top: 10px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: crimson; color: white; cursor: pointer;">Confirm Erase</button>
   </div>
+
 </div>
 
-<!-- ✅ SCRIPT BLOCK -->
+<!-- ✅ FINAL SCRIPT THAT WORKS -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // COLLAPSIBLE TOGGLE
+  // Collapsible behavior
   const collapsibles = document.querySelectorAll(".collapsible");
   collapsibles.forEach(button => {
     button.addEventListener("click", () => {
@@ -1949,7 +1951,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // VOID FUNCTIONALITY
+  // Void logic
   const voidReplies = [
     "How tf can you lose Kanak?!?",
     "She'll never read this.",
@@ -1967,33 +1969,38 @@ document.addEventListener("DOMContentLoaded", function () {
     "It will take a while, to make you smile. Somewhere in these eyes, I'm on your side."
   ];
 
-  const voidBtn = document.getElementById("voidButton");
+  const voidButton = document.getElementById("voidButton");
   const voidInput = document.getElementById("voidInput");
   const voidReply = document.getElementById("voidReply");
 
-  voidBtn.addEventListener("click", function () {
-    if (!voidInput.value.trim()) return;
+  if (voidButton) {
+    voidButton.addEventListener("click", function () {
+      const inputText = voidInput.value.trim();
+      if (!inputText) return;
 
-    if (voidReplies.length === 0) {
-      voidReply.innerText = "The void has nothing more to say.";
-    } else {
-      const index = Math.floor(Math.random() * voidReplies.length);
-      voidReply.innerText = voidReplies.splice(index, 1)[0];
-    }
+      if (voidReplies.length === 0) {
+        voidReply.innerText = "The void has nothing more to say.";
+      } else {
+        const index = Math.floor(Math.random() * voidReplies.length);
+        voidReply.innerText = voidReplies.splice(index, 1)[0];
+      }
 
-    voidReply.style.opacity = 0;
-    voidReply.style.display = "block";
-    setTimeout(() => {
-      voidReply.style.opacity = 1;
-    }, 50);
-  });
+      voidReply.style.opacity = 0;
+      voidReply.style.display = "block";
+      setTimeout(() => {
+        voidReply.style.opacity = 1;
+      }, 50);
+    });
+  }
 
-  // ENDGAME FUNCTIONALITY
-  const eraseBtn = document.getElementById("eraseButton");
-  eraseBtn.addEventListener("click", function () {
-    localStorage.clear();
-    document.body.innerHTML = \"<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:white; font-size:22px; font-family:sans-serif;'>You let go.</div>\";
-  });
+  // Erase logic
+  const eraseButton = document.getElementById("eraseButton");
+  if (eraseButton) {
+    eraseButton.addEventListener("click", function () {
+      localStorage.clear();
+      document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:white; font-size:22px; font-family:sans-serif;'>You let go.</div>";
+    });
+  }
 });
 </script>
 
