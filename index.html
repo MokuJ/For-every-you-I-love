@@ -1414,8 +1414,14 @@
   </button>  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #111; color: white; border-radius: 8px; margin-top: 10px;">
     <!-- 🔻 PIN POINTER (inverted) -->
     <div style="position: relative; text-align: center;">
-      <div style="position: absolute; bottom: 510px; left: 50%; transform: translateX(-50%) rotate(180deg); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red;"></div><!-- 🌀 CANVAS -->
-  <canvas id="loveWheel" width="500" height="500" style="border-radius: 50%; border: 6px solid #555; background: #222;"></canvas>
+      <!-- ✅ Responsive Country Wheel Block -->
+<div style="position: relative; display: inline-block; margin-top: 20px;">
+  <!-- 📍 Pointer -->
+  <div class="wheel-pointer" style="position: absolute; width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red;"></div>
+
+  <!-- 🌀 Canvas -->
+  <canvas id="loveWheel" width="360" height="360" style="width: 100%; max-width: 360px; height: auto; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
+</div>
 </div>
 
 <!-- 🧿 SPIN BUTTON (centered) -->
@@ -2815,6 +2821,37 @@ function adjustScaling() {
 
 window.addEventListener("load", adjustScaling);
 window.addEventListener("resize", adjustScaling);
+</script>
+<script>
+function resizeLoveWheel() {
+  const canvas = document.getElementById("loveWheel");
+  const pointer = document.querySelector(".wheel-pointer");
+
+  if (!canvas || !pointer) return;
+
+  const screenWidth = window.innerWidth;
+  let size;
+
+  if (screenWidth >= 1024) {
+    size = 500;
+  } else if (screenWidth >= 768) {
+    size = 400;
+  } else {
+    size = Math.floor(screenWidth * 0.9);
+  }
+
+  canvas.width = size;
+  canvas.height = size;
+  canvas.style.width = size + "px";
+  canvas.style.height = size + "px";
+
+  pointer.style.top = `-${Math.floor(size * 0.04)}px`;
+  pointer.style.left = "50%";
+  pointer.style.transform = "translateX(-50%) rotate(180deg)";
+}
+
+window.addEventListener("load", resizeLoveWheel);
+window.addEventListener("resize", resizeLoveWheel);
 </script>
 </body>
 </html>
