@@ -1471,32 +1471,40 @@ am5.ready(function() {
   root.setThemes([am5themes_Animated.new(root)]);
 
   let chart = root.container.children.push(am5map.MapChart.new(root, {
-    panX: "none",
-    panY: "none",
-    wheelY: "none",
-    projection: am5map.geoMercator()
+    panX: "rotateX",
+    panY: "rotateY",
+    projection: am5map.geoMercator(),
+    wheelY: "zoom",
+    pinchZoom: true
   }));
 
   let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-    geoJSON: am5geodata_worldLow
+    geoJSON: am5geodata_worldLow,
+    valueField: "value"
   }));
 
   polygonSeries.mapPolygons.template.setAll({
     tooltipText: "{name}",
     interactive: true,
-    cursorOverStyle: "pointer"
+    cursorOverStyle: "pointer",
+    fill: am5.color(0x8ab6d6),
+    stroke: am5.color(0xffffff)
   });
 
   polygonSeries.mapPolygons.template.events.on("click", function(ev) {
     const countryName = ev.target.dataItem.dataContext.name;
     const message = loveMessages[countryName];
     if (message) {
-      ev.target.showTooltip({
-        forceHidden: false,
-        text: message
+      let tooltip = am5.Tooltip.new(root, {
+        getFillFromSprite: false,
+        labelText: message,
+        background: am5.Rectangle.new(root, {
+          fill: am5.color(0x111111),
+          fillOpacity: 0.9
+        })
       });
-    } else {
-      ev.target.hideTooltip();
+      ev.target.set("tooltip", tooltip);
+      tooltip.show();
     }
   });
 });
