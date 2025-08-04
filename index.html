@@ -1660,6 +1660,11 @@ function drawWheel() {
 
 document.getElementById("spinButton").addEventListener("click", () => {
   if (isSpinning) return;
+
+  const audio = new Audio('spin.mp3');
+  audio.play();
+
+  isSpinning = true;
   isSpinning = true;
   const canvas = document.getElementById("loveWheel");
   const numSlices = countries.length;
@@ -1715,58 +1720,26 @@ window.addEventListener("load", () => {
 });
 window.addEventListener("resize", resizeWheelCanvas);
 
-// Collapsible logic
-const collapsibles = document.getElementsByClassName("collapsible");
-for (let i = 0; i < collapsibles.length; i++) {
-  collapsibles[i].addEventListener("click", function () {
-    this.classList.toggle("active");
-    const content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-      setTimeout(resizeWheelCanvas, 100); // 🛠 Fix canvas on open
-    }
+<script>
+function setupAllCollapsibles() {
+  document.querySelectorAll(".collapsible").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      const isOpen = content.style.display === "block";
+      content.style.display = isOpen ? "none" : "block";
+    });
   });
 }
+
+setupAllCollapsibles();
 </script>
   
-  <button class="collapsible" style="
-  background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
-  color: #ffe5e5;
-  font-size: 1.3em;
-  font-weight: 600;
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  text-align: center;
-  border: 2px solid #ff6b6b;
-  border-radius: 12px;
-  padding: 14px 24px;
-  max-width: 300px;
-  margin: 40px auto 10px auto;
-  display: block;
-  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: pulseGlow 3s infinite ease-in-out;
-">
+  <!-- ✅ FIXED: Proposal Collapsible -->
+<button class="collapsible" style="background-color: #8b0000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; display: block; margin: 20px auto 0;">
   💍 Marry me?
 </button>
-
-<div class="content" style="
-  background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
-  border: 2px solid #ff9999;
-  border-radius: 14px;
-  padding: 30px;
-  color: #fff0f0;
-  font-size: 1.4em;
-  font-family: 'Georgia', serif;
-  max-width: 700px;
-  margin: 0 auto 60px auto;
-  box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
-  text-align: center;
-  line-height: 1.8;
-  text-shadow: 1px 1px 2px #000;
-">
-  <p style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
+<div class="collapsible-content" style="display: none; padding: 20px; background-color: #1a1a1a; color: white; border-radius: 8px; margin-top: 10px; text-align: center;">
+  <p style="font-size: 18px;">You already have me.</p>
 </div>
 
 <style>
