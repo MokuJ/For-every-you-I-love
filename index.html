@@ -1408,11 +1408,12 @@
     </details>
   </div>
   
-  <!-- Collapsible World Love Map --><button class="collapsible">🌍 Around The World, I Still Love You</button>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
-<div class="content">
-  <div id="worldMapContainer" style="height: 500px; width: 100%; margin: 20px auto;"></div>
-</div><!-- Load amCharts and map libraries --><script src="https://cdn.amcharts.com/lib/5/index.js"></script><script src="https://cdn.amcharts.com/lib/5/map.js"></script><script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script><script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script><script>
+<script>
 const loveMessages = {
   "India": "मैं तुमसे प्यार करता हूँ",
   "Japan": "愛してる",
@@ -1428,84 +1429,43 @@ const loveMessages = {
   "Mexico": "Te amo",
   "United Kingdom": "I love you",
   "Canada": "I love you",
-  "Australia": "I love you",
-  "Saudi Arabia": "أحبك",
-  "Thailand": "ฉันรักคุณ",
-  "Vietnam": "Anh yêu em",
-  "Turkey": "Seni seviyorum",
-  "Indonesia": "Aku cinta kamu",
-  "Iran": "دوستت دارم",
-  "Philippines": "Mahal kita",
-  "Egypt": "بحبك",
-  "Pakistan": "میں تم سے پیار کرتا ہوں",
-  "Bangladesh": "আমি তোমায় ভালোবাসি",
-  "Ukraine": "Я тебе кохаю",
-  "Argentina": "Te amo",
-  "South Africa": "Ek het jou lief",
-  "Poland": "Kocham cię",
-  "Netherlands": "Ik hou van jou",
-  "Sweden": "Jag älskar dig",
-  "Norway": "Jeg elsker deg",
-  "Denmark": "Jeg elsker dig",
-  "Greece": "Σ’ αγαπώ",
-  "Portugal": "Eu te amo",
-  "Czech Republic": "Miluji tě",
-  "Hungary": "Szeretlek",
-  "Romania": "Te iubesc",
-  "Israel": "אני אוהב אותך",
-  "Malaysia": "Saya cinta padamu",
-  "Singapore": "I love you",
-  "New Zealand": "Aroha ahau ki a koe",
-  "Nepal": "म तिमीलाई माया गर्छु",
-  "Sri Lanka": "මම ඔබට ආදරෙයි",
-  "Iraq": "أحبك",
-  "Afghanistan": "زه تا سره مینه لرم",
-  "Switzerland": "Ich liebe dich",
-  "Austria": "Ich liebe dich",
-  "Belgium": "Ik hou van jou",
-  "Finland": "Rakastan sinua"
+  "Australia": "I love you"
 };
 
 am5.ready(function() {
   let root = am5.Root.new("worldMapContainer");
   root.setThemes([am5themes_Animated.new(root)]);
 
-  let chart = root.container.children.push(am5map.MapChart.new(root, {
-    panX: "rotateX",
-    panY: "rotateY",
-    projection: am5map.geoMercator(),
-    wheelY: "zoom",
-    pinchZoom: true
-  }));
+  let chart = root.container.children.push(
+    am5map.MapChart.new(root, {
+      panX: "rotateX",
+      panY: "rotateY",
+      projection: am5map.geoMercator(),
+      wheelY: "zoom",
+      pinchZoom: true
+    })
+  );
 
-  let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-    geoJSON: am5geodata_worldLow,
-    valueField: "value"
-  }));
+  let polygonSeries = chart.series.push(
+    am5map.MapPolygonSeries.new(root, {
+      geoJSON: am5geodata_worldLow,
+      valueField: "value",
+      calculateAggregates: true
+    })
+  );
 
   polygonSeries.mapPolygons.template.setAll({
     tooltipText: "{name}",
     interactive: true,
     cursorOverStyle: "pointer",
-    fill: am5.color(0x8ab6d6),
+    fill: am5.color(0x8cbcd6),
     stroke: am5.color(0xffffff)
   });
 
   polygonSeries.mapPolygons.template.events.on("click", function(ev) {
-    const countryName = ev.target.dataItem.dataContext.name;
-    const message = loveMessages[countryName];
-    if (message) {
-      let tooltip = am5.Tooltip.new(root, {
-        getFillFromSprite: false,
-        labelText: message,
-        background: am5.Rectangle.new(root, {
-          fill: am5.color(0x111111),
-          fillOpacity: 0.9
-        })
-      });
-      ev.target.set("tooltip", tooltip);
-      tooltip.show();
-    }
+    const name = ev.target.dataItem.dataContext.name;
+    const love = loveMessages[name] || "I love you";
+    alert(name + ": " + love);
   });
 });
 </script>
