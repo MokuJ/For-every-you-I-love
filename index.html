@@ -3099,5 +3099,54 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <audio id="spinSound" src="spin.mp3" preload="auto"></audio>
+<script>
+function eraseEverything() {
+  // Clear storage
+  localStorage.clear();
+
+  // Destroy the entire page's body
+  document.body.innerHTML = `
+    <style>
+      @keyframes glitch {
+        0% { transform: skew(0.5deg); }
+        10% { transform: translate(-2px, 2px) skew(0.5deg); }
+        20% { transform: translate(2px, -2px) skew(0.5deg); }
+        30% { transform: translate(-1px, 1px) skew(0.5deg); }
+        40% { transform: translate(1px, -1px) skew(0.5deg); }
+        50% { transform: translate(0px, 0px) skew(0.5deg); }
+        100% { opacity: 0; transform: scale(0.5) rotate(720deg); }
+      }
+
+      @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.2; }
+        75% { opacity: 0.5; }
+      }
+
+      body {
+        background-color: black;
+        color: red;
+        font-family: monospace;
+        font-size: 2em;
+        text-align: center;
+        animation: glitch 5s ease-out forwards, flicker 1s infinite;
+        padding-top: 25vh;
+      }
+    </style>
+    <div id="endText">YOU ERASED EVERYTHING<br><span style="font-size:0.5em;">there is no coming back</span></div>
+  `;
+
+  // Optional: Glitch sound (if you want it)
+  const glitchSound = new Audio('glitch.mp3');
+  glitchSound.volume = 0.5;
+  glitchSound.play();
+
+  // Optional: Also shake the screen (vibration on supported devices)
+  if (window.navigator.vibrate) {
+    navigator.vibrate([200, 100, 200, 100, 500]);
+  }
+}
+</script>
+<audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
 </body>
 </html>
