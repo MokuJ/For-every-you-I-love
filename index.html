@@ -2994,6 +2994,63 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  const button = document.getElementById("marryButton");
+  const content = document.getElementById("marryContent");
+  const target = document.getElementById("marryTypewriter");
+  const message = "Will you marry me, Kanak?";
+  
+  let index = 0;
+  let typingTimeout;
+  let isTyping = false;
+
+  if (!button || !content || !target) {
+    console.error("Missing marry elements.");
+    return;
+  }
+
+  button.addEventListener("click", function () {
+    const isVisible = content.style.display === "block";
+
+    if (isTyping) return; // ❌ Don't allow clicking while typing
+
+    if (!isVisible) {
+      content.style.display = "block";
+      target.innerHTML = "";
+      index = 0;
+      isTyping = true;
+      button.disabled = true;
+
+      function typeWriter() {
+        if (index < message.length) {
+          target.innerHTML += message.charAt(index);
+          index++;
+          typingTimeout = setTimeout(typeWriter, 70);
+        } else {
+          isTyping = false;
+          button.disabled = false;
+        }
+      }
+
+      clearTimeout(typingTimeout);
+      typeWriter();
+
+      // 🎉 Confetti
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+        });
+      }
+    } else {
+      content.style.display = "none";
+    }
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
   function toggleVisibility(buttonId, boxId) {
     const button = document.getElementById(buttonId);
     const box = document.getElementById(boxId);
@@ -3019,64 +3076,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleVisibility("contactBtn", "contactBox");
   toggleVisibility("musicBtn", "musicBox");
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("marryButton");
-  const box = document.getElementById("marryContent");
-  const target = document.getElementById("marryTypewriter");
-
-  const msg = "Will you marry me, Kanak?";
-  let i = 0;
-  let isTyping = false;
-
-  if (!btn || !box || !target) {
-    console.error("Missing marryButton, marryContent, or marryTypewriter.");
-    return;
-  }
-
-  btn.addEventListener("click", function () {
-    const isOpen = box.style.display === "block";
-
-    // ✅ If already open and not typing, close
-    if (isOpen && !isTyping) {
-      box.style.display = "none";
-      return;
-    }
-
-    // ✅ If closed, start opening
-    if (!isOpen) {
-      box.style.display = "block";
-      target.innerHTML = "";
-      i = 0;
-      isTyping = true;
-      btn.disabled = true;
-
-      function typeChar() {
-        if (i < msg.length) {
-          target.innerHTML += msg.charAt(i);
-          i++;
-          setTimeout(typeChar, 70);
-        } else {
-          isTyping = false;
-          btn.disabled = false;
-        }
-      }
-
-      typeChar();
-
-      // 🎉 Confetti Burst
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 150,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-        });
-      }
-    }
-  });
 });
 </script>
 </body>
