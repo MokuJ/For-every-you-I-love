@@ -1732,6 +1732,7 @@ for (let i = 0; i < collapsibles.length; i++) {
 </script>
   
   <!-- 💍 Marry Me Button -->
+  <div style="position: relative; z-index: 1;">
 <button id="marryButton" style="
   background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
   color: #ffe5e5;
@@ -1748,9 +1749,10 @@ for (let i = 0; i < collapsibles.length; i++) {
   box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: pulseGlow 3s infinite ease-in-out;
-">
-  💍 Marry me?
-</button>
+  cursor: pointer;
+  pointer-events: auto;
+">💍 Marry me?</button>
+</div>
 
 <div id="marryContent" style="
   display: none;
@@ -2999,24 +3001,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const box = document.getElementById("marryContent");
   const target = document.getElementById("marryTypewriter");
   const msg = "Will you marry me, Kanak?";
-
-  let i = 0;
   let typing = false;
+  let i = 0;
 
-  if (!btn || !box || !target) return;
+  if (!btn || !box || !target) {
+    console.error("Missing elements.");
+    return;
+  }
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", function () {
     if (typing) return;
 
-    const isVisible = box.style.display === "block";
+    const isOpen = box.style.display === "block";
 
-    if (!isVisible) {
+    if (!isOpen) {
       box.style.display = "block";
       target.innerHTML = "";
       i = 0;
       typing = true;
 
-      const type = () => {
+      function type() {
         if (i < msg.length) {
           target.innerHTML += msg.charAt(i);
           i++;
@@ -3024,7 +3028,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           typing = false;
         }
-      };
+      }
 
       type();
 
