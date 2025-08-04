@@ -884,6 +884,35 @@
 }
 </style>
   </style>
+  <!-- Confetti + Typewriter Styles -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<style>
+  .typewriter-text {
+    display: inline-block;
+    border-right: 2px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
+    font-size: 1.5em;
+    color: gold;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: white }
+  }
+
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.7); }
+    100% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.2); }
+  }
+</style>
 </head>
 <body>
 
@@ -1731,63 +1760,43 @@ for (let i = 0; i < collapsibles.length; i++) {
 }
 </script>
   
-<!-- 💍 Marry Me Section -->
-<div style="max-width: 600px; margin: 60px auto; text-align: center;">
-  <button id="marryButton" style="
-    background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
-    color: #ffe5e5;
-    font-size: 1.3em;
-    font-weight: 600;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-    border: 2px solid #ff6b6b;
-    border-radius: 12px;
-    padding: 14px 24px;
-    max-width: 300px;
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
-    animation: pulseGlow 3s infinite ease-in-out;
-    cursor: pointer;
-  ">💍 Marry me?</button>
+<!-- 💍 Marry Me? Collapsible -->
+<button id="marryMeBtn" style="
+  background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
+  color: #ffe5e5;
+  font-size: 1.3em;
+  font-weight: 600;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  text-align: center;
+  border: 2px solid #ff6b6b;
+  border-radius: 12px;
+  padding: 14px 24px;
+  max-width: 300px;
+  margin: 40px auto 10px auto;
+  display: block;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+  animation: pulseGlow 3s infinite ease-in-out;
+  cursor: pointer;
+">
+  💍 Marry me?
+</button>
 
-  <div id="marryContent" style="
-    display: none;
-    background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
-    border: 2px solid #ff9999;
-    border-radius: 14px;
-    padding: 30px;
-    color: #fff0f0;
-    font-size: 1.4em;
-    font-family: 'Georgia', serif;
-    max-width: 700px;
-    margin: 0 auto;
-    box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
-    text-align: center;
-    text-shadow: 1px 1px 2px #000;
-  ">
-    <!-- ✅ THIS ID IS CRUCIAL -->
-    <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
-  </div>
-</div>
-
-<style>
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 18px rgba(255, 107, 107, 0.6);
-    transform: scale(1.03);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
-    transform: scale(1);
-  }
-}
-</style>
+<div id="marryMeContent" style="
+  display: none;
+  background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
+  border: 2px solid #ff9999;
+  border-radius: 14px;
+  padding: 30px;
+  color: #fff0f0;
+  font-size: 1.4em;
+  font-family: 'Georgia', serif;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+  box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
+  text-align: center;
+  line-height: 1.8;
+  text-shadow: 1px 1px 2px #000;
+"></div>
 
   <div class="music-collection-container">
     <button id="musicBtn" onclick="toggleMusicCollection()">
@@ -2461,24 +2470,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 </style>
 
-<!-- 🎉 Confetti on Click -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
 <script>
-  document.querySelectorAll(".collapsible").forEach(button => {
-    button.addEventListener("click", function () {
-      if (this.textContent.includes("Marry me")) {
-  const content = this.nextElementSibling;
-  const isOpening = content.style.display !== "block";
-  if (isOpening) {
-    confetti({
-      particleCount: 150,
-      spread: 80,
-      origin: { y: 0.6 }
-    });
-  }
-}
-    });
-  });
   document.querySelectorAll(".collapsible").forEach(button => {
   button.addEventListener("click", function () {
     const content = this.nextElementSibling;
@@ -2572,38 +2565,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 </style>
 
-<script>
-  // 💗 Add heartbeat class to "Marry me?" button
-  const marryButton = [...document.querySelectorAll(".collapsible")]
-    .find(btn => btn.textContent.trim().includes("Marry me"));
-  if (marryButton) {
-    marryButton.classList.add("marriage-proposal");
-  }
-
-  // 💌 Typewriter effect for the proposal message
-  function typeText(el, text, speed = 60) {
-    let i = 0;
-    el.innerHTML = '';
-    const interval = setInterval(() => {
-      el.innerHTML += text.charAt(i);
-      i++;
-      if (i >= text.length) clearInterval(interval);
-    }, speed);
-  }
-
-  if (marryButton) {
-    marryButton.addEventListener("click", function () {
-      const content = this.nextElementSibling;
-      const isOpening = content.style.display !== "block";
-      if (isOpening) {
-        const p = content.querySelector('p');
-        if (p) {
-          typeText(p, "Will you marry me, Kanak?");
-        }
-      }
-    });
-  }
-</script>
 
 <script>
 const memeImages = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg"];
@@ -2959,102 +2920,6 @@ document.querySelectorAll(".collapsible").forEach(button => {
   });
 });
 </script>
-<script>
-document.querySelectorAll(".inner-collapsible").forEach(button => {
-  button.addEventListener("click", function () {
-    const content = this.nextElementSibling;
-    if (!content) return;
-    content.style.display = content.style.display === "block" ? "none" : "block";
-  });
-});
-</script>
-<script>
-document.getElementById("marryButton").addEventListener("click", function () {
-  const content = document.getElementById("marryContent");
-  if (!content) return;
-
-  content.style.display = content.style.display === "block" ? "none" : "block";
-});
-</script>
-
-<!-- 🎉 Confetti Library -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-
-<!-- 💍 Marry Me Script -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const button = document.getElementById("marryButton");
-  const content = document.getElementById("marryContent");
-  const typewriter = document.getElementById("marryTypewriter");
-  const message = "Will you marry me, Kanak?";
-
-  let i = 0;
-  let isTyping = false;
-
-  if (!button || !content || !typewriter) {
-    console.error("Missing button/content/typewriter element.");
-    return;
-  }
-
-  button.addEventListener("click", () => {
-    const isOpen = content.style.display === "block";
-
-    if (isTyping) return;
-
-    if (!isOpen) {
-      content.style.display = "block";
-      i = 0;
-      isTyping = true;
-      typewriter.innerHTML = "";
-
-      function type() {
-        if (i < message.length) {
-          typewriter.innerHTML += message.charAt(i);
-          i++;
-          setTimeout(type, 70);
-        } else {
-          isTyping = false;
-        }
-      }
-
-      type();
-
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 200,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-        });
-      }
-
-    } else {
-      content.style.display = "none";
-    }
-  });
-});
-</script>
-
-<script>
-window.addEventListener("load", function () {
-  const btn = document.getElementById("marryButton");
-  const content = document.getElementById("marryContent");
-
-  if (!btn || !content) return;
-
-  // Reset display state
-  content.style.display = "none";
-
-  // Clear duplicate event listeners
-  const newBtn = btn.cloneNode(true);
-  btn.parentNode.replaceChild(newBtn, btn);
-
-  newBtn.addEventListener("click", function () {
-    const isOpen = content.style.display === "block";
-    content.style.display = isOpen ? "none" : "block";
-  });
-});
-</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -3087,101 +2952,48 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("marryButton");
-  const content = document.getElementById("marryContent");
-  const writer = document.getElementById("marryTypewriter");
-  const message = "Will you marry me, Kanak?";
-  let i = 0;
-  let typing = false;
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("marryMeBtn");
+    const box = document.getElementById("marryMeContent");
+    const message = "Will you marry me, Kanak?";
+    let clicked = false;
 
-  if (!btn || !content || !writer) return;
+    btn.addEventListener("click", () => {
+      const open = box.style.display === "block";
 
-  btn.addEventListener("click", () => {
-    const visible = content.style.display === "block";
+      if (!open && !clicked) {
+        clicked = true;
+        box.style.display = "block";
+        box.innerHTML = `<div class="typewriter-text"></div>`;
 
-    if (!visible) {
-      content.style.display = "block";
-      if (typing || writer.innerText) return;
+        const textBox = box.querySelector(".typewriter-text");
+        let i = 0;
+        const type = () => {
+          if (i < message.length) {
+            textBox.textContent += message.charAt(i++);
+            setTimeout(type, 70);
+          } else {
+            clicked = false;
+          }
+        };
+        type();
 
-      typing = true;
-      writer.innerText = "";
-      i = 0;
-
-      const type = () => {
-        if (i < message.length) {
-          writer.innerText += message.charAt(i++);
-          setTimeout(type, 70);
-        } else {
-          typing = false;
+        // Confetti!
+        if (typeof confetti === "function") {
+          confetti({
+            particleCount: 200,
+            spread: 120,
+            origin: { y: 0.6 },
+            colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+          });
         }
-      };
-      type();
-
-      // Confetti, if library is loaded
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 180,
-          spread: 75,
-          origin: { y: 0.6 },
-          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-        });
+      } else {
+        box.style.display = "none";
+        box.innerHTML = "";
+        clicked = false;
       }
-    } else {
-      content.style.display = "none";
-    }
+    });
   });
-});
-</script>
-<!-- 💥 Confetti -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-
-<!-- 💍 Marry Me – One Script to Rule -->
-<script>
-(() => {
-  const btn = document.getElementById("marryButton");
-  const box = document.getElementById("marryContent");
-  const target = document.getElementById("marryTypewriter");
-  const msg = "Will you marry me, Kanak?";
-  let i = 0, typing = false;
-
-  if (!btn || !box || !target) {
-    console.warn("Missing #marryButton or #marryContent or #marryTypewriter");
-    return;
-  }
-
-  btn.onclick = () => {
-    const shown = box.style.display === "block";
-
-    if (!shown && !typing) {
-      box.style.display = "block";
-      target.innerText = "";
-      i = 0;
-      typing = true;
-
-      const type = () => {
-        if (i < msg.length) {
-          target.innerText += msg.charAt(i++);
-          setTimeout(type, 65);
-        } else {
-          typing = false;
-        }
-      };
-      type();
-
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 222,
-          spread: 100,
-          origin: { y: 0.6 },
-          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-        });
-      }
-    } else {
-      box.style.display = "none";
-    }
-  };
-})();
 </script>
 </body>
 </html>
