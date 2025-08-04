@@ -2974,5 +2974,35 @@ document.getElementById("marryButton").addEventListener("click", function () {
   content.style.display = content.style.display === "block" ? "none" : "block";
 });
 </script>
+<script>
+const marryMessage = "Will you marry me, Kanak?";
+let marryIndex = 0;
+let typingInterval;
+
+function typeMarryMessage() {
+  const target = document.getElementById("marryTypewriter");
+  if (marryIndex < marryMessage.length) {
+    target.innerHTML += marryMessage.charAt(marryIndex);
+    marryIndex++;
+    typingInterval = setTimeout(typeMarryMessage, 70);
+  }
+}
+
+document.getElementById("marryButton").addEventListener("click", function () {
+  const content = document.getElementById("marryContent");
+  if (!content) return;
+
+  const isVisible = content.style.display === "block";
+  content.style.display = isVisible ? "none" : "block";
+
+  if (!isVisible) {
+    // Reset typewriter
+    clearTimeout(typingInterval);
+    marryIndex = 0;
+    document.getElementById("marryTypewriter").innerHTML = "";
+    typeMarryMessage();
+  }
+});
+</script>
 </body>
 </html>
