@@ -2996,19 +2996,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const innerCollapsibles = document.querySelectorAll(".music-collection .inner-collapsible");
+document.addEventListener("DOMContentLoaded", function () {
+  const musicBox = document.getElementById("musicBox");
+  if (!musicBox) return;
 
-    innerCollapsibles.forEach((btn) => {
-      btn.addEventListener("click", function () {
-        const content = this.nextElementSibling;
-        if (!content) return;
+  const innerCollapsibles = musicBox.querySelectorAll(".inner-collapsible");
 
-        const isOpen = content.style.display === "block";
-        content.style.display = isOpen ? "none" : "block";
-      });
+  innerCollapsibles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      if (!content) return;
+      const isVisible = content.style.display === "block";
+      content.style.display = isVisible ? "none" : "block";
     });
   });
+});
 </script>
 </body>
 </html>
