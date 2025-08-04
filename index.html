@@ -1732,7 +1732,7 @@ for (let i = 0; i < collapsibles.length; i++) {
 </script>
   
   <!-- 💍 Marry Me Button -->
-<button class="collapsible" style="
+<button id="marryButton" style="
   background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
   color: #ffe5e5;
   font-size: 1.3em;
@@ -1752,8 +1752,7 @@ for (let i = 0; i < collapsibles.length; i++) {
   💍 Marry me?
 </button>
 
-<!-- 💬 The content that opens -->
-<div class="collapsible-content" style="
+<div id="marryContent" style="
   display: none;
   background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
   border: 2px solid #ff9999;
@@ -1768,8 +1767,7 @@ for (let i = 0; i < collapsibles.length; i++) {
   text-align: center;
   line-height: 1.8;
 ">
-  <p style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;">
-  </p>
+  <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
 </div>
 
 <style>
@@ -2966,6 +2964,14 @@ document.querySelectorAll(".inner-collapsible").forEach(button => {
     if (!content) return;
     content.style.display = content.style.display === "block" ? "none" : "block";
   });
+});
+</script>
+<script>
+document.getElementById("marryButton").addEventListener("click", function () {
+  const content = document.getElementById("marryContent");
+  if (!content) return;
+
+  content.style.display = content.style.display === "block" ? "none" : "block";
 });
 </script>
 </body>
