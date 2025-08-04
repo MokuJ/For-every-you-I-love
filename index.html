@@ -1988,7 +1988,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const eraseButton = document.getElementById("eraseButton");
   eraseButton.addEventListener("click", () => {
     localStorage.clear();
-    document.body.innerHTML = "<div style='color:white; background:black; height:100vh; display:flex; justify-content:center; align-items:center; font-size:24px;'>You let go.</div>";
+    // Stop all animations globally (you can expand this if your script uses intervals/timeouts)
+const highestId = setTimeout(() => {}, 0);
+for (let i = 0; i <= highestId; i++) clearTimeout(i);
+
+// Then show message
+document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:white; font-size:22px; font-family:sans-serif;'>You let go. You can't dare to move on.</div>";
   });
 });
 </script>
