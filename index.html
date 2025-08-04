@@ -2983,52 +2983,51 @@ document.getElementById("marryButton").addEventListener("click", function () {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("marryButton");
-  const content = document.getElementById("marryContent");
+  const box = document.getElementById("marryContent");
   const target = document.getElementById("marryTypewriter");
   const message = "Will you marry me, Kanak?";
 
   let i = 0;
-  let typing = false;
-  let typed = false;
+  let isTyping = false;
 
-  if (!btn || !content || !target) return;
+  if (!btn || !box || !target) return;
 
   btn.addEventListener("click", function () {
-    const isOpen = content.style.display === "block";
+    const isOpen = box.style.display === "block";
+
+    if (isTyping) return; // prevent clicking while typing
 
     if (!isOpen) {
-      content.style.display = "block";
-      if (!typed) {
-        i = 0;
-        target.innerHTML = "";
-        typing = true;
+      box.style.display = "block";
+      target.innerHTML = "";
+      i = 0;
+      isTyping = true;
 
-        function type() {
-          if (i < message.length) {
-            target.innerHTML += message.charAt(i);
-            i++;
-            setTimeout(type, 70);
-          } else {
-            typing = false;
-            typed = true;
-          }
-        }
+      // Confetti 🎉
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 200,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+        });
+      }
 
-        type();
-
-        // Confetti burst
-        if (typeof confetti === "function") {
-          confetti({
-            particleCount: 150,
-            spread: 80,
-            origin: { y: 0.6 },
-            colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-          });
+      // Typewriter Effect
+      function type() {
+        if (i < message.length) {
+          target.innerHTML += message.charAt(i);
+          i++;
+          setTimeout(type, 70);
+        } else {
+          isTyping = false;
         }
       }
 
+      type();
+
     } else {
-      content.style.display = "none";
+      box.style.display = "none";
     }
   });
 });
