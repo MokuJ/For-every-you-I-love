@@ -1408,6 +1408,290 @@
     </details>
   </div>
   
+  <!-- Your collapsible button + canvas code -->
+<button class="collapsible">...</button>
+<div class="content">...</div>
+
+<!-- Collapsible toggle script -->
+<script>
+const collapsibles = document.getElementsByClassName("collapsible");
+for (let i = 0; i < collapsibles.length; i++) {
+  collapsibles[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    const content = this.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+  });
+});
+</script>
+
+<!-- 🧠 Add THIS right below ⬇️ -->
+<script>
+const countries = [
+"🇦🇫 Afghanistan - زه ستا سره مینه لرم",
+"🇦🇱 Albania - Të dua",
+"🇩🇿 Algeria - أنا أحبك",
+"🇦🇩 Andorra - T'estimo",
+"🇦🇴 Angola - Amo-te",
+"🇦🇬 Antigua and Barbuda - I love you",
+"🇦🇷 Argentina - Te amo",
+"🇦🇲 Armenia - Ես քեզ սիրում եմ",
+"🇦🇺 Australia - I love you",
+"🇦🇹 Austria - Ich liebe dich",
+"🇦🇿 Azerbaijan - Mən səni sevirəm",
+"🇧🇸 Bahamas - I love you",
+"🇧🇭 Bahrain - أنا أحبك",
+"🇧🇩 Bangladesh - আমি তোমাকে ভালোবাসি",
+"🇧🇧 Barbados - I love you",
+"🇧🇾 Belarus - Я цябе кахаю",
+"🇧🇪 Belgium - Je t'aime",
+"🇧🇿 Belize - I love you",
+"🇧🇯 Benin - Je t'aime",
+"🇧🇹 Bhutan - ང་ཁྱེད་རང་ལུ་དགའ་",
+"🇧🇴 Bolivia - Te amo",
+"🇧🇦 Bosnia and Herzegovina - Volim te",
+"🇧🇼 Botswana - I love you",
+"🇧🇷 Brazil - Eu te amo",
+"🇧🇳 Brunei - Aku cinta padamu",
+"🇧🇬 Bulgaria - Обичам те",
+"🇧🇫 Burkina Faso - Je t'aime",
+"🇧🇮 Burundi - Ndagukunda",
+"🇨🇻 Cabo Verde - Amo-te",
+"🇰🇭 Cambodia - ខ្ញុំស្រឡាញ់អ្នក",
+"🇨🇲 Cameroon - Je t'aime",
+"🇨🇦 Canada - I love you",
+"🇨🇫 Central African Republic - Je t'aime",
+"🇹🇩 Chad - Je t'aime",
+"🇨🇱 Chile - Te amo",
+"🇨🇳 China - 我爱你",
+"🇨🇴 Colombia - Te amo",
+"🇰🇲 Comoros - N'tsihini",
+"🇨🇬 Congo - Je t'aime",
+"🇨🇩 Congo, Democratic Republic of the - Je t'aime",
+"🇨🇷 Costa Rica - Te amo",
+"🇨🇮 Côte d'Ivoire - Je t'aime",
+"🇭🇷 Croatia - Volim te",
+"🇨🇺 Cuba - Te amo",
+"🇨🇾 Cyprus - Σ'αγαπώ",
+"🇨🇿 Czech Republic - Miluji tě",
+"🇩🇰 Denmark - Jeg elsker dig",
+"🇩🇯 Djibouti - Je t'aime",
+"🇩🇲 Dominica - I love you",
+"🇩🇴 Dominican Republic - Te amo",
+"🇪🇨 Ecuador - Te amo",
+"🇪🇬 Egypt - أنا أحبك",
+"🇸🇻 El Salvador - Te amo",
+"🇬🇶 Equatorial Guinea - Te amo",
+"🇪🇷 Eritrea - ኣነ የፍቅረኪ",
+"🇪🇪 Estonia - Ma armastan sind",
+"🇸🇿 Eswatini - Ngiyakutsandza",
+"🇪🇹 Ethiopia - እወድሻለሁ",
+"🇫🇯 Fiji - Au domoni iko",
+"🇫🇮 Finland - Minä rakastan sinua",
+"🇫🇷 France - Je t'aime",
+"🇬🇦 Gabon - Je t'aime",
+"🇬🇲 Gambia - I love you",
+"🇬🇪 Georgia - მე შენ მიყვარხარ",
+"🇩🇪 Germany - Ich liebe dich",
+"🇬🇭 Ghana - Me dɔ wo",
+"🇬🇷 Greece - Σ'αγαπώ",
+"🇬🇩 Grenada - I love you",
+"🇬🇹 Guatemala - Te amo",
+"🇬🇳 Guinea - Je t'aime",
+"🇬🇼 Guinea-Bissau - Amo-te",
+"🇬🇾 Guyana - I love you",
+"🇭🇹 Haiti - Mwen renmen ou",
+"🇭🇳 Honduras - Te amo",
+"🇭🇺 Hungary - Szeretlek",
+"🇮🇸 Iceland - Ég elska þig",
+"🇮🇳 India - मैं तुमसे प्यार करता हूँ",
+"🇮🇩 Indonesia - Aku cinta kamu",
+"🇮🇷 Iran - دوستت دارم",
+"🇮🇶 Iraq - أنا أحبك",
+"🇮🇪 Ireland - I love you",
+"🇮🇱 Israel - אני אוהב אותך",
+"🇮🇹 Italy - Ti amo",
+"🇯🇲 Jamaica - I love you",
+"🇯🇵 Japan - 愛してる",
+"🇯🇴 Jordan - أنا أحبك",
+"🇰🇿 Kazakhstan - Мен сені сүйемін",
+"🇰🇪 Kenya - Nakupenda",
+"🇰🇮 Kiribati - I love you",
+"🇰🇵 Korea, North - 사랑합니다",
+"🇰🇷 Korea, South - 사랑해",
+"🇽🇰 Kosovo - Të dua",
+"🇰🇼 Kuwait - أنا أحبك",
+"🇰🇬 Kyrgyzstan - Мен сени сүйөм",
+"🇱🇦 Laos - ຂ້ອຍຮັກເຈົ້າ",
+"🇱🇻 Latvia - Es tevi mīlu",
+"🇱🇧 Lebanon - أنا أحبك",
+"🇱🇸 Lesotho - Kea u rata",
+"🇱🇷 Liberia - I love you",
+"🇱🇾 Libya - أنا أحبك",
+"🇱🇮 Liechtenstein - Ich liebe dich",
+"🇱🇹 Lithuania - Aš tave myliu",
+"🇱🇺 Luxembourg - Ech hunn dech gär",
+"🇲🇬 Madagascar - Tiako ianao",
+"🇲🇼 Malawi - Ndimakukonda",
+"🇲🇾 Malaysia - Saya cintakan awak",
+"🇲🇻 Maldives - އަހަރެން ތިބާ ދެކެ ލޯބިވޭ",
+"🇲🇱 Mali - Je t'aime",
+"🇲🇹 Malta - Inħobbok",
+"🇲🇭 Marshall Islands - Iokwe",
+"🇲🇷 Mauritania - أنا أحبك",
+"🇲🇺 Mauritius - Je t'aime",
+"🇲🇽 Mexico - Te amo",
+"🇫🇲 Micronesia, Federated States of - I love you",
+"🇲🇩 Moldova - Te iubesc",
+"🇲🇨 Monaco - Je t'aime",
+"🇲🇳 Mongolia - Би чамд хайртай",
+"🇲🇪 Montenegro - Volim te",
+"🇲🇦 Morocco - أنا أحبك",
+"🇲🇿 Mozambique - Amo-te",
+"🇲🇲 Myanmar - ငါနင့်ကိုချစ်တယ်",
+"🇳🇦 Namibia - I love you",
+"🇳🇷 Nauru - I love you",
+"🇳🇵 Nepal - म तिमीलाई माया गर्छु",
+"🇳🇱 Netherlands - Ik hou van jou",
+"🇳🇿 New Zealand - I love you",
+"🇳🇮 Nicaragua - Te amo",
+"🇳🇪 Niger - Je t'aime",
+"🇳🇬 Nigeria - Mo nifẹ rẹ",
+"🇲🇰 North Macedonia - Те сакам",
+"🇳🇴 Norway - Jeg elsker deg",
+"🇴🇲 Oman - أنا أحبك",
+"🇵🇰 Pakistan - میں تم سے پیار کرتا ہوں",
+"🇵🇼 Palau - I love you",
+"🇵🇸 Palestine - أنا أحبك",
+"🇵🇦 Panama - Te amo",
+"🇵🇬 Papua New Guinea - I love you",
+"🇵🇾 Paraguay - Te amo",
+"🇵🇪 Peru - Te amo",
+"🇵🇭 Philippines - Mahal kita",
+"🇵🇱 Poland - Kocham cię",
+"🇵🇹 Portugal - Eu te amo",
+"🇶🇦 Qatar - أنا أحبك",
+"🇷🇴 Romania - Te iubesc",
+"🇷🇺 Russia - Я тебя люблю",
+"🇷🇼 Rwanda - Ndagukunda",
+"🇰🇳 Saint Kitts and Nevis - I love you",
+"🇱🇨 Saint Lucia - I love you",
+"🇻🇨 Saint Vincent and the Grenadines - I love you",
+"🇼🇸 Samoa - Ou te alofa ia te oe",
+"🇸🇲 San Marino - Ti amo",
+"🇸🇹 Sao Tome and Principe - Amo-te",
+"🇸🇦 Saudi Arabia - أنا أحبك",
+"🇸🇳 Senegal - Je t'aime",
+"🇷🇸 Serbia - Волим те",
+"🇸🇨 Seychelles - Mon kontan ou",
+"🇸🇱 Sierra Leone - I love you",
+"🇸🇬 Singapore - I love you",
+"🇸🇰 Slovakia - Milujem ťa",
+"🇸🇮 Slovenia - Ljubim te",
+"🇸🇧 Solomon Islands - I love you",
+"🇸🇴 Somalia - Waan ku jeclahay",
+"🇿🇦 South Africa - I love you",
+"🇸🇸 South Sudan - I love you",
+"🇪🇸 Spain - Te amo",
+"🇱🇰 Sri Lanka - මම ඔයාට ආදරෙයි",
+"🇸🇩 Sudan - أنا أحبك",
+"🇸🇷 Suriname - I love you",
+"🇸🇪 Sweden - Jag älskar dig",
+"🇨🇭 Switzerland - Ich liebe dich",
+"🇸🇾 Syria - أنا أحبك",
+"🇹🇼 Taiwan - 我愛你",
+"🇹🇯 Tajikistan - Ман туро дӯст медорам",
+"🇹🇿 Tanzania - Nakupenda",
+"🇹🇭 Thailand - ฉันรักเธอ",
+"🇹🇱 Timor-Leste - Hau hadomi o",
+"🇹🇬 Togo - Je t'aime",
+"🇹🇴 Tonga - 'Oku ou 'ofa atu kiate koe",
+"🇹🇹 Trinidad and Tobago - I love you",
+"🇹🇳 Tunisia - أنا أحبك",
+"🇹🇷 Turkey - Seni seviyorum",
+"🇹🇲 Turkmenistan - Men seni söýýärin",
+"🇹🇻 Tuvalu - I love you",
+"🇺🇬 Uganda - Nkwagala",
+"🇺🇦 Ukraine - Я тебе люблю",
+"🇦🇪 United Arab Emirates - أنا أحبك",
+"🇬🇧 United Kingdom - I love you",
+"🇺🇸 United States - I love you",
+"🇺🇾 Uruguay - Te amo",
+"🇺🇿 Uzbekistan - Men seni sevaman",
+"🇻🇺 Vanuatu - I love you",
+"🇻🇦 Vatican City - Ti amo",
+"🇻🇪 Venezuela - Te amo",
+"🇻🇳 Vietnam - Anh yêu em",
+"🇾🇪 Yemen - أنا أحبك",
+"🇿🇲 Zambia - I love you",
+"🇿🇼 Zimbabwe - Ndinokuda"
+
+];
+
+let currentAngle = 0;
+const canvas = document.getElementById("loveWheel");
+const ctx = canvas.getContext("2d");
+const spinButton = document.getElementById("spinButton");
+const resultDiv = document.getElementById("result");
+
+function drawWheel() {
+  const numSegments = countries.length;
+  const angleStep = (2 * Math.PI) / numSegments;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < numSegments; i++) {
+    const startAngle = currentAngle + i * angleStep;
+    const endAngle = startAngle + angleStep;
+    ctx.beginPath();
+    ctx.moveTo(250, 250);
+    ctx.arc(250, 250, 250, startAngle, endAngle);
+    ctx.fillStyle = i % 2 === 0 ? "#89CFF0" : "#FFA07A";
+    ctx.fill();
+    ctx.save();
+    ctx.translate(250, 250);
+    ctx.rotate(startAngle + angleStep / 2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#000";
+    ctx.font = "12px sans-serif";
+    ctx.fillText(countries[i], 230, 5);
+    ctx.restore();
+  }
+}
+
+function spinWheel() {
+  const spinTime = 3000;
+  const targetAngle = Math.random() * 2 * Math.PI;
+  const spins = 6 * Math.PI;
+  const totalRotation = spins + targetAngle;
+  const start = performance.now();
+
+  function animate(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / spinTime, 1);
+    currentAngle += (totalRotation - currentAngle) * 0.05;
+    drawWheel();
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      currentAngle = totalRotation % (2 * Math.PI);
+      const selected = Math.floor(countries.length * (1 - currentAngle / (2 * Math.PI))) % countries.length;
+      const picked = countries[selected];
+      resultDiv.innerText = `❤️ ${picked}`;
+      countries.splice(selected, 1);
+      if (countries.length === 0) {
+        spinButton.disabled = true;
+        resultDiv.innerText = "🎉 All countries loved!";
+      }
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+spinButton.addEventListener("click", spinWheel);
+drawWheel();
+</script>
+  
   <button class="collapsible" style="
   background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
   color: #ffe5e5;
