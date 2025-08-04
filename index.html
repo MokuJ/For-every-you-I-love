@@ -1433,6 +1433,7 @@
 </div><!-- ✅ COLLAPSIBLE SCRIPT --><script>
 let spinAudio;
 let isSpinning = false;
+let animationFrameId = null;
 
 document.addEventListener("DOMContentLoaded", function () {
   const button = document.querySelector(".collapsible");
@@ -1443,14 +1444,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const isOpen = content.style.display === "block";
       content.style.display = isOpen ? "none" : "block";
 
-      // Stop wheel and audio if collapsible is closed
+      // Stop audio
       if (isOpen && spinAudio && !spinAudio.paused) {
         spinAudio.pause();
         spinAudio.currentTime = 0;
       }
-      if (isOpen && isSpinning) {
-        isSpinning = false;
+
+      // Cancel animation
+      if (isOpen && animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
       }
+
+      isSpinning = false;
     });
   }
 });
@@ -1686,7 +1692,7 @@ function drawWheel() {
 }
 
 function spinWheel() {
-  if (isSpinning) return; // block if already spinning
+  if (isSpinning) return;
   isSpinning = true;
 
   const spinTime = 3000;
@@ -1705,7 +1711,7 @@ function spinWheel() {
     drawWheel();
 
     if (progress < 1 && isSpinning) {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     } else {
       currentAngle = totalRotation % (2 * Math.PI);
       const selected = Math.floor(countries.length * (1 - currentAngle / (2 * Math.PI))) % countries.length;
@@ -1717,10 +1723,11 @@ function spinWheel() {
         resultDiv.innerText = "🎉 All countries loved!";
       }
       isSpinning = false;
+      animationFrameId = null;
     }
   }
 
-  requestAnimationFrame(animate);
+  animationFrameId = requestAnimationFrame(animate);
 }
 
 spinButton.addEventListener("click", spinWheel);
