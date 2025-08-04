@@ -2913,5 +2913,36 @@ setTimeout(() => {
   }
 }, 150);
 </script>
+<script>
+function resizeWheelCanvas() {
+  const canvas = document.getElementById("loveWheel");
+  const pointer = document.querySelector(".wheel-pointer");
+  const parent = canvas.parentElement;
+
+  if (!canvas || !parent) return;
+
+  const size = Math.min(parent.offsetWidth, 500);
+  canvas.width = size;
+  canvas.height = size;
+
+  // Optional: reposition pointer
+  if (pointer) {
+    pointer.style.top = `-${Math.floor(size * 0.04)}px`;
+    pointer.style.left = "50%";
+    pointer.style.transform = "translateX(-50%) rotate(180deg)";
+  }
+
+  if (typeof drawWheel === "function") {
+    drawWheel(); // force redraw wheel
+  }
+}
+
+// Fire it cleanly on page load and screen resize
+window.addEventListener("load", () => {
+  resizeWheelCanvas();
+  setTimeout(resizeWheelCanvas, 150); // 👈 this fixes mobile glitch
+});
+window.addEventListener("resize", resizeWheelCanvas);
+</script>
 </body>
 </html>
