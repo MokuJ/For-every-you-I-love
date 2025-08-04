@@ -1884,31 +1884,35 @@ for (let i = 0; i < collapsibles.length; i++) {
   </button>
   <button onclick="scrollToTop()" id="backToTop">↑ Top</button>
 
- <div id="contactBox" style="text-align: center; margin-top: 20px;">
-  <div id="protectedContact" style="display: inline-block; text-align: center;">
-    <p style="color: #aaa; margin-bottom: 10px;">Enter password to view:</p>
-    <input type="password" id="contactPass" placeholder="Password" style="padding: 8px; border-radius: 6px; border: none; width: 200px; margin: 10px auto; display: block;">
-    <button onclick="verifyContact()" style="padding: 8px 16px; border-radius: 6px; border: none; background-color: #444; color: white; cursor: pointer; margin-top: 8px;">Unlock</button>
-  </div>
-
-  <div id="kanakLinks" style="margin-top: 30px;">
-    <p style="color: #ccc; font-size: 0.95em; margin-bottom: 10px;">Her little digital world 🌍</p>
-    <div>
-      <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" title="Main Insta">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Main" />
-      </a>
-      <a href="https://www.instagram.com/kanakmastikhor?igsh=NmdiNTdna2ptMG5m" target="_blank" title="Private Insta">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Pvt" />
-      </a>
-      <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" title="Snapchat">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Snapchat" />
-      </a>
-      <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" title="Spotify Playlist">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify" />
-      </a>
+  <div class="contact-container">
+    <button id="contactBtn" onclick="toggleContact()">
+      📱 Contact Kanak
+    </button>
+    <div id="contactBox">
+      <div id="protectedContact">
+        <p style="color: #aaa;">Enter password to view:</p>
+        <input type="password" id="contactPass" placeholder="Password">
+        <button onclick="verifyContact()" style="display: block; margin: 10px auto; padding: 8px 16px; border-radius: 6px; border: none; background-color: #444; color: white; cursor: pointer;">Unlock</button>
+      </div>
+      <div id="kanakLinks">
+        <p style="color: #ccc; font-size: 0.95em; margin-bottom: 10px;">Her little digital world 🌍</p>
+        <div>
+          <a href="https://www.instagram.com/kannakkk__?igsh=N2k0em13bGNobXFw" target="_blank" title="Main Insta">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Main" />
+          </a>
+          <a href="https://www.instagram.com/kanakmastikhor?igsh=NmdiNTdna2ptMG5m" target="_blank" title="Private Insta">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Insta Pvt" />
+          </a>
+          <a href="https://www.snapchat.com/add/kanakk.26?share_id=ed425jGazRU&locale=en-US" target="_blank" title="Snapchat">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Snapchat" />
+          </a>
+          <a href="https://open.spotify.com/playlist/4FiOzaG3HW441t17cTcNLi?si=iG4LvZA0Q5S9I71vl8bKMg" target="_blank" title="Spotify Playlist">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify" />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
     The Void That Replies
