@@ -1914,67 +1914,82 @@ drawWheel();
     </div>
   </div>
 
-<!-- 🎯 Collapsible: Main -->
-<button class="collapsible-main">Main Section</button>
-<div class="content-main" style="display:none;">
-  <p>This is your main content collapsible.</p>
-</div>
-
-<!-- 🎯 Collapsible: The Void That Replies -->
-<button class="collapsible-void">🕳️ The Void That Replies</button>
-<div class="content-void" style="display:none; background: #111; color: white; padding: 20px; border-radius: 10px;">
-  <input id="voidInput" type="text" placeholder="Speak..." style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: none; border-radius: 6px;">
-  <button id="voidButton" style="padding: 10px; background: #444; color: white; border: none; border-radius: 6px;">Send into the Void</button>
-  <div id="voidReply" style="margin-top: 15px; display: none;"></div>
-</div>
-
-<!-- 🎯 Collapsible: Endgame -->
-<button class="collapsible-endgame">☠️ Erase Everything</button>
-<div class="content-endgame" style="display:none; background: #1a1a1a; color: white; padding: 20px; border-radius: 10px;">
-  <p>This cannot be undone.</p>
-  <button id="eraseButton" style="padding: 10px; background: crimson; color: white; border: none; border-radius: 6px;">Confirm Erase</button>
-</div>
-
-<!-- ✅ SCRIPT -->
-<script>
+<!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Revised & Centered) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
+    🕳️ The Void That Replies
+  </button>
+  <div class="content-void" style="display:none; background: #111; color: white; padding: 20px; border-radius: 10px; margin-top: 10px;">
+    <input id="voidInput" type="text" placeholder="Speak..." style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: none; border-radius: 6px;">
+    <button id="voidButton" style="padding: 10px 20px; background: #444; color: white; border: none; border-radius: 6px; cursor: pointer;">Send into the Void</button>
+    <div id="voidReply" style="margin-top: 15px; display: none; font-style: italic;"></div>
+  </div>  <!-- ☠️ Endgame -->  <button class="collapsible-endgame" style="background-color: #8b0000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; margin: 20px auto 0; display: block;">
+    ☠️ Erase Everything
+  </button>
+  <div class="content-endgame" style="display:none; background: #1a1a1a; color: white; padding: 20px; border-radius: 10px; margin-top: 10px;">
+    <p>This cannot be undone.</p>
+    <button id="eraseButton" style="padding: 10px 20px; background: crimson; color: white; border: none; border-radius: 6px; cursor: pointer;">Confirm Erase</button>
+  </div></div><!-- ✅ SCRIPT --><script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Main
-  document.querySelector(".collapsible-main").onclick = () => {
-    const c = document.querySelector(".content-main");
-    c.style.display = c.style.display === "block" ? "none" : "block";
-  };
-
-  // Void
-  const replies = [
-    "She’ll never read this.",
-    "You waited too long.",
-    "She was disappointed in you.",
-    "It’s already too late.",
-    "You should’ve lied.",
-    "You were right. She lied."
-  ];
+  // COLLAPSIBLE TOGGLES
   document.querySelector(".collapsible-void").onclick = () => {
     const c = document.querySelector(".content-void");
     c.style.display = c.style.display === "block" ? "none" : "block";
   };
-  document.getElementById("voidButton").onclick = () => {
-    const input = document.getElementById("voidInput").value.trim();
-    if (!input) return;
-    const r = replies.length ? replies.splice(Math.floor(Math.random() * replies.length), 1)[0] : "The void is empty.";
-    const box = document.getElementById("voidReply");
-    box.innerText = r;
-    box.style.display = "block";
-  };
 
-  // Endgame
   document.querySelector(".collapsible-endgame").onclick = () => {
     const c = document.querySelector(".content-endgame");
     c.style.display = c.style.display === "block" ? "none" : "block";
   };
-  document.getElementById("eraseButton").onclick = () => {
+
+  // VOID LOGIC
+  const replies = [
+    "How tf can you lose Kanak?!?",
+    "She'll never read this.",
+    "You should've lied.",
+    "You were supposed to be hers. Was she yours?",
+    "You waited too long.",
+    "Were you ever lost? Was she ever found?",
+    "It's already too late.",
+    "She was disappointed in you.",
+    "You were wrong. She did care.",
+    "She'll forget your name.",
+    "She thinks of you too. Just not the way you want.",
+    "You'll die without her presence.",
+    "She'll be someone else's, of her liking.",
+    "It will take a while, to make you smile. Somewhere in these eyes, I'm on your side."
+  ];
+
+  const voidInput = document.getElementById("voidInput");
+  const voidButton = document.getElementById("voidButton");
+  const voidReply = document.getElementById("voidReply");
+
+  let voidLocked = false;
+
+  voidButton.addEventListener("click", () => {
+    const message = voidInput.value.trim();
+    if (!message || voidLocked) return;
+
+    voidLocked = true;
+    voidInput.value = "";
+    voidReply.style.display = "block";
+    voidReply.innerHTML = "Typing...";
+
+    setTimeout(() => {
+      if (replies.length === 0) {
+        voidReply.innerHTML = "I have nothing more to say to you.";
+      } else {
+        const index = Math.floor(Math.random() * replies.length);
+        voidReply.innerHTML = replies.splice(index, 1)[0];
+      }
+      voidLocked = false;
+    }, 1500);
+  });
+
+  // ENDGAME
+  const eraseButton = document.getElementById("eraseButton");
+  eraseButton.addEventListener("click", () => {
     localStorage.clear();
     document.body.innerHTML = "<div style='color:white; background:black; height:100vh; display:flex; justify-content:center; align-items:center; font-size:24px;'>You let go.</div>";
-  };
+  });
 });
 </script>
 
