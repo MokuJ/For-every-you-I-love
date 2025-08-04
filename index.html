@@ -1914,7 +1914,7 @@ drawWheel();
     </div>
   </div>
 
-<!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Revised & Centered) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
+<!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
     🕳️ The Void That Replies
   </button>
   <div class="content-void" style="display:none; background: #111; color: white; padding: 20px; border-radius: 10px; margin-top: 10px;">
@@ -1930,15 +1930,22 @@ drawWheel();
   </div></div><!-- ✅ SCRIPT --><script>
 document.addEventListener("DOMContentLoaded", () => {
   // COLLAPSIBLE TOGGLES
-  document.querySelector(".collapsible-void").onclick = () => {
-    const c = document.querySelector(".content-void");
-    c.style.display = c.style.display === "block" ? "none" : "block";
-  };
+  const voidCollapsible = document.querySelector(".collapsible-void");
+  const endgameCollapsible = document.querySelector(".collapsible-endgame");
 
-  document.querySelector(".collapsible-endgame").onclick = () => {
-    const c = document.querySelector(".content-endgame");
-    c.style.display = c.style.display === "block" ? "none" : "block";
-  };
+  if (voidCollapsible) {
+    voidCollapsible.addEventListener("click", () => {
+      const c = document.querySelector(".content-void");
+      c.style.display = c.style.display === "block" ? "none" : "block";
+    });
+  }
+
+  if (endgameCollapsible) {
+    endgameCollapsible.addEventListener("click", () => {
+      const c = document.querySelector(".content-endgame");
+      c.style.display = c.style.display === "block" ? "none" : "block";
+    });
+  }
 
   // VOID LOGIC
   const replies = [
@@ -1961,78 +1968,80 @@ document.addEventListener("DOMContentLoaded", () => {
   const voidInput = document.getElementById("voidInput");
   const voidButton = document.getElementById("voidButton");
   const voidReply = document.getElementById("voidReply");
-
   let voidLocked = false;
 
-  voidButton.addEventListener("click", () => {
-    const message = voidInput.value.trim();
-    if (!message || voidLocked) return;
+  if (voidButton) {
+    voidButton.addEventListener("click", () => {
+      const message = voidInput.value.trim();
+      if (!message || voidLocked) return;
 
-    voidLocked = true;
-    voidInput.value = "";
-    voidReply.style.display = "block";
-    voidReply.innerHTML = "Typing...";
+      voidLocked = true;
+      voidInput.value = "";
+      voidReply.style.display = "block";
+      voidReply.innerHTML = "Typing...";
 
-    setTimeout(() => {
-      if (replies.length === 0) {
-        voidReply.innerHTML = "I have nothing more to say to you.";
-      } else {
-        const index = Math.floor(Math.random() * replies.length);
-        voidReply.innerHTML = replies.splice(index, 1)[0];
-      }
-      voidLocked = false;
-    }, 1500);
-  });
-
-  // ENDGAME
-  const eraseButton = document.getElementById("eraseButton");
-eraseButton.addEventListener("click", () => {
-  localStorage.clear();
-
-  // Kill all running scripts/animations
-  const highestId = setTimeout(() => {}, 0);
-  for (let i = 0; i <= highestId; i++) clearTimeout(i);
-
-  // Replace with glitch horror loop
-  document.body.style.background = "#000";
-  document.body.style.color = "#ff0033";
-  document.body.innerHTML = "";
-
-  const glitchMessages = [
-    "You shouldn't have done that.",
-    "Too late now.",
-    "System failure.",
-    "Memory corrupted.",
-    "Goodbye.",
-    "Everything is gone.",
-    "There is no going back.",
-    "You erased her too.",
-    "I warned you.",
-    "Nothing remains.",
-    "You let go.",
-    "A sin has been committed.",
-    "What have you done?"
-  ];
-
-  let spamCount = 0;
-  const spamInterval = setInterval(() => {
-    const msg = document.createElement("div");
-    msg.innerText = glitchMessages[Math.floor(Math.random() * glitchMessages.length)];
-    msg.style.fontSize = "18px";
-    msg.style.margin = "10px";
-    msg.style.fontFamily = "monospace";
-    msg.style.opacity = "0.9";
-    msg.style.animation = "fadeIn 0.5s ease";
-    document.body.appendChild(msg);
-    spamCount++;
-
-    if (spamCount >= 30) {
-      clearInterval(spamInterval);
       setTimeout(() => {
-        document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
-      }, 2000);
-    }
-  }, 100);
+        if (replies.length === 0) {
+          voidReply.innerHTML = "I have nothing more to say to you.";
+        } else {
+          const index = Math.floor(Math.random() * replies.length);
+          voidReply.innerHTML = replies.splice(index, 1)[0];
+        }
+        voidLocked = false;
+      }, 1500);
+    });
+  }
+
+  // ENDGAME: HORROR SPAM
+  const eraseButton = document.getElementById("eraseButton");
+  if (eraseButton) {
+    eraseButton.addEventListener("click", () => {
+      localStorage.clear();
+
+      const highestId = setTimeout(() => {}, 0);
+      for (let i = 0; i <= highestId; i++) clearTimeout(i);
+
+      document.body.innerHTML = "";
+      document.body.style.background = "#000";
+      document.body.style.color = "#ff0033";
+
+      const glitchMessages = [
+        "You shouldn't have done that.",
+        "Too late now.",
+        "System failure.",
+        "Memory corrupted.",
+        "Goodbye.",
+        "Everything is gone.",
+        "There is no going back.",
+        "You erased her too.",
+        "I warned you.",
+        "Nothing remains.",
+        "You let go.",
+        "A sin has been committed.",
+        "What have you done?"
+      ];
+
+      let spamCount = 0;
+      const spamInterval = setInterval(() => {
+        const msg = document.createElement("div");
+        msg.innerText = glitchMessages[Math.floor(Math.random() * glitchMessages.length)];
+        msg.style.fontSize = "18px";
+        msg.style.margin = "10px";
+        msg.style.fontFamily = "monospace";
+        msg.style.opacity = "0.9";
+        msg.style.animation = "fadeIn 0.5s ease";
+        document.body.appendChild(msg);
+        spamCount++;
+
+        if (spamCount >= 30) {
+          clearInterval(spamInterval);
+          setTimeout(() => {
+            document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
+          }, 2000);
+        }
+      }, 100);
+    });
+  }
 });
 </script>
 
@@ -2654,6 +2663,20 @@ document.querySelectorAll(".fresh-collapsible").forEach((btn) => {
   });
 });
 </script>
+<div style="text-align:center; margin: 30px 0;">
+  <button onclick="document.body.classList.toggle('letter-mode')" style="
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #e0d8cc;
+    color: #2e2e2e;
+    font-weight: bold;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+  ">
+    ✉️ Letter Mode
+  </button>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
