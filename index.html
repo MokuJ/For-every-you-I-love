@@ -1986,15 +1986,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ENDGAME
   const eraseButton = document.getElementById("eraseButton");
-  eraseButton.addEventListener("click", () => {
-    localStorage.clear();
-    // Stop all animations globally (you can expand this if your script uses intervals/timeouts)
-const highestId = setTimeout(() => {}, 0);
-for (let i = 0; i <= highestId; i++) clearTimeout(i);
+eraseButton.addEventListener("click", () => {
+  localStorage.clear();
 
-// Then show message
-document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:white; font-size:22px; font-family:sans-serif;'>You let go. You can't dare to move on.</div>";
-  });
+  // Kill all running scripts/animations
+  const highestId = setTimeout(() => {}, 0);
+  for (let i = 0; i <= highestId; i++) clearTimeout(i);
+
+  // Replace with glitch horror loop
+  document.body.style.background = "#000";
+  document.body.style.color = "#ff0033";
+  document.body.innerHTML = "";
+
+  const glitchMessages = [
+    "You shouldn't have done that.",
+    "Too late now.",
+    "System failure.",
+    "Memory corrupted.",
+    "Goodbye.",
+    "Everything is gone.",
+    "There is no going back.",
+    "You erased her too.",
+    "I warned you.",
+    "Nothing remains.",
+    "You let go.",
+    "A sin has been committed.",
+    "What have you done?"
+  ];
+
+  let spamCount = 0;
+  const spamInterval = setInterval(() => {
+    const msg = document.createElement("div");
+    msg.innerText = glitchMessages[Math.floor(Math.random() * glitchMessages.length)];
+    msg.style.fontSize = "18px";
+    msg.style.margin = "10px";
+    msg.style.fontFamily = "monospace";
+    msg.style.opacity = "0.9";
+    msg.style.animation = "fadeIn 0.5s ease";
+    document.body.appendChild(msg);
+    spamCount++;
+
+    if (spamCount >= 30) {
+      clearInterval(spamInterval);
+      setTimeout(() => {
+        document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
+      }, 2000);
+    }
+  }, 100);
 });
 </script>
 
