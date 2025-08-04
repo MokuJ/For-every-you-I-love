@@ -3050,16 +3050,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   btn.onclick = () => {
-    // FORCE TOGGLE
     const showing = box.style.display === "block";
     box.style.display = showing ? "none" : "block";
 
     if (!showing) {
-      // RESET TYPEWRITER
+      // Reset message
       clearTimeout(typing);
       target.innerHTML = "";
       i = 0;
 
+      // Typewriter effect
       function type() {
         if (i < msg.length) {
           target.innerHTML += msg.charAt(i);
@@ -3067,8 +3067,15 @@ document.addEventListener("DOMContentLoaded", function () {
           typing = setTimeout(type, 70);
         }
       }
-
       type();
+
+      // 🎉 Confetti Burst!
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+      });
     }
   };
 });
