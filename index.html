@@ -2813,140 +2813,76 @@ function adjustScaling() {
 window.addEventListener("load", adjustScaling);
 window.addEventListener("resize", adjustScaling);
 </script>
+
 <script>
-function resizeLoveWheel() {
+function drawWheel() {
   const canvas = document.getElementById("loveWheel");
-  const pointer = document.querySelector(".wheel-pointer");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const size = canvas.width;
+  const center = size / 2;
+  const numSlices = countries.length;
+  const sliceAngle = (2 * Math.PI) / numSlices;
 
-  if (!canvas || !pointer) return;
+  ctx.clearRect(0, 0, size, size);
 
-  const screenWidth = window.innerWidth;
-  let size;
-
-  if (screenWidth >= 1024) {
-    size = 500;
-  } else if (screenWidth >= 768) {
-    size = 400;
-  } else {
-    size = Math.floor(screenWidth * 0.9);
+  for (let i = 0; i < numSlices; i++) {
+    const angle = i * sliceAngle + currentAngle;
+    ctx.beginPath();
+    ctx.moveTo(center, center);
+    ctx.arc(center, center, center, angle, angle + sliceAngle);
+    ctx.fillStyle = i % 2 === 0 ? "#aa00ff" : "#ff4081";
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#fff";
+    ctx.font = `${Math.floor(size / 30)}px sans-serif`;
+    ctx.save();
+    ctx.translate(center, center);
+    ctx.rotate(angle + sliceAngle / 2);
+    ctx.fillText(countries[i].split(" - ")[0], size * 0.35, 0);
+    ctx.restore();
   }
-
-  canvas.width = size;
-  canvas.height = size;
-  canvas.style.width = size + "px";
-  canvas.style.height = size + "px";
-
-  pointer.style.top = `-${Math.floor(size * 0.04)}px`;
-  pointer.style.left = "50%";
-  pointer.style.transform = "translateX(-50%) rotate(180deg)";
 }
 
-window.addEventListener("load", resizeLoveWheel);
-window.addEventListener("resize", resizeLoveWheel);
-</script>
-<script>
-function resizeLoveWheel() {
-  const canvas = document.getElementById("loveWheel");
-  const pointer = document.querySelector(".wheel-pointer");
-
-  if (!canvas || !pointer) return;
-
-  // Get displayed width from computed style
-  const rect = canvas.getBoundingClientRect();
-  const size = Math.floor(rect.width);
-
-  // Set internal canvas resolution
-  canvas.width = size;
-  canvas.height = size;
-
-  // Realign pointer
-  pointer.style.top = `-${Math.floor(size * 0.04)}px`;
-  pointer.style.left = "50%";
-  pointer.style.transform = "translateX(-50%) rotate(180deg)";
-}
-
-window.addEventListener("load", resizeLoveWheel);
-window.addEventListener("resize", resizeLoveWheel);
-</script>
-<script>
-function resizeLoveWheel() {
-  const canvas = document.getElementById("loveWheel");
-  const pointer = document.querySelector(".wheel-pointer");
-  if (!canvas || !pointer) return;
-
-  // Dynamically get displayed width
-  const width = Math.min(window.innerWidth * 0.9, 500);
-  canvas.width = width;
-  canvas.height = width;
-
-  pointer.style.top = `-${Math.floor(width * 0.04)}px`;
-  pointer.style.left = "50%";
-  pointer.style.transform = "translateX(-50%) rotate(180deg)";
-}
-
-window.addEventListener("load", resizeLoveWheel);
-window.addEventListener("resize", resizeLoveWheel);
-</script>
-<script>
-function resizeWheelCanvas() {
-  const canvas = document.getElementById("loveWheel");
-  const parent = canvas.parentElement;
-  const size = Math.min(parent.offsetWidth, 500);
-  canvas.width = size;
-  canvas.height = size;
-  if (typeof drawWheel === "function") drawWheel(); // <- important
-}
-
-window.addEventListener("DOMContentLoaded", resizeWheelCanvas);
-window.addEventListener("resize", resizeWheelCanvas);
-</script>
-<script>
-setTimeout(() => {
-  if (typeof resizeWheelCanvas === "function") {
-    resizeWheelCanvas();
-  }
-}, 150);
-</script>
-<script>
 function resizeWheelCanvas() {
   const canvas = document.getElementById("loveWheel");
   const pointer = document.querySelector(".wheel-pointer");
-  const parent = canvas.parentElement;
+  if (!canvas) return;
 
-  if (!canvas || !parent) return;
+  const containerWidth = canvas.parentElement.offsetWidth;
+  const size = Math.min(containerWidth, window.innerWidth * 0.9, 500);
 
-  const size = Math.min(parent.offsetWidth, 500);
   canvas.width = size;
   canvas.height = size;
+  canvas.style.width = `${size}px`;
+  canvas.style.height = `${size}px`;
 
-  // Optional: reposition pointer
   if (pointer) {
     pointer.style.top = `-${Math.floor(size * 0.04)}px`;
     pointer.style.left = "50%";
     pointer.style.transform = "translateX(-50%) rotate(180deg)";
   }
 
-  if (typeof drawWheel === "function") {
-    drawWheel(); // force redraw wheel
-  }
+  drawWheel();
 }
 
-// Fire it cleanly on page load and screen resize
+// 🚀 Handle Collapsible + Resize
+document.querySelectorAll(".collapsible").forEach(btn => {
+  btn.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+    const isOpen = content.style.display === "block";
+    content.style.display = isOpen ? "none" : "block";
+    if (!isOpen) {
+      setTimeout(resizeWheelCanvas, 100);
+    }
+  });
+});
+
 window.addEventListener("load", () => {
   resizeWheelCanvas();
-  setTimeout(resizeWheelCanvas, 150); // 👈 this fixes mobile glitch
+  setTimeout(resizeWheelCanvas, 150); // mobile glitch fix
 });
 window.addEventListener("resize", resizeWheelCanvas);
-</script>
-<script>
-window.addEventListener("DOMContentLoaded", function () {
-  const canvas = document.getElementById("loveWheel");
-  if (canvas) {
-    const width = Math.min(window.innerWidth * 0.9, 500);
-    canvas.width = width;
-    canvas.height = width;
-  }
-});
 </script>
 </body>
 </html>
