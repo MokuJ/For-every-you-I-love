@@ -1914,6 +1914,73 @@ drawWheel();
     </div>
   </div>
 
+<!-- ✅ COLLAPSIBLE: The Void That Replies --><div style="max-width: 600px; margin: 40px auto;">
+  <button class="collapsible" style="background-color: #1a1a1a; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; display: block; margin: 0 auto;">
+    🕳️ The Void That Replies
+  </button>
+  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #111; color: white; border-radius: 8px; margin-top: 10px;">
+    <p style="font-style: italic; margin-bottom: 10px;">Speak to the silence. See what it returns.</p>
+    <input type="text" id="voidInput" placeholder="Type your message..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; background: #222; color: white;">
+    <button onclick="sendToVoid()" style="margin-top: 10px; padding: 10px 15px; font-size: 14px; border: none; border-radius: 6px; background-color: #444; color: white; cursor: pointer;">Send into the Void</button>
+    <div id="voidReply" style="margin-top: 20px; padding: 15px; background: #1e1e1e; border-left: 5px solid crimson; border-radius: 8px; font-weight: bold; display: none;"></div>
+  </div>
+</div><!-- ✅ COLLAPSIBLE: Endgame --><div style="max-width: 600px; margin: 40px auto;">
+  <button class="collapsible" style="background-color: #8b0000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; display: block; margin: 20px auto 0;">
+    ☠️ Erase Everything
+  </button>
+  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #1a1a1a; color: white; border-radius: 8px; margin-top: 10px; text-align: center;">
+    <p>Nothing will remain. Not your confessions. Not your spins. Not even the void.</p>
+    <button onclick="eraseEverything()" style="margin-top: 10px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: crimson; color: white; cursor: pointer;">Confirm Erase</button>
+    <div id="endMessage" style="margin-top: 20px; font-weight: bold; display: none; font-size: 18px; color: #ccc;"></div>
+  </div>
+</div><script>
+// Handle collapsibles
+const collapsibles = document.getElementsByClassName("collapsible");
+for (let i = 0; i < collapsibles.length; i++) {
+  collapsibles[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    const content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+// The Void That Replies
+const voidReplies = [
+  "She never read it.",
+  "You should’ve lied.",
+  "You were supposed to be hers. Was she yours?",
+  "You waited too long.",
+  "Were you ever lost? Was she ever found?",
+  "It’s already too late.",
+  "She was disappointed in you.",
+  "You were wrong. She did care.",
+  "She'll forget your name.",
+  "She thinks of you too. Just not the way you want."
+  "You'll die without her presence."
+  "She'll be someone else's, of her liking."
+  "It will take a while, to make you smile. Somewhere in these eyes, I'm on your side."
+];
+
+function sendToVoid() {
+  const input = document.getElementById("voidInput");
+  const reply = document.getElementById("voidReply");
+  if (!input.value.trim()) return;
+  const index = Math.floor(Math.random() * voidReplies.length);
+  reply.innerText = voidReplies.splice(index, 1)[0];
+  reply.style.display = "block";
+}
+
+// Endgame - Erase Everything
+function eraseEverything() {
+  localStorage.clear();
+  document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:white; font-size:22px; font-family:sans-serif;'>You let go.</div>";
+}
+</script>
+
   <audio id="bgm" loop>
     <source src="bgm.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
