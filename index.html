@@ -2998,10 +2998,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const content = document.getElementById("marryContent");
   const target = document.getElementById("marryTypewriter");
   const message = "Will you marry me, Kanak?";
-  
+
   let index = 0;
-  let typingTimeout;
   let isTyping = false;
+  let typingTimeout;
 
   if (!button || !content || !target) {
     console.error("Missing marry elements.");
@@ -3011,28 +3011,26 @@ document.addEventListener("DOMContentLoaded", function () {
   button.addEventListener("click", function () {
     const isVisible = content.style.display === "block";
 
-    if (isTyping) return; // ❌ Don't allow clicking while typing
+    if (isTyping) return; // Prevent spam click
 
     if (!isVisible) {
       content.style.display = "block";
       target.innerHTML = "";
       index = 0;
       isTyping = true;
-      button.disabled = true;
 
-      function typeWriter() {
+      function typeLetter() {
         if (index < message.length) {
           target.innerHTML += message.charAt(index);
           index++;
-          typingTimeout = setTimeout(typeWriter, 70);
+          typingTimeout = setTimeout(typeLetter, 70);
         } else {
           isTyping = false;
-          button.disabled = false;
         }
       }
 
       clearTimeout(typingTimeout);
-      typeWriter();
+      typeLetter();
 
       // 🎉 Confetti
       if (typeof confetti === "function") {
@@ -3044,7 +3042,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
     } else {
-      content.style.display = "none";
+      if (!isTyping) {
+        content.style.display = "none";
+      }
     }
   });
 });
