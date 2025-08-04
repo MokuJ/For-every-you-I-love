@@ -1731,7 +1731,8 @@ for (let i = 0; i < collapsibles.length; i++) {
 }
 </script>
   
-  <button class="collapsible" style="
+  <!-- 💍 Marry Me Button -->
+<button class="collapsible" style="
   background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
   color: #ffe5e5;
   font-size: 1.3em;
@@ -1751,7 +1752,9 @@ for (let i = 0; i < collapsibles.length; i++) {
   💍 Marry me?
 </button>
 
-<div class="content" style="
+<!-- 💬 The content that opens -->
+<div class="collapsible-content" style="
+  display: none;
   background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
   border: 2px solid #ff9999;
   border-radius: 14px;
@@ -1764,9 +1767,9 @@ for (let i = 0; i < collapsibles.length; i++) {
   box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
   text-align: center;
   line-height: 1.8;
-  text-shadow: 1px 1px 2px #000;
 ">
-  <p style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
+  <p style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;">
+  </p>
 </div>
 
 <style>
@@ -2958,6 +2961,15 @@ document.querySelectorAll(".collapsible").forEach(button => {
 </script>
 <script>
 document.querySelectorAll(".inner-collapsible").forEach(button => {
+  button.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+    if (!content) return;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+  });
+});
+</script>
+<script>
+document.querySelectorAll(".collapsible").forEach(button => {
   button.addEventListener("click", function () {
     const content = this.nextElementSibling;
     if (!content) return;
