@@ -2989,38 +2989,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let i = 0;
   let typing = false;
+  let typed = false;
 
-  btn.addEventListener("click", () => {
-    if (typing) return;
+  if (!btn || !content || !target) return;
 
-    const isVisible = content.style.display === "block";
+  btn.addEventListener("click", function () {
+    const isOpen = content.style.display === "block";
 
-    if (!isVisible) {
+    if (!isOpen) {
       content.style.display = "block";
-      target.innerHTML = "";
-      i = 0;
-      typing = true;
+      if (!typed) {
+        i = 0;
+        target.innerHTML = "";
+        typing = true;
 
-      function type() {
-        if (i < message.length) {
-          target.innerHTML += message.charAt(i);
-          i++;
-          setTimeout(type, 70);
-        } else {
-          typing = false;
+        function type() {
+          if (i < message.length) {
+            target.innerHTML += message.charAt(i);
+            i++;
+            setTimeout(type, 70);
+          } else {
+            typing = false;
+            typed = true;
+          }
         }
-      }
 
-      type();
+        type();
 
-      // Optional: Confetti if loaded
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 150,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-        });
+        // Confetti burst
+        if (typeof confetti === "function") {
+          confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+          });
+        }
       }
 
     } else {
