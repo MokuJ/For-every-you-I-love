@@ -2968,14 +2968,5 @@ document.querySelectorAll(".inner-collapsible").forEach(button => {
   });
 });
 </script>
-<script>
-document.querySelectorAll(".collapsible").forEach(button => {
-  button.addEventListener("click", function () {
-    const content = this.nextElementSibling;
-    if (!content) return;
-    content.style.display = content.style.display === "block" ? "none" : "block";
-  });
-});
-</script>
 </body>
 </html>
