@@ -966,12 +966,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
-<style>
-  @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-</style>
 </head>
 <body>
 
@@ -3160,23 +3154,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (eraseButton) {
     eraseButton.addEventListener("click", () => {
-      // Stop any running intervals or timeouts
+      // Clear storage & timeouts
       localStorage.clear();
       const highestId = setTimeout(() => {}, 0);
       for (let i = 0; i <= highestId; i++) clearTimeout(i);
 
-      // Play glitch audio
-      if (glitchAudio) {
-        glitchAudio.currentTime = 0;
-        glitchAudio.play();
-      }
-
-      // Style reset
+      // Reset styles
       document.body.innerHTML = "";
       document.body.style.background = "#000";
       document.body.style.color = "#ff0033";
 
-      // Start horror spam
+      // Glitch sound
+      if (glitchAudio && glitchAudio.play) {
+        glitchAudio.currentTime = 0;
+        glitchAudio.volume = 1;
+        glitchAudio.play().catch(() => {
+          console.warn("Glitch sound couldn't autoplay. Try interacting first.");
+        });
+      }
+
+      // Messages
       const glitchMessages = [
         "You shouldn't have done that.",
         "Too late now.",
@@ -3201,7 +3198,7 @@ document.addEventListener("DOMContentLoaded", function () {
         msg.style.margin = "10px";
         msg.style.fontFamily = "monospace";
         msg.style.opacity = "0.85";
-        msg.style.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 70%)`;
+        msg.style.color = "#ff0033";
         msg.style.animation = "fadeIn 0.2s ease";
         msg.style.transform = `rotate(${Math.floor(Math.random() * 10) - 5}deg) translateX(${Math.floor(Math.random() * 20) - 10}px)`;
         document.body.appendChild(msg);
@@ -3210,7 +3207,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (spamCount >= 35) {
           clearInterval(spamInterval);
           setTimeout(() => {
-            document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
+            document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:#888; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
           }, 2500);
         }
       }, 90);
@@ -3219,5 +3216,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
+<button onclick="document.getElementById('glitchSound').play()">Test Glitch Sound</button>
 </body>
 </html>
