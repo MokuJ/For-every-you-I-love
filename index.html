@@ -1732,11 +1732,41 @@ for (let i = 0; i < collapsibles.length; i++) {
 </script>
   
   <!-- 💍 Marry Me Button -->
-<button id="marryButton" style="background: crimson; color: white; padding: 14px 24px; border-radius: 12px; border: none; font-size: 1.3em; margin: 40px auto 10px auto; display: block;">
+<button id="marryButton" style="
+  background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
+  color: #ffe5e5;
+  font-size: 1.3em;
+  font-weight: 600;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  text-align: center;
+  border: 2px solid #ff6b6b;
+  border-radius: 12px;
+  padding: 14px 24px;
+  max-width: 300px;
+  margin: 40px auto 10px auto;
+  display: block;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: pulseGlow 3s infinite ease-in-out;
+">
   💍 Marry me?
 </button>
 
-<div id="marryContent" style="display: none; padding: 30px; background-color: #1a0d0d; color: #fff0f0; border-radius: 14px; text-align: center; max-width: 600px; margin: 0 auto;">
+<div id="marryContent" style="
+  display: none;
+  background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
+  border: 2px solid #ff9999;
+  border-radius: 14px;
+  padding: 30px;
+  color: #fff0f0;
+  font-size: 1.4em;
+  font-family: 'Georgia', serif;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+  box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
+  text-align: center;
+  line-height: 1.8;
+">
   <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
 </div>
 
@@ -2942,6 +2972,36 @@ document.getElementById("marryButton").addEventListener("click", function () {
   if (!content) return;
 
   content.style.display = content.style.display === "block" ? "none" : "block";
+});
+</script>
+<script>
+const marryMessage = "Will you marry me, Kanak?";
+let marryIndex = 0;
+let typingInterval;
+
+function typeMarryMessage() {
+  const target = document.getElementById("marryTypewriter");
+  if (marryIndex < marryMessage.length) {
+    target.innerHTML += marryMessage.charAt(marryIndex);
+    marryIndex++;
+    typingInterval = setTimeout(typeMarryMessage, 70);
+  }
+}
+
+document.getElementById("marryButton").addEventListener("click", function () {
+  const content = document.getElementById("marryContent");
+  if (!content) return;
+
+  const isVisible = content.style.display === "block";
+  content.style.display = isVisible ? "none" : "block";
+
+  if (!isVisible) {
+    // Reset typewriter
+    clearTimeout(typingInterval);
+    marryIndex = 0;
+    document.getElementById("marryTypewriter").innerHTML = "";
+    typeMarryMessage();
+  }
 });
 </script>
 <script>
