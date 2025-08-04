@@ -3153,79 +3153,61 @@ function eraseEverything() {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const eraseButton = document.getElementById("eraseButton");
-  const glitchAudio = document.getElementById("glitchSound");
+  if (!eraseButton) return;
 
-  if (eraseButton) {
-    eraseButton.addEventListener("click", () => {
-      // Clear storage & timeouts
-      localStorage.clear();
-      const highestId = setTimeout(() => {}, 0);
-      for (let i = 0; i <= highestId; i++) clearTimeout(i);
+  const glitchAudio = new Audio("glitch.mp3");
 
-      // Reset styles
-      document.body.innerHTML = "";
-      document.body.style.background = "#000";
-      document.body.style.color = "#ff0033";
+  eraseButton.addEventListener("click", () => {
+    // Play glitch sound
+    glitchAudio.play().catch(e => console.error("Sound failed:", e));
 
-      // Glitch sound
-      if (glitchAudio && glitchAudio.play) {
-        glitchAudio.currentTime = 0;
-        glitchAudio.volume = 1;
-        glitchAudio.play().catch(() => {
-          console.warn("Glitch sound couldn't autoplay. Try interacting first.");
-        });
+    localStorage.clear();
+
+    const highestId = setTimeout(() => {}, 0);
+    for (let i = 0; i <= highestId; i++) clearTimeout(i);
+
+    document.body.innerHTML = "";
+    document.body.style.background = "#000";
+    document.body.style.color = "#ff0033";
+
+    const glitchMessages = [
+      "You shouldn't have done that.",
+      "Too late now.",
+      "System failure.",
+      "Memory corrupted.",
+      "Goodbye.",
+      "Everything is gone.",
+      "There is no going back.",
+      "You erased her too.",
+      "I warned you.",
+      "Nothing remains.",
+      "You let go.",
+      "A sin has been committed.",
+      "What have you done?"
+    ];
+
+    let spamCount = 0;
+    const spamInterval = setInterval(() => {
+      const msg = document.createElement("div");
+      msg.innerText = glitchMessages[Math.floor(Math.random() * glitchMessages.length)];
+      msg.style.fontSize = "18px";
+      msg.style.margin = "10px";
+      msg.style.fontFamily = "monospace";
+      msg.style.opacity = "0.9";
+      msg.style.animation = "fadeIn 0.5s ease";
+      document.body.appendChild(msg);
+      spamCount++;
+
+      if (spamCount >= 30) {
+        clearInterval(spamInterval);
+        // INSTANT FINAL MESSAGE
+        document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:#ff0033; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
       }
-
-      // Messages
-      const glitchMessages = [
-        "You shouldn't have done that.",
-        "Too late now.",
-        "System failure.",
-        "Memory corrupted.",
-        "Goodbye.",
-        "Everything is gone.",
-        "There is no going back.",
-        "You erased her too.",
-        "I warned you.",
-        "Nothing remains.",
-        "You let go.",
-        "A sin has been committed.",
-        "What have you done?"
-      ];
-
-      let spamCount = 0;
-      const spamInterval = setInterval(() => {
-        const msg = document.createElement("div");
-        msg.innerText = glitchMessages[Math.floor(Math.random() * glitchMessages.length)];
-        msg.style.fontSize = "18px";
-        msg.style.margin = "10px";
-        msg.style.fontFamily = "monospace";
-        msg.style.opacity = "0.85";
-        msg.style.color = "#ff0033";
-        msg.style.animation = "fadeIn 0.2s ease";
-        msg.style.transform = `rotate(${Math.floor(Math.random() * 10) - 5}deg) translateX(${Math.floor(Math.random() * 20) - 10}px)`;
-        document.body.appendChild(msg);
-        spamCount++;
-
-        if (spamCount >= 30) {
-  clearInterval(spamInterval);
-  document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
-}
-      }, 90);
-    });
-  }
+    }, 100);
+  });
 });
 </script>
 <audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
-<script>
-  const testAudio = document.createElement("audio");
-  testAudio.src = "glitch.mp3";
-  testAudio.addEventListener("canplaythrough", () => alert("✅ Browser can play glitch.mp3"));
-  testAudio.addEventListener("error", () => alert("❌ Can't play glitch.mp3. Check file."));
-</script>
-<audio controls>
-  <source src="glitch.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<button id="eraseButton" onclick="eraseEverything()">Confirm Erase</button>
 </body>
 </html>
