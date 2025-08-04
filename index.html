@@ -2938,5 +2938,21 @@ window.addEventListener("load", () => {
 });
 window.addEventListener("resize", resizeWheelCanvas);
 </script>
+<script>
+document.querySelectorAll(".collapsible").forEach(button => {
+  button.addEventListener("click", function () {
+    this.classList.toggle("active");
+    const content = this.nextElementSibling;
+    if (!content) return;
+
+    // Toggle display
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+});
+</script>
 </body>
 </html>
