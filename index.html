@@ -2795,5 +2795,26 @@ document.addEventListener('DOMContentLoaded', function () {
   type();
 });
 </script>
+<script>
+// Auto-zoom/scale adjustments for all screens
+function adjustScaling() {
+  const meta = document.querySelector('meta[name="viewport"]');
+  if (!meta) {
+    const m = document.createElement('meta');
+    m.name = "viewport";
+    m.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+    document.head.appendChild(m);
+  } else {
+    meta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
+  }
+
+  document.body.style.wordWrap = "break-word";
+  document.body.style.overflowX = "hidden";
+  document.body.style.maxWidth = "100vw";
+}
+
+window.addEventListener("load", adjustScaling);
+window.addEventListener("resize", adjustScaling);
+</script>
 </body>
 </html>
