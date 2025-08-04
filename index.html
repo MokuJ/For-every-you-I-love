@@ -1417,7 +1417,7 @@
       <!-- ✅ Responsive Country Wheel Block -->
 <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 500px; margin: 0 auto;">
   <div class="wheel-pointer" style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red; z-index: 10;"></div>
-  <canvas id="loveWheel" style="width: 100%; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
+  <canvas id="loveWheel" style="width: 100%; max-width: 500px; height: auto; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
 </div>
 </div>
 
@@ -2900,11 +2900,18 @@ function resizeWheelCanvas() {
   const size = Math.min(parent.offsetWidth, 500);
   canvas.width = size;
   canvas.height = size;
-  if (typeof drawWheel === "function") drawWheel(); // if you have a draw function, call it again after resizing
+  if (typeof drawWheel === "function") drawWheel(); // <- important
 }
 
 window.addEventListener("DOMContentLoaded", resizeWheelCanvas);
 window.addEventListener("resize", resizeWheelCanvas);
+</script>
+<script>
+setTimeout(() => {
+  if (typeof resizeWheelCanvas === "function") {
+    resizeWheelCanvas();
+  }
+}, 150);
 </script>
 </body>
 </html>
