@@ -1788,7 +1788,7 @@ for (let i = 0; i < collapsibles.length; i++) {
 </style>
 
   <div class="music-collection-container">
-    <button onclick="toggleMusicCollection()">
+    <button id="musicBtn" onclick="toggleMusicCollection()">
       🎵 Music Collection
     </button>
     <div id="musicBox">
@@ -1885,7 +1885,7 @@ for (let i = 0; i < collapsibles.length; i++) {
   <button onclick="scrollToTop()" id="backToTop">↑ Top</button>
 
   <div class="contact-container">
-    <button onclick="toggleContact()">
+    <button id="contactBtn" onclick="toggleContact()">
       📱 Contact Kanak
     </button>
     <div id="contactBox">
@@ -3078,6 +3078,23 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   };
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function setupSingleClickToggle(buttonId, boxId) {
+    const btn = document.getElementById(buttonId);
+    const box = document.getElementById(boxId);
+    if (!btn || !box) return;
+
+    btn.addEventListener("click", () => {
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    });
+  }
+
+  // 🎯 Specifically fix these buttons
+  setupSingleClickToggle("contactBtn", "contactBox");
+  setupSingleClickToggle("musicBtn", "musicBox");
 });
 </script>
 </body>
