@@ -2977,5 +2977,22 @@ document.querySelectorAll(".collapsible").forEach(button => {
   });
 });
 </script>
+<script>
+// Handle all collapsibles
+function setupCollapsibles(className) {
+  document.querySelectorAll(`.${className}`).forEach(button => {
+    button.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      if (!content) return;
+      const isVisible = content.style.display === "block";
+      content.style.display = isVisible ? "none" : "block";
+    });
+  });
+}
+
+// Run setup for each collapsible type
+setupCollapsibles("collapsible");         // For regular ones like "Marry Me?", Wheel, etc.
+setupCollapsibles("inner-collapsible");   // For nested ones inside Music Collection
+</script>
 </body>
 </html>
