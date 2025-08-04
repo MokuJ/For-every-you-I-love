@@ -1415,12 +1415,9 @@
     <!-- 🔻 PIN POINTER (inverted) -->
     <div style="position: relative; text-align: center;">
       <!-- ✅ Responsive Country Wheel Block -->
-<div style="position: relative; display: flex; justify-content: center; align-items: center; max-width: 90vw; margin: 20px auto;">
-  <!-- 📍 Pointer -->
+<div style="position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 500px; margin: 0 auto;">
   <div class="wheel-pointer" style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red; z-index: 10;"></div>
-
-  <!-- 🌀 Canvas -->
-  <canvas id="loveWheel" style="width: 90vw; max-width: 500px; aspect-ratio: 1 / 1; height: auto; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
+  <canvas id="loveWheel" style="width: 100%; border-radius: 50%; border: 6px solid #333; background: #111;"></canvas>
 </div>
 </div>
 
@@ -2876,6 +2873,38 @@ function resizeLoveWheel() {
 
 window.addEventListener("load", resizeLoveWheel);
 window.addEventListener("resize", resizeLoveWheel);
+</script>
+<script>
+function resizeLoveWheel() {
+  const canvas = document.getElementById("loveWheel");
+  const pointer = document.querySelector(".wheel-pointer");
+  if (!canvas || !pointer) return;
+
+  // Dynamically get displayed width
+  const width = Math.min(window.innerWidth * 0.9, 500);
+  canvas.width = width;
+  canvas.height = width;
+
+  pointer.style.top = `-${Math.floor(width * 0.04)}px`;
+  pointer.style.left = "50%";
+  pointer.style.transform = "translateX(-50%) rotate(180deg)";
+}
+
+window.addEventListener("load", resizeLoveWheel);
+window.addEventListener("resize", resizeLoveWheel);
+</script>
+<script>
+function resizeWheelCanvas() {
+  const canvas = document.getElementById("loveWheel");
+  const parent = canvas.parentElement;
+  const size = Math.min(parent.offsetWidth, 500);
+  canvas.width = size;
+  canvas.height = size;
+  if (typeof drawWheel === "function") drawWheel(); // if you have a draw function, call it again after resizing
+}
+
+window.addEventListener("DOMContentLoaded", resizeWheelCanvas);
+window.addEventListener("resize", resizeWheelCanvas);
 </script>
 </body>
 </html>
