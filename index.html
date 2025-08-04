@@ -1731,8 +1731,7 @@ for (let i = 0; i < collapsibles.length; i++) {
 }
 </script>
   
-  <!-- 💍 Marry Me Button -->
-  <div style="position: relative; z-index: 1;">
+<!-- 💍 Marry Me Button -->
 <button id="marryButton" style="
   background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
   color: #ffe5e5;
@@ -1750,10 +1749,9 @@ for (let i = 0; i < collapsibles.length; i++) {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: pulseGlow 3s infinite ease-in-out;
   cursor: pointer;
-  pointer-events: auto;
 ">💍 Marry me?</button>
-</div>
 
+<!-- 💌 Message Box -->
 <div id="marryContent" style="
   display: none;
   background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
@@ -1768,6 +1766,7 @@ for (let i = 0; i < collapsibles.length; i++) {
   box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
   text-align: center;
   line-height: 1.8;
+  text-shadow: 1px 1px 2px #000;
 ">
   <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
 </div>
@@ -2998,31 +2997,26 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("marryButton");
-  const box = document.getElementById("marryContent");
+  const content = document.getElementById("marryContent");
   const target = document.getElementById("marryTypewriter");
-  const msg = "Will you marry me, Kanak?";
-  let typing = false;
+  const message = "Will you marry me, Kanak?";
   let i = 0;
+  let typing = false;
 
-  if (!btn || !box || !target) {
-    console.error("Missing elements.");
-    return;
-  }
-
-  btn.addEventListener("click", function () {
+  btn.addEventListener("click", () => {
     if (typing) return;
 
-    const isOpen = box.style.display === "block";
+    const isOpen = content.style.display === "block";
 
     if (!isOpen) {
-      box.style.display = "block";
+      content.style.display = "block";
       target.innerHTML = "";
       i = 0;
       typing = true;
 
       function type() {
-        if (i < msg.length) {
-          target.innerHTML += msg.charAt(i);
+        if (i < message.length) {
+          target.innerHTML += message.charAt(i);
           i++;
           setTimeout(type, 70);
         } else {
@@ -3042,7 +3036,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
     } else {
-      box.style.display = "none";
+      content.style.display = "none";
     }
   });
 });
