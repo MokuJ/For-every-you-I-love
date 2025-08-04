@@ -3140,7 +3140,7 @@ function eraseEverything() {
   `;
 
   // Optional: Glitch sound (if you want it)
-  const glitchSound = new Audio('glitch.mp3');
+  const glitchSound = new Audio('glitch1.mp3');
   glitchSound.volume = 0.5;
   glitchSound.play();
 
@@ -3155,7 +3155,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const eraseButton = document.getElementById("eraseButton");
   if (!eraseButton) return;
 
-  const glitchAudio = new Audio("glitch.mp3");
+  const glitchAudio = new Audio("glitch1.mp3");
 
   eraseButton.addEventListener("click", () => {
     // Play glitch sound
@@ -3207,7 +3207,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-<audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
+<audio id="glitchSound" src="glitch1.mp3" preload="auto"></audio>
 <button id="eraseButton" onclick="eraseEverything()">Confirm Erase</button>
 </body>
 </html>
