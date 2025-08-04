@@ -2938,5 +2938,15 @@ window.addEventListener("load", () => {
 });
 window.addEventListener("resize", resizeWheelCanvas);
 </script>
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("loveWheel");
+  if (canvas) {
+    const width = Math.min(window.innerWidth * 0.9, 500);
+    canvas.width = width;
+    canvas.height = width;
+  }
+});
+</script>
 </body>
 </html>
