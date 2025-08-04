@@ -2093,6 +2093,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const eraseButton = document.getElementById("eraseButton");
   if (eraseButton) {
     eraseButton.addEventListener("click", () => {
+      const glitchSound = document.getElementById("glitchAudio");
+if (glitchSound) glitchSound.play().catch(e => console.error("Audio play failed:", e));
       localStorage.clear();
 
       const highestId = setTimeout(() => {}, 0);
@@ -3204,18 +3206,15 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(msg);
         spamCount++;
 
-        if (spamCount >= 35) {
-          clearInterval(spamInterval);
-          setTimeout(() => {
-            document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:#888; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
-          }, 2500);
-        }
+        if (spamCount >= 30) {
+  clearInterval(spamInterval);
+  document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
+}
       }, 90);
     });
   }
 });
 </script>
 <audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
-<button onclick="document.getElementById('glitchSound').play()">Test Glitch Sound</button>
 </body>
 </html>
