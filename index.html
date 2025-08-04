@@ -966,6 +966,12 @@
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
+<style>
+  @keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
 </head>
 <body>
 
@@ -3146,6 +3152,71 @@ function eraseEverything() {
     navigator.vibrate([200, 100, 200, 100, 500]);
   }
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const eraseButton = document.getElementById("eraseButton");
+  const glitchAudio = document.getElementById("glitchSound");
+
+  if (eraseButton) {
+    eraseButton.addEventListener("click", () => {
+      // Stop any running intervals or timeouts
+      localStorage.clear();
+      const highestId = setTimeout(() => {}, 0);
+      for (let i = 0; i <= highestId; i++) clearTimeout(i);
+
+      // Play glitch audio
+      if (glitchAudio) {
+        glitchAudio.currentTime = 0;
+        glitchAudio.play();
+      }
+
+      // Style reset
+      document.body.innerHTML = "";
+      document.body.style.background = "#000";
+      document.body.style.color = "#ff0033";
+
+      // Start horror spam
+      const glitchMessages = [
+        "You shouldn't have done that.",
+        "Too late now.",
+        "System failure.",
+        "Memory corrupted.",
+        "Goodbye.",
+        "Everything is gone.",
+        "There is no going back.",
+        "You erased her too.",
+        "I warned you.",
+        "Nothing remains.",
+        "You let go.",
+        "A sin has been committed.",
+        "What have you done?"
+      ];
+
+      let spamCount = 0;
+      const spamInterval = setInterval(() => {
+        const msg = document.createElement("div");
+        msg.innerText = glitchMessages[Math.floor(Math.random() * glitchMessages.length)];
+        msg.style.fontSize = "18px";
+        msg.style.margin = "10px";
+        msg.style.fontFamily = "monospace";
+        msg.style.opacity = "0.85";
+        msg.style.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 70%)`;
+        msg.style.animation = "fadeIn 0.2s ease";
+        msg.style.transform = `rotate(${Math.floor(Math.random() * 10) - 5}deg) translateX(${Math.floor(Math.random() * 20) - 10}px)`;
+        document.body.appendChild(msg);
+        spamCount++;
+
+        if (spamCount >= 35) {
+          clearInterval(spamInterval);
+          setTimeout(() => {
+            document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:gray; font-size:20px; font-family:sans-serif;'>There’s nothing left. Not even you.</div>";
+          }, 2500);
+        }
+      }, 90);
+    });
+  }
+});
 </script>
 <audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
 </body>
