@@ -2817,126 +2817,239 @@ window.addEventListener("resize", adjustScaling);
 </script>
 
 <script>
-function drawWheel() {
-  const canvas = document.getElementById("loveWheel");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const size = canvas.width;
-  const center = size / 2;
-  const numSlices = countries.length;
-  const sliceAngle = (2 * Math.PI) / numSlices;
+  // 🚀 Wheel Canvas
+  const countries = ["USA", "India", "UK", "Canada", "Australia"]; // You can replace this with your list
+  let currentAngle = 0;
+  let isSpinning = false;
 
-  ctx.clearRect(0, 0, size, size);
+  function drawWheel() {
+    const canvas = document.getElementById("loveWheel");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const size = canvas.width;
+    const center = size / 2;
+    const numSlices = countries.length;
+    const sliceAngle = (2 * Math.PI) / numSlices;
 
-  for (let i = 0; i < numSlices; i++) {
-    const angle = i * sliceAngle + currentAngle;
-    ctx.beginPath();
-    ctx.moveTo(center, center);
-    ctx.arc(center, center, center, angle, angle + sliceAngle);
-    ctx.fillStyle = i % 2 === 0 ? "#aa00ff" : "#ff4081";
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = "#fff";
-    ctx.font = `${Math.floor(size / 30)}px sans-serif`;
-    ctx.save();
-    ctx.translate(center, center);
-    ctx.rotate(angle + sliceAngle / 2);
-    ctx.fillText(countries[i].split(" - ")[0], size * 0.35, 0);
-    ctx.restore();
-  }
-}
+    ctx.clearRect(0, 0, size, size);
 
-function resizeWheelCanvas() {
-  const canvas = document.getElementById("loveWheel");
-  const pointer = document.querySelector(".wheel-pointer");
-  if (!canvas) return;
-
-  const containerWidth = canvas.parentElement.offsetWidth;
-  const size = Math.min(containerWidth, window.innerWidth * 0.9, 500);
-
-  canvas.width = size;
-  canvas.height = size;
-  canvas.style.width = `${size}px`;
-  canvas.style.height = `${size}px`;
-
-  if (pointer) {
-    pointer.style.top = `-${Math.floor(size * 0.04)}px`;
-    pointer.style.left = "50%";
-    pointer.style.transform = "translateX(-50%) rotate(180deg)";
-  }
-
-  drawWheel();
-}
-
-// 🚀 Handle Collapsible + Resize
-document.querySelectorAll(".collapsible").forEach(btn => {
-  btn.addEventListener("click", function () {
-    const content = this.nextElementSibling;
-    const isOpen = content.style.display === "block";
-    content.style.display = isOpen ? "none" : "block";
-    if (!isOpen) {
-      setTimeout(resizeWheelCanvas, 100);
+    for (let i = 0; i < numSlices; i++) {
+      const angle = i * sliceAngle + currentAngle;
+      ctx.beginPath();
+      ctx.moveTo(center, center);
+      ctx.arc(center, center, center, angle, angle + sliceAngle);
+      ctx.fillStyle = i % 2 === 0 ? "#aa00ff" : "#ff4081";
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.font = `${Math.floor(size / 30)}px sans-serif`;
+      ctx.save();
+      ctx.translate(center, center);
+      ctx.rotate(angle + sliceAngle / 2);
+      ctx.fillText(countries[i].split(" - ")[0], size * 0.35, 0);
+      ctx.restore();
     }
+  }
+
+  function resizeWheelCanvas() {
+    const canvas = document.getElementById("loveWheel");
+    const pointer = document.querySelector(".wheel-pointer");
+    if (!canvas) return;
+
+    const containerWidth = canvas.parentElement.offsetWidth;
+    const size = Math.min(containerWidth, window.innerWidth * 0.9, 500);
+
+    canvas.width = size;
+    canvas.height = size;
+    canvas.style.width = `${size}px`;
+    canvas.style.height = `${size}px`;
+
+    if (pointer) {
+      pointer.style.top = `-${Math.floor(size * 0.04)}px`;
+      pointer.style.left = "50%";
+      pointer.style.transform = "translateX(-50%) rotate(180deg)";
+    }
+
+    drawWheel();
+  }
+
+  window.addEventListener("load", () => {
+    resizeWheelCanvas();
+    setTimeout(resizeWheelCanvas, 150); // mobile glitch fix
   });
-});
+  window.addEventListener("resize", resizeWheelCanvas);
 
-window.addEventListener("load", () => {
-  resizeWheelCanvas();
-  setTimeout(resizeWheelCanvas, 150); // mobile glitch fix
-});
-window.addEventListener("resize", resizeWheelCanvas);
-// The list of affirmations to spin through
-const affirmations = [
-  "I love you, Kanak.",
-  "You are the best thing that has ever happened to me.",
-  "I am so grateful to have you in my life.",
-  "You are my person.",
-  "You are beautiful, inside and out.",
-  "I love your laugh.",
-  "You make me happy.",
-  "I miss you so much."
-];
 
-function startSpinning() {
-  const box = document.getElementById('affirmationBox');
-  const textSpan = document.getElementById('affirmationText');
-  let spinCount = 0;
-  const totalSpins = 30;
-  const spinSound = document.getElementById('spinSound');
+  // 🚀 Spinning Affirmation Wheel
+  const affirmations = [
+    "I love you, Kanak.",
+    "You are the best thing that has ever happened to me.",
+    "I am so grateful to have you in my life.",
+    "You are my person.",
+    "You are beautiful, inside and out.",
+    "I love your laugh.",
+    "You make me happy.",
+    "I miss you so much."
+  ];
 
-  // Play the sound effect
-  spinSound.play();
+  function startSpinning() {
+    const box = document.getElementById('affirmationBox');
+    const textSpan = document.getElementById('affirmationText');
+    let spinCount = 0;
+    const totalSpins = 30;
+    const spinSound = document.getElementById('spinSound');
+    spinSound.play();
 
-  let spinningInterval = setInterval(() => {
-      if (spinCount >= totalSpins) {
-          clearInterval(spinningInterval);
-          spinSound.pause();
-          spinSound.currentTime = 0;
-          textSpan.textContent = "You are my world.";
-          return;
-      }
+    let spinningInterval = setInterval(() => {
+        if (spinCount >= totalSpins) {
+            clearInterval(spinningInterval);
+            spinSound.pause();
+            spinSound.currentTime = 0;
+            textSpan.textContent = "You are my world.";
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * (affirmations.length - 1));
+        textSpan.textContent = affirmations[randomIndex];
+        spinCount++;
+    }, 100);
+  }
 
-      const randomIndex = Math.floor(Math.random() * (affirmations.length - 1));
-      textSpan.textContent = affirmations[randomIndex];
-      spinCount++;
-  }, 100);
-}
-// Main Collapsible logic for all collapsible elements
-var coll = document.getElementsByClassName("collapsible");
-for (let i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    // Find the next sibling element with the class "content"
-    var content = this.nextElementSibling;
-    // If the next sibling is a content box, toggle its display
-    if (content && content.classList.contains("content")) {
-      if (content.style.display === "block") {
-        content.style.display = "none";
+
+  // 🚀 Collapsible Logic
+  // This handles all buttons with the class "collapsible"
+  var coll = document.getElementsByClassName("collapsible");
+  for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
       } else {
-        content.style.display = "block";
+        content.style.maxHeight = content.scrollHeight + "px";
       }
+    });
+  }
+
+  // This handles all buttons with the class "fresh-collapsible"
+  var freshColl = document.getElementsByClassName("fresh-collapsible");
+  for (let i = 0; i < freshColl.length; i++) {
+    freshColl[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  }
+
+  // 🚀 Music Collection Logic
+  // This is the specific function for the main Music Collection button
+  function toggleMusicCollection() {
+    var musicBox = document.getElementById("musicBox");
+    if (musicBox.style.display === "block") {
+      musicBox.style.display = "none";
+    } else {
+      musicBox.style.display = "block";
+    }
+  }
+
+
+  // 🚀 Password and Secret Sections
+  // This is the function for the 'Craving a glimpse?' button
+  function toggleSecretSection() {
+    var secretSection = document.getElementById('secretSection');
+    if (secretSection.style.display === 'none' || secretSection.style.display === '') {
+      secretSection.style.display = 'block';
+    } else {
+      secretSection.style.display = 'none';
+    }
+  }
+
+  // Password for 'Craving a glimpse?' button
+  const correctPassword = "ILY2607";
+  function revealImage() {
+    var passwordInput = document.getElementById('passwordInput').value;
+    var imageContainer = document.getElementById('imageContainer');
+    if (passwordInput === correctPassword) {
+      imageContainer.style.display = 'block';
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  }
+
+  // Password for 'Enter Password to View Image' button
+  const imagePassword = "ILY2607";
+  function checkPassword() {
+    const password = prompt("Please enter the password to view the image:");
+    if (password === imagePassword) {
+      document.getElementById('image-container').style.display = 'block';
+    } else {
+      alert("Incorrect password.");
+    }
+  }
+
+  // Other utility functions for the site
+  document.getElementById("revealToggle").addEventListener("click", function() {
+    var secretSection = document.getElementById('secretSection');
+    if (secretSection.style.display === 'none' || secretSection.style.display === '') {
+      secretSection.style.display = 'block';
+      this.textContent = "Hide Glimpse";
+    } else {
+      secretSection.style.display = 'none';
+      this.textContent = "Craving a glimpse? 👀";
     }
   });
-}
+
+  document.querySelectorAll(".mini-collapsible").forEach(btn => {
+    btn.addEventListener("click", function() {
+      const parent = this.closest(".collapsible-pair");
+      if (parent) {
+        const content = parent.querySelector(".fresh-content");
+        if (content) {
+          content.classList.toggle("open");
+        }
+      }
+    });
+  });
+
+  // Scroll to Top Button
+  const backToTopButton = document.getElementById('backToTop');
+  if (backToTopButton) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // For the `details` tag (Happy Birthday)
+  document.querySelectorAll('details.birthday-details').forEach(detailsElement => {
+    detailsElement.addEventListener('toggle', event => {
+      if (detailsElement.open) {
+        // You can add logic here for when it opens, if needed.
+      }
+    });
+  });
+
+  // For the love strip
+  function duplicateLoveStripContent() {
+    const stripContent = document.querySelector('.love-strip-content');
+    if (stripContent) {
+      stripContent.innerHTML += stripContent.innerHTML;
+    }
+  }
+  duplicateLoveStripContent();
 </script>
 </body>
 </html>
