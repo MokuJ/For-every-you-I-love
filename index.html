@@ -1743,6 +1743,7 @@ function drawWheel() {
 document.getElementById("spinButton").addEventListener("click", () => {
   if (isSpinning) return;
   isSpinning = true;
+  document.getElementById("spinSound").play();
   const canvas = document.getElementById("loveWheel");
   const numSlices = countries.length;
   const sliceAngle = (2 * Math.PI) / numSlices;
@@ -3065,5 +3066,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+<audio id="spinSound" src="spin.mp3" preload="auto"></audio>
 </body>
 </html>
