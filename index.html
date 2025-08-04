@@ -3035,5 +3035,43 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("marryButton");
+  const box = document.getElementById("marryContent");
+  const msg = "Will you marry me, Kanak?";
+  const target = document.getElementById("marryTypewriter");
+  let i = 0;
+  let typing;
+
+  if (!btn || !box || !target) {
+    console.error("Missing Marry Me button or container.");
+    return;
+  }
+
+  btn.onclick = () => {
+    // FORCE TOGGLE
+    const showing = box.style.display === "block";
+    box.style.display = showing ? "none" : "block";
+
+    if (!showing) {
+      // RESET TYPEWRITER
+      clearTimeout(typing);
+      target.innerHTML = "";
+      i = 0;
+
+      function type() {
+        if (i < msg.length) {
+          target.innerHTML += msg.charAt(i);
+          i++;
+          typing = setTimeout(type, 70);
+        }
+      }
+
+      type();
+    }
+  };
+});
+</script>
 </body>
 </html>
