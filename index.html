@@ -1408,33 +1408,29 @@
     </details>
   </div>
   
-  <!-- ✅ COLLAPSIBLE LOVE WHEEL -->
-<div style="max-width: 600px; margin: 40px auto;">
+  <!-- ✅ COLLAPSIBLE LOVE WHEEL --><div style="max-width: 600px; margin: 40px auto;">
   <button class="collapsible" style="background-color: #1a1a1a; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; display: block; margin: 0 auto;">
     🎡 Around the World, I Still Love You
-  </button>
-
-  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #111; color: white; border-radius: 8px; margin-top: 10px;">
-    <!-- 🔻 PIN POINTER -->
+  </button>  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #111; color: white; border-radius: 8px; margin-top: 10px;">
+    <!-- 🔻 PIN POINTER (inverted) -->
     <div style="position: relative; text-align: center;">
-      <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red;"></div>
-
-      <!-- 🌀 CANVAS -->
-      <canvas id="loveWheel" width="500" height="500" style="border-radius: 50%; border: 6px solid #555; background: #222;"></canvas>
-    </div>
-
-    <!-- 🧿 SPIN BUTTON -->
-    <button id="spinButton" style="margin-top:20px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: #555; color: white; cursor: pointer;">
-      Spin the Wheel
-    </button>
-
-    <!-- 📦 RESULT BOX -->
-    <div id="resultBox" style="margin-top: 20px; padding: 15px; background: #333; border-radius: 8px; color: #eee; font-size: 16px; font-weight: bold;"></div>
-  </div>
+      <div style="position: absolute; bottom: 510px; left: 50%; transform: translateX(-50%) rotate(180deg); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid red;"></div><!-- 🌀 CANVAS -->
+  <canvas id="loveWheel" width="500" height="500" style="border-radius: 50%; border: 6px solid #555; background: #222;"></canvas>
 </div>
 
-<!-- ✅ COLLAPSIBLE SCRIPT -->
-<script>
+<!-- 🧿 SPIN BUTTON (centered) -->
+<div style="text-align: center;">
+  <button id="spinButton" style="margin-top:20px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: #555; color: white; cursor: pointer;">
+    Spin the Wheel
+  </button>
+</div>
+
+<!-- 📦 RESULT BOX (upgraded) -->
+<div id="resultBox" style="margin-top: 25px; padding: 18px 22px; background: linear-gradient(to right, #232526, #414345); border-left: 5px solid #00bcd4; border-radius: 10px; color: #eee; font-size: 17px; font-weight: 600; font-family: 'Segoe UI', sans-serif; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.4);">
+</div>
+
+  </div>
+</div><!-- ✅ COLLAPSIBLE SCRIPT --><script>
 document.addEventListener("DOMContentLoaded", function () {
   const button = document.querySelector(".collapsible");
   const content = document.querySelector(".collapsible-content");
@@ -1445,10 +1441,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-</script>
-
-<!-- ✅ LOVE WHEEL SCRIPT -->
-<script>
+</script><!-- ✅ LOVE WHEEL SCRIPT --><script>
 const countries = [
   "🇦🇫 Afghanistan - زه ستا سره مینه لرم",
 "🇦🇱 Albania - Të dua",
