@@ -3031,6 +3031,27 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <script>
+window.addEventListener("load", function () {
+  const btn = document.getElementById("marryButton");
+  const content = document.getElementById("marryContent");
+
+  if (!btn || !content) return;
+
+  // Reset display state
+  content.style.display = "none";
+
+  // Clear duplicate event listeners
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+
+  newBtn.addEventListener("click", function () {
+    const isOpen = content.style.display === "block";
+    content.style.display = isOpen ? "none" : "block";
+  });
+});
+</script>
+
+<script>
 document.addEventListener("DOMContentLoaded", function () {
   function toggleVisibility(buttonId, boxId) {
     const button = document.getElementById(buttonId);
