@@ -3097,5 +3097,23 @@ document.addEventListener("DOMContentLoaded", function () {
   setupSingleClickToggle("musicBtn", "musicBox");
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function toggleVisibility(btnId, boxId) {
+    const button = document.getElementById(btnId);
+    const box = document.getElementById(boxId);
+
+    if (!button || !box) return;
+
+    button.addEventListener("click", function () {
+      const currentlyVisible = box.style.display === "block";
+      box.style.display = currentlyVisible ? "none" : "block";
+    });
+  }
+
+  toggleVisibility("contactBtn", "contactBox");
+  toggleVisibility("musicBtn", "musicBox");
+});
+</script>
 </body>
 </html>
