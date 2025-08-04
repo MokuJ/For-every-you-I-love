@@ -3133,5 +3133,55 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<!-- 💥 Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+<!-- 💍 Marry Me – One Script to Rule -->
+<script>
+(() => {
+  const btn = document.getElementById("marryButton");
+  const box = document.getElementById("marryContent");
+  const target = document.getElementById("marryTypewriter");
+  const msg = "Will you marry me, Kanak?";
+  let i = 0, typing = false;
+
+  if (!btn || !box || !target) {
+    console.warn("Missing #marryButton or #marryContent or #marryTypewriter");
+    return;
+  }
+
+  btn.onclick = () => {
+    const shown = box.style.display === "block";
+
+    if (!shown && !typing) {
+      box.style.display = "block";
+      target.innerText = "";
+      i = 0;
+      typing = true;
+
+      const type = () => {
+        if (i < msg.length) {
+          target.innerText += msg.charAt(i++);
+          setTimeout(type, 65);
+        } else {
+          typing = false;
+        }
+      };
+      type();
+
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 222,
+          spread: 100,
+          origin: { y: 0.6 },
+          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+        });
+      }
+    } else {
+      box.style.display = "none";
+    }
+  };
+})();
+</script>
 </body>
 </html>
