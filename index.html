@@ -2975,109 +2975,57 @@ document.getElementById("marryButton").addEventListener("click", function () {
 });
 </script>
 <script>
-const marryMessage = "Will you marry me, Kanak?";
-let marryIndex = 0;
-let typingInterval;
-
-function typeMarryMessage() {
-  const target = document.getElementById("marryTypewriter");
-  if (marryIndex < marryMessage.length) {
-    target.innerHTML += marryMessage.charAt(marryIndex);
-    marryIndex++;
-    typingInterval = setTimeout(typeMarryMessage, 70);
-  }
-}
-
-document.getElementById("marryButton").addEventListener("click", function () {
-  const content = document.getElementById("marryContent");
-  if (!content) return;
-
-  const isVisible = content.style.display === "block";
-  content.style.display = isVisible ? "none" : "block";
-
-  if (!isVisible) {
-    // Reset typewriter
-    clearTimeout(typingInterval);
-    marryIndex = 0;
-    document.getElementById("marryTypewriter").innerHTML = "";
-    typeMarryMessage();
-  }
-});
-</script>
-<script>
-const marryMessage = "Will you marry me, Kanak?";
-let marryIndex = 0;
-let typingInterval;
-
-function typeMarryMessage() {
-  const target = document.getElementById("marryTypewriter");
-  if (marryIndex < marryMessage.length) {
-    target.innerHTML += marryMessage.charAt(marryIndex);
-    marryIndex++;
-    typingInterval = setTimeout(typeMarryMessage, 70);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  const button = document.getElementById("marryButton");
-  const content = document.getElementById("marryContent");
-
-  button.addEventListener("click", function () {
-    const isVisible = content.style.display === "block";
-    content.style.display = isVisible ? "none" : "block";
-
-    if (!isVisible) {
-      clearTimeout(typingInterval);
-      marryIndex = 0;
-      document.getElementById("marryTypewriter").innerHTML = "";
-      typeMarryMessage();
-    }
-  });
-});
-</script>
-<script>
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("marryButton");
   const box = document.getElementById("marryContent");
-  const msg = "Will you marry me, Kanak?";
   const target = document.getElementById("marryTypewriter");
+  const msg = "Will you marry me, Kanak?";
   let i = 0;
   let typing;
+  let isTyping = false;
 
   if (!btn || !box || !target) {
-    console.error("Missing Marry Me button or container.");
+    console.error("Missing Marry Me button, box, or target.");
     return;
   }
 
-  btn.onclick = () => {
+  btn.addEventListener("click", function () {
     const showing = box.style.display === "block";
-    box.style.display = showing ? "none" : "block";
 
     if (!showing) {
-      // Reset message
-      clearTimeout(typing);
+      box.style.display = "block";
+      btn.disabled = true;         // 🔒 Disable button while typing
       target.innerHTML = "";
       i = 0;
+      isTyping = true;
 
-      // Typewriter effect
       function type() {
         if (i < msg.length) {
           target.innerHTML += msg.charAt(i);
           i++;
           typing = setTimeout(type, 70);
+        } else {
+          btn.disabled = false;    // ✅ Enable after full message
+          isTyping = false;
         }
       }
+
+      clearTimeout(typing);
       type();
 
-      // 🎉 Confetti Burst!
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-      });
+      // 🎉 Confetti Burst
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+        });
+      }
+    } else if (!isTyping) {
+      box.style.display = "none";
     }
-  };
+  });
 });
 </script>
 <script>
