@@ -2992,47 +2992,42 @@ document.addEventListener("DOMContentLoaded", function () {
   setupSingleClickToggle("musicBtn", "musicBox");
 });
 </script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const button = document.getElementById("marryButton");
-  const content = document.getElementById("marryContent");
+  const btn = document.getElementById("marryButton");
+  const box = document.getElementById("marryContent");
   const target = document.getElementById("marryTypewriter");
-  const message = "Will you marry me, Kanak?";
+  const msg = "Will you marry me, Kanak?";
 
-  let index = 0;
-  let isTyping = false;
-  let typingTimeout;
+  let i = 0;
+  let typing = false;
 
-  if (!button || !content || !target) {
-    console.error("Missing marry elements.");
-    return;
-  }
+  if (!btn || !box || !target) return;
 
-  button.addEventListener("click", function () {
-    const isVisible = content.style.display === "block";
+  btn.addEventListener("click", () => {
+    if (typing) return;
 
-    if (isTyping) return; // Prevent spam click
+    const isVisible = box.style.display === "block";
 
     if (!isVisible) {
-      content.style.display = "block";
+      box.style.display = "block";
       target.innerHTML = "";
-      index = 0;
-      isTyping = true;
+      i = 0;
+      typing = true;
 
-      function typeLetter() {
-        if (index < message.length) {
-          target.innerHTML += message.charAt(index);
-          index++;
-          typingTimeout = setTimeout(typeLetter, 70);
+      const type = () => {
+        if (i < msg.length) {
+          target.innerHTML += msg.charAt(i);
+          i++;
+          setTimeout(type, 70);
         } else {
-          isTyping = false;
+          typing = false;
         }
-      }
+      };
 
-      clearTimeout(typingTimeout);
-      typeLetter();
+      type();
 
-      // 🎉 Confetti
       if (typeof confetti === "function") {
         confetti({
           particleCount: 150,
@@ -3041,14 +3036,14 @@ document.addEventListener("DOMContentLoaded", function () {
           colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
         });
       }
+
     } else {
-      if (!isTyping) {
-        content.style.display = "none";
-      }
+      box.style.display = "none";
     }
   });
 });
 </script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   function toggleVisibility(buttonId, boxId) {
