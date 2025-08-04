@@ -2997,9 +2997,9 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const miniBtns = document.querySelectorAll(".fresh-collapsible, .mini-collapsible");
+    const innerCollapsibles = document.querySelectorAll(".music-collection .inner-collapsible");
 
-    miniBtns.forEach((btn) => {
+    innerCollapsibles.forEach((btn) => {
       btn.addEventListener("click", function () {
         const content = this.nextElementSibling;
         if (!content) return;
