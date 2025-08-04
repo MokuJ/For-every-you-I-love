@@ -3099,16 +3099,26 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  function toggleVisibility(btnId, boxId) {
-    const button = document.getElementById(btnId);
+  function toggleVisibility(buttonId, boxId) {
+    const button = document.getElementById(buttonId);
     const box = document.getElementById(boxId);
 
     if (!button || !box) return;
 
+    // Set initial state
+    box.style.display = "none";
+    box.dataset.open = "false";
+
     button.addEventListener("click", function () {
-      const computedDisplay = window.getComputedStyle(box).display;
-      const isVisible = computedDisplay === "block";
-      box.style.display = isVisible ? "none" : "block";
+      const isOpen = box.dataset.open === "true";
+
+      if (isOpen) {
+        box.style.display = "none";
+        box.dataset.open = "false";
+      } else {
+        box.style.display = "block";
+        box.dataset.open = "true";
+      }
     });
   }
 
