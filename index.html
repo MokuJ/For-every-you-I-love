@@ -1914,93 +1914,67 @@ drawWheel();
     </div>
   </div>
 
-<!-- ✅ FULL BLOCK: THE VOID + ENDGAME -->
-<div style="max-width: 600px; margin: 40px auto;">
-
-  <!-- 🕳️ The Void That Replies -->
-  <button class="collapsible" style="background-color: #1a1a1a; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; margin: 0 auto; display: block;">
-    🕳️ The Void That Replies
-  </button>
-  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #111; color: white; border-radius: 8px; margin-top: 10px;">
-    <p style="font-style: italic; margin-bottom: 10px;">Speak to the silence. See what it returns.</p>
-    <input type="text" id="voidInput" placeholder="Type your message..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; background: #222; color: white;">
-    <button id="voidButton" style="margin-top: 10px; padding: 10px 15px; font-size: 14px; border: none; border-radius: 6px; background-color: #444; color: white; cursor: pointer;">Send into the Void</button>
-    <div id="voidReply" style="margin-top: 20px; padding: 15px; background: #1e1e1e; border-left: 5px solid crimson; border-radius: 8px; font-weight: bold; display: none; transition: opacity 0.4s ease;"></div>
-  </div>
-
-  <!-- ☠️ Endgame -->
-  <button class="collapsible" style="background-color: #8b0000; color: white; padding: 12px 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; width: auto; margin: 20px auto 0; display: block;">
-    ☠️ Erase Everything
-  </button>
-  <div class="collapsible-content" style="display: none; padding: 20px; background-color: #1a1a1a; color: white; border-radius: 8px; margin-top: 10px; text-align: center;">
-    <p>Nothing will remain. Not your confessions. Not your spins. Not even the void.</p>
-    <button id="eraseButton" style="margin-top: 10px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background-color: crimson; color: white; cursor: pointer;">Confirm Erase</button>
-  </div>
-
+<!-- 🎯 Collapsible: Main -->
+<button class="collapsible-main">Main Section</button>
+<div class="content-main" style="display:none;">
+  <p>This is your main content collapsible.</p>
 </div>
 
-<!-- ✅ FINAL SCRIPT THAT WORKS -->
+<!-- 🎯 Collapsible: The Void That Replies -->
+<button class="collapsible-void">🕳️ The Void That Replies</button>
+<div class="content-void" style="display:none; background: #111; color: white; padding: 20px; border-radius: 10px;">
+  <input id="voidInput" type="text" placeholder="Speak..." style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: none; border-radius: 6px;">
+  <button id="voidButton" style="padding: 10px; background: #444; color: white; border: none; border-radius: 6px;">Send into the Void</button>
+  <div id="voidReply" style="margin-top: 15px; display: none;"></div>
+</div>
+
+<!-- 🎯 Collapsible: Endgame -->
+<button class="collapsible-endgame">☠️ Erase Everything</button>
+<div class="content-endgame" style="display:none; background: #1a1a1a; color: white; padding: 20px; border-radius: 10px;">
+  <p>This cannot be undone.</p>
+  <button id="eraseButton" style="padding: 10px; background: crimson; color: white; border: none; border-radius: 6px;">Confirm Erase</button>
+</div>
+
+<!-- ✅ SCRIPT -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Collapsible behavior
-  const collapsibles = document.querySelectorAll(".collapsible");
-  collapsibles.forEach(button => {
-    button.addEventListener("click", () => {
-      const content = button.nextElementSibling;
-      content.style.display = content.style.display === "block" ? "none" : "block";
-    });
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  // Main
+  document.querySelector(".collapsible-main").onclick = () => {
+    const c = document.querySelector(".content-main");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+  };
 
-  // Void logic
-  const voidReplies = [
-    "How tf can you lose Kanak?!?",
-    "She'll never read this.",
-    "You should’ve lied.",
-    "You were supposed to be hers. Was she yours?",
+  // Void
+  const replies = [
+    "She’ll never read this.",
     "You waited too long.",
-    "Were you ever lost? Was she ever found?",
-    "It’s already too late.",
     "She was disappointed in you.",
-    "You were wrong. She did care.",
-    "She'll forget your name.",
-    "She thinks of you too. Just not the way you want.",
-    "You'll die without her presence.",
-    "She'll be someone else's, of her liking.",
-    "It will take a while, to make you smile. Somewhere in these eyes, I'm on your side."
+    "It’s already too late.",
+    "You should’ve lied.",
+    "You were right. She lied."
   ];
+  document.querySelector(".collapsible-void").onclick = () => {
+    const c = document.querySelector(".content-void");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+  };
+  document.getElementById("voidButton").onclick = () => {
+    const input = document.getElementById("voidInput").value.trim();
+    if (!input) return;
+    const r = replies.length ? replies.splice(Math.floor(Math.random() * replies.length), 1)[0] : "The void is empty.";
+    const box = document.getElementById("voidReply");
+    box.innerText = r;
+    box.style.display = "block";
+  };
 
-  const voidButton = document.getElementById("voidButton");
-  const voidInput = document.getElementById("voidInput");
-  const voidReply = document.getElementById("voidReply");
-
-  if (voidButton) {
-    voidButton.addEventListener("click", function () {
-      const inputText = voidInput.value.trim();
-      if (!inputText) return;
-
-      if (voidReplies.length === 0) {
-        voidReply.innerText = "The void has nothing more to say.";
-      } else {
-        const index = Math.floor(Math.random() * voidReplies.length);
-        voidReply.innerText = voidReplies.splice(index, 1)[0];
-      }
-
-      voidReply.style.opacity = 0;
-      voidReply.style.display = "block";
-      setTimeout(() => {
-        voidReply.style.opacity = 1;
-      }, 50);
-    });
-  }
-
-  // Erase logic
-  const eraseButton = document.getElementById("eraseButton");
-  if (eraseButton) {
-    eraseButton.addEventListener("click", function () {
-      localStorage.clear();
-      document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; background:#000; color:white; font-size:22px; font-family:sans-serif;'>You let go.</div>";
-    });
-  }
+  // Endgame
+  document.querySelector(".collapsible-endgame").onclick = () => {
+    const c = document.querySelector(".content-endgame");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+  };
+  document.getElementById("eraseButton").onclick = () => {
+    localStorage.clear();
+    document.body.innerHTML = "<div style='color:white; background:black; height:100vh; display:flex; justify-content:center; align-items:center; font-size:24px;'>You let go.</div>";
+  };
 });
 </script>
 
