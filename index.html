@@ -1412,12 +1412,7 @@
 
 <div class="content">
   <div id="worldMapContainer" style="height: 500px; width: 100%; margin: 20px auto;"></div>
-</div><!-- Load amCharts and map libraries --><script src="https://cdn.amcharts.com/lib/5/index.js"></script><script src="https://cdn.amcharts.com/lib/5/map.js"></script><script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script><script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script><script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
-<script>
+</div><!-- Load amCharts and map libraries --><script src="https://cdn.amcharts.com/lib/5/index.js"></script><script src="https://cdn.amcharts.com/lib/5/map.js"></script><script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script><script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script><script>
 const loveMessages = {
   "India": "मैं तुमसे प्यार करता हूँ",
   "Japan": "愛してる",
@@ -1442,8 +1437,8 @@ am5.ready(function() {
 
   let chart = root.container.children.push(
     am5map.MapChart.new(root, {
-      panX: "rotateX",
-      panY: "rotateY",
+      panX: "translateX",
+      panY: "translateY",
       projection: am5map.geoMercator(),
       wheelY: "zoom",
       pinchZoom: true
@@ -1459,17 +1454,34 @@ am5.ready(function() {
   );
 
   polygonSeries.mapPolygons.template.setAll({
-    tooltipText: "{name}",
     interactive: true,
-    cursorOverStyle: "pointer",
     fill: am5.color(0x8cbcd6),
-    stroke: am5.color(0xffffff)
+    stroke: am5.color(0xffffff),
+    tooltipText: ""
   });
 
   polygonSeries.mapPolygons.template.events.on("click", function(ev) {
     const name = ev.target.dataItem.dataContext.name;
-    const love = loveMessages[name] || "I love you";
-    alert(name + ": " + love);
+    const message = loveMessages[name] || "I love you";
+
+    const popup = document.createElement("div");
+    popup.innerText = `${name}: ${message}`;
+    popup.style.position = "fixed";
+    popup.style.left = "50%";
+    popup.style.top = "20px";
+    popup.style.transform = "translateX(-50%)";
+    popup.style.background = "#222";
+    popup.style.color = "#fff";
+    popup.style.padding = "10px 20px";
+    popup.style.borderRadius = "10px";
+    popup.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
+    popup.style.fontSize = "16px";
+    popup.style.zIndex = "9999";
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+      document.body.removeChild(popup);
+    }, 2500);
   });
 });
 </script>
