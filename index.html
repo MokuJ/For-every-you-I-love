@@ -1431,8 +1431,6 @@
 
   </div>
 </div><!-- ✅ COLLAPSIBLE SCRIPT --><script>
-let animationFrameId = null;
-let forceStop = false;
 let spinAudio;
 let isSpinning = false;
 let animationFrameId = null;
@@ -1445,20 +1443,6 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", () => {
       const isOpen = content.style.display === "block";
       content.style.display = isOpen ? "none" : "block";
-      if (isOpen) {
-  forceStop = true;
-  isSpinning = false;
-
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = null;
-  }
-
-  if (spinAudio && !spinAudio.paused) {
-    spinAudio.pause();
-    spinAudio.currentTime = 0;
-  }
-}
 
       // Stop audio
       if (isOpen && spinAudio && !spinAudio.paused) {
@@ -1710,7 +1694,6 @@ function drawWheel() {
 function spinWheel() {
   if (isSpinning) return;
   isSpinning = true;
-  forceStop = false;
 
   const spinTime = 3000;
   const targetAngle = Math.random() * 2 * Math.PI;
@@ -1727,7 +1710,7 @@ function spinWheel() {
     currentAngle += (totalRotation - currentAngle) * 0.05;
     drawWheel();
 
-    if (progress < 1 && isSpinning && !forceStop) {
+    if (progress < 1 && isSpinning) {
       animationFrameId = requestAnimationFrame(animate);
     } else {
       currentAngle = totalRotation % (2 * Math.PI);
