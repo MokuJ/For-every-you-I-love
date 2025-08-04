@@ -1731,44 +1731,40 @@ for (let i = 0; i < collapsibles.length; i++) {
 }
 </script>
   
-<!-- 💍 MARRY ME COLLAPSIBLE -->
-<div id="marryWrapper" style="text-align: center; margin: 50px auto;">
+<!-- 💍 Marry Me Section -->
+<div style="max-width: 600px; margin: 60px auto; text-align: center;">
   <button id="marryButton" style="
     background: radial-gradient(circle at center, #4e2c2c, #2a1a1a);
     color: #ffe5e5;
     font-size: 1.3em;
     font-weight: 600;
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-    text-align: center;
     border: 2px solid #ff6b6b;
     border-radius: 12px;
     padding: 14px 24px;
     max-width: 300px;
-    display: inline-block;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: pulseGlow 3s infinite ease-in-out;
     cursor: pointer;
-  ">
-    💍 Marry me?
-  </button>
+  ">💍 Marry me?</button>
 
   <div id="marryContent" style="
     display: none;
-    margin-top: 30px;
-    padding: 30px;
     background: linear-gradient(to bottom, #2c1b1b, #1a0d0d);
     border: 2px solid #ff9999;
     border-radius: 14px;
+    padding: 30px;
     color: #fff0f0;
     font-size: 1.4em;
     font-family: 'Georgia', serif;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     box-shadow: 0 0 25px rgba(255, 77, 77, 0.2);
     text-align: center;
-    line-height: 1.8;
     text-shadow: 1px 1px 2px #000;
   ">
     <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
@@ -2980,54 +2976,57 @@ document.getElementById("marryButton").addEventListener("click", function () {
 });
 </script>
 
+<!-- 💥 Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+<!-- 💍 Marry Me Script -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("marryButton");
-  const box = document.getElementById("marryContent");
-  const target = document.getElementById("marryTypewriter");
+  const button = document.getElementById("marryButton");
+  const content = document.getElementById("marryContent");
+  const typewriter = document.getElementById("marryTypewriter");
   const message = "Will you marry me, Kanak?";
 
-  let i = 0;
-  let isTyping = false;
+  let typing = false;
+  let typed = false;
 
-  if (!btn || !box || !target) return;
+  button.addEventListener("click", () => {
+    const isVisible = content.style.display === "block";
+    
+    if (!isVisible) {
+      content.style.display = "block";
 
-  btn.addEventListener("click", function () {
-    const isOpen = box.style.display === "block";
+      if (!typed && !typing) {
+        typing = true;
+        typewriter.innerHTML = "";
+        let i = 0;
 
-    if (isTyping) return; // prevent clicking while typing
+        function type() {
+          if (i < message.length) {
+            typewriter.innerHTML += message.charAt(i);
+            i++;
+            setTimeout(type, 70);
+          } else {
+            typing = false;
+            typed = true;
+          }
+        }
 
-    if (!isOpen) {
-      box.style.display = "block";
-      target.innerHTML = "";
-      i = 0;
-      isTyping = true;
+        type();
 
-      // Confetti 🎉
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 200,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-        });
-      }
-
-      // Typewriter Effect
-      function type() {
-        if (i < message.length) {
-          target.innerHTML += message.charAt(i);
-          i++;
-          setTimeout(type, 70);
-        } else {
-          isTyping = false;
+        // 🎉 Confetti
+        if (typeof confetti === "function") {
+          confetti({
+            particleCount: 200,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+          });
         }
       }
 
-      type();
-
     } else {
-      box.style.display = "none";
+      content.style.display = "none";
     }
   });
 });
