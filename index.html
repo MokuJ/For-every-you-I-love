@@ -1767,6 +1767,7 @@ for (let i = 0; i < collapsibles.length; i++) {
     text-align: center;
     text-shadow: 1px 1px 2px #000;
   ">
+    <!-- ✅ THIS ID IS CRUCIAL -->
     <p id="marryTypewriter" style="font-weight: bold; font-size: 1.6em; color: #ffd6d6;"></p>
   </div>
 </div>
@@ -2976,7 +2977,7 @@ document.getElementById("marryButton").addEventListener("click", function () {
 });
 </script>
 
-<!-- 💥 Confetti Library -->
+<!-- 🎉 Confetti Library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 
 <!-- 💍 Marry Me Script -->
@@ -2987,42 +2988,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const typewriter = document.getElementById("marryTypewriter");
   const message = "Will you marry me, Kanak?";
 
-  let typing = false;
-  let typed = false;
+  let i = 0;
+  let isTyping = false;
+
+  if (!button || !content || !typewriter) {
+    console.error("Missing button/content/typewriter element.");
+    return;
+  }
 
   button.addEventListener("click", () => {
-    const isVisible = content.style.display === "block";
-    
-    if (!isVisible) {
+    const isOpen = content.style.display === "block";
+
+    if (isTyping) return;
+
+    if (!isOpen) {
       content.style.display = "block";
+      i = 0;
+      isTyping = true;
+      typewriter.innerHTML = "";
 
-      if (!typed && !typing) {
-        typing = true;
-        typewriter.innerHTML = "";
-        let i = 0;
-
-        function type() {
-          if (i < message.length) {
-            typewriter.innerHTML += message.charAt(i);
-            i++;
-            setTimeout(type, 70);
-          } else {
-            typing = false;
-            typed = true;
-          }
+      function type() {
+        if (i < message.length) {
+          typewriter.innerHTML += message.charAt(i);
+          i++;
+          setTimeout(type, 70);
+        } else {
+          isTyping = false;
         }
+      }
 
-        type();
+      type();
 
-        // 🎉 Confetti
-        if (typeof confetti === "function") {
-          confetti({
-            particleCount: 200,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
-          });
-        }
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 200,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#ff6b6b', '#ffd6d6', '#ffffff']
+        });
       }
 
     } else {
