@@ -2036,6 +2036,209 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
+<!-- 🎮 GAME COLLAPSIBLE -->
+<button class="collapsible">🎮 Game</button>
+<div class="content">
+  <div id="gameContainer">
+    <canvas id="gameCanvas" width="800" height="200"></canvas>
+    <p id="gameMessage"></p>
+  </div>
+</div>
+
+<style>
+  #gameContainer {
+    text-align: center;
+    margin: 20px 0;
+  }
+  #gameCanvas {
+    background: linear-gradient(to top, #1a1a2e, #16213e);
+    border: 2px solid #fff;
+    border-radius: 12px;
+  }
+  #gameMessage {
+    font-family: 'Courier New', monospace;
+    color: #00ffcc;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const player = {
+    x: 50,
+    y: 150,
+    width: 40,
+    height: 40,
+    velocityY: 0,
+    jumping: false,
+    img: null
+  };
+
+  const gravity = 0.6;
+  const jumpPower = -12;
+
+  const obstacles = [];
+  const powerUps = [];
+
+  let score = 0;
+  let gameOver = false;
+  let frame = 0;
+
+  const emotionWords = ["Guilt", "Loss", "Anger", "Regret", "Longing"];
+
+  const jumpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum.ogg");
+  const powerUpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg");
+  const loseSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+
+  // Load player image
+  player.img = new Image();
+  player.img.src = "https://i.imgur.com/zYVQ7UR.png"; // A nice sprite
+
+  // Obstacle image (optional)
+  const obstacleImg = new Image();
+  obstacleImg.src = "https://i.imgur.com/YQZ3dZQ.png";
+
+  // Power-up image (Kanak)
+  const kanakImg = new Image();
+  kanakImg.src = "https://i.imgur.com/U6tXkXA.png";
+
+  document.addEventListener("keydown", function (e) {
+    if ((e.code === "Space" || e.code === "ArrowUp") && !player.jumping && !gameOver) {
+      player.velocityY = jumpPower;
+      player.jumping = true;
+      jumpSound.play();
+    }
+  });
+
+  function spawnObstacle() {
+    const emotion = emotionWords[Math.floor(Math.random() * emotionWords.length)];
+    obstacles.push({
+      x: canvas.width,
+      y: 160,
+      width: 40,
+      height: 40,
+      text: emotion
+    });
+  }
+
+  function spawnPowerUp() {
+    powerUps.push({
+      x: canvas.width,
+      y: 140,
+      width: 40,
+      height: 40
+    });
+  }
+
+  function resetGame() {
+    score = 0;
+    gameOver = false;
+    player.y = 150;
+    player.velocityY = 0;
+    obstacles.length = 0;
+    powerUps.length = 0;
+    document.getElementById("gameMessage").textContent = "";
+    requestAnimationFrame(gameLoop);
+  }
+
+  function gameLoop() {
+    if (gameOver) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Player
+    player.velocityY += gravity;
+    player.y += player.velocityY;
+    if (player.y >= 150) {
+      player.y = 150;
+      player.jumping = false;
+    }
+    ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
+
+    // Obstacles
+    for (let i = 0; i < obstacles.length; i++) {
+      const obs = obstacles[i];
+      obs.x -= 6;
+      ctx.drawImage(obstacleImg, obs.x, obs.y, obs.width, obs.height);
+      ctx.fillStyle = "white";
+      ctx.font = "10px Arial";
+      ctx.fillText(obs.text, obs.x + 2, obs.y + 30);
+
+      // Collision
+      if (
+        player.x < obs.x + obs.width &&
+        player.x + player.width > obs.x &&
+        player.y < obs.y + obs.height &&
+        player.y + player.height > obs.y
+      ) {
+        loseSound.play();
+        gameOver = true;
+        document.getElementById("gameMessage").textContent =
+          "You crashed into " + obs.text + ". Try again?";
+        return;
+      }
+    }
+
+    // Power-ups
+    for (let i = 0; i < powerUps.length; i++) {
+      const pu = powerUps[i];
+      pu.x -= 6;
+      ctx.drawImage(kanakImg, pu.x, pu.y, pu.width, pu.height);
+
+      if (
+        player.x < pu.x + pu.width &&
+        player.x + player.width > pu.x &&
+        player.y < pu.y + pu.height &&
+        player.y + player.height > pu.y
+      ) {
+        powerUps.splice(i, 1);
+        score += 500;
+        powerUpSound.play();
+      }
+    }
+
+    // Spawn logic
+    if (frame % 90 === 0) spawnObstacle();
+    if (score > 0 && score % 200 === 0 && frame % 60 === 0) spawnPowerUp();
+
+    // Score
+    score++;
+    ctx.fillStyle = "#fff";
+    ctx.font = "16px monospace";
+    ctx.fillText("Score: " + score, 650, 30);
+
+    // Win condition
+    if (score >= 26072008) {
+      document.getElementById("gameMessage").textContent =
+        "You made it to 26,072,008. Kanak smiled. 💍";
+      gameOver = true;
+      return;
+    }
+
+    // Remove off-screen
+    obstacles.filter((o) => o.x > -50);
+    powerUps.filter((p) => p.x > -50);
+
+    frame++;
+    requestAnimationFrame(gameLoop);
+  }
+
+  // Start game when collapsible opens
+  document.querySelectorAll(".collapsible").forEach(button => {
+    button.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      if (this.textContent.includes("Game")) {
+        setTimeout(() => {
+          if (!gameOver) resetGame();
+        }, 300);
+      }
+    });
+  });
+</script>
+
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
     The Void That Replies
   </button>
