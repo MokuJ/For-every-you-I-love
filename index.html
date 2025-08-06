@@ -2036,7 +2036,180 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
+<!-- Collapsible Button --><button class="collapsible">🎮 Game</button>
 
+<div class="content">
+  <div style="max-width: 800px; margin: auto;">
+    <canvas id="gameCanvas" width="800" height="200" style="background: url('https://i.imgur.com/6mKxwKQ.png') repeat-x; background-size: cover; border-radius: 12px; display: block;"></canvas>
+  </div>
+</div><!-- Collapsible Style (Add to your <style> section) --><style>
+.collapsible {
+  background-color: #333;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+  border-radius: 12px;
+  margin: 10px 0;
+  transition: background-color 0.2s ease;
+}
+.collapsible:hover {
+  background-color: #444;
+}
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.content.open {
+  max-height: 1000px;
+}
+</style><!-- Game Script (Add before </body>) --><script>
+// Toggle collapsible
+  document.querySelectorAll(".collapsible").forEach(button => {
+    button.addEventListener("click", function () {
+      const content = this.nextElementSibling;
+      const canvas = content.querySelector("canvas");
+      this.classList.toggle("active");
+      content.classList.toggle("open");
+      if (!content.classList.contains("open")) {
+        cancelAnimationFrame(animationId);
+        gameRunning = false;
+      }
+    });
+  });
+
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+  let playerImg = new Image();
+  let obstacleImg = new Image();
+  let kanakImg = new Image();
+  playerImg.src = "https://i.imgur.com/q3Q9kN3.png"; // Moksh
+  obstacleImg.src = "https://i.imgur.com/vPzTObh.png"; // Emotion
+  kanakImg.src = "https://i.imgur.com/Su4PqR0.png"; // Kanak power-up
+
+  let player = { x: 50, y: 150, width: 40, height: 40, vy: 0, jump: -12, gravity: 0.6, grounded: true };
+  let obstacles = [];
+  let powerups = [];
+  let frame = 0;
+  let score = 0;
+  let animationId;
+  let gameRunning = false;
+
+  function drawPlayer() {
+    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+  }
+
+  function drawObstacles() {
+    obstacles.forEach(o => {
+      ctx.drawImage(obstacleImg, o.x, o.y, o.width, o.height);
+      o.x -= 6;
+    });
+    obstacles = obstacles.filter(o => o.x + o.width > 0);
+  }
+
+  function drawPowerups() {
+    powerups.forEach(p => {
+      ctx.drawImage(kanakImg, p.x, p.y, p.width, p.height);
+      p.x -= 6;
+    });
+    powerups = powerups.filter(p => p.x + p.width > 0);
+  }
+
+  function jump() {
+    if (player.grounded) {
+      player.vy = player.jump;
+      player.grounded = false;
+    }
+  }
+
+  function collision(a, b) {
+    return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+  }
+
+  function drawScore() {
+    ctx.font = "20px monospace";
+    ctx.fillStyle = "black";
+    ctx.fillText("Score: " + score, 10, 20);
+  }
+
+  function endGame() {
+    gameRunning = false;
+    cancelAnimationFrame(animationId);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.font = "24px sans-serif";
+    ctx.fillText("Game Over", canvas.width/2 - 60, canvas.height/2);
+    ctx.fillText("Score: " + score, canvas.width/2 - 50, canvas.height/2 + 30);
+  }
+
+  function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
+    drawObstacles();
+    drawPowerups();
+    drawScore();
+
+    player.vy += player.gravity;
+    player.y += player.vy;
+    if (player.y >= 150) {
+      player.y = 150;
+      player.vy = 0;
+      player.grounded = true;
+    }
+
+    if (frame % 100 === 0) {
+      obstacles.push({ x: canvas.width, y: 160, width: 30, height: 30 });
+    }
+
+    if (score % 200 === 0 && score !== 0) {
+      powerups.push({ x: canvas.width, y: 100, width: 30, height: 30 });
+    }
+
+    for (let o of obstacles) {
+      if (collision(player, o)) {
+        endGame();
+        return;
+      }
+    }
+
+    for (let i = 0; i < powerups.length; i++) {
+      if (collision(player, powerups[i])) {
+        score += 500;
+        powerups.splice(i, 1);
+      }
+    }
+
+    score++;
+    if (score >= 26072008) {
+      gameRunning = false;
+      cancelAnimationFrame(animationId);
+      ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#fff";
+      ctx.font = "20px serif";
+      ctx.fillText("You made it to 26,072,008. Kanak smiled. 💍", 100, 100);
+      return;
+    }
+
+    frame++;
+    animationId = requestAnimationFrame(gameLoop);
+  }
+
+  canvas.addEventListener("click", () => {
+    if (!gameRunning) {
+      gameRunning = true;
+      animationId = requestAnimationFrame(gameLoop);
+    } else {
+      jump();
+    }
+  });
+</script>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
     The Void That Replies
