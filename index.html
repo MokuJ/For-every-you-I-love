@@ -2036,148 +2036,191 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
-<!-- 🎮 Game Collapsible -->
-<button class="game-collapsible" style="background: #2c2c2c; color: #ffc107; padding: 10px 20px; border: none; border-radius: 12px; margin: 20px auto; display: block; font-size: 16px;">
-  🎮 Game
-</button>
-<div class="game-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
-  <div style="display: flex; justify-content: center; padding: 10px;">
-    <canvas id="gameCanvas" width="320" height="150" style="border-radius: 10px; background: #fff;"></canvas>
-  </div>
-  <p id="endMessage" style="text-align:center; font-size: 16px; font-weight: bold; color: #ff4d4d; display: none;">
-    You made it to 26,072,008. Kanak smiled. 💍
-  </p>
-</div>
+<!-- Game Collapsible (Polished and Fully Functional) --><style>
+  .game-collapsible {
+    background-color: #3a3a3a;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+  }
 
-<script>
-  document.querySelectorAll(".game-collapsible").forEach(button => {
-    button.addEventListener("click", function () {
-      this.classList.toggle("active");
-      const content = this.nextElementSibling;
-      content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
-    });
-  });
+  .game-collapsible:hover {
+    background-color: #5a5a5a;
+  }
 
+  .game-content {
+    display: none;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  canvas {
+    background-color: #fefefe;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+  }
+</style><button class="game-collapsible">🎮 Game</button>
+
+<div class="game-content">
+  <canvas id="gameCanvas" width="600" height="200"></canvas>
+  <p id="gameScore">Score: 0</p>
+  <p id="gameMessage" style="color: pink; font-weight: bold;"></p>
+</div><script>
+  const gameBtn = document.querySelector(".game-collapsible");
+  const gameContent = document.querySelector(".game-content");
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
+  const scoreDisplay = document.getElementById("gameScore");
+  const message = document.getElementById("gameMessage");
 
-  let player = { x: 50, y: 110, width: 30, height: 30, velocityY: 0, gravity: 1.2, jumpPower: -15, onGround: true };
-  let obstacles = [];
-  let powerUps = [];
+  let running = false;
   let score = 0;
-  let gameOver = false;
+  let player = { x: 50, y: 160, width: 40, height: 40, velocityY: 0, jumping: false };
+  let gravity = 1;
+  let obstacles = [];
+  let kanakPowerUps = [];
+  let obstacleImages = ["https://i.imgur.com/wcZ8NNs.png", "https://i.imgur.com/zEN3WqF.png"];
+  let kanakImgSrc = "https://i.imgur.com/HNIkEv7.png";
+  let playerImgSrc = "https://i.imgur.com/FjNdJc4.png";
 
-  const jumpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum.ogg");
-  const powerUpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg");
-  const loseSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+  let playerImg = new Image();
+  playerImg.src = playerImgSrc;
+
+  let jumpSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_d048b2261c.mp3");
+  let powerupSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_420d8c10e7.mp3");
+  let loseSound = new Audio("https://cdn.pixabay.com/audio/2021/11/16/audio_f6f83a3e0c.mp3");
+
+  function resetGame() {
+    score = 0;
+    player.y = 160;
+    player.velocityY = 0;
+    player.jumping = false;
+    obstacles = [];
+    kanakPowerUps = [];
+    message.innerText = "";
+  }
+
+  function spawnObstacle() {
+    const img = new Image();
+    img.src = obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
+    obstacles.push({ x: 600, y: 160, width: 40, height: 40, img });
+  }
+
+  function spawnPowerUp() {
+    const img = new Image();
+    img.src = kanakImgSrc;
+    kanakPowerUps.push({ x: 600, y: 160, width: 40, height: 40, img });
+  }
 
   function jump() {
-    if (player.onGround) {
-      player.velocityY = player.jumpPower;
-      player.onGround = false;
+    if (!player.jumping) {
+      player.velocityY = -15;
+      player.jumping = true;
       jumpSound.play();
     }
   }
 
-  function drawPlayer() {
-    ctx.fillStyle = "#ff69b4";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-  }
-
-  function drawObstacle(obstacle) {
-    ctx.fillStyle = "#d32f2f";
-    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-  }
-
-  function drawPowerUp(powerUp) {
-    ctx.fillStyle = "#ffd700";
-    ctx.fillRect(powerUp.x, powerUp.y, powerUp.width, powerUp.height);
+  function collision(obj) {
+    return (
+      player.x < obj.x + obj.width &&
+      player.x + player.width > obj.x &&
+      player.y < obj.y + obj.height &&
+      player.y + player.height > obj.y
+    );
   }
 
   function update() {
-    if (gameOver) return;
+    if (!running) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Player physics
-    player.velocityY += player.gravity;
+    player.velocityY += gravity;
     player.y += player.velocityY;
-    if (player.y >= 110) {
-      player.y = 110;
+
+    if (player.y >= 160) {
+      player.y = 160;
       player.velocityY = 0;
-      player.onGround = true;
+      player.jumping = false;
     }
 
-    drawPlayer();
+    obstacles.forEach(o => o.x -= 5);
+    kanakPowerUps.forEach(p => p.x -= 5);
 
-    // Obstacles
-    if (Math.random() < 0.03) {
-      obstacles.push({ x: canvas.width, y: 120, width: 20, height: 30 });
-    }
+    obstacles = obstacles.filter(o => o.x + o.width > 0);
+    kanakPowerUps = kanakPowerUps.filter(p => p.x + p.width > 0);
 
-    obstacles.forEach((obstacle, index) => {
-      obstacle.x -= 5;
-      drawObstacle(obstacle);
+    if (Math.random() < 0.02) spawnObstacle();
+    if (score > 0 && score % 200 === 0) spawnPowerUp();
 
-      if (
-        player.x < obstacle.x + obstacle.width &&
-        player.x + player.width > obstacle.x &&
-        player.y < obstacle.y + obstacle.height &&
-        player.y + player.height > obstacle.y
-      ) {
-        gameOver = true;
+    for (let o of obstacles) {
+      if (collision(o)) {
         loseSound.play();
-        document.getElementById("endMessage").style.display = "block";
+        message.innerText = "Game Over. Try again.";
+        running = false;
+        return;
       }
-
-      if (obstacle.x + obstacle.width < 0) {
-        obstacles.splice(index, 1);
-        score += 10;
-      }
-    });
-
-    // Power-ups
-    if (score > 0 && score % 200 === 0 && powerUps.length === 0) {
-      powerUps.push({ x: canvas.width, y: 90, width: 20, height: 20 });
     }
 
-    powerUps.forEach((powerUp, index) => {
-      powerUp.x -= 4;
-      drawPowerUp(powerUp);
-
-      if (
-        player.x < powerUp.x + powerUp.width &&
-        player.x + player.width > powerUp.x &&
-        player.y < powerUp.y + powerUp.height &&
-        player.y + player.height > powerUp.y
-      ) {
+    for (let i = 0; i < kanakPowerUps.length; i++) {
+      if (collision(kanakPowerUps[i])) {
         score += 500;
-        powerUpSound.play();
-        powerUps.splice(index, 1);
+        kanakPowerUps.splice(i, 1);
+        powerupSound.play();
       }
+    }
 
-      if (powerUp.x + powerUp.width < 0) {
-        powerUps.splice(index, 1);
-      }
-    });
+    score++;
+    scoreDisplay.innerText = `Score: ${score}`;
 
     if (score >= 26072008) {
-      gameOver = true;
-      document.getElementById("endMessage").style.display = "block";
+      message.innerText = "💍 You made it to 26,072,008. Kanak smiled.";
+      running = false;
+      return;
     }
-
-    ctx.fillStyle = "#000";
-    ctx.font = "14px sans-serif";
-    ctx.fillText("Score: " + score, 10, 20);
-
-    requestAnimationFrame(update);
   }
 
-  document.addEventListener("keydown", (e) => {
-    if (e.code === "Space") jump();
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+
+    obstacles.forEach(o => ctx.drawImage(o.img, o.x, o.y, o.width, o.height));
+    kanakPowerUps.forEach(p => ctx.drawImage(p.img, p.x, p.y, p.width, p.height));
+  }
+
+  function gameLoop() {
+    if (running) {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+  }
+
+  canvas.addEventListener("click", () => {
+    if (!running) {
+      resetGame();
+      running = true;
+      gameLoop();
+    } else {
+      jump();
+    }
   });
 
-  update();
+  gameBtn.addEventListener("click", () => {
+    const isOpen = gameContent.style.display === "block";
+    gameContent.style.display = isOpen ? "none" : "block";
+    if (!isOpen) {
+      message.innerText = "";
+      scoreDisplay.innerText = "Score: 0";
+    } else {
+      running = false;
+    }
+  });
 </script>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
