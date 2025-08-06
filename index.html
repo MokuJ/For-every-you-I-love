@@ -2036,191 +2036,181 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
-<!-- Game Collapsible (Polished and Fully Functional) --><style>
-  .game-collapsible {
+<button class="collapsible gray-game-button">🎮 Game</button>
+
+<div class="content game-container">
+  <canvas id="gameCanvas" width="800" height="200"></canvas>
+</div><style>
+  .gray-game-button {
     background-color: #3a3a3a;
     color: white;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    margin: 20px auto;
-    display: block;
-    width: fit-content;
-    transition: background-color 0.3s ease;
-  }
-
-  .game-collapsible:hover {
-    background-color: #5a5a5a;
-  }
-
-  .game-content {
-    display: none;
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  canvas {
-    background-color: #fefefe;
+    padding: 8px 16px;
     border-radius: 12px;
-    width: 100%;
-    max-width: 600px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: block;
+    margin: 0 auto 10px;
   }
-</style><button class="game-collapsible">🎮 Game</button>
 
-<div class="game-content">
-  <canvas id="gameCanvas" width="600" height="200"></canvas>
-  <p id="gameScore">Score: 0</p>
-  <p id="gameMessage" style="color: pink; font-weight: bold;"></p>
-</div><script>
-  const gameBtn = document.querySelector(".game-collapsible");
-  const gameContent = document.querySelector(".game-content");
-  const canvas = document.getElementById("gameCanvas");
-  const ctx = canvas.getContext("2d");
-  const scoreDisplay = document.getElementById("gameScore");
-  const message = document.getElementById("gameMessage");
+  .game-container {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 
-  let running = false;
-  let score = 0;
-  let player = { x: 50, y: 160, width: 40, height: 40, velocityY: 0, jumping: false };
-  let gravity = 1;
-  let obstacles = [];
-  let kanakPowerUps = [];
-  let obstacleImages = ["https://i.imgur.com/wcZ8NNs.png", "https://i.imgur.com/zEN3WqF.png"];
-  let kanakImgSrc = "https://i.imgur.com/HNIkEv7.png";
-  let playerImgSrc = "https://i.imgur.com/FjNdJc4.png";
+  #gameCanvas {
+    border-radius: 12px;
+    background: url('https://raw.githubusercontent.com/mokuj/assets/main/game_bg.png') repeat-x;
+    background-size: cover;
+    display: block;
+    margin: 0 auto;
+  }
+</style><script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+let isPlaying = false;
+let gameInterval, obstacleTimer, kanakTimer;
+let score = 0;
+let playerImg = new Image();
+let obstacleImg = new Image();
+let kanakImg = new Image();
+playerImg.src = "https://raw.githubusercontent.com/mokuj/assets/main/moksh.png";
+obstacleImg.src = "https://raw.githubusercontent.com/mokuj/assets/main/obstacle.png";
+kanakImg.src = "https://raw.githubusercontent.com/mokuj/assets/main/kanak.png";
 
-  let playerImg = new Image();
-  playerImg.src = playerImgSrc;
+let player = {
+  x: 50,
+  y: 160,
+  width: 40,
+  height: 40,
+  velocityY: 0,
+  gravity: 1.5,
+  isJumping: false
+};
 
-  let jumpSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_d048b2261c.mp3");
-  let powerupSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_420d8c10e7.mp3");
-  let loseSound = new Audio("https://cdn.pixabay.com/audio/2021/11/16/audio_f6f83a3e0c.mp3");
+let obstacles = [];
+let kanaks = [];
 
-  function resetGame() {
-    score = 0;
+function drawPlayer() {
+  ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+}
+
+function drawObstacles() {
+  obstacles.forEach(ob => {
+    ob.x -= 5;
+    ctx.drawImage(obstacleImg, ob.x, ob.y, ob.width, ob.height);
+  });
+}
+
+function drawKanaks() {
+  kanaks.forEach(k => {
+    k.x -= 5;
+    ctx.drawImage(kanakImg, k.x, k.y, k.width, k.height);
+  });
+}
+
+function spawnObstacle() {
+  obstacles.push({ x: canvas.width, y: 160, width: 40, height: 40 });
+}
+
+function spawnKanak() {
+  kanaks.push({ x: canvas.width, y: 160, width: 40, height: 40 });
+}
+
+function jump() {
+  if (!player.isJumping) {
+    player.velocityY = -18;
+    player.isJumping = true;
+  }
+}
+
+function checkCollision(rect1, rect2) {
+  return (
+    rect1.x < rect2.x + rect2.width &&
+    rect1.x + rect1.width > rect2.x &&
+    rect1.y < rect2.y + rect2.height &&
+    rect1.height + rect1.y > rect2.y
+  );
+}
+
+function updateGame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  player.y += player.velocityY;
+  player.velocityY += player.gravity;
+
+  if (player.y >= 160) {
     player.y = 160;
-    player.velocityY = 0;
-    player.jumping = false;
-    obstacles = [];
-    kanakPowerUps = [];
-    message.innerText = "";
+    player.isJumping = false;
   }
 
-  function spawnObstacle() {
-    const img = new Image();
-    img.src = obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
-    obstacles.push({ x: 600, y: 160, width: 40, height: 40, img });
-  }
+  drawPlayer();
+  drawObstacles();
+  drawKanaks();
 
-  function spawnPowerUp() {
-    const img = new Image();
-    img.src = kanakImgSrc;
-    kanakPowerUps.push({ x: 600, y: 160, width: 40, height: 40, img });
-  }
-
-  function jump() {
-    if (!player.jumping) {
-      player.velocityY = -15;
-      player.jumping = true;
-      jumpSound.play();
+  obstacles = obstacles.filter(ob => {
+    if (checkCollision(player, ob)) {
+      endGame();
+      return false;
     }
-  }
-
-  function collision(obj) {
-    return (
-      player.x < obj.x + obj.width &&
-      player.x + player.width > obj.x &&
-      player.y < obj.y + obj.height &&
-      player.y + player.height > obj.y
-    );
-  }
-
-  function update() {
-    if (!running) return;
-
-    player.velocityY += gravity;
-    player.y += player.velocityY;
-
-    if (player.y >= 160) {
-      player.y = 160;
-      player.velocityY = 0;
-      player.jumping = false;
-    }
-
-    obstacles.forEach(o => o.x -= 5);
-    kanakPowerUps.forEach(p => p.x -= 5);
-
-    obstacles = obstacles.filter(o => o.x + o.width > 0);
-    kanakPowerUps = kanakPowerUps.filter(p => p.x + p.width > 0);
-
-    if (Math.random() < 0.02) spawnObstacle();
-    if (score > 0 && score % 200 === 0) spawnPowerUp();
-
-    for (let o of obstacles) {
-      if (collision(o)) {
-        loseSound.play();
-        message.innerText = "Game Over. Try again.";
-        running = false;
-        return;
-      }
-    }
-
-    for (let i = 0; i < kanakPowerUps.length; i++) {
-      if (collision(kanakPowerUps[i])) {
-        score += 500;
-        kanakPowerUps.splice(i, 1);
-        powerupSound.play();
-      }
-    }
-
-    score++;
-    scoreDisplay.innerText = `Score: ${score}`;
-
-    if (score >= 26072008) {
-      message.innerText = "💍 You made it to 26,072,008. Kanak smiled.";
-      running = false;
-      return;
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
-
-    obstacles.forEach(o => ctx.drawImage(o.img, o.x, o.y, o.width, o.height));
-    kanakPowerUps.forEach(p => ctx.drawImage(p.img, p.x, p.y, p.width, p.height));
-  }
-
-  function gameLoop() {
-    if (running) {
-      update();
-      draw();
-      requestAnimationFrame(gameLoop);
-    }
-  }
-
-  canvas.addEventListener("click", () => {
-    if (!running) {
-      resetGame();
-      running = true;
-      gameLoop();
-    } else {
-      jump();
-    }
+    return ob.x + ob.width > 0;
   });
 
-  gameBtn.addEventListener("click", () => {
-    const isOpen = gameContent.style.display === "block";
-    gameContent.style.display = isOpen ? "none" : "block";
-    if (!isOpen) {
-      message.innerText = "";
-      scoreDisplay.innerText = "Score: 0";
-    } else {
-      running = false;
+  kanaks = kanaks.filter(k => {
+    if (checkCollision(player, k)) {
+      score += 500;
+      return false;
     }
+    return k.x + k.width > 0;
   });
+
+  score++;
+  ctx.fillStyle = "black";
+  ctx.font = "16px Arial";
+  ctx.fillText("Score: " + score, 10, 20);
+
+  if (score >= 26072008) {
+    ctx.fillStyle = "red";
+    ctx.font = "20px Arial";
+    ctx.fillText("You made it to 26,072,008. Kanak smiled. 💍", 200, 100);
+    endGame();
+  }
+}
+
+function startGame() {
+  if (isPlaying) return;
+  isPlaying = true;
+  score = 0;
+  obstacles = [];
+  kanaks = [];
+  gameInterval = setInterval(updateGame, 40);
+  obstacleTimer = setInterval(spawnObstacle, 1500);
+  kanakTimer = setInterval(spawnKanak, 5000);
+}
+
+function endGame() {
+  clearInterval(gameInterval);
+  clearInterval(obstacleTimer);
+  clearInterval(kanakTimer);
+  isPlaying = false;
+}
+
+canvas.addEventListener("click", startGame);
+document.addEventListener("keydown", function (e) {
+  if (e.code === "Space") {
+    jump();
+  }
+});
+
+// Toggle and auto-pause when collapsible is closed
+const collapsibleGameBtn = document.querySelector(".gray-game-button");
+const gameContent = collapsibleGameBtn.nextElementSibling;
+collapsibleGameBtn.addEventListener("click", function () {
+  gameContent.classList.toggle("open");
+  if (!gameContent.classList.contains("open")) {
+    endGame();
+  }
+});
 </script>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
