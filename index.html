@@ -2036,181 +2036,179 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
-<button class="collapsible gray-game-button">🎮 Game</button>
+<!-- Collapsible Game Button -->
+<button class="collapsible">🎮 Game</button>
+<div class="content">
+  <div style="max-width: 800px; margin: auto;">
+    <canvas id="gameCanvas" width="800" height="200" style="background: #eaeaea; border-radius: 12px;"></canvas>
+  </div>
+</div>
 
-<div class="content game-container">
-  <canvas id="gameCanvas" width="800" height="200"></canvas>
-</div><style>
-  .gray-game-button {
-    background-color: #3a3a3a;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    display: block;
-    margin: 0 auto 10px;
-  }
+<!-- Game Script -->
+<script>
+let canvas = document.getElementById("gameCanvas");
+let ctx = canvas.getContext("2d");
+let gameStarted = false;
+let gameRunning = false;
 
-  .game-container {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
+const playerImg = new Image();
+playerImg.src = "https://i.imgur.com/zYVQ7UR.png";
 
-  #gameCanvas {
-    border-radius: 12px;
-    background: url('https://raw.githubusercontent.com/mokuj/assets/main/game_bg.png') repeat-x;
-    background-size: cover;
-    display: block;
-    margin: 0 auto;
-  }
-</style><script>
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-let isPlaying = false;
-let gameInterval, obstacleTimer, kanakTimer;
-let score = 0;
-let playerImg = new Image();
-let obstacleImg = new Image();
-let kanakImg = new Image();
-playerImg.src = "https://raw.githubusercontent.com/mokuj/assets/main/moksh.png";
-obstacleImg.src = "https://raw.githubusercontent.com/mokuj/assets/main/obstacle.png";
-kanakImg.src = "https://raw.githubusercontent.com/mokuj/assets/main/kanak.png";
+const obstacleImg = new Image();
+obstacleImg.src = "https://i.imgur.com/YQZ3dZQ.png";
 
-let player = {
-  x: 50,
-  y: 160,
-  width: 40,
-  height: 40,
-  velocityY: 0,
-  gravity: 1.5,
-  isJumping: false
-};
+const kanakImg = new Image();
+kanakImg.src = "https://i.imgur.com/U6tXkXA.png";
 
+let player = { x: 50, y: 150, width: 40, height: 40, dy: 0, gravity: 1.5, jump: -18, grounded: true };
 let obstacles = [];
-let kanaks = [];
+let powerUps = [];
+let score = 0;
+let frame = 0;
+let gameOver = false;
 
 function drawPlayer() {
   ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
 }
 
 function drawObstacles() {
-  obstacles.forEach(ob => {
-    ob.x -= 5;
-    ctx.drawImage(obstacleImg, ob.x, ob.y, ob.width, ob.height);
-  });
-}
-
-function drawKanaks() {
-  kanaks.forEach(k => {
-    k.x -= 5;
-    ctx.drawImage(kanakImg, k.x, k.y, k.width, k.height);
-  });
-}
-
-function spawnObstacle() {
-  obstacles.push({ x: canvas.width, y: 160, width: 40, height: 40 });
-}
-
-function spawnKanak() {
-  kanaks.push({ x: canvas.width, y: 160, width: 40, height: 40 });
-}
-
-function jump() {
-  if (!player.isJumping) {
-    player.velocityY = -18;
-    player.isJumping = true;
+  for (let o of obstacles) {
+    ctx.drawImage(obstacleImg, o.x, o.y, o.width, o.height);
   }
 }
 
-function checkCollision(rect1, rect2) {
-  return (
-    rect1.x < rect2.x + rect2.width &&
-    rect1.x + rect1.width > rect2.x &&
-    rect1.y < rect2.y + rect2.height &&
-    rect1.height + rect1.y > rect2.y
-  );
+function drawPowerUps() {
+  for (let p of powerUps) {
+    ctx.drawImage(kanakImg, p.x, p.y, p.width, p.height);
+  }
 }
 
-function updateGame() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  player.y += player.velocityY;
-  player.velocityY += player.gravity;
+function drawText(text) {
+  ctx.font = "20px Arial";
+  ctx.fillStyle = "#000";
+  ctx.fillText("Score: " + score, 650, 30);
+}
 
-  if (player.y >= 160) {
-    player.y = 160;
-    player.isJumping = false;
+function drawGameOver() {
+  ctx.font = "26px Arial";
+  ctx.fillStyle = "#c0392b";
+  ctx.fillText("Game Over", 330, 100);
+}
+
+function drawWinMessage() {
+  ctx.font = "24px serif";
+  ctx.fillStyle = "#e91e63";
+  ctx.fillText("You made it to 26,072,008. Kanak smiled. 💍", 150, 120);
+}
+
+function update() {
+  if (!gameRunning) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Player physics
+  player.y += player.dy;
+  player.dy += player.gravity;
+
+  if (player.y > 150) {
+    player.y = 150;
+    player.dy = 0;
+    player.grounded = true;
+  }
+
+  // Obstacles
+  for (let o of obstacles) o.x -= 6;
+  if (frame % 80 === 0) {
+    obstacles.push({ x: 800, y: 150, width: 40, height: 40 });
+  }
+  obstacles = obstacles.filter(o => o.x + o.width > 0);
+
+  // Power-ups
+  for (let p of powerUps) p.x -= 6;
+  if (score > 0 && score % 200 === 0 && !powerUps.find(p => p.x > 600)) {
+    powerUps.push({ x: 800, y: 140, width: 30, height: 30 });
+  }
+  powerUps = powerUps.filter(p => p.x + p.width > 0);
+
+  // Collision
+  for (let o of obstacles) {
+    if (
+      player.x < o.x + o.width &&
+      player.x + player.width > o.x &&
+      player.y < o.y + o.height &&
+      player.y + player.height > o.y
+    ) {
+      gameRunning = false;
+      gameOver = true;
+    }
+  }
+
+  for (let p of powerUps) {
+    if (
+      player.x < p.x + p.width &&
+      player.x + player.width > p.x &&
+      player.y < p.y + p.height &&
+      player.y + player.height > p.y
+    ) {
+      score += 500;
+      powerUps = [];
+    }
   }
 
   drawPlayer();
   drawObstacles();
-  drawKanaks();
-
-  obstacles = obstacles.filter(ob => {
-    if (checkCollision(player, ob)) {
-      endGame();
-      return false;
-    }
-    return ob.x + ob.width > 0;
-  });
-
-  kanaks = kanaks.filter(k => {
-    if (checkCollision(player, k)) {
-      score += 500;
-      return false;
-    }
-    return k.x + k.width > 0;
-  });
+  drawPowerUps();
+  drawText();
 
   score++;
-  ctx.fillStyle = "black";
-  ctx.font = "16px Arial";
-  ctx.fillText("Score: " + score, 10, 20);
-
   if (score >= 26072008) {
-    ctx.fillStyle = "red";
-    ctx.font = "20px Arial";
-    ctx.fillText("You made it to 26,072,008. Kanak smiled. 💍", 200, 100);
-    endGame();
+    gameRunning = false;
   }
+
+  if (gameOver) drawGameOver();
+  if (score >= 26072008) drawWinMessage();
+
+  frame++;
+  requestAnimationFrame(update);
 }
 
-function startGame() {
-  if (isPlaying) return;
-  isPlaying = true;
-  score = 0;
+canvas.addEventListener("click", () => {
+  if (!gameStarted || gameOver) {
+    resetGame();
+  }
+  gameRunning = true;
+});
+
+function resetGame() {
+  gameStarted = true;
+  gameRunning = true;
+  gameOver = false;
+  player.y = 150;
+  player.dy = 0;
   obstacles = [];
-  kanaks = [];
-  gameInterval = setInterval(updateGame, 40);
-  obstacleTimer = setInterval(spawnObstacle, 1500);
-  kanakTimer = setInterval(spawnKanak, 5000);
+  powerUps = [];
+  score = 0;
+  frame = 0;
 }
 
-function endGame() {
-  clearInterval(gameInterval);
-  clearInterval(obstacleTimer);
-  clearInterval(kanakTimer);
-  isPlaying = false;
-}
-
-canvas.addEventListener("click", startGame);
-document.addEventListener("keydown", function (e) {
-  if (e.code === "Space") {
-    jump();
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" && player.grounded) {
+    player.dy = player.jump;
+    player.grounded = false;
   }
 });
 
-// Toggle and auto-pause when collapsible is closed
-const collapsibleGameBtn = document.querySelector(".gray-game-button");
-const gameContent = collapsibleGameBtn.nextElementSibling;
-collapsibleGameBtn.addEventListener("click", function () {
-  gameContent.classList.toggle("open");
-  if (!gameContent.classList.contains("open")) {
-    endGame();
-  }
+// Pause when collapsible closes
+document.querySelectorAll(".collapsible").forEach(button => {
+  button.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+    content.classList.toggle("open");
+    if (!content.classList.contains("open")) {
+      gameRunning = false;
+    }
+  });
 });
+
+update();
 </script>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
