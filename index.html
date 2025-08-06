@@ -1417,7 +1417,7 @@
 
 <button class="collapsible">Day 25</button>
 <div class="content">
-  <h3>Could’ve Stayed Longer</h3>
+  <h3>You've Been Hope</h3>
   <p>It’s been many many days. Who even counts these things anymore? I do. Because love counts days, even when they stop mattering to the world.</p>
   <p>You’ve become a rhythm in my solitude. A presence in the pauses. A warmth that lingers in cold nights.</p>
   <p>Thank you for existing. Even if it’s from far away.</p>
@@ -2036,207 +2036,159 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
-<!-- 🎮 GAME COLLAPSIBLE -->
-<button class="collapsible">🎮 Game</button>
-<div class="content">
-  <div id="gameContainer">
-    <canvas id="gameCanvas" width="800" height="200"></canvas>
-    <p id="gameMessage"></p>
+<!-- 🎮 Game Collapsible -->
+<button class="collapsible" style="background-color:#ffecf2; color:#000; cursor:pointer; padding:10px 18px; width:fit-content; border:none; border-radius:12px; text-align:center; font-size:1rem; margin:10px auto; display:block;">
+  🎮 Game
+</button>
+<div class="content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;">
+  <div id="gameContainer" style="width: 100%; max-width: 800px; margin: auto;">
+    <canvas id="gameCanvas" width="800" height="200" style="background: #fdf6f6; border-radius: 12px;"></canvas>
+    <p id="endMessage" style="text-align:center; font-size: 1.2rem; font-weight: bold; color: #c0392b; display: none;">
+      You made it to 26,072,008. Kanak smiled. 💍
+    </p>
   </div>
 </div>
 
-<style>
-  #gameContainer {
-    text-align: center;
-    margin: 20px 0;
-  }
-  #gameCanvas {
-    background: linear-gradient(to top, #1a1a2e, #16213e);
-    border: 2px solid #fff;
-    border-radius: 12px;
-  }
-  #gameMessage {
-    font-family: 'Courier New', monospace;
-    color: #00ffcc;
-    font-size: 1.2rem;
-    margin-top: 10px;
-  }
-</style>
-
 <script>
+  // Collapsible toggle
+  document.querySelectorAll(".collapsible").forEach(button => {
+    button.addEventListener("click", function () {
+      this.classList.toggle("active");
+      const content = this.nextElementSibling;
+      content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+    });
+  });
+
+  // Game Code
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
-  const player = {
-    x: 50,
-    y: 150,
-    width: 40,
-    height: 40,
-    velocityY: 0,
-    jumping: false,
-    img: null
-  };
+  const playerImg = new Image();
+  playerImg.src = "https://i.imgur.com/zYVQ7UR.png";
 
-  const gravity = 0.6;
-  const jumpPower = -12;
+  const obstacleImg = new Image();
+  obstacleImg.src = "https://i.imgur.com/YQZ3dZQ.png";
 
-  const obstacles = [];
-  const powerUps = [];
-
-  let score = 0;
-  let gameOver = false;
-  let frame = 0;
-
-  const emotionWords = ["Guilt", "Loss", "Anger", "Regret", "Longing"];
+  const powerUpImg = new Image();
+  powerUpImg.src = "https://i.imgur.com/U6tXkXA.png";
 
   const jumpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum.ogg");
   const powerUpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg");
   const loseSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
 
-  // Load player image
-  player.img = new Image();
-  player.img.src = "https://i.imgur.com/zYVQ7UR.png"; // A nice sprite
+  let player = { x: 50, y: 150, width: 40, height: 40, velocityY: 0, gravity: 1.5, jumpPower: -20, onGround: true };
+  let obstacles = [];
+  let powerUps = [];
+  let score = 0;
+  let gameOver = false;
 
-  // Obstacle image (optional)
-  const obstacleImg = new Image();
-  obstacleImg.src = "https://i.imgur.com/YQZ3dZQ.png";
-
-  // Power-up image (Kanak)
-  const kanakImg = new Image();
-  kanakImg.src = "https://i.imgur.com/U6tXkXA.png";
-
-  document.addEventListener("keydown", function (e) {
-    if ((e.code === "Space" || e.code === "ArrowUp") && !player.jumping && !gameOver) {
-      player.velocityY = jumpPower;
-      player.jumping = true;
+  function jump() {
+    if (player.onGround) {
+      player.velocityY = player.jumpPower;
+      player.onGround = false;
       jumpSound.play();
     }
-  });
-
-  function spawnObstacle() {
-    const emotion = emotionWords[Math.floor(Math.random() * emotionWords.length)];
-    obstacles.push({
-      x: canvas.width,
-      y: 160,
-      width: 40,
-      height: 40,
-      text: emotion
-    });
   }
 
-  function spawnPowerUp() {
-    powerUps.push({
-      x: canvas.width,
-      y: 140,
-      width: 40,
-      height: 40
-    });
+  function drawPlayer() {
+    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
   }
 
-  function resetGame() {
-    score = 0;
-    gameOver = false;
-    player.y = 150;
-    player.velocityY = 0;
-    obstacles.length = 0;
-    powerUps.length = 0;
-    document.getElementById("gameMessage").textContent = "";
-    requestAnimationFrame(gameLoop);
+  function drawObstacle(obstacle) {
+    ctx.drawImage(obstacleImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
   }
 
-  function gameLoop() {
+  function drawPowerUp(powerUp) {
+    ctx.drawImage(powerUpImg, powerUp.x, powerUp.y, powerUp.width, powerUp.height);
+  }
+
+  function update() {
     if (gameOver) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Player
-    player.velocityY += gravity;
+    // Player movement
+    player.velocityY += player.gravity;
     player.y += player.velocityY;
     if (player.y >= 150) {
       player.y = 150;
-      player.jumping = false;
+      player.velocityY = 0;
+      player.onGround = true;
     }
-    ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
+
+    drawPlayer();
 
     // Obstacles
-    for (let i = 0; i < obstacles.length; i++) {
-      const obs = obstacles[i];
-      obs.x -= 6;
-      ctx.drawImage(obstacleImg, obs.x, obs.y, obs.width, obs.height);
-      ctx.fillStyle = "white";
-      ctx.font = "10px Arial";
-      ctx.fillText(obs.text, obs.x + 2, obs.y + 30);
+    if (Math.random() < 0.02) {
+      obstacles.push({ x: 800, y: 160, width: 30, height: 30, name: "Anger" });
+    }
+
+    obstacles.forEach((obstacle, index) => {
+      obstacle.x -= 6;
+      drawObstacle(obstacle);
 
       // Collision
       if (
-        player.x < obs.x + obs.width &&
-        player.x + player.width > obs.x &&
-        player.y < obs.y + obs.height &&
-        player.y + player.height > obs.y
+        player.x < obstacle.x + obstacle.width &&
+        player.x + player.width > obstacle.x &&
+        player.y < obstacle.y + obstacle.height &&
+        player.y + player.height > obstacle.y
       ) {
-        loseSound.play();
         gameOver = true;
-        document.getElementById("gameMessage").textContent =
-          "You crashed into " + obs.text + ". Try again?";
-        return;
+        loseSound.play();
+        document.getElementById("endMessage").style.display = "block";
       }
-    }
 
-    // Power-ups
-    for (let i = 0; i < powerUps.length; i++) {
-      const pu = powerUps[i];
-      pu.x -= 6;
-      ctx.drawImage(kanakImg, pu.x, pu.y, pu.width, pu.height);
-
-      if (
-        player.x < pu.x + pu.width &&
-        player.x + player.width > pu.x &&
-        player.y < pu.y + pu.height &&
-        player.y + player.height > pu.y
-      ) {
-        powerUps.splice(i, 1);
-        score += 500;
-        powerUpSound.play();
-      }
-    }
-
-    // Spawn logic
-    if (frame % 90 === 0) spawnObstacle();
-    if (score > 0 && score % 200 === 0 && frame % 60 === 0) spawnPowerUp();
-
-    // Score
-    score++;
-    ctx.fillStyle = "#fff";
-    ctx.font = "16px monospace";
-    ctx.fillText("Score: " + score, 650, 30);
-
-    // Win condition
-    if (score >= 26072008) {
-      document.getElementById("gameMessage").textContent =
-        "You made it to 26,072,008. Kanak smiled. 💍";
-      gameOver = true;
-      return;
-    }
-
-    // Remove off-screen
-    obstacles.filter((o) => o.x > -50);
-    powerUps.filter((p) => p.x > -50);
-
-    frame++;
-    requestAnimationFrame(gameLoop);
-  }
-
-  // Start game when collapsible opens
-  document.querySelectorAll(".collapsible").forEach(button => {
-    button.addEventListener("click", function () {
-      const content = this.nextElementSibling;
-      if (this.textContent.includes("Game")) {
-        setTimeout(() => {
-          if (!gameOver) resetGame();
-        }, 300);
+      if (obstacle.x + obstacle.width < 0) {
+        obstacles.splice(index, 1);
+        score += 10;
       }
     });
+
+    // Power-up every 200 points
+    if (score > 0 && score % 200 === 0 && powerUps.length === 0) {
+      powerUps.push({ x: 800, y: 100, width: 30, height: 30 });
+    }
+
+    powerUps.forEach((powerUp, index) => {
+      powerUp.x -= 5;
+      drawPowerUp(powerUp);
+
+      if (
+        player.x < powerUp.x + powerUp.width &&
+        player.x + player.width > powerUp.x &&
+        player.y < powerUp.y + powerUp.height &&
+        player.y + player.height > powerUp.y
+      ) {
+        powerUpSound.play();
+        score += 500;
+        powerUps.splice(index, 1);
+      }
+
+      if (powerUp.x + powerUp.width < 0) {
+        powerUps.splice(index, 1);
+      }
+    });
+
+    // End condition
+    if (score >= 26072008) {
+      gameOver = true;
+      document.getElementById("endMessage").style.display = "block";
+    }
+
+    // Score
+    ctx.fillStyle = "#000";
+    ctx.font = "16px sans-serif";
+    ctx.fillText("Score: " + score, 10, 20);
+
+    requestAnimationFrame(update);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") jump();
   });
+
+  update();
 </script>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
