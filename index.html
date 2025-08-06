@@ -2037,10 +2037,10 @@ for (let i = 0; i < collapsibles.length; i++) {
   </div>
 
 <!-- 🎮 Game Collapsible -->
-<button class="inner-collapsible" style="background-color:black; color:#000; cursor:pointer; padding:10px 18px; width:fit-content; border:1px white; border-radius:12px; text-align:center; font-size:1rem; margin:10px auto; display:block;">
+<button class="game-collapsible" style="background-color: #ccc; color: #000; cursor: pointer; padding: 10px 18px; width: fit-content; border: none; border-radius: 12px; text-align: center; font-size: 1rem; margin: 10px auto; display: block;">
   🎮 Game
 </button>
-<div class="content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;">
+<div class="game-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;">
   <div id="gameContainer" style="width: 100%; max-width: 800px; margin: auto;">
     <canvas id="gameCanvas" width="800" height="200" style="background: #fdf6f6; border-radius: 12px;"></canvas>
     <p id="endMessage" style="text-align:center; font-size: 1.2rem; font-weight: bold; color: #c0392b; display: none;">
@@ -2050,8 +2050,8 @@ for (let i = 0; i < collapsibles.length; i++) {
 </div>
 
 <script>
-  // Collapsible toggle
-  document.querySelectorAll(".collapsible").forEach(button => {
+  // Unique collapsible toggle
+  document.querySelectorAll(".game-collapsible").forEach(button => {
     button.addEventListener("click", function () {
       this.classList.toggle("active");
       const content = this.nextElementSibling;
@@ -2059,7 +2059,7 @@ for (let i = 0; i < collapsibles.length; i++) {
     });
   });
 
-  // Game Code
+  // Game Logic
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
@@ -2120,14 +2120,13 @@ for (let i = 0; i < collapsibles.length; i++) {
 
     // Obstacles
     if (Math.random() < 0.02) {
-      obstacles.push({ x: 800, y: 160, width: 30, height: 30, name: "Anger" });
+      obstacles.push({ x: 800, y: 160, width: 30, height: 30 });
     }
 
     obstacles.forEach((obstacle, index) => {
       obstacle.x -= 6;
       drawObstacle(obstacle);
 
-      // Collision
       if (
         player.x < obstacle.x + obstacle.width &&
         player.x + player.width > obstacle.x &&
@@ -2145,7 +2144,7 @@ for (let i = 0; i < collapsibles.length; i++) {
       }
     });
 
-    // Power-up every 200 points
+    // Power-up logic
     if (score > 0 && score % 200 === 0 && powerUps.length === 0) {
       powerUps.push({ x: 800, y: 100, width: 30, height: 30 });
     }
@@ -2170,13 +2169,13 @@ for (let i = 0; i < collapsibles.length; i++) {
       }
     });
 
-    // End condition
+    // Win Condition
     if (score >= 26072008) {
       gameOver = true;
       document.getElementById("endMessage").style.display = "block";
     }
 
-    // Score
+    // Scoreboard
     ctx.fillStyle = "#000";
     ctx.font = "16px sans-serif";
     ctx.fillText("Score: " + score, 10, 20);
@@ -3420,5 +3419,13 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 <audio id="glitchSound" src="glitch1.mp3" preload="auto"></audio>
 <button id="eraseButton" onclick="eraseEverything()">Confirm Erase</button>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const button = document.querySelector(".game-collapsible");
+    if (button) {
+      button.click(); // Simulate click to auto-open
+    }
+  });
+</script>
 </body>
 </html>
