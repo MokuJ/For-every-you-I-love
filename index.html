@@ -2037,20 +2037,19 @@ for (let i = 0; i < collapsibles.length; i++) {
   </div>
 
 <!-- 🎮 Game Collapsible -->
-<button class="game-collapsible" style="background-color: #ccc; color: #000; cursor: pointer; padding: 10px 18px; width: fit-content; border: none; border-radius: 12px; text-align: center; font-size: 1rem; margin: 10px auto; display: block;">
+<button class="game-collapsible" style="background: #2c2c2c; color: #ffc107; padding: 10px 20px; border: none; border-radius: 12px; margin: 20px auto; display: block; font-size: 16px;">
   🎮 Game
 </button>
-<div class="game-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;">
-  <div id="gameContainer" style="width: 100%; max-width: 800px; margin: auto;">
-    <canvas id="gameCanvas" width="800" height="200" style="background: #fdf6f6; border-radius: 12px;"></canvas>
-    <p id="endMessage" style="text-align:center; font-size: 1.2rem; font-weight: bold; color: #c0392b; display: none;">
-      You made it to 26,072,008. Kanak smiled. 💍
-    </p>
+<div class="game-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
+  <div style="display: flex; justify-content: center; padding: 10px;">
+    <canvas id="gameCanvas" width="320" height="150" style="border-radius: 10px; background: #fff;"></canvas>
   </div>
+  <p id="endMessage" style="text-align:center; font-size: 16px; font-weight: bold; color: #ff4d4d; display: none;">
+    You made it to 26,072,008. Kanak smiled. 💍
+  </p>
 </div>
 
 <script>
-  // Unique collapsible toggle
   document.querySelectorAll(".game-collapsible").forEach(button => {
     button.addEventListener("click", function () {
       this.classList.toggle("active");
@@ -2059,28 +2058,18 @@ for (let i = 0; i < collapsibles.length; i++) {
     });
   });
 
-  // Game Logic
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
-  const playerImg = new Image();
-  playerImg.src = "https://i.imgur.com/zYVQ7UR.png";
-
-  const obstacleImg = new Image();
-  obstacleImg.src = "https://i.imgur.com/YQZ3dZQ.png";
-
-  const powerUpImg = new Image();
-  powerUpImg.src = "https://i.imgur.com/U6tXkXA.png";
-
-  const jumpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum.ogg");
-  const powerUpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg");
-  const loseSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
-
-  let player = { x: 50, y: 150, width: 40, height: 40, velocityY: 0, gravity: 1.5, jumpPower: -20, onGround: true };
+  let player = { x: 50, y: 110, width: 30, height: 30, velocityY: 0, gravity: 1.2, jumpPower: -15, onGround: true };
   let obstacles = [];
   let powerUps = [];
   let score = 0;
   let gameOver = false;
+
+  const jumpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum.ogg");
+  const powerUpSound = new Audio("https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg");
+  const loseSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
 
   function jump() {
     if (player.onGround) {
@@ -2091,15 +2080,18 @@ for (let i = 0; i < collapsibles.length; i++) {
   }
 
   function drawPlayer() {
-    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    ctx.fillStyle = "#ff69b4";
+    ctx.fillRect(player.x, player.y, player.width, player.height);
   }
 
   function drawObstacle(obstacle) {
-    ctx.drawImage(obstacleImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    ctx.fillStyle = "#d32f2f";
+    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
   }
 
   function drawPowerUp(powerUp) {
-    ctx.drawImage(powerUpImg, powerUp.x, powerUp.y, powerUp.width, powerUp.height);
+    ctx.fillStyle = "#ffd700";
+    ctx.fillRect(powerUp.x, powerUp.y, powerUp.width, powerUp.height);
   }
 
   function update() {
@@ -2107,11 +2099,11 @@ for (let i = 0; i < collapsibles.length; i++) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Player movement
+    // Player physics
     player.velocityY += player.gravity;
     player.y += player.velocityY;
-    if (player.y >= 150) {
-      player.y = 150;
+    if (player.y >= 110) {
+      player.y = 110;
       player.velocityY = 0;
       player.onGround = true;
     }
@@ -2119,12 +2111,12 @@ for (let i = 0; i < collapsibles.length; i++) {
     drawPlayer();
 
     // Obstacles
-    if (Math.random() < 0.02) {
-      obstacles.push({ x: 800, y: 160, width: 30, height: 30 });
+    if (Math.random() < 0.03) {
+      obstacles.push({ x: canvas.width, y: 120, width: 20, height: 30 });
     }
 
     obstacles.forEach((obstacle, index) => {
-      obstacle.x -= 6;
+      obstacle.x -= 5;
       drawObstacle(obstacle);
 
       if (
@@ -2144,13 +2136,13 @@ for (let i = 0; i < collapsibles.length; i++) {
       }
     });
 
-    // Power-up logic
+    // Power-ups
     if (score > 0 && score % 200 === 0 && powerUps.length === 0) {
-      powerUps.push({ x: 800, y: 100, width: 30, height: 30 });
+      powerUps.push({ x: canvas.width, y: 90, width: 20, height: 20 });
     }
 
     powerUps.forEach((powerUp, index) => {
-      powerUp.x -= 5;
+      powerUp.x -= 4;
       drawPowerUp(powerUp);
 
       if (
@@ -2159,8 +2151,8 @@ for (let i = 0; i < collapsibles.length; i++) {
         player.y < powerUp.y + powerUp.height &&
         player.y + player.height > powerUp.y
       ) {
-        powerUpSound.play();
         score += 500;
+        powerUpSound.play();
         powerUps.splice(index, 1);
       }
 
@@ -2169,15 +2161,13 @@ for (let i = 0; i < collapsibles.length; i++) {
       }
     });
 
-    // Win Condition
     if (score >= 26072008) {
       gameOver = true;
       document.getElementById("endMessage").style.display = "block";
     }
 
-    // Scoreboard
     ctx.fillStyle = "#000";
-    ctx.font = "16px sans-serif";
+    ctx.font = "14px sans-serif";
     ctx.fillText("Score: " + score, 10, 20);
 
     requestAnimationFrame(update);
