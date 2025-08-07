@@ -2036,7 +2036,7 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
-<!-- 🎮 Game Collapsible + Endless Runner -->
+<!-- 🎮 Moksh Runner Game Collapsible -->
 <style>
   .game-toggle-btn {
     display: block;
@@ -2059,9 +2059,11 @@ for (let i = 0; i < collapsibles.length; i++) {
   }
   #gameCanvas {
     border: 2px solid #ccc;
-    background: url('https://i.imgur.com/8wWArUM.png') repeat-x;
+    background: url('https://i.imgur.com/FgQbO4Q.png') repeat-x;
     background-size: cover;
     border-radius: 12px;
+    display: block;
+    margin: auto;
   }
 </style>
 
@@ -2071,52 +2073,58 @@ for (let i = 0; i < collapsibles.length; i++) {
 </div>
 
 <script>
-  const toggleGame = () => {
-    const section = document.getElementById("gameCollapsible");
-    section.style.display = section.style.display === "block" ? "none" : "block";
-    if (section.style.display === "none") pauseGame();
-  };
-
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
+  let gameInterval, score = 0, running = false;
 
   const playerImg = new Image();
-  playerImg.src = "https://i.imgur.com/vV2DnSl.png"; // Moksh character PNG
+  playerImg.src = "https://i.imgur.com/vV2DnSl.png";
 
   const obstacleImgs = [
-    "https://i.imgur.com/EehNhW1.png", // Guilt
-    "https://i.imgur.com/fTdfEPI.png", // Loss
-    "https://i.imgur.com/URWrQTr.png"  // Regret
+    "https://i.imgur.com/EehNhW1.png",
+    "https://i.imgur.com/fTdfEPI.png",
+    "https://i.imgur.com/URWrQTr.png"
   ];
 
   const powerUpImg = new Image();
-  powerUpImg.src = "https://i.imgur.com/1cUuZmD.png"; // Kanak power-up
+  powerUpImg.src = "https://i.imgur.com/1cUuZmD.png";
 
-  const jumpSound = new Audio("https://freesound.org/data/previews/331/331912_3248244-lq.mp3");
-  const powerSound = new Audio("https://freesound.org/data/previews/107/107726_1537424-lq.mp3");
-  const loseSound = new Audio("https://freesound.org/data/previews/419/419024_701979-lq.mp3");
+  const jumpSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_a763d82e3f.mp3");
+  const powerSound = new Audio("https://cdn.pixabay.com/audio/2022/03/02/audio_3386a2bd52.mp3");
+  const loseSound = new Audio("https://cdn.pixabay.com/audio/2021/08/04/audio_e5c0cf3f69.mp3");
 
-  let player = { x: 50, y: 150, width: 40, height: 40, dy: 0, jumping: false };
-  let obstacles = [];
-  let powerUps = [];
-  let score = 0;
-  let gameOver = false;
-  let gameStarted = false;
-  let interval;
+  const player = { x: 50, y: 150, width: 40, height: 40, dy: 0, jumping: false };
+  let obstacles = [], powerUps = [];
+  const gravity = 0.6;
+  const maxScore = 260708;
 
-  const gravity = 0.7;
+  function toggleGame() {
+    const section = document.getElementById("gameCollapsible");
+    const isOpening = section.style.display !== "block";
+    section.style.display = isOpening ? "block" : "none";
+    if (!isOpening) {
+      clearInterval(gameInterval);
+      running = false;
+    }
+  }
 
   canvas.addEventListener("click", () => {
-    if (!gameStarted) {
-      resetGame();
-      interval = setInterval(update, 20);
-      gameStarted = true;
-    } else if (!player.jumping) {
-      player.dy = -10;
-      player.jumping = true;
-      jumpSound.play();
+    if (!running) {
+      startGame();
+    } else {
+      if (!player.jumping) {
+        player.dy = -10;
+        player.jumping = true;
+        jumpSound.play();
+      }
     }
   });
+
+  function startGame() {
+    resetGame();
+    running = true;
+    gameInterval = setInterval(updateGame, 20);
+  }
 
   function resetGame() {
     player.y = 150;
@@ -2125,22 +2133,12 @@ for (let i = 0; i < collapsibles.length; i++) {
     obstacles = [];
     powerUps = [];
     score = 0;
-    gameOver = false;
   }
 
-  function pauseGame() {
-    clearInterval(interval);
-    gameStarted = false;
-  }
-
-  function drawImage(img, x, y, w, h) {
-    if (img.complete) ctx.drawImage(img, x, y, w, h);
-  }
-
-  function update() {
+  function updateGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Player physics
+    // Draw player
     player.dy += gravity;
     player.y += player.dy;
     if (player.y > 150) {
@@ -2148,17 +2146,18 @@ for (let i = 0; i < collapsibles.length; i++) {
       player.dy = 0;
       player.jumping = false;
     }
-    drawImage(playerImg, player.x, player.y, player.width, player.height);
+    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
 
-    // Obstacles
+    // Spawn obstacles
     if (Math.random() < 0.02) {
       const img = new Image();
       img.src = obstacleImgs[Math.floor(Math.random() * obstacleImgs.length)];
-      obstacles.push({ x: 600, y: 160, width: 30, height: 30, img });
+      obstacles.push({ x: canvas.width, y: 160, width: 30, height: 30, img });
     }
+
     obstacles.forEach((ob, i) => {
-      ob.x -= 6;
-      drawImage(ob.img, ob.x, ob.y, ob.width, ob.height);
+      ob.x -= 5;
+      ctx.drawImage(ob.img, ob.x, ob.y, ob.width, ob.height);
       if (
         ob.x < player.x + player.width &&
         ob.x + ob.width > player.x &&
@@ -2166,20 +2165,20 @@ for (let i = 0; i < collapsibles.length; i++) {
         ob.y + ob.height > player.y
       ) {
         loseSound.play();
-        pauseGame();
+        clearInterval(gameInterval);
         alert("Game Over! Score: " + score);
-        gameOver = true;
+        running = false;
       }
     });
     obstacles = obstacles.filter(ob => ob.x > -50);
 
     // Power-ups
-    if (score > 0 && score % 200 === 0) {
-      powerUps.push({ x: 600, y: 120, width: 25, height: 25 });
+    if (score > 0 && score % 200 === 0 && powerUps.length < 1) {
+      powerUps.push({ x: canvas.width, y: 120, width: 25, height: 25 });
     }
     powerUps.forEach((p, i) => {
-      p.x -= 6;
-      drawImage(powerUpImg, p.x, p.y, p.width, p.height);
+      p.x -= 5;
+      ctx.drawImage(powerUpImg, p.x, p.y, p.width, p.height);
       if (
         p.x < player.x + player.width &&
         p.x + p.width > player.x &&
@@ -2192,14 +2191,15 @@ for (let i = 0; i < collapsibles.length; i++) {
       }
     });
 
+    // Score + win
     score++;
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "white";
     ctx.font = "16px sans-serif";
     ctx.fillText("Score: " + score, 500, 20);
-
-    if (score >= 260708 && !gameOver) {
-      pauseGame();
+    if (score >= maxScore) {
+      clearInterval(gameInterval);
       alert("You made it to 260,708. Kanak smiled. 💍");
+      running = false;
     }
   }
 </script>
