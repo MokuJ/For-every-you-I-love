@@ -2097,15 +2097,17 @@ for (let i = 0; i < collapsibles.length; i++) {
   let ctx = canvas.getContext("2d");
 
   let moksh = new Image();
-  moksh.src = "https://i.imgur.com/x5vT2A4.png"; // Dino-like character
-  let obstacle = new Image();
-  obstacle.src = "https://i.imgur.com/Z7bL0Ye.png"; // Obstacle - cactus style
-  let kanak = new Image();
-  kanak.src = "https://i.imgur.com/Q5s3c5U.png"; // Power-up (heart)
+moksh.src = "https://opengameart.org/sites/default/files/dino_0.png";
 
-  let jumpSound = new Audio("https://www.soundjay.com/button/beep-07.wav");
-  let powerUpSound = new Audio("https://www.soundjay.com/button/button-3.mp3");
-  let loseSound = new Audio("https://www.soundjay.com/button/fail-buzzer-01.mp3");
+let obstacle = new Image();
+obstacle.src = "https://opengameart.org/sites/default/files/cactus.png";
+
+let kanak = new Image();
+kanak.src = "https://opengameart.org/sites/default/files/heart_2.png";
+
+let jumpSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-jump-223.wav");
+let powerUpSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.wav");
+let loseSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav");
 
   let y = 150, vy = 0, gravity = 1, jumping = false;
   let obstacles = [], kanaks = [], score = 0, running = false, interval;
