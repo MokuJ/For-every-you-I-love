@@ -1021,6 +1021,74 @@
     }
   }
 </style>
+<style>
+  #welcomeOverlay {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    overflow: hidden;
+  }
+
+  .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    animation: twinkle 2s infinite ease-in-out alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .welcomeText {
+    z-index: 2;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 0 20px;
+  }
+
+  .kanakHighlight {
+    font-size: 2.5rem;
+    color: #ff5e9c;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .countdown {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    z-index: 2;
+    color: #aaa;
+  }
+</style>
+
+<div id="welcomeOverlay">
+  <div class="stars" id="starfield"></div>
+  <div class="welcomeText">
+    Welcome to the digital vault, where I have stored all my love for this one girl...
+    <div class="kanakHighlight">Kanak</div>
+  </div>
+  <div class="countdown" id="countdown">5</div>
+</div>
 </head>
 <body>
   
@@ -3357,6 +3425,34 @@ function updateTimeSince() {
 }
 setInterval(updateTimeSince, 1000);
 updateTimeSince();
+</script>
+<script>
+  // Twinkling stars generator
+  const starfield = document.getElementById('starfield');
+  for (let i = 0; i < 120; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDuration = (1 + Math.random() * 3) + 's';
+    starfield.appendChild(star);
+  }
+
+  // Countdown and hide overlay
+  let timeLeft = 5;
+  const countdown = document.getElementById("countdown");
+  const overlay = document.getElementById("welcomeOverlay");
+
+  const interval = setInterval(() => {
+    timeLeft--;
+    countdown.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      overlay.style.transition = "opacity 1s";
+      overlay.style.opacity = 0;
+      setTimeout(() => overlay.remove(), 1000);
+    }
+  }, 1000);
 </script>
 </body>
 </html>
