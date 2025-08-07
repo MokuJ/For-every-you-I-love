@@ -2036,7 +2036,159 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
+<style>
+  .moksh-collapsible {
+    background-color: #555;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    border: none;
+  }
 
+  .moksh-collapsible:hover {
+    background-color: #777;
+  }
+
+  .moksh-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease-in-out;
+    text-align: center;
+  }
+
+  .moksh-content.open {
+    max-height: 1000px;
+    overflow: visible;
+  }
+
+  canvas {
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+  }
+
+  #mokshGameScore {
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+</style>
+
+<button class="moksh-collapsible">🎮 Moksh Game</button>
+<div class="moksh-content">
+  <canvas id="mokshGame" width="800" height="200" style="background: url('https://i.imgur.com/fD4JtQ6.png'); background-size: cover;"></canvas>
+  <div id="mokshGameScore">Score: 0</div>
+  <button onclick="startMokshGame()" style="margin-top: 10px;">Restart</button>
+</div>
+
+<script>
+  const button = document.querySelector(".moksh-collapsible");
+  const content = document.querySelector(".moksh-content");
+  let canvas = document.getElementById("mokshGame");
+  let ctx = canvas.getContext("2d");
+
+  let moksh = new Image();
+  moksh.src = "https://i.imgur.com/1XbJG5X.png";
+  let obstacle = new Image();
+  obstacle.src = "https://i.imgur.com/Fk5PyWs.png";
+  let kanak = new Image();
+  kanak.src = "https://i.imgur.com/TTi0bhu.png";
+
+  let jumpSound = new Audio("https://www.soundjay.com/button/beep-07.wav");
+  let powerUpSound = new Audio("https://www.soundjay.com/button/button-3.mp3");
+  let loseSound = new Audio("https://www.soundjay.com/button/fail-buzzer-01.mp3");
+
+  let y = 150, vy = 0, gravity = 1, jumping = false;
+  let obstacles = [], kanaks = [], score = 0, running = false, interval;
+
+  button.onclick = function () {
+    content.classList.toggle("open");
+    if (!content.classList.contains("open")) {
+      clearInterval(interval);
+      running = false;
+    }
+  };
+
+  canvas.onclick = function () {
+    if (!running) startMokshGame();
+    else if (!jumping) {
+      vy = -15;
+      jumping = true;
+      jumpSound.play();
+    }
+  };
+
+  function startMokshGame() {
+    y = 150;
+    vy = 0;
+    obstacles = [];
+    kanaks = [];
+    score = 0;
+    jumping = false;
+    running = true;
+    document.getElementById("mokshGameScore").textContent = "Score: 0";
+    clearInterval(interval);
+    interval = setInterval(update, 30);
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    vy += gravity;
+    y += vy;
+    if (y > 150) {
+      y = 150;
+      vy = 0;
+      jumping = false;
+    }
+
+    ctx.drawImage(moksh, 50, y, 40, 40);
+
+    if (Math.random() < 0.02) {
+      obstacles.push({ x: canvas.width });
+    }
+
+    if (score % 200 === 0 && score !== 0) {
+      kanaks.push({ x: canvas.width });
+    }
+
+    for (let i = 0; i < obstacles.length; i++) {
+      obstacles[i].x -= 5;
+      ctx.drawImage(obstacle, obstacles[i].x, 160, 30, 30);
+
+      if (obstacles[i].x < 90 && obstacles[i].x > 50 && y > 130) {
+        loseSound.play();
+        clearInterval(interval);
+        running = false;
+        document.getElementById("mokshGameScore").textContent = `💔 Game Over. Final Score: ${score}`;
+      }
+    }
+
+    for (let i = 0; i < kanaks.length; i++) {
+      kanaks[i].x -= 5;
+      ctx.drawImage(kanak, kanaks[i].x, 130, 30, 30);
+
+      if (kanaks[i].x < 90 && kanaks[i].x > 50 && y < 160) {
+        score += 500;
+        kanaks.splice(i, 1);
+        powerUpSound.play();
+      }
+    }
+
+    score++;
+    document.getElementById("mokshGameScore").textContent = "Score: " + score;
+
+    if (score >= 26072008) {
+      clearInterval(interval);
+      document.getElementById("mokshGameScore").textContent = "💍 You made it to 26,072,008. Kanak smiled.";
+    }
+  }
+</script>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
     The Void That Replies
