@@ -2036,176 +2036,172 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
-<!-- Moksh Endless Runner Game Collapsible --><div class="collapsible custom-game-btn">🎮 Game</div>
-<div class="custom-game-content">
-  <canvas id="mokshGameCanvas" width="800" height="250"></canvas>
-</div><style>
-  .custom-game-btn {
-    background-color: #999;
-    color: white;
-    font-weight: bold;
-    padding: 12px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 20px auto;
-    text-align: center;
-    width: fit-content;
-  }
-  .custom-game-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
-    text-align: center;
-  }
-  .custom-game-content.open {
-    max-height: 1000px;
-  }
-</style><script>
-// Toggle button behavior
-const gameBtn = document.querySelector('.custom-game-btn');
-const gameContent = document.querySelector('.custom-game-content');
-let gameRunning = false;
+<!-- Moksh Runner Game Collapsible --><button class="collapsible moksh-runner-button">🎮 Game</button>
 
-gameBtn.addEventListener('click', () => {
-  gameContent.classList.toggle('open');
-  if (gameContent.classList.contains('open')) {
-    startGame();
-  } else {
+<div class="content">
+  <canvas id="gameCanvas" width="800" height="200" style="border: 2px solid #000; border-radius: 10px; display: block; margin: 10px auto; background: url('https://i.imgur.com/3e5p3Mn.png') repeat-x; background-size: cover;"></canvas>
+  <div id="scoreDisplay" style="text-align:center; font-weight:bold; font-size:18px; margin-top: 10px;">Score: 0</div>
+</div><style>
+.collapsible.moksh-runner-button {
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: fit-content;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 16px;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+.collapsible.moksh-runner-button.active {
+  background-color: #555;
+}
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.content.open {
+  max-height: 1000px;
+}
+</style><script>
+// Collapsible functionality
+const mokshBtn = document.querySelector(".collapsible.moksh-runner-button");
+const mokshContent = mokshBtn.nextElementSibling;
+let mokshGameStarted = false;
+
+mokshBtn.addEventListener("click", function() {
+  this.classList.toggle("active");
+  if (mokshContent.style.maxHeight){
+    mokshContent.style.maxHeight = null;
     cancelAnimationFrame(animationId);
-    gameRunning = false;
+  } else {
+    mokshContent.style.maxHeight = mokshContent.scrollHeight + "px";
+    if (!mokshGameStarted) startGame();
   }
 });
 
-// Game logic
-let canvas, ctx, playerImg, obstacleImgs, powerupImg, bgImg;
-let player, obstacles, powerups, score, gameOver, jumpSound, powerSound, hitSound;
-let gravity = 0.5;
-let isJumping = false;
+// Game code
+let canvas = document.getElementById("gameCanvas");
+let ctx = canvas.getContext("2d");
+let score = 0;
+let player = { x: 50, y: 150, width: 50, height: 50, vy: 0, grounded: true, img: new Image() };
+player.img.src = "https://i.imgur.com/9YQ5v4T.png"; // Moksh PNG
+
+let gravity = 1.5;
+let obstacles = [];
+let powerups = [];
+let gameOver = false;
 let animationId;
-const maxScore = 260708;
+
+let jumpSound = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+let powerupSound = new Audio("https://www.fesliyanstudios.com/play-mp3/6678");
+let crashSound = new Audio("https://www.fesliyanstudios.com/play-mp3/6738");
+
+let obstacleImgs = [
+  "https://i.imgur.com/CdfDoZW.png", // Guilt
+  "https://i.imgur.com/JTOzOPO.png", // Anger
+  "https://i.imgur.com/PRmyZVG.png"  // Regret
+];
+let kanakImg = new Image();
+kanakImg.src = "https://i.imgur.com/J5qMuKz.png"; // Power-up Kanak
 
 function startGame() {
-  canvas = document.getElementById("mokshGameCanvas");
-  ctx = canvas.getContext("2d");
-
-  // Load images
-  playerImg = new Image();
-  playerImg.src = "https://i.postimg.cc/TYyqsXwM/dino.png"; // Moksh PNG
-
-  obstacleImgs = [
-    "https://i.postimg.cc/Sxhczr8R/block1.png",
-    "https://i.postimg.cc/T2wL0PY8/block2.png",
-    "https://i.postimg.cc/zfSdr8L8/block3.png"
-  ].map(src => { const img = new Image(); img.src = src; return img; });
-
-  powerupImg = new Image();
-  powerupImg.src = "https://i.postimg.cc/7YQmXrGM/kanak.png"; // Kanak power-up
-
-  bgImg = new Image();
-  bgImg.src = "https://i.postimg.cc/fWvNr2NS/bg.png"; // Background image
-
-  // Load sounds
-  jumpSound = new Audio("https://freesound.org/data/previews/331/331912_3248244-lq.mp3");
-  powerSound = new Audio("https://freesound.org/data/previews/446/446095_839173-lq.mp3");
-  hitSound = new Audio("https://freesound.org/data/previews/198/198841_2859978-lq.mp3");
-
-  // Initialize
-  player = { x: 50, y: 180, width: 40, height: 40, velocityY: 0 };
-  obstacles = [];
-  powerups = [];
-  score = 0;
-  gameOver = false;
-  gameRunning = true;
-
-  document.addEventListener("keydown", handleJump);
-  canvas.addEventListener("click", handleJump);
-
-  spawnObstacle();
-  animate();
+  mokshGameStarted = true;
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") jump();
+  });
+  canvas.addEventListener("click", () => jump());
+  loop();
 }
 
-function handleJump() {
-  if (!gameOver && player.y >= 180) {
-    player.velocityY = -10;
+function jump() {
+  if (player.grounded) {
+    player.vy = -20;
+    player.grounded = false;
     jumpSound.play();
   }
 }
 
+function drawPlayer() {
+  ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
+}
+
+function drawObstacle(obs) {
+  ctx.drawImage(obs.img, obs.x, obs.y, obs.width, obs.height);
+}
+
+function drawPowerUp(pu) {
+  ctx.drawImage(kanakImg, pu.x, pu.y, pu.width, pu.height);
+}
+
 function spawnObstacle() {
-  if (!gameRunning) return;
-  const img = obstacleImgs[Math.floor(Math.random() * obstacleImgs.length)];
-  obstacles.push({ x: 800, y: 180, width: 40, height: 40, img });
-  setTimeout(spawnObstacle, 2000 + Math.random() * 2000);
+  let img = new Image();
+  img.src = obstacleImgs[Math.floor(Math.random() * obstacleImgs.length)];
+  obstacles.push({ x: 800, y: 150, width: 40, height: 40, img });
 }
 
-function spawnPowerup() {
-  powerups.push({ x: 800, y: 150, width: 30, height: 30 });
+function spawnPowerUp() {
+  powerups.push({ x: 800, y: 100, width: 40, height: 40 });
 }
 
-function drawText(text, x, y, color = "#fff", size = "18px") {
-  ctx.fillStyle = color;
-  ctx.font = `${size} Arial`;
-  ctx.fillText(text, x, y);
-}
-
-function animate() {
-  animationId = requestAnimationFrame(animate);
+function loop() {
+  animationId = requestAnimationFrame(loop);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
 
-  // Player
-  player.velocityY += gravity;
-  player.y += player.velocityY;
-  if (player.y > 180) player.y = 180;
-  ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+  player.vy += gravity;
+  player.y += player.vy;
+  if (player.y >= 150) {
+    player.y = 150;
+    player.vy = 0;
+    player.grounded = true;
+  }
+  drawPlayer();
 
   // Obstacles
-  for (let i = 0; i < obstacles.length; i++) {
-    const obs = obstacles[i];
+  obstacles.forEach((obs, i) => {
     obs.x -= 6;
-    ctx.drawImage(obs.img, obs.x, obs.y, obs.width, obs.height);
-
-    if (collision(player, obs)) {
-      hitSound.play();
-      cancelAnimationFrame(animationId);
-      gameOver = true;
-      drawText("Game Over", 330, 100, "red", "28px");
-      return;
-    }
-  }
+    drawObstacle(obs);
+    if (obs.x + obs.width < 0) obstacles.splice(i, 1);
+    if (isColliding(player, obs)) endGame();
+  });
 
   // Powerups
-  for (let i = 0; i < powerups.length; i++) {
-    const pu = powerups[i];
-    pu.x -= 5;
-    ctx.drawImage(powerupImg, pu.x, pu.y, pu.width, pu.height);
-
-    if (collision(player, pu)) {
-      powerSound.play();
-      powerups.splice(i, 1);
+  powerups.forEach((pu, i) => {
+    pu.x -= 6;
+    drawPowerUp(pu);
+    if (pu.x + pu.width < 0) powerups.splice(i, 1);
+    if (isColliding(player, pu)) {
       score += 500;
+      powerups.splice(i, 1);
+      powerupSound.play();
     }
-  }
+  });
 
-  // Score
   score++;
-  drawText("Score: " + score, 10, 30);
+  document.getElementById("scoreDisplay").textContent = "Score: " + score;
+  if (score % 150 === 0) spawnObstacle();
+  if (score % 200 === 0) spawnPowerUp();
 
-  // Check win
-  if (score >= maxScore) {
-    cancelAnimationFrame(animationId);
-    drawText("You made it to 260708.", 250, 100, "#0f0", "20px");
-    drawText("Kanak smiled. 💍", 270, 130, "#0f0", "20px");
-    return;
-  }
-
-  // Powerup logic
-  if (score % 200 === 0) {
-    spawnPowerup();
+  if (score >= 260708) {
+    endGame("You made it to 260708. Kanak smiled. 💍");
   }
 }
 
-function collision(a, b) {
+function endGame(msg = "Game Over") {
+  cancelAnimationFrame(animationId);
+  crashSound.play();
+  alert(msg);
+}
+
+function isColliding(a, b) {
   return (
     a.x < b.x + b.width &&
     a.x + a.width > b.x &&
