@@ -2036,161 +2036,161 @@ for (let i = 0; i < collapsibles.length; i++) {
     </div>
   </div>
 
+<button class="collapsible game-collapsible">🎮 Game</button>
+<div class="game-content" style="padding: 10px; background: #111;">
+  <canvas id="gameCanvas" width="600" height="200" style="border: 2px solid white; display: block; margin: 10px auto;"></canvas>
+  <div id="scoreDisplay" style="color: white; text-align: center; font-size: 1.2em;">Score: 0</div>
+  <button onclick="restartGame()" style="display: block; margin: 10px auto;">🔁 Restart</button>
+</div>
+
 <style>
-  .moksh-collapsible {
-    background-color: #555;
+  .game-collapsible {
+    background-color: gray;
     color: white;
-    padding: 10px 16px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 16px;
+    padding: 10px;
     cursor: pointer;
-    margin: 10px auto;
-    display: block;
+    width: fit-content;
     border: none;
-  }
-
-  .moksh-collapsible:hover {
-    background-color: #777;
-  }
-
-  .moksh-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.6s ease-in-out;
     text-align: center;
+    font-size: 18px;
+    margin: 10px auto;
+    border-radius: 8px;
   }
 
-  .moksh-content.open {
-    max-height: 1000px;
-    overflow: visible;
-  }
-
-  canvas {
-    border-radius: 12px;
-    width: 100%;
-    height: auto;
-    max-width: 800px;
-    background-color: #111;
-    background-image: url("https://i.imgur.com/mWYpERe.png");
-    background-size: cover;
-  }
-
-  #mokshGameScore {
-    color: white;
-    font-size: 16px;
-    margin-top: 10px;
+  .game-content {
+    display: none;
+    overflow: hidden;
   }
 </style>
 
-<button class="moksh-collapsible">🎮 Moksh Game</button>
-<div class="moksh-content">
-  <canvas id="mokshGame" width="800" height="200"></canvas>
-  <div id="mokshGameScore">Score: 0</div>
-  <button onclick="startMokshGame()" style="margin-top: 10px;">Restart</button>
-</div>
-
 <script>
-  const button = document.querySelector(".moksh-collapsible");
-  const content = document.querySelector(".moksh-content");
-  let canvas = document.getElementById("mokshGame");
-  let ctx = canvas.getContext("2d");
+  const gameButton = document.querySelector('.game-collapsible');
+  const gameDiv = document.querySelector('.game-content');
+  let gameRunning = false;
 
-  let moksh = new Image();
-moksh.src = "https://opengameart.org/sites/default/files/dino_0.png";
-
-let obstacle = new Image();
-obstacle.src = "https://opengameart.org/sites/default/files/cactus.png";
-
-let kanak = new Image();
-kanak.src = "https://opengameart.org/sites/default/files/heart_2.png";
-
-let jumpSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-jump-223.wav");
-let powerUpSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.wav");
-let loseSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav");
-
-  let y = 150, vy = 0, gravity = 1, jumping = false;
-  let obstacles = [], kanaks = [], score = 0, running = false, interval;
-
-  button.onclick = function () {
-    content.classList.toggle("open");
-    if (!content.classList.contains("open")) {
-      clearInterval(interval);
-      running = false;
+  gameButton.addEventListener('click', () => {
+    const isVisible = gameDiv.style.display === 'block';
+    gameDiv.style.display = isVisible ? 'none' : 'block';
+    if (isVisible) {
+      gameRunning = false;
+    } else {
+      startGame();
     }
-  };
+  });
 
-  canvas.onclick = function () {
-    if (!running) startMokshGame();
-    else if (!jumping) {
+  let canvas, ctx;
+  let moksh, obstacleImg, kanakImg;
+  let x = 50, y = 150, vy = 0, gravity = 1.2;
+  let isJumping = false;
+  let score = 0, gameInterval;
+  let obstacles = [], kanaks = [];
+
+  // Load images
+  moksh = new Image();
+  moksh.src = "https://opengameart.org/sites/default/files/dino_0.png";
+  obstacleImg = new Image();
+  obstacleImg.src = "https://opengameart.org/sites/default/files/cactus.png";
+  kanakImg = new Image();
+  kanakImg.src = "https://opengameart.org/sites/default/files/heart_2.png";
+
+  // Sounds
+  let jumpSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-jump-223.wav");
+  let powerUpSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.wav");
+  let loseSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.wav");
+
+  document.addEventListener("keydown", function (e) {
+    if (e.code === "Space" && !isJumping) {
       vy = -15;
-      jumping = true;
+      isJumping = true;
       jumpSound.play();
     }
-  };
+  });
 
-  function startMokshGame() {
+  function startGame() {
+    canvas = document.getElementById("gameCanvas");
+    ctx = canvas.getContext("2d");
+    x = 50;
     y = 150;
     vy = 0;
+    score = 0;
     obstacles = [];
     kanaks = [];
-    score = 0;
-    jumping = false;
-    running = true;
-    document.getElementById("mokshGameScore").textContent = "Score: 0";
-    clearInterval(interval);
-    interval = setInterval(update, 30);
+    gameRunning = true;
+    document.getElementById("scoreDisplay").textContent = "Score: 0";
+
+    if (gameInterval) clearInterval(gameInterval);
+    gameInterval = setInterval(updateGame, 30);
   }
 
-  function update() {
+  function restartGame() {
+    clearInterval(gameInterval);
+    startGame();
+  }
+
+  function updateGame() {
+    if (!gameRunning) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Gravity & jump
     vy += gravity;
     y += vy;
     if (y > 150) {
       y = 150;
       vy = 0;
-      jumping = false;
+      isJumping = false;
     }
 
-    ctx.drawImage(moksh, 50, y, 40, 40);
+    // Draw Moksh
+    ctx.drawImage(moksh, x, y - 50, 40, 50);
 
+    // Create obstacles
     if (Math.random() < 0.02) {
-      obstacles.push({ x: canvas.width });
+      obstacles.push({ x: canvas.width, y: 150 });
     }
 
-    if (score % 200 === 0 && score !== 0) {
-      kanaks.push({ x: canvas.width });
+    // Create Kanak power-up
+    if (score % 200 === 0 && score !== 0 && !kanaks.find(k => k.x > canvas.width - 100)) {
+      kanaks.push({ x: canvas.width, y: 120 });
     }
 
-    for (let i = 0; i < obstacles.length; i++) {
-      obstacles[i].x -= 5;
-      ctx.drawImage(obstacle, obstacles[i].x, 160, 30, 30);
+    // Move & draw obstacles
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      obstacles[i].x -= 6;
+      ctx.drawImage(obstacleImg, obstacles[i].x, obstacles[i].y - 30, 30, 30);
 
-      if (obstacles[i].x < 90 && obstacles[i].x > 50 && y > 130) {
+      // Collision
+      if (obstacles[i].x < x + 40 && obstacles[i].x + 30 > x && y > 120) {
+        gameRunning = false;
         loseSound.play();
-        clearInterval(interval);
-        running = false;
-        document.getElementById("mokshGameScore").textContent = `💔 Game Over. Final Score: ${score}`;
+        clearInterval(gameInterval);
+        alert("Game Over. Score: " + score);
+        return;
       }
+
+      if (obstacles[i].x < -30) obstacles.splice(i, 1);
     }
 
-    for (let i = 0; i < kanaks.length; i++) {
+    // Move & draw Kanak
+    for (let i = kanaks.length - 1; i >= 0; i--) {
       kanaks[i].x -= 5;
-      ctx.drawImage(kanak, kanaks[i].x, 130, 30, 30);
+      ctx.drawImage(kanakImg, kanaks[i].x, kanaks[i].y - 30, 30, 30);
 
-      if (kanaks[i].x < 90 && kanaks[i].x > 50 && y < 160) {
+      if (kanaks[i].x < x + 40 && kanaks[i].x + 30 > x && y > 90) {
         score += 500;
-        kanaks.splice(i, 1);
         powerUpSound.play();
+        kanaks.splice(i, 1);
       }
+
+      if (kanaks[i].x < -30) kanaks.splice(i, 1);
     }
 
+    // Score
     score++;
-    document.getElementById("mokshGameScore").textContent = "Score: " + score;
+    document.getElementById("scoreDisplay").textContent = "Score: " + score;
 
     if (score >= 26072008) {
-      clearInterval(interval);
-      document.getElementById("mokshGameScore").textContent = "💍 You made it to 26,072,008. Kanak smiled.";
+      clearInterval(gameInterval);
+      alert("You made it to 26,072,008. Kanak smiled. 💍");
     }
   }
 </script>
