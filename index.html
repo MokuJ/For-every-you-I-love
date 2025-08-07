@@ -1021,83 +1021,10 @@
     }
   }
 </style>
-<style>
-  #welcomeScreen {
-    position: fixed;
-    z-index: 9999;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    padding: 2rem;
-  }
-
-  #stars {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background:
-      radial-gradient(white 1px, transparent 1px),
-      radial-gradient(white 1px, transparent 1px);
-    background-size: 3px 3px;
-    background-position: 0 0, 1.5px 1.5px;
-    animation: starsTwinkle 1.5s infinite alternate;
-    z-index: 1;
-  }
-
-  @keyframes starsTwinkle {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
-  }
-
-  #welcomeText {
-    z-index: 2;
-    font-size: 1.8rem;
-    max-width: 90%;
-    line-height: 1.7;
-  }
-
-  #highlight {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #ff69b4;
-    text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
-    margin-top: 1rem;
-  }
-
-  .typewriter-text {
-    overflow: hidden;
-    border-right: 2px solid #fff;
-    white-space: nowrap;
-    animation: typing 3.5s steps(50, end), blink .75s step-end infinite;
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink {
-    50% { border-color: transparent }
-  }
-</style>
 </head>
 <body>
   
-<div id="welcomeScreen">
-  <div id="stars"></div>
-  <div id="welcomeText">
-    <div class="typewriter-text">Welcome to the digital vault, where I have stored all my love for this one girl...</div>
-    <div id="highlight">Kanak 💖</div>
-  </div>
-</div>
+
 
   <div id="stars"></div>
 
@@ -3430,14 +3357,6 @@ function updateTimeSince() {
 }
 setInterval(updateTimeSince, 1000);
 updateTimeSince();
-</script>
-<script>
-  setTimeout(() => {
-    const welcome = document.getElementById("welcomeScreen");
-    welcome.style.transition = "opacity 1s ease";
-    welcome.style.opacity = 0;
-    setTimeout(() => welcome.remove(), 1000);
-  }, 5000);
 </script>
 </body>
 </html>
