@@ -2071,6 +2071,9 @@ for (let i = 0; i < collapsibles.length; i++) {
     width: 100%;
     height: auto;
     max-width: 800px;
+    background-color: #111;
+    background-image: url("https://i.imgur.com/mWYpERe.png");
+    background-size: cover;
   }
 
   #mokshGameScore {
@@ -2082,7 +2085,7 @@ for (let i = 0; i < collapsibles.length; i++) {
 
 <button class="moksh-collapsible">🎮 Moksh Game</button>
 <div class="moksh-content">
-  <canvas id="mokshGame" width="800" height="200" style="background: url('https://i.imgur.com/fD4JtQ6.png'); background-size: cover;"></canvas>
+  <canvas id="mokshGame" width="800" height="200"></canvas>
   <div id="mokshGameScore">Score: 0</div>
   <button onclick="startMokshGame()" style="margin-top: 10px;">Restart</button>
 </div>
@@ -2094,11 +2097,11 @@ for (let i = 0; i < collapsibles.length; i++) {
   let ctx = canvas.getContext("2d");
 
   let moksh = new Image();
-  moksh.src = "https://i.imgur.com/1XbJG5X.png";
+  moksh.src = "https://i.imgur.com/x5vT2A4.png"; // Dino-like character
   let obstacle = new Image();
-  obstacle.src = "https://i.imgur.com/Fk5PyWs.png";
+  obstacle.src = "https://i.imgur.com/Z7bL0Ye.png"; // Obstacle - cactus style
   let kanak = new Image();
-  kanak.src = "https://i.imgur.com/TTi0bhu.png";
+  kanak.src = "https://i.imgur.com/Q5s3c5U.png"; // Power-up (heart)
 
   let jumpSound = new Audio("https://www.soundjay.com/button/beep-07.wav");
   let powerUpSound = new Audio("https://www.soundjay.com/button/button-3.mp3");
