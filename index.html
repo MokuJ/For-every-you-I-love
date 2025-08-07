@@ -883,8 +883,8 @@
   border-radius: 12px;
 }
 .sweet-collapsible {
-  background-color: #fff0f5;
-  color: #4b004b;
+  background-color: #d3d3d3;
+  color: #1f1f1f;
   cursor: pointer;
   padding: 12px 20px;
   width: fit-content;
@@ -898,7 +898,7 @@
 }
 
 .sweet-collapsible:hover {
-  background-color: #ffe0ec;
+  background-color: #b0b0b0;
 }
 
 .sweet-content {
@@ -906,14 +906,24 @@
   overflow: hidden;
   transition: max-height 0.4s ease;
   padding: 0 18px;
-  font-style: italic;
-  font-family: 'Georgia', serif;
   color: #320032;
 }
 
 .sweet-content.open {
-  max-height: 500px;
+  max-height: 1000px;
   margin-top: 10px;
+}
+
+#time-since-box {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  color: #333;
 }
 </style>
   </style>
@@ -2072,13 +2082,20 @@ for (let i = 0; i < collapsibles.length; i++) {
 <!-- 🌌 STARGAZE COLLAPSIBLE -->
 <button class="sweet-collapsible">🌌 Stargaze</button>
 <div class="sweet-content">
-  <p>We watched the stars, but I was only looking at you. Even the sky felt jealous of what we had that night.</p>
+  <div id="star-map-container">
+    <iframe src="https://virtualsky.lco.global/embed/index.html?longitude=77.1025&latitude=28.7041&constellations=true&showstarlabels=true&projection=stereo&gridlines_az=true&live=true"
+      width="100%" height="400px" frameborder="0" style="border-radius: 12px;"></iframe>
+    <button onclick="alert('That star is Kanak. The brightest one, even in my darkest nights.')"
+      style="margin-top: 12px; background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">⭐ Click Kanak</button>
+  </div>
 </div>
 
 <!-- ⏳ TIME SINCE COLLAPSIBLE -->
 <button class="sweet-collapsible">⏳ Time Since</button>
 <div class="sweet-content">
-  <p id="time-since-counter" style="font-weight: bold; font-size: 1.1em;"></p>
+  <div id="time-since-box">
+    <p id="time-since-counter"></p>
+  </div>
 </div>
 
 <!-- ✅ FULL BLOCK: THE VOID + ENDGAME (Final Horror Edition) --><div style="max-width: 600px; margin: 40px auto; text-align: center;">  <!-- 🕳️ The Void That Replies -->  <button class="collapsible-void" style="background-color: #000; color: white; padding: 12px 20px; font-size: 18px; border: 1px solid white; border-radius: 8px; cursor: pointer; margin: 0 auto; display: block;">
@@ -3332,12 +3349,11 @@ function updateTimeSince() {
 
   const counter = document.getElementById("time-since-counter");
   if (counter) {
-    counter.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds since 29 May 2022, 7 PM IST`;
+    counter.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s since 29 May 2022, 7:00 PM IST`;
   }
 }
-
 setInterval(updateTimeSince, 1000);
-updateTimeSince(); // Initial call
+updateTimeSince();
 </script>
 </body>
 </html>
