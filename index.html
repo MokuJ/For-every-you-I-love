@@ -1023,6 +1023,12 @@
 </style>
 </head>
 <body>
+  
+<div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #111; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; font-family: 'Georgia', serif; text-align: center;">
+  <div style="font-size: 1.5rem; margin-bottom: 1rem;">Welcome to the digital vault,<br>where I have stored all my love for this one girl...</div>
+  <div style="font-size: 3rem; font-weight: bold; color: #ff4da6; margin-bottom: 1.5rem;">Kanak</div>
+  <div id="countdown" style="font-size: 2rem;">5</div>
+</div>
 
   <div id="stars"></div>
 
@@ -3355,6 +3361,19 @@ function updateTimeSince() {
 }
 setInterval(updateTimeSince, 1000);
 updateTimeSince();
+</script>
+<script>
+  let countdown = 5;
+  const countdownEl = document.getElementById('countdown');
+
+  const timer = setInterval(() => {
+    countdown--;
+    if (countdownEl) countdownEl.textContent = countdown;
+    if (countdown === 0) {
+      clearInterval(timer);
+      document.getElementById('splash-screen').style.display = 'none';
+    }
+  }, 1000);
 </script>
 </body>
 </html>
