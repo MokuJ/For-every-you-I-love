@@ -1489,58 +1489,7 @@
   <p>Don't return if you don't want to. I understand. But, if you ever see this just give me a subtle hint that you saw and chose not to come back. Might not be much to you but may help me in moving on.</p>
 </div>
 
-<style>
-.collapsible {
-  background-color: #1a1a1a;
-  color: #fff;
-  cursor: pointer;
-  padding: 14px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  font-size: 16px;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  transition: background-color 0.3s ease;
-}
-.collapsible:hover {
-  background-color: #333;
-}
-.content {
-  display: none;
-  padding: 12px;
-  background-color: #0d0d0d;
-  border-radius: 8px;
-  border: 1px solid #333;
-  margin-bottom: 10px;
-}
-audio {
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-</style>
 
-<button class="collapsible">Moonlit Distance</button>
-<div class="content">
-  <h3>Eternal Across the Sky</h3>
-  <p>Some stars are meant to be seen, not reached.<br>
-  And I learned to watch in silence.</p>
-  <audio controls>
-    <source src="time.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-</div>
-
-<script>
-document.querySelectorAll(".collapsible").forEach(button => {
-  button.addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    content.style.display = (content.style.display === "block") ? "none" : "block";
-  });
-});
-</script>
 
 <!-- COLLAPSIBLE 1 -->
 <div class="card" style="text-align: center;">
