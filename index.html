@@ -102,18 +102,24 @@
     }
 
     .content {
-      display: none;
-      overflow: hidden;
-      background-color: #1a1a1a;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.05);
-      margin: 0 auto 40px auto; /* Center with auto margins, added more margin-bottom for content sections */
-      max-width: 700px; /* Max width for larger screens */
-      color: #eee;
-      line-height: 1.6;
-      font-size: 1.05em;
-    }
+  max-height: 0;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  padding: 0 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  margin: 0 auto 40px auto;
+  max-width: 700px;
+  color: #eee;
+  line-height: 1.6;
+  font-size: 1.05em;
+  transition: max-height 0.6s ease, padding 0.6s ease;
+}
+
+.content.open {
+  max-height: 1500px; /* enough space for your biggest section */
+  padding: 30px;
+}
 
     /* General containers for responsive sizing */
     .info-box, .love-message-box, .section-title {
@@ -3371,5 +3377,22 @@ function updateTimeSince() {
 setInterval(updateTimeSince, 1000);
 updateTimeSince();
 </script>
+<script>
+  document.querySelectorAll(".collapsible").forEach(button => {
+  button.addEventListener("click", () => {
+    const content = button.nextElementSibling;
+    content.classList.toggle("open");
+  });
+});
+</script>
+<script>
+// 🌌 Parallax stars effect
+const stars = document.getElementById("stars");
+window.addEventListener("scroll", () => {
+  let offset = window.scrollY * 0.2;
+  stars.style.transform = `translateY(${offset}px)`;
+});
+</script>
+</body>
 </body>
 </html>
